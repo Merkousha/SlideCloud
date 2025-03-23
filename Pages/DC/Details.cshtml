@@ -1,0 +1,38 @@
+﻿@page
+@model SlideCloud.Pages.DC.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>DocumentCategory</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DocumentCategory.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DocumentCategory.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DocumentCategory.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DocumentCategory.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DocumentCategory.Slug)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DocumentCategory.Slug)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.DocumentCategory.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>
