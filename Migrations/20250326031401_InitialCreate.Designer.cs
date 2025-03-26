@@ -11,8 +11,8 @@ using SlideCloud.Data;
 namespace SlideCloud.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250303160036_InitMig")]
-    partial class InitMig
+    [Migration("20250326031401_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
