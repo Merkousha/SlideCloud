@@ -1,0 +1,228 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoona6b1.eot?wyt438');
+  src:  url('fonts/icomoona6b1.eot?wyt438#iefix') format('embedded-opentype'),
+    url('fonts/icomoona6b1.ttf?wyt438') format('truetype'),
+    url('fonts/icomoona6b1.woff?wyt438') format('woff'),
+    url('fonts/icomoona6b1.svg?wyt438#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-double-arrow-2:before {
+  content: "\e942";
+}
+.icon-quote-2:before {
+  content: "\e941";
+}
+.icon-quote:before {
+  content: "\e940";
+}
+.icon-instructors:before {
+  content: "\e93c";
+}
+.icon-students:before {
+  content: "\e93d";
+}
+.icon-batch-assign:before {
+  content: "\e93e";
+}
+.icon-connectibity:before {
+  content: "\e93f";
+}
+.icon-globe:before {
+  content: "\e938";
+}
+.icon-medal:before {
+  content: "\e939";
+}
+.icon-graduation:before {
+  content: "\e93a";
+}
+.icon-ranking:before {
+  content: "\e93b";
+}
+.icon-chevron-up:before {
+  content: "\e936";
+}
+.icon-chevron-down:before {
+  content: "\e937";
+}
+.icon-multiple-users:before {
+  content: "\e933";
+}
+.icon-play:before {
+  content: "\e934";
+}
+.icon-video:before {
+  content: "\e935";
+}
+.icon-address:before {
+  content: "\e930";
+}
+.icon-location-2:before {
+  content: "\e931";
+}
+.icon-date:before {
+  content: "\e932";
+}
+.icon-share:before {
+  content: "\e92e";
+}
+.icon-arrow-right-2:before {
+  content: "\e92b";
+}
+.icon-double-arrow:before {
+  content: "\e929";
+}
+.icon-arrow-right:before {
+  content: "\e928";
+}
+.icon-comments:before {
+  content: "\e927";
+}
+.icon-right-arrow:before {
+  content: "\e925";
+}
+.icon-left-arrow:before {
+  content: "\e926";
+}
+.icon-close:before {
+  content: "\e924";
+}
+.icon-search:before {
+  content: "\e922";
+}
+.icon-cart:before {
+  content: "\e923";
+}
+.icon-art-studies:before {
+  content: "\e900";
+}
+.icon-briefcase:before {
+  content: "\e901";
+}
+.icon-check:before {
+  content: "\e903";
+}
+.icon-clapperboard:before {
+  content: "\e904";
+}
+.icon-clock:before {
+  content: "\e905";
+}
+.icon-clock-1:before {
+  content: "\e906";
+}
+.icon-coding:before {
+  content: "\e907";
+}
+.icon-coding-1:before {
+  content: "\e908";
+}
+.icon-community:before {
+  content: "\e909";
+}
+.icon-copy-writing:before {
+  content: "\e90a";
+}
+.icon-down-chevron:before {
+  content: "\e90b";
+}
+.icon-email:before {
+  content: "\e90c";
+}
+.icon-facebook:before {
+  content: "\e90d";
+}
+.icon-files:before {
+  content: "\e90e";
+}
+.icon-healthcare:before {
+  content: "\e90f";
+}
+.icon-home:before {
+  content: "\e910";
+}
+.icon-linkedin:before {
+  content: "\e911";
+}
+.icon-list:before {
+  content: "\e912";
+}
+.icon-live-streaming:before {
+  content: "\e913";
+}
+.icon-location:before {
+  content: "\e914";
+}
+.icon-megaphone:before {
+  content: "\e915";
+}
+.icon-multiple-users-silhouette:before {
+  content: "\e916";
+}
+.icon-open-book:before {
+  content: "\e917";
+}
+.icon-right-arrow2:before {
+  content: "\e918";
+}
+.icon-right-up:before {
+  content: "\e919";
+}
+.icon-self-confidence:before {
+  content: "\e91a";
+}
+.icon-setting:before {
+  content: "\e91b";
+}
+.icon-speaker-filled-audio-tool:before {
+  content: "\e91c";
+}
+.icon-star:before {
+  content: "\e91d";
+}
+.icon-telephone:before {
+  content: "\e91e";
+}
+.icon-twitter:before {
+  content: "\e91f";
+}
+.icon-user:before {
+  content: "\e920";
+}
+.icon-video-camera:before {
+  content: "\e921";
+}
+.icon-youtube:before {
+  content: "\e92a";
+}
+.icon-speech-bubble:before {
+  content: "\e902";
+}
+.icon-paper-plane:before {
+  content: "\e92c";
+}
+.icon-arrow-left:before {
+  content: "\e92d";
+}
+.icon-check-2:before {
+  content: "\e92f";
+}

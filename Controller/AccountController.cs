@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SlideCloud.Models;
 using SlideCloud.Models.DTO.User;
+using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 
 namespace SlideCloud.Controller
@@ -74,6 +76,25 @@ namespace SlideCloud.Controller
                 PhoneNumber = model.PhoneNumber
             };
 
+            // بررسی تکراری بودن ایمیل
+            var isEmailUnique =  _userManager.Users.Any(u => u.Email == model.Email);
+            if (isEmailUnique)
+            {
+                ModelState.AddModelError("Email", "این ایمیل قبلاً ثبت شده است.");
+            }
+
+            // بررسی تکراری بودن شماره تلفن
+            var isPhoneNumberUnique = _userManager.Users.Any(u => u.PhoneNumber == model.PhoneNumber);
+            if (isPhoneNumberUnique)
+            {
+                ModelState.AddModelError("PhoneNumber", "این شماره تلفن قبلاً ثبت شده است.");
+            }
+
+            // اگر خطایی وجود داشته باشد، فرم را با پیام‌های خطا بازگردانید
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
@@ -112,5 +133,9 @@ namespace SlideCloud.Controller
         }
 
         #endregion
+
+
     }
+
+
 }
