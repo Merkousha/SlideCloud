@@ -28,19 +28,20 @@
                         @if (!User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Login</a>
+                                @Html.ActionLink("Login", "Login", "Account", null, new { @class = "nav-link text-dark" })
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Account" asp-action="Register">Register</a>
+                                @Html.ActionLink("Register", "Register", "Account", null, new { @class = "nav-link text-dark" })
                             </li>
                         }
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="User" asp-action="Index">User Account</a>
+                                @Html.ActionLink("User Account", "Index", "User", null, new { @class = "nav-link text-dark" })
+
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Account" asp-action="Logout">Log Out Account</a>
+                                @Html.ActionLink("Logout", "Register", "Logout", null, new { @class = "nav-link text-dark" })
                             </li>
                         }
                     </ul>
