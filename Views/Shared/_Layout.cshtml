@@ -1,70 +1,409 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
+
+<!-- Mirrored from pixydrops.com/eduhive-html/index-dark.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jun 2024 10:42:01 GMT -->
 <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - SlideCloud</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/SlideCloud.styles.css" asp-append-version="true" />
+    <!-- favicons Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicons/favicon-16x16.png" />
+    <link rel="manifest" href="assets/images/favicons/site.webmanifest" />
+    <meta name="description" content="Eduhive is a very modern and versatile education & online courses HTML Template. It is specially designed for LMS, online courses, education, learning management, e-learning, online training, zoom classes, and all other education related websites and businesses." />
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&amp;family=Cormorant:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&amp;family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&amp;display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/vendors/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/vendors/bootstrap-select/bootstrap-select.min.css" />
+    <link rel="stylesheet" href="assets/vendors/animate/animate.min.css" />
+    <link rel="stylesheet" href="assets/vendors/fontawesome/css/all.min.css" />
+    <link rel="stylesheet" href="assets/vendors/jquery-ui/jquery-ui.css" />
+    <link rel="stylesheet" href="assets/vendors/jarallax/jarallax.css" />
+    <link rel="stylesheet" href="assets/vendors/jquery-magnific-popup/jquery.magnific-popup.css" />
+    <link rel="stylesheet" href="assets/vendors/nouislider/nouislider.min.css" />
+    <link rel="stylesheet" href="assets/vendors/nouislider/nouislider.pips.css" />
+    <link rel="stylesheet" href="assets/vendors/tiny-slider/tiny-slider.css" />
+    <link rel="stylesheet" href="assets/vendors/eduhive-icons/style.css" />
+    <link rel="stylesheet" href="assets/vendors/owl-carousel/css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="assets/vendors/owl-carousel/css/owl.theme.default.min.css" />
+
+    <!-- template styles -->
+    <link rel="stylesheet" href="assets/css/eduhive.css" />
+    <link rel="stylesheet" href="assets/css/eduhive-dark.css" />
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-controller="Home" asp-action="Index">SlideCloud</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        @if (!User.Identity.IsAuthenticated)
-                        {
-                            <li class="nav-item">
-                                @Html.ActionLink("Login", "Login", "Account", null, new { @class = "nav-link text-dark" })
-                            </li>
-                            <li class="nav-item">
-                                @Html.ActionLink("Register", "Register", "Account", null, new { @class = "nav-link text-dark" })
-                            </li>
-                        }
-                        else
-                        {
-                            <li class="nav-item">
-                                @Html.ActionLink("User Account", "Index", "User", null, new { @class = "nav-link text-dark" })
 
-                            </li>
-                            <li class="nav-item">
-                                @Html.ActionLink("Logout", "Register", "Logout", null, new { @class = "nav-link text-dark" })
-                            </li>
-                        }
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+<body class="custom-cursor">
+
+    <div class="custom-cursor__cursor"></div>
+    <div class="custom-cursor__cursor-two"></div>
+
+    <div class="preloader">
+        <div class="preloader__image" style="background-image: url(assets/images/loader.png);"></div>
     </div>
+    <!-- /.preloader -->
+    <div class="page-wrapper">
+        <header class="main-header main-header--two main-header--three sticky-header sticky-header--three sticky-header--normal">
+            <div class="container-fluid rtl">
+                <div class="main-header__inner">
+                    <div class="main-header__left">
+                        <div class="main-header__logo logo-retina">
+                            <a href="index.html">
+                                <img src="~/assets/images/logo-light.png" alt="eduhive HTML" width="209">
+                            </a>
+                        </div><!-- /.main-header__logo -->
+                        <div class="main-header__courses">
+                            <div class="main-header__courses__text">
+                                <span class="main-header__courses__icon-list">
+                                    <i class="icon-list"></i>
+                                </span>
+                                دوره های ما
+                                <span class="main-header__courses__icon-arrow">
+                                    <i class="icon-chevron-down"></i>
+                                </span>
+                            </div><!-- /.main-header__courses__text -->
+                            <ul class="main-header__courses__list">
+                                <li><a href="wordpress-development.html">توسعه وردپرس</a></li>
+                                <li><a href="data-science.html">علوم داده ها</a></li>
+                                <li><a href="web-development.html">توسعه وب</a></li>
+                                <li><a href="uiux-design.html">طراحی رابط کاربری</a></li>
+                                <li><a href="graphics-design.html">طراحی گرافیک</a></li>
+                                <li><a href="digital-marketing.html">بازاریابی دیجیتال</a></li>
+                                <li><a href="search-engine-optimization.html">بهینه سازی موتور جستجو</a></li>
+                                <li><a href="apps-development.html">توسعه اپلیکیشن ها</a></li>
+                                <li><a href="web-design.html">طراحی وب سایت</a></li>
+                            </ul><!-- /.main-header__courses__list -->
+                        </div><!-- /.main-header__courses -->
+                    </div><!-- /.main-header__left -->
+                    <div class="main-header__right">
+                        <nav class="main-header__nav main-menu">
+                            <ul class="main-menu__list">
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 1403 - SlideCloud - <a asp-controller="Home" asp-action="Privacy">Privacy</a>
+                                <li class="dropdown megamenu">
+                                    <a href="index.html">خانه</a>
+                                    <ul>
+                                        <li>
+                                            <section class="home-showcase">
+                                                <div class="container">
+                                                    <div class="home-showcase__inner">
+                                                        <div class="row">
+                                                            <div class="col-md-6 col-lg-3">
+                                                                <div class="demo-one__card">
+                                                                    <div class="demo-one__image">
+                                                                        <img src="~/assets/images/home-showcase/home-showcase-1.jpg" alt="">
+                                                                        <div class="demo-one__btns">
+                                                                            <a href="index.html" class="eduhive-btn demo-one__btn">
+                                                                                <span>چند صفحه</span>
+                                                                                <span class="eduhive-btn__icon">
+                                                                                    <span class="eduhive-btn__icon__inner"><i class="icon-left-arrow"></i></span>
+                                                                                </span>
+                                                                            </a><!-- /.thm-btn demo-one__btn -->
+                                                                            <a href="index-one-page.html" class="eduhive-btn demo-one__btn">
+                                                                                <span>تک صفحه</span>
+                                                                                <span class="eduhive-btn__icon">
+                                                                                    <span class="eduhive-btn__icon__inner"><i class="icon-left-arrow"></i></span>
+                                                                                </span>
+                                                                            </a><!-- /.thm-btn demo-one__btn -->
+                                                                        </div><!-- /.demo-one__btns -->
+                                                                    </div><!-- /.demo-one__image -->
+                                                                    <div class="demo-one__content">
+                                                                        <h3 class="demo-one__title">
+                                                                            <a href="index.html">صفحه اصلی 01</a>
+                                                                        </h3><!-- /.demo-one__title -->
+                                                                    </div><!-- /.demo-one__content -->
+                                                                </div><!-- /.demo-one__card -->
+                                                            </div><!-- /.col-md-6 col-lg-3 -->
+                                                            <div class="col-md-6 col-lg-3">
+                                                                <div class="demo-one__card">
+                                                                    <div class="demo-one__image">
+                                                                        <img src="~/assets/images/home-showcase/home-showcase-2.jpg" alt="">
+                                                                        <div class="demo-one__btns">
+                                                                            <a href="index-2.html" class="eduhive-btn demo-one__btn">
+                                                                                <span>چند صفحه</span>
+                                                                                <span class="eduhive-btn__icon">
+                                                                                    <span class="eduhive-btn__icon__inner"><i class="icon-left-arrow"></i></span>
+                                                                                </span>
+                                                                            </a><!-- /.thm-btn demo-one__btn -->
+                                                                            <a href="index-2-one-page.html" class="eduhive-btn demo-one__btn">
+                                                                                <span>تک صفحه</span>
+                                                                                <span class="eduhive-btn__icon">
+                                                                                    <span class="eduhive-btn__icon__inner"><i class="icon-left-arrow"></i></span>
+                                                                                </span>
+                                                                            </a><!-- /.thm-btn demo-one__btn -->
+                                                                        </div><!-- /.demo-one__btns -->
+                                                                    </div><!-- /.demo-one__image -->
+                                                                    <div class="demo-one__content">
+                                                                        <h3 class="demo-one__title">
+                                                                            <a href="index-2.html">صفحه اصلی 02</a>
+                                                                        </h3><!-- /.demo-one__title -->
+                                                                    </div><!-- /.demo-one__content -->
+                                                                </div><!-- /.demo-one__card -->
+                                                            </div><!-- /.col-md-6 col-lg-3 -->
+                                                            <div class="col-md-6 col-lg-3">
+                                                                <div class="demo-one__card">
+                                                                    <div class="demo-one__image">
+                                                                        <img src="~/assets/images/home-showcase/home-showcase-3.jpg" alt="">
+                                                                        <div class="demo-one__btns">
+                                                                            <a href="index-3.html" class="eduhive-btn demo-one__btn">
+                                                                                <span>چند صفحه</span>
+                                                                                <span class="eduhive-btn__icon">
+                                                                                    <span class="eduhive-btn__icon__inner"><i class="icon-left-arrow"></i></span>
+                                                                                </span>
+                                                                            </a><!-- /.thm-btn demo-one__btn -->
+                                                                            <a href="index-3-one-page.html" class="eduhive-btn demo-one__btn">
+                                                                                <span>تک صفحه</span>
+                                                                                <span class="eduhive-btn__icon">
+                                                                                    <span class="eduhive-btn__icon__inner"><i class="icon-left-arrow"></i></span>
+                                                                                </span>
+                                                                            </a><!-- /.thm-btn demo-one__btn -->
+                                                                        </div><!-- /.demo-one__btns -->
+                                                                    </div><!-- /.demo-one__image -->
+                                                                    <div class="demo-one__content">
+                                                                        <h3 class="demo-one__title">
+                                                                            <a href="index-3.html">صفحه اصلی 03</a>
+                                                                        </h3><!-- /.demo-one__title -->
+                                                                    </div><!-- /.demo-one__content -->
+                                                                </div><!-- /.demo-one__card -->
+                                                            </div><!-- /.col-md-6 col-lg-3 -->
+                                                            <div class="col-md-6 col-lg-3">
+                                                                <div class="demo-one__card">
+                                                                    <div class="demo-one__image">
+                                                                        <img src="~/assets/images/home-showcase/home-showcase-4.jpg" alt="">
+                                                                        <div class="demo-one__btns">
+                                                                            <a href="index-dark.html" class="eduhive-btn demo-one__btn">
+                                                                                <span>مشاهده صفحه</span>
+                                                                                <span class="eduhive-btn__icon">
+                                                                                    <span class="eduhive-btn__icon__inner"><i class="icon-left-arrow"></i></span>
+                                                                                </span>
+                                                                            </a><!-- /.thm-btn demo-one__btn -->
+                                                                        </div><!-- /.demo-one__btns -->
+                                                                    </div><!-- /.demo-one__image -->
+                                                                    <div class="demo-one__content">
+                                                                        <h3 class="demo-one__title">
+                                                                            <a href="index-dark.html">صفحه اصلی تاریک</a>
+                                                                        </h3><!-- /.demo-one__title -->
+                                                                    </div><!-- /.demo-one__content -->
+                                                                </div><!-- /.demo-one__card -->
+                                                            </div><!-- /.col-md-6 col-lg-3 -->
+                                                        </div><!-- /.row -->
+
+                                                    </div><!-- /.home-showcase__inner -->
+                                                </div><!-- /.container -->
+                                            </section>
+                                        </li>
+                                    </ul>
+                                </li>
+
+
+                                <li>
+                                    <a href="about.html">درباره ما</a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#">صفحات</a>
+                                    <ul>
+                                        <li><a href="instructors.html">مربیان ما 01</a></li>
+                                        <li><a href="instructors-2.html">مربیان ما 02</a></li>
+                                        <li><a href="instructors-carousel.html">کاروسل مربیان 01</a></li>
+                                        <li><a href="instructors-carousel-2.html">کاروسل مربیان 02</a></li>
+                                        <li><a href="become-instructor.html">مربی شوید</a></li>
+                                        <li><a href="instructor-details.html">مشخصات مربی</a></li>
+                                        <li><a href="testimonials-carousel.html">کاروسل نظرات 01</a></li>
+                                        <li><a href="testimonials-carousel-2.html">کاروسل نظرات 02</a></li>
+                                        <li><a href="events.html">رویدادهای ما</a></li>
+                                        <li><a href="events-carousel.html">کاروسل رویداد ها</a></li>
+                                        <li><a href="event-details.html">جزئیات رویداد ها</a></li>
+                                        <li><a href="pricing.html">جدول قیمت گذاری</a></li>
+                                        <li>
+                                            <a href="gallery.html">گالری</a>
+                                            <ul>
+                                                <li><a href="gallery.html">گالری ماسونری</a></li>
+                                                <li><a href="gallery-filter.html">فیلتر گالری</a></li>
+                                                <li><a href="gallery-grid.html">گالری گرید</a></li>
+                                                <li><a href="gallery-carousel.html">کاروسل گالری</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="faq.html">سوالات متداول ما</a></li>
+                                        <li><a href="login.html">ورود</a></li>
+                                        <li><a href="404.html">404 خطا</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#">دوره ها</a>
+                                    <ul>
+                                        <li><a href="courses.html">دوره های ما 01</a></li>
+                                        <li><a href="courses-2.html">دوره های ما 02</a></li>
+                                        <li><a href="courses-carousel.html">کاروسل دوره ها 01</a></li>
+                                        <li><a href="courses-carousel-2.html">کاروسل دوره ها 02</a></li>
+                                        <li><a href="wordpress-development.html">توسعه وردپرس</a></li>
+                                        <li><a href="data-science.html">علوم داده ها</a></li>
+                                        <li><a href="web-development.html">توسعه وب</a></li>
+                                        <li><a href="uiux-design.html">طراحی رابط کاربری</a></li>
+                                        <li><a href="graphics-design.html">طراحی گرافیک</a></li>
+                                        <li><a href="digital-marketing.html">بازاریابی دیجیتال</a></li>
+                                        <li><a href="search-engine-optimization.html">بهینه سازی موتور جستجو</a></li>
+                                        <li><a href="apps-development.html">توسعه اپلیکیشن ها</a></li>
+                                        <li><a href="web-design.html">طراحی وب سایت</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#">فروشگاه</a>
+                                    <ul>
+                                        <li class="dropdown">
+                                            <a href="#">محصولات</a>
+                                            <ul>
+                                                <li><a href="products.html">بدون نوار کناری</a></li>
+                                                <li><a href="products-left.html">نوار کناری سمت چپ</a></li>
+                                                <li><a href="products-right.html">نوار کناری سمت راست</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="products-carousel.html">کاروسل محصولات</a></li>
+                                        <li><a href="product-details.html">جزئیات محصولات</a></li>
+                                        <li><a href="cart.html">سبد خرید</a></li>
+                                        <li><a href="checkout.html">پرداخت</a></li>
+                                    </ul>
+                                </li>
+                                @if (!User.Identity.IsAuthenticated)
+                                {
+                                    <li class="nav-item">
+                                        @Html.ActionLink("ورود", "Login", "Account", null, new { @class = "" })
+                                    </li>
+                                    <li class="nav-item">
+                                        @Html.ActionLink("ثبت نام", "Register", "Account", null, new { @class = "" })
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="nav-item">
+                                        @Html.ActionLink("پنل کاربری", "Index", "User", null, new { @class = "" })
+
+                                    </li>
+                                    <li class="nav-item">
+                                        @Html.ActionLink("خروج", "Register", "Logout", null, new { @class = "" })
+                                    </li>
+                                }
+                            </ul>
+                        </nav><!-- /.main-header__nav -->
+                        <div class="mobile-nav__btn mobile-nav__toggler">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div><!-- /.mobile-nav__toggler -->
+                        <a href="#" class="search-toggler main-header__search">
+                            <i class="icon-search" aria-hidden="true"></i>
+                            <span class="sr-only">جستجو</span>
+                        </a><!-- /.search-toggler -->
+                        <a href="cart.html" class="main-header__cart">
+                            <i class="icon-cart" aria-hidden="true"></i>
+                            <span class="sr-only">سبد خرید</span>
+                        </a><!-- /.search-toggler -->
+                        <!-- /.main-header__btn eduhive-btn -->
+                    </div><!-- /.main-header__right -->
+                </div><!-- /.main-header__inner -->
+            </div><!-- /.container-fluid -->
+        </header><!-- /.main-header -->
+        @RenderBody()
+    </div><!-- /.page-wrapper -->
+
+    <div class="mobile-nav__wrapper">
+        <div class="mobile-nav__overlay mobile-nav__toggler"></div><!-- /.mobile-nav__overlay -->
+        <div class="mobile-nav__content rtl">
+            <span class="mobile-nav__close mobile-nav__toggler"><i class="icon-close"></i></span>
+            <div class="logo-box logo-retina">
+                <a href="index.html" aria-label="logo image">
+                    <img src="~/assets/images/logo-light.png" width="209" alt="" />
+                </a>
+            </div><!-- /.logo-box -->
+            <div class="mobile-nav__container"></div><!-- /.mobile-nav__container -->
+            <ul class="mobile-nav__contact list-unstyled">
+                <li>
+                    <span class="mobile-nav__contact__icon"><i class="fa fa-envelope"></i></span>
+                    <a href="mailto:needhelp@eduhive.com">needhelp@company.com</a>
+                </li>
+                <li>
+                    <span class="mobile-nav__contact__icon"><i class="fa fa-phone-alt"></i></span>
+                    <a href="tel:+9156980036420">+91 5698 0036 420</a>
+                </li>
+            </ul><!-- /.mobile-nav__contact -->
+            <div class="mobile-nav__social social-links-two">
+                <a href="https://facebook.com/">
+                    <span class="social-links-two__icon">
+                        <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                    </span><!-- /.social-links-two__icon -->
+                    <span class="sr-only">فیسبوک</span>
+                </a>
+                <a href="https://twitter.com/">
+                    <span class="social-links-two__icon">
+                        <i class="fab fa-twitter" aria-hidden="true"></i>
+                    </span><!-- /.social-links-two__icon -->
+                    <span class="sr-only">توییتر</span>
+                </a>
+                <a href="https://instagram.com/">
+                    <span class="social-links-two__icon">
+                        <i class="fab fa-instagram" aria-hidden="true"></i>
+                    </span><!-- /.social-links-two__icon -->
+                    <span class="sr-only">اینستاگرام</span>
+                </a>
+                <a href="https://youtube.com/">
+                    <span class="social-links-two__icon">
+                        <i class="fab fa-youtube" aria-hidden="true"></i>
+                    </span><!-- /.social-links-two__icon -->
+                    <span class="sr-only">یوتوب</span>
+                </a>
+            </div><!-- /.mobile-nav__social -->
+        </div><!-- /.mobile-nav__content -->
+    </div><!-- /.mobile-nav__wrapper -->
+    <div class="search-popup">
+        <div class="search-popup__overlay search-toggler"></div>
+        <!-- /.search-popup__overlay -->
+        <div class="search-popup__content rtl">
+            <form role="search" method="get" class="search-popup__form" action="#">
+                <input type="text" id="search" placeholder="اینجا جستجو کنید..." />
+                <button type="submit" aria-label="search submit" class="eduhive-btn">
+                    <i class="icon-search"></i>
+                </button>
+            </form>
         </div>
-    </footer>
+        <!-- /.search-popup__content -->
+    </div>
+    <!-- /.search-popup -->
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <a href="#" data-target="html" class="scroll-to-target scroll-to-top">
+        <span class="scroll-to-top__text">بازگشت به بالا</span>
+        <span class="scroll-to-top__wrapper"><span class="scroll-to-top__inner"></span></span>
+    </a>
 
+    <script src="~/assets/vendors/jquery/jquery-3.7.0.min.js"></script>
+    <script src="~/assets/vendors/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/vendors/bootstrap-select/bootstrap-select.min.js"></script>
+    <script src="~/assets/vendors/jarallax/jarallax.min.js"></script>
+    <script src="~/assets/vendors/jquery-ui/jquery-ui.js"></script>
+    <script src="~/assets/vendors/jquery-ajaxchimp/jquery.ajaxchimp.min.js"></script>
+    <script src="~/assets/vendors/jquery-appear/jquery.appear.min.js"></script>
+    <script src="~/assets/vendors/jquery-circle-progress/jquery.circle-progress.min.js"></script>
+    <script src="~/assets/vendors/jquery-magnific-popup/jquery.magnific-popup.min.js"></script>
+    <script src="~/assets/vendors/jquery-validate/jquery.validate.min.js"></script>
+    <script src="~/assets/vendors/nouislider/nouislider.min.js"></script>
+    <script src="~/assets/vendors/tiny-slider/tiny-slider.js"></script>
+    <script src="~/assets/vendors/wnumb/wNumb.min.js"></script>
+    <script src="~/assets/vendors/owl-carousel/js/owl.carousel.min.js"></script>
+    <script src="~/assets/vendors/owl-carousel/js/owlcarousel2-filter.min.js"></script>
+    <script src="~/assets/vendors/owl-carousel/js/owlcarousel2-progressbar.js"></script>
+    <script src="~/assets/vendors/wow/wow.js"></script>
+    <script src="~/assets/vendors/imagesloaded/imagesloaded.min.js"></script>
+    <script src="~/assets/vendors/isotope/isotope.js"></script>
+    <script src="~/assets/vendors/countdown/countdown.min.js"></script>
+    <script src="~/assets/vendors/jquery-circleType/jquery.circleType.js"></script>
+    <script src="~/assets/vendors/jquery-lettering/jquery.lettering.min.js"></script>
+    <!-- template js -->
+    <script src="~/assets/js/eduhive.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+
+
+<!-- Mirrored from pixydrops.com/eduhive-html/index-dark.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jun 2024 10:42:02 GMT -->
 </html>
