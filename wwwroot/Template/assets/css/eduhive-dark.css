@@ -1,0 +1,118 @@
+:root {
+  --eduhive-black: #ffffff;
+  --eduhive-black-rgb: 255, 255, 255;
+  --eduhive-black2: #20104B;
+  --eduhive-black2-rgb: 32, 16, 75;
+}
+
+/*------------------------------------------------
+Background Style 
+--------------------------------------------------*/
+body,
+.preloader,
+.main-menu .main-menu__list li ul,
+.mobile-nav__overlay,
+.main-slider-three,
+.main-slider-three__item,
+.course-category,
+.about-three,
+.about-three__inner,
+.funfact-one--round,
+.offer-one,
+.instructors-three,
+.instructor-card-three__image::after,
+.client-carousel {
+  background-color: var(--eduhive-black2);
+}
+
+.sticky-header--cloned.sticky-header--three,
+.mobile-nav__content,
+.home-showcase__inner,
+.main-menu .main-menu__list li ul,
+.home-showcase .demo-one__card,
+.main-header--two .main-header__courses__list {
+  background-color: var(--eduhive-black4);
+}
+
+.demo-one__btns,
+.blog-card__image__link,
+.footer-widget__gallery__icon {
+  background-color: rgba(var(--eduhive-black2-rgb), 0.7);
+}
+
+.main-slider-three__student__count {
+  background-color: var(--eduhive-white3);
+}
+
+.funfact-one--home-3 .container::after {
+  background-color: rgba(var(--eduhive-border-color-rgb), 0.2);
+}
+
+.offer-one__shape-box {
+  background-color: var(--eduhive-base);
+}
+
+.testimonials-three {
+  background-color: rgba(var(--eduhive-base-rgb), 0.15);
+}
+
+.blog-three {
+  background-color: rgba(var(--eduhive-base-rgb), 0.1);
+}
+
+.main-footer {
+  background: linear-gradient(90deg, var(--eduhive-base) 0%, var(--eduhive-black5) 100%);
+}
+
+/*------------------------------------------------
+Color Style 
+--------------------------------------------------*/
+.main-header--two .main-header__courses__list li a,
+.main-menu .main-menu__list li ul li > a,
+.home-showcase .demo-one__title,
+.main-footer__copyright {
+  color: var(--eduhive-black);
+}
+
+.eduhive-owl__carousel--basic-nav.owl-carousel .owl-nav button,
+.search-popup__form input[type=search]:focus,
+.search-popup__form input[type=text]:focus,
+.demo-one__title,
+.mobile-nav__content .main-menu__list li a button.expanded,
+.main-slider-three__student__count,
+.course-category__card__title,
+.about-three__experience__title,
+.about-three__experience__text,
+.course-card__title,
+.testimonial-card-three__name,
+.blog-three__custome-navs button,
+.main-footer__newsletter__form input[type=text]:focus {
+  color: var(--eduhive-black2);
+}
+
+.home-showcase .demo-one__title:hover {
+  color: var(--eduhive-base);
+}
+
+.footer-widget__info__icon,
+.footer-widget__info li a:hover,
+.footer-widget__links li a:hover,
+.footer-widget__links li a:hover .footer-widget__links__icon {
+  color: var(--eduhive-secondary);
+}
+
+/*------------------------------------------------
+Border Style 
+--------------------------------------------------*/
+.main-header--three,
+.main-header--three .main-header__courses__text,
+.offer-one__item,
+.footer-widget__info,
+.main-footer__bottom__inner {
+  border-color: rgba(var(--eduhive-border-color-rgb), 0.2);
+}
+
+.about-three__inner {
+  border: 5px solid rgba(var(--eduhive-white-rgb), 0.3);
+}
+/*# sourceMappingURL=eduhive-dark.css.map */
