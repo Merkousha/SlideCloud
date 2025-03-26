@@ -14,7 +14,7 @@ namespace SlideCloud
 
             #region AddIdentity and configure
 
-            builder.Services.AddIdentity<User, IdentityRole>()
+            builder.Services.AddIdentity<User, IdentityRole<long>>()
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
 
@@ -39,12 +39,19 @@ namespace SlideCloud
             #endregion
 
             // Add services to the container.
+            #region Definee ConnectionString
+#if DEBUG
+            string ConnectionString = builder.Configuration.GetConnectionString("LocalConnection");
+#else
+            string ConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+#endif
+            #endregion
 
             builder.Services.AddAuthentication();
             builder.Services.AddAuthorization();
             builder.Services.AddRazorPages();
             builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(ConnectionString));
 
             var app = builder.Build();
 

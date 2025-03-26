@@ -1,11 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿namespace SlideCloud.Models;
 
-namespace SlideCloud.Models;
-
+using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-public class User:IdentityUser
+public class User: IdentityUser<long>
 {
     [Key]
     public int Id { get; set; }
