@@ -1,5 +1,7 @@
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SlideCloud.Data;
+using SlideCloud.Models;
 
 namespace SlideCloud
 {
@@ -9,7 +11,37 @@ namespace SlideCloud
         {
             var builder = WebApplication.CreateBuilder(args);
 
+
+            #region AddIdentity and configure
+
+            builder.Services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders();
+
+
+            builder.Services.Configure<IdentityOptions>(options =>
+            {
+                // تنظیمات اعتبارسنجی رمز عبور
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredLength = 3;
+
+                // تنظیمات قفل کردن حساب کاربری
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                options.Lockout.MaxFailedAccessAttempts = 5;
+
+                // تنظیمات کوکی‌ها و احراز هویت
+                options.SignIn.RequireConfirmedEmail = false;
+            });
+            //builder.Services.AddScoped<RoleManager<ApplicationRole>>();
+            #endregion
+
             // Add services to the container.
+
+            builder.Services.AddAuthentication();
+            builder.Services.AddAuthorization();
             builder.Services.AddRazorPages();
             builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -29,6 +61,7 @@ namespace SlideCloud
 
             app.UseRouting();
 
+            app.UseAuthentication(); // قبل از UseAuthorization قرار دارد
             app.UseAuthorization();
 
             app.MapRazorPages();
