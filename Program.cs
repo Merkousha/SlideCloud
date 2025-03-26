@@ -50,6 +50,7 @@ namespace SlideCloud
             builder.Services.AddAuthentication();
             builder.Services.AddAuthorization();
             builder.Services.AddRazorPages();
+            builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(ConnectionString));
 
@@ -72,7 +73,9 @@ namespace SlideCloud
             app.UseAuthorization();
 
             app.MapRazorPages();
-
+            app.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}");
             app.Run();
         }
     }
