@@ -22,6 +22,7 @@
 			</div>
 
 			<div class="form-group">
+				@Html.ValidationMessageFor(a => a.Email)
 				@Html.LabelFor(a => a.Email)
 				@Html.EditorFor(a=>a.Email)
 			</div>
@@ -30,7 +31,12 @@
 				@Html.LabelFor(a => a.Password)
 				@Html.EditorFor(a=>a.Password)
 			</div>
+				<div class="form-group">
+					@Html.LabelFor(a => a.RePassword)
+				@Html.EditorFor(a => a.RePassword)
+				</div>
 			<div class="form-group">
+				@Html.ValidationMessageFor(a => a.PhoneNumber)
 				@Html.LabelFor(a => a.PhoneNumber)
 				@Html.EditorFor(a=>a.PhoneNumber)
 			</div>
@@ -64,5 +70,6 @@
 </div>
 
 @section Scripts {
+
 	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
