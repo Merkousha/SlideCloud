@@ -10,7 +10,7 @@
 <h4>UserDto</h4>
 <hr />
 <div class="row">
-	<div class="col-md-4">
+	<div class="col-md-4 m-5">
 		<form   action="/Account/Login"  method="post">
 			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 			<div class="form-group">
@@ -31,9 +31,11 @@
 
 
 			<div class="form-group">
-				<input type="submit" value="Create" class="btn btn-primary" />
+				<input type="submit" value="Login" class="btn btn-primary" />
 			</div>
 		</form>
+
+		@Html.ActionLink("ForgetPassword", "ForgetPassword", "Account", new { }, new { @class = "" }))
 	</div>
 </div>
 

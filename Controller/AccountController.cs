@@ -102,5 +102,15 @@ namespace SlideCloud.Controller
         }
 
         #endregion
+
+        #region ForgetPassword
+        [HttpGet]
+        public async Task<IActionResult> ForgetPassword()
+        {
+            
+            return View();
+        }
+
+        #endregion
     }
 }
