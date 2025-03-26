@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using DotNetEnv;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SlideCloud.Data;
 using SlideCloud.Models;
@@ -10,7 +11,7 @@ namespace SlideCloud
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
+            Env.Load();
 
             #region AddIdentity and configure
 
@@ -39,7 +40,7 @@ namespace SlideCloud
             #endregion
 
             // Add services to the container.
-            string ConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+            var ConnectionString = Environment.GetEnvironmentVariable("DefaultConnection");
 
             builder.Services.AddAuthentication();
             builder.Services.AddAuthorization();
