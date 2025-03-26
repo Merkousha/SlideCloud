@@ -12,7 +12,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">SlideCloud</a>
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">SlideCloud</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -20,26 +20,29 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        @if(!User.Identity.IsAuthenticated){
-	                        <li class="nav-item">
-		                        <a class="nav-link text-dark" asp-action="login" asp-controller="account">Login</a>
-	                        </li>
-	                        <li class="nav-item">
-                                <a class="nav-link text-dark" asp-action="Register" asp-controller="account">Register</a>
-	                        </li>
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                @Html.ActionLink("Login", "Login", "Account", null, new { @class = "nav-link text-dark" })
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Register", "Register", "Account", null, new { @class = "nav-link text-dark" })
+                            </li>
                         }
-                        else{
-	                        <li class="nav-item">
-		                        <a class="nav-link text-dark" asp-area="" asp-page="/User">User Account</a>
-	                        </li>
-	                        <li class="nav-item">
-                                <a class="nav-link text-dark" asp-action="logout" asp-controller="account">Log Out Account</a>
-	                        </li>
+                        else
+                        {
+                            <li class="nav-item">
+                                @Html.ActionLink("User Account", "Index", "User", null, new { @class = "nav-link text-dark" })
+
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Logout", "Register", "Logout", null, new { @class = "nav-link text-dark" })
+                            </li>
                         }
                     </ul>
                 </div>
@@ -54,7 +57,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 1403 - SlideCloud - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            &copy; 1403 - SlideCloud - <a asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
 
