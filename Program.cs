@@ -35,17 +35,11 @@ namespace SlideCloud
                 // تنظیمات کوکی‌ها و احراز هویت
                 options.SignIn.RequireConfirmedEmail = false;
             });
-            //builder.Services.AddScoped<RoleManager<ApplicationRole>>();
+            builder.Services.AddScoped<RoleManager<IdentityRole<long>>>();
             #endregion
 
             // Add services to the container.
-            #region Definee ConnectionString
-#if DEBUG
-            string ConnectionString = builder.Configuration.GetConnectionString("LocalConnection");
-#else
             string ConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-#endif
-            #endregion
 
             builder.Services.AddAuthentication();
             builder.Services.AddAuthorization();
@@ -71,11 +65,11 @@ namespace SlideCloud
 
             app.UseAuthentication(); // قبل از UseAuthorization قرار دارد
             app.UseAuthorization();
-
-            app.MapRazorPages();
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+            app.MapRazorPages();
+
             app.Run();
         }
     }

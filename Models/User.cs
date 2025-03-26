@@ -25,10 +25,6 @@ public class User: IdentityUser<long>
     [MaxLength(20)]
     public string PhoneNumber { get; set; }
 
-    // کلید خارجی به Role
-    public int RoleId { get; set; }
-
-    [ForeignKey("RoleId")]
-    public Role Role { get; set; }
+    
 }
 

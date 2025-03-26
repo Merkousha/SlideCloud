@@ -15,7 +15,7 @@ public class AppDbContext : IdentityDbContext<User, IdentityRole<long>, long>
     public DbSet<Document> Documents { get; set; }
     public DbSet<DocumentCategory> DocumentCategories { get; set; }
     public DbSet<DocumentType> DocumentTypes { get; set; }
-    public DbSet<Role> Roles { get; set; }
+
 
     public DbSet<Tag> Tags { get; set; }
     public DbSet<TagDocument> TagDocuments { get; set; }
