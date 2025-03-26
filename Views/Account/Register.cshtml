@@ -1,0 +1,68 @@
+﻿@model SlideCloud.Models.DTO.User.RegisterDto
+
+@{
+	Layout = "_Layout";
+	ViewData["Title"] = "CreateUser";
+}
+
+<h1>CreateUser</h1>
+
+<h4>RegisterDto</h4>
+<hr />
+<div class="row">
+	<div class="col-md-4">
+		<form   action="/Account/Register"  method="post">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<div class="form-group">
+				</div>
+				@Html.ValidationSummary()
+			<div class="form-group">
+				@Html.LabelFor(a=>a.FullName)
+				@Html.EditorFor(a=>a.FullName)
+			</div>
+
+			<div class="form-group">
+				@Html.LabelFor(a => a.Email)
+				@Html.EditorFor(a=>a.Email)
+			</div>
+
+			<div class="form-group">
+				@Html.LabelFor(a => a.Password)
+				@Html.EditorFor(a=>a.Password)
+			</div>
+			<div class="form-group">
+				@Html.LabelFor(a => a.PhoneNumber)
+				@Html.EditorFor(a=>a.PhoneNumber)
+			</div>
+		
+		
+
+			@* <div class="form-group">
+				<label asp-for="Email" class="control-label"></label>
+				<input asp-for="Email" class="form-control" />
+				<span asp-validation-for="Email" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Password" class="control-label"></label>
+				<input asp-for="Password" class="form-control" />
+				<span asp-validation-for="Password" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="PhoneNumber" class="control-label"></label>
+				<input asp-for="PhoneNumber" class="form-control" />
+				<span asp-validation-for="PhoneNumber" class="text-danger"></span>
+			</div> *@
+			<div class="form-group">
+				<input type="submit" value="Create" class="btn btn-primary" />
+			</div>
+		</form>
+	</div>
+</div>
+
+<div>
+	<a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

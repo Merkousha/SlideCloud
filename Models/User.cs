@@ -1,9 +1,10 @@
 ﻿namespace SlideCloud.Models;
 
+using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-public class User
+public class User: IdentityUser<long>
 {
     [Key]
     public int Id { get; set; }
@@ -24,10 +25,6 @@ public class User
     [MaxLength(20)]
     public string PhoneNumber { get; set; }
 
-    // کلید خارجی به Role
-    public int RoleId { get; set; }
-
-    [ForeignKey("RoleId")]
-    public Role Role { get; set; }
+    
 }
 
