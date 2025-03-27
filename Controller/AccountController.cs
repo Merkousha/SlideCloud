@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SlideCloud.Models;
@@ -135,6 +136,19 @@ namespace SlideCloud.Controller
         #endregion
 
 
+        #region Profile
+        [Authorize]
+        public async Task<IActionResult> Profile()
+        {
+            var user = await _userManager.GetUserAsync(User); // دریافت اطلاعات کاربر جاری
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Account"); // در صورت لاگین نبودن، به صفحه ورود منتقل شود
+            }
+
+            return View(user); // ارسال اطلاعات کاربر به ویو
+        }
+        #endregion
     }
 
 

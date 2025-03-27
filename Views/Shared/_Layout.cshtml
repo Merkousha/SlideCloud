@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - SlideCloud</title>
+    <title>خانه دو || Eduhive || دوره های آنلاین آموزش HTML</title>
     <!-- favicons Icons -->
     <link rel="apple-touch-icon" sizes="180x180" href="~/assets/images/favicons/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="~/assets/images/favicons/favicon-32x32.png" />
@@ -95,7 +95,7 @@
                                                             <div class="col-md-6 col-lg-3">
                                                                 <div class="demo-one__card">
                                                                     <div class="demo-one__image">
-                                                                        <img src="~/assets/images/home-showcase/home-showcase-1.jpg" alt="">
+                                                                        <img src="assets/images/home-showcase/home-showcase-1.jpg" alt="">
                                                                         <div class="demo-one__btns">
                                                                             <a href="index.html" class="eduhive-btn demo-one__btn">
                                                                                 <span>چند صفحه</span>
@@ -121,7 +121,7 @@
                                                             <div class="col-md-6 col-lg-3">
                                                                 <div class="demo-one__card">
                                                                     <div class="demo-one__image">
-                                                                        <img src="~/assets/images/home-showcase/home-showcase-2.jpg" alt="">
+                                                                        <img src="assets/images/home-showcase/home-showcase-2.jpg" alt="">
                                                                         <div class="demo-one__btns">
                                                                             <a href="index-2.html" class="eduhive-btn demo-one__btn">
                                                                                 <span>چند صفحه</span>
@@ -147,7 +147,7 @@
                                                             <div class="col-md-6 col-lg-3">
                                                                 <div class="demo-one__card">
                                                                     <div class="demo-one__image">
-                                                                        <img src="~/assets/images/home-showcase/home-showcase-3.jpg" alt="">
+                                                                        <img src="assets/images/home-showcase/home-showcase-3.jpg" alt="">
                                                                         <div class="demo-one__btns">
                                                                             <a href="index-3.html" class="eduhive-btn demo-one__btn">
                                                                                 <span>چند صفحه</span>
@@ -173,7 +173,7 @@
                                                             <div class="col-md-6 col-lg-3">
                                                                 <div class="demo-one__card">
                                                                     <div class="demo-one__image">
-                                                                        <img src="~/assets/images/home-showcase/home-showcase-4.jpg" alt="">
+                                                                        <img src="assets/images/home-showcase/home-showcase-4.jpg" alt="">
                                                                         <div class="demo-one__btns">
                                                                             <a href="index-dark.html" class="eduhive-btn demo-one__btn">
                                                                                 <span>مشاهده صفحه</span>
@@ -232,7 +232,7 @@
                                         <li><a href="404.html">404 خطا</a></li>
                                     </ul>
                                 </li>
-                                <li class="dropdown">
+                                @* <li class="dropdown">
                                     <a href="#">دوره ها</a>
                                     <ul>
                                         <li><a href="courses.html">دوره های ما 01</a></li>
@@ -267,6 +267,40 @@
                                         <li><a href="checkout.html">پرداخت</a></li>
                                     </ul>
                                 </li>
+                                <li class="dropdown">
+                                    <a href="#">بلاگ </a>
+                                    <ul>
+                                        <li class="dropdown">
+                                            <a href="#">بلاگ گرید</a>
+                                            <ul>
+                                                <li><a href="blog-grid.html">بدون سایدبار</a></li>
+                                                <li><a href="blog-grid-left.html">سایدبار چپ</a></li>
+                                                <li><a href="blog-grid-right.html">سایدبار راست</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a href="#">بلاگ لیست</a>
+                                            <ul>
+                                                <li><a href="blog-list.html">بدون سایدبار</a></li>
+                                                <li><a href="blog-list-left.html">سایدبار چپ</a></li>
+                                                <li><a href="blog-list-right.html">سایدبار راست</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="blog-carousel.html">کاروسل بلاگ 01</a></li>
+                                        <li><a href="blog-carousel-2.html">کاروسل بلاگ 02</a></li>
+                                        <li class="dropdown">
+                                            <a href="#">جزئیات بلاگ</a>
+                                            <ul>
+                                                <li><a href="blog-details.html">بدون سایدبار</a></li>
+                                                <li><a href="blog-details-left.html">سایدبار چپ</a></li>
+                                                <li><a href="blog-details-right.html">سایدبار راست</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li> *@
+                                <li>
+                                    <a href="contact.html">تماس با ما</a>
+                                </li>
                                 @if (!User.Identity.IsAuthenticated)
                                 {
                                     <li class="nav-item">
@@ -279,11 +313,11 @@
                                 else
                                 {
                                     <li class="nav-item">
-                                        @Html.ActionLink("پنل کاربری", "Index", "User", null, new { @class = "" })
+                                        @Html.ActionLink("پنل کاربری", "Profile", "Account", null, new { @class = "" })
 
                                     </li>
                                     <li class="nav-item">
-                                        @Html.ActionLink("خروج", "Register", "Logout", null, new { @class = "" })
+                                        @Html.ActionLink("خروج", "LogOut", "Account", null, new { @class = "" })
                                     </li>
                                 }
                             </ul>
@@ -301,12 +335,221 @@
                             <i class="icon-cart" aria-hidden="true"></i>
                             <span class="sr-only">سبد خرید</span>
                         </a><!-- /.search-toggler -->
-                        <!-- /.main-header__btn eduhive-btn -->
+                        <a href="contact.html" class="main-header__btn eduhive-btn">
+                            <span>ورود به صورت رایگان</span>
+                            <span class="eduhive-btn__icon">
+                                <span class="eduhive-btn__icon__inner"><i class="icon-left-arrow"></i></span>
+                            </span>
+                        </a><!-- /.main-header__btn eduhive-btn -->
                     </div><!-- /.main-header__right -->
                 </div><!-- /.main-header__inner -->
             </div><!-- /.container-fluid -->
         </header><!-- /.main-header -->
         @RenderBody()
+        @await RenderSectionAsync("Scripts", required: false)
+        <footer class="main-footer section-space-top">
+            <div class="container rtl">
+                <div class="main-footer__top">
+                    <a href="index.html" class="main-footer__logo">
+                        <img src="assets/images/logo-dark.png" width="209" alt="Eduhive HTML Template">
+                    </a><!-- /.main-footer__logo -->
+                    <div class="main-footer__top__inner">
+                        <div class="main-footer__newsletter">
+                            <form action="#" data-url="MAILCHIMP_FORM_URL" class="main-footer__newsletter__form mc-form">
+                                <input type="text" name="EMAIL" placeholder="ایمیل خود را وارد کنید">
+                                <button type="submit" class="eduhive-btn">
+                                    <span>دریافت خبرنامه</span>
+                                </button>
+                            </form><!-- /.main-footer__newsletter__form mc-form -->
+                            <div class="mc-form__response"></div><!-- /.mc-form__response -->
+                        </div><!-- /.main-footer__newsletter -->
+                        <div class="main-footer__social social-links">
+                            <a href="https://facebook.com/">
+                                <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                                <span class="sr-only">فیسبوک</span>
+                            </a>
+                            <a href="https://twitter.com/">
+                                <i class="icon-twitter" aria-hidden="true"></i>
+                                <span class="sr-only">توییتر</span>
+                            </a>
+                            <a href="https://linkedin.com/">
+                                <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+                                <span class="sr-only">لینکدین</span>
+                            </a>
+                            <a href="https://youtube.com/">
+                                <i class="fab fa-youtube" aria-hidden="true"></i>
+                                <span class="sr-only">یوتوب</span>
+                            </a>
+                        </div><!-- /.main-footer__social social-links -->
+                    </div><!-- /.main-footer__top__inner -->
+                </div><!-- /.main-footer__top -->
+                <div class="row gutter-y-40 rtl">
+                    <div class="col-xl-3 col-lg-4 wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="00ms">
+                        <div class="footer-widget footer-widget--about">
+                            <h2 class="footer-widget__title">درباره ما</h2><!-- /.footer-widget__title -->
+                            <p class="footer-widget__about-text">
+                                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ
+                                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ
+                                لورم ایپسوم متن ساختگی با تولید
+                            </p><!-- /.footer-widget__about-text -->
+                            <ul class="footer-widget__info">
+                                <li>
+                                    <span class="footer-widget__info__icon"><i class="icon-location"></i></span>
+                                    <a href="https://www.google.com/maps">تهران، میدان تجریش، خیابان ولیعصر</a>
+                                </li>
+                                <li>
+                                    <span class="footer-widget__info__icon"><i class="icon-email"></i></span>
+                                    <a href="mailto:bl4cklich@gmail.com">emailaddress@company.com</a>
+                                </li>
+                                <li>
+                                    <span class="footer-widget__info__icon"><i class="icon-telephone"></i></span>
+                                    <a href="tel:+989121234567">09121234567</a>
+                                </li>
+                            </ul><!-- /.footer-widget__info -->
+                        </div><!-- /.footer-widget -->
+                    </div><!-- /.col-xl-3 col-lg-4 -->
+                    <div class="col-xl-3 col-md-4 col-sm-6 wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="100ms">
+                        <div class="footer-widget footer-widget--links">
+                            <h2 class="footer-widget__title">دسترسی سریع</h2><!-- /.footer-widget__title -->
+                            <ul class="list-unstyled footer-widget__links">
+                                <li>
+                                    <a href="about.html">
+                                        <span class="footer-widget__links__icon rotate">
+                                            <i class="icon-double-arrow"></i>
+                                        </span>
+                                        درباره آموزشگاه
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="courses.html">
+                                        <span class="footer-widget__links__icon rotate">
+                                            <i class="icon-double-arrow"></i>
+                                        </span>
+                                        دوره های ما
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="instructors.html">
+                                        <span class="footer-widget__links__icon rotate">
+                                            <i class="icon-double-arrow"></i>
+                                        </span>
+                                        مربیان
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="instructor-details.html">
+                                        <span class="footer-widget__links__icon rotate">
+                                            <i class="icon-double-arrow"></i>
+                                        </span>
+                                        جزئیات مربیان
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="contact.html">
+                                        <span class="footer-widget__links__icon rotate">
+                                            <i class="icon-double-arrow"></i>
+                                        </span>
+                                        تماس با ما
+                                    </a>
+                                </li>
+                            </ul><!-- /.list-unstyled footer-widget__links -->
+                        </div><!-- /.footer-widget -->
+                    </div><!-- /.col-xl-3 col-md-4 col-sm-6 -->
+                    <div class="col-xl-3 col-md-4 col-sm-6 wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="200ms">
+                        <div class="footer-widget footer-widget--links">
+                            <h2 class="footer-widget__title">دوره های آموزشی</h2><!-- /.footer-widget__title -->
+                            <ul class="list-unstyled footer-widget__links">
+                                <li>
+                                    <a href="apps-development.html">
+                                        <span class="footer-widget__links__icon rotate">
+                                            <i class="icon-double-arrow"></i>
+                                        </span>
+                                        توسعه اپلیکیشن ها
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="digital-marketing.html">
+                                        <span class="footer-widget__links__icon rotate">
+                                            <i class="icon-double-arrow"></i>
+                                        </span>
+                                        دیجیتال مارکتینگ
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="graphics-design.html">
+                                        <span class="footer-widget__links__icon rotate">
+                                            <i class="icon-double-arrow"></i>
+                                        </span>
+                                        طراحی گرافیک
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="uiux-design.html">
+                                        <span class="footer-widget__links__icon rotate">
+                                            <i class="icon-double-arrow"></i>
+                                        </span>
+                                        طراحی UI/UX
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="data-science.html">
+                                        <span class="footer-widget__links__icon rotate">
+                                            <i class="icon-double-arrow"></i>
+                                        </span>
+                                        علم داده
+                                    </a>
+                                </li>
+                            </ul><!-- /.list-unstyled footer-widget__links -->
+                        </div><!-- /.footer-widget -->
+                    </div><!-- /.col-xl-3 col-md-4 col-sm-6 -->
+                    <div class="col-xl-3 col-md-4 wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="300ms">
+                        <div class="footer-widget footer-widget--gallery">
+                            <h2 class="footer-widget__title">گالری ما</h2><!-- /.footer-widget__title -->
+                            <div class="footer-widget__gallery">
+                                <a href="gallery.html" class="footer-widget__gallery__link">
+                                    <img src="~/assets/images/gallery/footer-widget-gallery-1.jpg" alt="footer-widget-gallery">
+                                    <span class="footer-widget__gallery__icon icon-plus"></span>
+                                </a><!-- /.footer-widget__gallery__link -->
+                                <a href="gallery.html" class="footer-widget__gallery__link">
+                                    <img src="~/assets/images/gallery/footer-widget-gallery-2.jpg" alt="footer-widget-gallery">
+                                    <span class="footer-widget__gallery__icon icon-plus"></span>
+                                </a><!-- /.footer-widget__gallery__link -->
+                                <a href="gallery.html" class="footer-widget__gallery__link">
+                                    <img src="~/assets/images/gallery/footer-widget-gallery-3.jpg" alt="footer-widget-gallery">
+                                    <span class="footer-widget__gallery__icon icon-plus"></span>
+                                </a><!-- /.footer-widget__gallery__link -->
+                                <a href="gallery.html" class="footer-widget__gallery__link">
+                                    <img src="~/assets/images/gallery/footer-widget-gallery-4.jpg" alt="footer-widget-gallery">
+                                    <span class="footer-widget__gallery__icon icon-plus"></span>
+                                </a><!-- /.footer-widget__gallery__link -->
+                                <a href="gallery.html" class="footer-widget__gallery__link">
+                                    <img src="~/assets/images/gallery/footer-widget-gallery-5.jpg" alt="footer-widget-gallery">
+                                    <span class="footer-widget__gallery__icon icon-plus"></span>
+                                </a><!-- /.footer-widget__gallery__link -->
+                                <a href="gallery.html" class="footer-widget__gallery__link">
+                                    <img src="~/assets/images/gallery/footer-widget-gallery-6.jpg" alt="footer-widget-gallery">
+                                    <span class="footer-widget__gallery__icon icon-plus"></span>
+                                </a><!-- /.footer-widget__gallery__link -->
+                            </div><!-- /.footer-widget__gallery -->
+                        </div><!-- /.footer-widget -->
+                    </div><!-- /.col-xl-3 col-md-4 -->
+                </div><!-- /.row gutter-y-40 -->
+            </div><!-- /.container -->
+            <div class="main-footer__bottom">
+                <div class="container">
+                    <div class="main-footer__bottom__inner">
+                        <p class="main-footer__copyright">
+                            &copy; تمامی حقوق<span class="dynamic-year"></span> محفوظ میباشد
+                        </p>
+                    </div><!-- /.main-footer__inner -->
+                </div><!-- /.container -->
+            </div><!-- /.main-footer__bottom -->
+            <img src="~/assets/images/shapes/footer-shape-1.png" alt="shape" class="main-footer__shape-one">
+            <img src="~/assets/images/shapes/footer-shape-2.png" alt="shape" class="main-footer__shape-two">
+            <img src="~/assets/images/shapes/footer-shape-4.png" alt="shape" class="main-footer__shape-four">
+            <img src="~/assets/images/shapes/footer-shape-5.png" alt="shape" class="main-footer__shape-five">
+        </footer><!-- /.main-footer section-space-top -->
+
     </div><!-- /.page-wrapper -->
 
     <div class="mobile-nav__wrapper">
@@ -401,7 +644,7 @@
     <script src="~/assets/vendors/jquery-lettering/jquery.lettering.min.js"></script>
     <!-- template js -->
     <script src="~/assets/js/eduhive.js"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    
 </body>
 
 

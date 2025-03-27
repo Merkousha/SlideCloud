@@ -1,0 +1,75 @@
+﻿@model SlideCloud.Models.User ;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Profile";
+}
+<section class="page-header">
+    <div class="container rtl">
+        <div class="page-header__content">
+            <ul class="eduhive-breadcrumb list-unstyled">
+            </ul><!-- /.eduhive-breadcrumb list-unstyled -->
+            <h2 class="page-header__title">پروفایل شما </h2>
+        </div><!-- /.page-header__content -->
+    </div><!-- /.container -->
+    <img src="~/assets/images/shapes/page-header-shape-1.png" alt="shape" class="page-header__shape-one">
+    <img src="~/assets/images/shapes/page-header-shape-2.png" alt="shape" class="page-header__shape-two">
+    <div class="page-header__shape-three"></div><!-- /.page-header__shape-three -->
+    <div class="page-header__shape-four"></div><!-- /.page-header__shape-four -->
+</section><!-- /.page-header -->
+<section class="course-instructor-details">
+    <div class="container rtl">
+        <div class="course-instructor-details__inner">
+            <div class="course-instructor-details__image">
+                <img src="~/assets/images/courses/course-d-instructor-1-8.jpg" alt="Sabrina Melton">
+            </div><!-- /.course-instructor-details__image -->
+            <div class="course-instructor-details__info">
+                <h3 class="course-instructor-details__name">@Model.Name</h3><!-- /.instructor__name -->
+                <p class="course-instructor-details__designation">Email : @Model.Email</p><!-- /.instructor__designation -->
+                <p class="course-instructor-details__text">Phone Number : @Model.PhoneNumber</p><!-- /.instructor__text -->
+                @* <div class="course-instructor-details__course-info">
+                    <div class="course-instructor-details__experience">
+                        تجربه: <span>10 سال</span>
+                    </div><!-- /.instructor__experience -->
+                    <div class="course-instructor-details__students">
+                        <span class="course-instructor-details__students__icon">
+                            <i class="icon-multiple-users"></i>
+                        </span>
+                        <p class="course-instructor-details__students__text">188 دانش آموز</p>
+                    </div><!-- /.instructor__students -->
+                    <div class="course-instructor-details__review">
+                        <span class="course-instructor-details__review__icon">
+                            <i class="icon-star"></i>
+                        </span>
+                        <p class="course-instructor-details__review__text">454 (36 بررسی)</p>
+                    </div><!-- /.instructor__review -->
+                </div><!-- /.course-instructor-details__course-info -->
+                <div class="course-instructor-details__social social-links-two">
+                    <a href="https://facebook.com/">
+                        <span class="social-links-two__icon">
+                            <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                        </span><!-- /.social-links-two__icon -->
+                        <span class="sr-only">فیسبوک</span>
+                    </a>
+                    <a href="https://twitter.com/">
+                        <span class="social-links-two__icon">
+                            <i class="fab fa-twitter" aria-hidden="true"></i>
+                        </span><!-- /.social-links-two__icon -->
+                        <span class="sr-only">توییتر</span>
+                    </a>
+                    <a href="https://instagram.com/">
+                        <span class="social-links-two__icon">
+                            <i class="fab fa-instagram" aria-hidden="true"></i>
+                        </span><!-- /.social-links-two__icon -->
+                        <span class="sr-only">اینستاگرام</span>
+                    </a>
+                    <a href="https://youtube.com/">
+                        <span class="social-links-two__icon">
+                            <i class="fab fa-youtube" aria-hidden="true"></i>
+                        </span><!-- /.social-links-two__icon -->
+                        <span class="sr-only">یوتوب</span>
+                    </a>
+                </div><!-- /.course-instructor-details__social --> *@
+            </div><!-- /.course-instructor-details__info -->
+        </div><!-- /.course-instructor-details__inner -->
+    </div><!-- /.container -->
+</section><!-- /.course-instructor-details -->
