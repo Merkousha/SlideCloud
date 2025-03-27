@@ -1,0 +1,92 @@
+﻿@using SlideCloud.Models;
+@model SlideCloud.Areas.User.Models.Slides.CreateSlides;
+
+@{
+	var documentTypes = ViewBag.DocumentTypes as ICollection<DocumentType>;
+	var documentCategorys = ViewBag.DocumentCategories as ICollection<DocumentCategory>;
+
+	var documentType = documentTypes.Select(a => new SelectListItem
+	{
+	Text = a.Name,
+	Value = a.Id.ToString()
+
+	});
+	var documentCategory = documentCategorys.Select(a => new SelectListItem
+	{
+		Text = a.Name,
+		Value = a.Id.ToString()
+	});
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "CreateSlide";
+}
+
+<h1>ساخت اسلاید</h1>
+
+<h4></h4>
+<hr />
+<div class="row">
+	<div class="col-md-8">
+		<form action="/Admin/ManageSlide/Create" method="post">
+		
+			<div class="form-group">
+			</div>
+			@Html.ValidationSummary()
+			<div class="form-group">
+				@Html.LabelFor(a => a.Title)
+				@Html.EditorFor(a => a.Title)
+				
+
+			</div>
+
+			<div class="form-group">
+				
+				@Html.LabelFor(a => a.Description)
+				@Html.EditorFor(a => a.Description)
+
+			</div>
+
+			<div class="form-group">
+				@Html.LabelFor(a => a.Picture)
+				@Html.EditorFor(a => a.Picture)
+
+			</div>
+
+			<div class="form-group">
+				@Html.LabelFor(a => a.File)
+				@Html.EditorFor(a => a.File)
+
+			</div>
+
+			<div class="form-group">
+				@Html.LabelFor(a => a.DocumentTypeId)
+				@Html.DropDownListFor(a => a.DocumentTypeId, documentType)
+
+			</div>
+
+			<div class="form-group">
+				@Html.LabelFor(a => a.DocumentCategoryId)
+				@Html.DropDownListFor(a => a.DocumentCategoryId, documentCategory)
+
+			</div>
+
+			<div class="form-group">
+				<input type="submit" value="Create" class="btn btn-primary" />
+			</div>
+		</form>
+
+		</div>
+
+	</div>
+
+
+<div>
+	<a asp-action="Index">بازگشت به منو</a>
+</div>
+
+
+@section Scripts {
+
+	<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+	<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+}
