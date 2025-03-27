@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using SlideCloud.Areas.Admin.Models.Slides;
+using SlideCloud.Areas.User.Models.Slides;
 using SlideCloud.Data;
 
-namespace SlideCloud.Areas.Admin.Controllers
+namespace SlideCloud.Areas.User.Controllers
 {
-    [Area("Admin")]
-    [Authorize(Roles ="Admin")]
+    [Area("User")]
+    [Authorize]
     public class ManageSlideController : Microsoft.AspNetCore.Mvc.Controller
     {
         private readonly AppDbContext _appDbContext;
