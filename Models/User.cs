@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 public class User: IdentityUser<long>
 {
     [Key]
-    public int Id { get; set; }
+    public long Id { get; set; }
 
     [Required]
     [MaxLength(50)]
@@ -17,9 +17,6 @@ public class User: IdentityUser<long>
     [MaxLength(50)]
     public string Email { get; set; }
 
-    [Required]
-    [MaxLength(50)]
-    public string Password { get; set; }
 
     // شماره تلفن بهتر است string باشد تا بتواند فرمت‌های متفاوت را نگهداری کند
     [MaxLength(20)]
