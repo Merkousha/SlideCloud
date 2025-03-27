@@ -1,0 +1,63 @@
+﻿@model SlideCloud.Areas.Admin.Models.Slides.CreateSlides;
+
+@{
+	
+	ViewData["Title"] = "CreateSlide";
+}
+
+<h1>CreateUser</h1>
+
+<h4>RegisterDto</h4>
+<hr />
+<div class="row">
+	<div class="col-md-4">
+		<form action="/Admin/ManageSlide/Create" method="post">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<div class="form-group">
+			</div>
+			@Html.ValidationSummary()
+			<div class="form-group">
+				@Html.LabelFor(a => a.Title)
+				@Html.EditorFor(a => a.Description)
+			</div>
+
+			<div class="form-group">
+				@Html.ValidationMessageFor(a => a.Email)
+				@Html.LabelFor(a => a.Email)
+				@Html.EditorFor(a => a.Email)
+			</div>
+
+			<div class="form-group">
+				@Html.LabelFor(a => a.Password)
+				@Html.EditorFor(a => a.Password)
+			</div>
+			<div class="form-group">
+				@Html.LabelFor(a => a.RePassword)
+				@Html.EditorFor(a => a.RePassword)
+			</div>
+			<div class="form-group">
+				@Html.ValidationMessageFor(a => a.PhoneNumber)
+				@Html.LabelFor(a => a.PhoneNumber)
+				@Html.EditorFor(a => a.PhoneNumber)
+			</div>
+
+
+
+
+			<div class="form-group">
+				<input type="submit" value="Create" class="btn btn-primary" />
+			</div>
+		</form>
+	</div>
+</div>
+
+<div>
+	<a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

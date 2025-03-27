@@ -11,5 +11,7 @@ namespace SlideCloud.Areas.Admin.Controllers
             return View();
         }
 
+       
+
     }
 }
