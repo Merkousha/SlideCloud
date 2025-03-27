@@ -10,8 +10,9 @@ namespace SlideCloud.Areas.Admin.Models.Slides
         [MaxLength(255)]
         public string Description { get; set; }
 
-        [Required]
+        [Required()]
         [MaxLength(255)]
+        
         public string Title { get; set; }
 
         [MaxLength(255)]

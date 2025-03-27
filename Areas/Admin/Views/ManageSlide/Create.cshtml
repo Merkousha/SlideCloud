@@ -1,7 +1,17 @@
 ﻿@model SlideCloud.Areas.Admin.Models.Slides.CreateSlides;
 
 @{
-	
+	var documentType = Model.DocumentTypes.Select(a => new SelectListItem {
+	Text = a.Name,
+	Value = a.Id.ToString()
+
+	});
+	var documentCategory = Model.DocumentCategories.Select(a => new SelectListItem
+	{
+		Text = a.Name,
+		Value = a.Id.ToString()
+	});
+	Layout = "_Layout";
 	ViewData["Title"] = "CreateSlide";
 }
 
@@ -18,28 +28,41 @@
 			@Html.ValidationSummary()
 			<div class="form-group">
 				@Html.LabelFor(a => a.Title)
+				@Html.EditorFor(a => a.Title)
+
+			</div>
+
+			<div class="form-group">
+				@Html.LabelFor(a => a.Description)
 				@Html.EditorFor(a => a.Description)
+
 			</div>
 
 			<div class="form-group">
-				@Html.ValidationMessageFor(a => a.Email)
-				@Html.LabelFor(a => a.Email)
-				@Html.EditorFor(a => a.Email)
+				@Html.LabelFor(a => a.Picture)
+				@Html.EditorFor(a => a.Picture)
+
 			</div>
 
 			<div class="form-group">
-				@Html.LabelFor(a => a.Password)
-				@Html.EditorFor(a => a.Password)
+				@Html.LabelFor(a => a.File)
+				@Html.EditorFor(a => a.File)
+
 			</div>
+
 			<div class="form-group">
-				@Html.LabelFor(a => a.RePassword)
-				@Html.EditorFor(a => a.RePassword)
+				@Html.LabelFor(a => a.File)
+				@Html.DropDownListFor(a => a.DocumentTypeId, documentType)
+
 			</div>
+
 			<div class="form-group">
-				@Html.ValidationMessageFor(a => a.PhoneNumber)
-				@Html.LabelFor(a => a.PhoneNumber)
-				@Html.EditorFor(a => a.PhoneNumber)
+				@Html.LabelFor(a => a.File)
+				@Html.DropDownListFor(a => a.DocumentCategoryId, documentCategory)
+
 			</div>
+
+			
 
 
 
@@ -54,6 +77,9 @@
 <div>
 	<a asp-action="Index">Back to List</a>
 </div>
+
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 
 @section Scripts {
 
