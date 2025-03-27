@@ -16,7 +16,7 @@
 		Text = a.Name,
 		Value = a.Id.ToString()
 	});
-	Layout = "_Layout";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 	ViewData["Title"] = "CreateSlide";
 }
 
@@ -83,12 +83,10 @@
 	<a asp-action="Index">بازگشت به منو</a>
 </div>
 
-<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 
 @section Scripts {
 
-	@{
-		await Html.RenderPartialAsync("_ValidationScriptsPartial");
-	}
+	<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+	<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
 }
