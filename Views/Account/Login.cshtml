@@ -1,50 +1,114 @@
 ﻿@model SlideCloud.Models.DTO.User.LoginDto
 
 @{
-    ViewData["Title"] = "LoginUser";
+    ViewData["Title"] = "ورود کاربران";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@section Styles {
 
-<h1>LoginUser</h1>
+    <style>
+        .password-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
 
-<h4>UserDto</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4 m-5">
-        <form action="/Account/Login" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-            </div>
-            @Html.ValidationSummary()
+        .toggle-password-input {
+            width: 100%;
+            padding-left: 2.5rem; /* فضای مناسب برای آیکون */
+        }
 
-            <div class="form-group">
-                @Html.LabelFor(a => a.Email)
-                @Html.EditorFor(a => a.Email)
-            </div>
+        .toggle-password-icon {
+            position: absolute;
+            left: 10px; /* فاصله از سمت راست */
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #888;
+        }
+    </style>
+}
+<section class="page-header">
+    <div class="container rtl">
+        <div class="page-header__content">
+            <ul class="eduhive-breadcrumb list-unstyled">
+                <li><span class="eduhive-breadcrumb__icon"><i class="icon-home"></i></span><a href="index.html">خانه</a></li>
+                <li><span>وارد شدن</span></li>
+            </ul><!-- /.eduhive-breadcrumb list-unstyled -->
+            <h2 class="page-header__title">وارد شدن</h2>
+        </div><!-- /.page-header__content -->
+    </div><!-- /.container -->
+    <img src="~/assets/images/shapes/page-header-shape-1.png" alt="shape" class="page-header__shape-one">
+    <img src="~/assets/images/shapes/page-header-shape-2.png" alt="shape" class="page-header__shape-two">
+    <div class="page-header__shape-three"></div><!-- /.page-header__shape-three -->
+    <div class="page-header__shape-four"></div><!-- /.page-header__shape-four -->
+</section><!-- /.page-header -->
 
-            <div class="form-group">
-                @Html.LabelFor(a => a.Password)
-                @Html.EditorFor(a => a.Password)
-            </div>
+<section class="login-page section-space">
+    <div class="container rtl">
+        <div class="row gutter-y-50 align-items-center">
+            <div class="col-lg-6 wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="00ms">
+                <div class="login-page__image">
+                    <div class="login-page__image__inner">
+                        <img src="~/assets/images/resources/login-1-1.jpg" alt="login">
+                    </div><!-- /.login-page__image__inner -->
+                </div><!-- /.login-page__image -->
+            </div><!-- /.col-lg-6 -->
+            <div class="col-lg-6 wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="100ms">
+
+                <form action="/Account/Login" method="post" class="login-page__form">
+                    <div class="login-page__form__wrapp">
+                        <div class="login-page__form__inner">
+                            <div class="login-page__form__top">
+                                <img src="~/assets/images/resources/login-logo-1-1.png" alt="logo" width="167" class="login-page__form__logo">
+                                <h3 class="login-page__form__title">خوشحالم که دوباره شما را می بینم</h3>
+                            </div><!-- /.login-page__form__top -->
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                            </div>
+                            @Html.ValidationSummary()
+
+                            <div class="login-page__form__input-box">
+                                @Html.LabelFor(m => m.Email, new { @class = "login-page__form__label" })
+                                @Html.TextBoxFor(m => m.Email, new { @placeholder = "ایمیل یا شماره تلفن" })
+                            </div>
+                            <div class="login-page__form__input-box">
+                                @Html.LabelFor(a => a.Password, new { @class = "login-page__form__label" })
+                                <div class="password-container">
+                                    @Html.PasswordFor(a => a.Password, new { @placeholder = "رمز عبور را وارد کنید", @class = "toggle-password-input" })
+                                    <i class="toggle-password-icon fa fa-fw fa-eye-slash" onclick="togglePassword()"></i>
+                                </div>
+                            </div>
+
+                            <div class="login-page__form__input-box login-page__form__input-box--4">
+                                <input type="submit" class="login-page__form__btn eduhive-btn eduhive-btn--normal" value="ورود">
+                            </div>
+                       
+                        <div class="login-page__form__bottom">
+                            <button type="button" class="login-page__form__signin-google">
+                                <img src="~/assets/images/shapes/google.png" alt="google">
+                                یا با گوگل وارد شوید
+                            </button>
+                            <p class="login-page__form__register-text">
+                                حساب کاربری ندارید؟ <a href="register.html">ثبت نام کن</a>
+                            </p>
+                        </div><!-- /.login-page__form__bottom -->
+                        </div><!-- /.login-page__form__wrapp -->
+                    </div><!-- /.login-page__form__inner -->
+                </form>
+
+                @Html.ActionLink("فراموشی رمز عبور", "ForgetPassword", "Account", new { @class = "login-page__form__forgot" })
 
 
 
-
-            <div class="form-group">
-                <input type="submit" value="Login" class="btn btn-primary" />
-            </div>
-        </form>
-
-        @Html.ActionLink("ForgetPassword", "ForgetPassword", "Account", new { }, new { @class = "" })
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
+            </div><!-- /.col-lg-6 -->
+        </div><!-- /.row gutter-y-50 -->
+    </div><!-- /.container -->
+</section><!-- /.login-page section-space -->
 @section Scripts {
-    @{
+    @*  @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    } *@
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 }

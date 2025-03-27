@@ -1,8 +1,9 @@
 :root {
-  --eduhive-black: #ffffff;
-  --eduhive-black-rgb: 255, 255, 255;
-  --eduhive-black2: #20104B;
-  --eduhive-black2-rgb: 32, 16, 75;
+    --eduhive-black: #ffffff;
+    --eduhive-black-rgb: 255, 255, 255;
+    --eduhive-black2: #20104B;
+    --eduhive-black2-rgb: 32, 16, 75;
+    --eduhive-text: #20104B;
 }
 
 /*------------------------------------------------
@@ -116,3 +117,9 @@ Border Style
   border: 5px solid rgba(var(--eduhive-white-rgb), 0.3);
 }
 /*# sourceMappingURL=eduhive-dark.css.map */
+
+
+
+p {
+    color: var(--eduhive-black, #20104B);
+}

@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>خانه دو || Eduhive || دوره های آنلاین آموزش HTML</title>
+    <title>@ViewBag.Title | SlideCloud</title>
     <!-- favicons Icons -->
     <link rel="apple-touch-icon" sizes="180x180" href="~/assets/images/favicons/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="~/assets/images/favicons/favicon-32x32.png" />
@@ -35,7 +35,7 @@
 
     <!-- template styles -->
     <link rel="stylesheet" href="~/assets/css/eduhive.css" />
-    <link rel="stylesheet" href="~/assets/css/eduhive-dark.css" />
+    @await RenderSectionAsync("Styles", required: false)
 </head>
 
 <body class="custom-cursor">
@@ -44,7 +44,7 @@
     <div class="custom-cursor__cursor-two"></div>
 
     <div class="preloader">
-        <div class="preloader__image" style="background-image: url(assets/images/loader.png);"></div>
+        <div class="preloader__image" style="background-image: url('@Url.Content("~/assets/images/loader.png")');"></div>
     </div>
     <!-- /.preloader -->
     <div class="page-wrapper">
@@ -95,7 +95,7 @@
                                                             <div class="col-md-6 col-lg-3">
                                                                 <div class="demo-one__card">
                                                                     <div class="demo-one__image">
-                                                                        <img src="assets/images/home-showcase/home-showcase-1.jpg" alt="">
+                                                                        <img src="~/assets/images/home-showcase/home-showcase-1.jpg" alt="">
                                                                         <div class="demo-one__btns">
                                                                             <a href="index.html" class="eduhive-btn demo-one__btn">
                                                                                 <span>چند صفحه</span>
@@ -121,7 +121,7 @@
                                                             <div class="col-md-6 col-lg-3">
                                                                 <div class="demo-one__card">
                                                                     <div class="demo-one__image">
-                                                                        <img src="assets/images/home-showcase/home-showcase-2.jpg" alt="">
+                                                                        <img src="~/assets/images/home-showcase/home-showcase-2.jpg" alt="">
                                                                         <div class="demo-one__btns">
                                                                             <a href="index-2.html" class="eduhive-btn demo-one__btn">
                                                                                 <span>چند صفحه</span>
@@ -147,7 +147,7 @@
                                                             <div class="col-md-6 col-lg-3">
                                                                 <div class="demo-one__card">
                                                                     <div class="demo-one__image">
-                                                                        <img src="assets/images/home-showcase/home-showcase-3.jpg" alt="">
+                                                                        <img src="~/assets/images/home-showcase/home-showcase-3.jpg" alt="">
                                                                         <div class="demo-one__btns">
                                                                             <a href="index-3.html" class="eduhive-btn demo-one__btn">
                                                                                 <span>چند صفحه</span>
@@ -173,7 +173,7 @@
                                                             <div class="col-md-6 col-lg-3">
                                                                 <div class="demo-one__card">
                                                                     <div class="demo-one__image">
-                                                                        <img src="assets/images/home-showcase/home-showcase-4.jpg" alt="">
+                                                                        <img src="~/assets/images/home-showcase/home-showcase-4.jpg" alt="">
                                                                         <div class="demo-one__btns">
                                                                             <a href="index-dark.html" class="eduhive-btn demo-one__btn">
                                                                                 <span>مشاهده صفحه</span>
@@ -335,23 +335,17 @@
                             <i class="icon-cart" aria-hidden="true"></i>
                             <span class="sr-only">سبد خرید</span>
                         </a><!-- /.search-toggler -->
-                        <a href="contact.html" class="main-header__btn eduhive-btn">
-                            <span>ورود به صورت رایگان</span>
-                            <span class="eduhive-btn__icon">
-                                <span class="eduhive-btn__icon__inner"><i class="icon-left-arrow"></i></span>
-                            </span>
-                        </a><!-- /.main-header__btn eduhive-btn -->
+                       
                     </div><!-- /.main-header__right -->
                 </div><!-- /.main-header__inner -->
             </div><!-- /.container-fluid -->
         </header><!-- /.main-header -->
         @RenderBody()
-        @await RenderSectionAsync("Scripts", required: false)
         <footer class="main-footer section-space-top">
             <div class="container rtl">
                 <div class="main-footer__top">
                     <a href="index.html" class="main-footer__logo">
-                        <img src="assets/images/logo-dark.png" width="209" alt="Eduhive HTML Template">
+                        <img src="~/assets/images/logo-dark.png" width="209" alt="Eduhive HTML Template">
                     </a><!-- /.main-footer__logo -->
                     <div class="main-footer__top__inner">
                         <div class="main-footer__newsletter">
@@ -639,11 +633,13 @@
     <script src="~/assets/vendors/wow/wow.js"></script>
     <script src="~/assets/vendors/imagesloaded/imagesloaded.min.js"></script>
     <script src="~/assets/vendors/isotope/isotope.js"></script>
-    <script src="~/assets/vendors/countdown/countdown.min.js"></script>
     <script src="~/assets/vendors/jquery-circleType/jquery.circleType.js"></script>
     <script src="~/assets/vendors/jquery-lettering/jquery.lettering.min.js"></script>
     <!-- template js -->
     <script src="~/assets/js/eduhive.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+    
     
 </body>
 

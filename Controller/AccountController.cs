@@ -30,6 +30,8 @@ namespace SlideCloud.Controller
         {
             return View();
         }
+
+
         [HttpPost]
         public async Task<IActionResult> Login(LoginDto model)
         {
