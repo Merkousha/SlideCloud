@@ -1,13 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SlideCloud.Areas.Admin.Models.Slides;
 using SlideCloud.Data;
 
 namespace SlideCloud.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class ManageSlideController : Microsoft.AspNetCore.Mvc.Controller
     {
-        AppDbContext _appDbContext;
+        private readonly AppDbContext _appDbContext;
 
         public ManageSlideController(AppDbContext appDbContext) 
         {
@@ -19,18 +21,17 @@ namespace SlideCloud.Areas.Admin.Controllers
         public IActionResult Create()
         {
             var model = new CreateSlides();
-            model.DocumentTypes= _appDbContext.DocumentTypes.ToList();
-            model.DocumentCategories= _appDbContext.DocumentCategories.ToList();
+            ViewBag.DocumentTypes = _appDbContext.DocumentTypes.ToList();
+            ViewBag.DocumentCategories = _appDbContext.DocumentCategories.ToList();
             return View(model);
         }
+
         [HttpPost]
-
-
         public IActionResult Create(CreateSlides model)
         {
-            model.DocumentTypes = _appDbContext.DocumentTypes.ToList();
-            model.DocumentCategories = _appDbContext.DocumentCategories.ToList();
-            if (ModelState.ErrorCount>2)
+            ViewBag.DocumentTypes = _appDbContext.DocumentTypes.ToList();
+            ViewBag.DocumentCategories = _appDbContext.DocumentCategories.ToList();
+            if (!ModelState.IsValid)
             {
                 
                 return View(model);
@@ -48,7 +49,7 @@ namespace SlideCloud.Areas.Admin.Controllers
 
             });
             _appDbContext.SaveChanges();
-            return Redirect("/");
+            return RedirectToAction("Index","Home");
         }
 
 

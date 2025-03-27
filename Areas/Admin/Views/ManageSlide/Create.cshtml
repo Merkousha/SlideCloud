@@ -1,12 +1,17 @@
-﻿@model SlideCloud.Areas.Admin.Models.Slides.CreateSlides;
+﻿@using SlideCloud.Models;
+@model SlideCloud.Areas.Admin.Models.Slides.CreateSlides;
 
 @{
-	var documentType = Model.DocumentTypes.Select(a => new SelectListItem {
+	var documentTypes = ViewBag.DocumentTypes as ICollection<DocumentType>;
+	var documentCategorys = ViewBag.DocumentCategories as ICollection<DocumentCategory>;
+
+	var documentType = documentTypes.Select(a => new SelectListItem
+			{
 	Text = a.Name,
 	Value = a.Id.ToString()
 
 	});
-	var documentCategory = Model.DocumentCategories.Select(a => new SelectListItem
+	var documentCategory = documentCategorys.Select(a => new SelectListItem
 	{
 		Text = a.Name,
 		Value = a.Id.ToString()
@@ -15,14 +20,14 @@
 	ViewData["Title"] = "CreateSlide";
 }
 
-<h1>CreateUser</h1>
+<h1>ساخت اسلاید</h1>
 
-<h4>RegisterDto</h4>
+<h4></h4>
 <hr />
 <div class="row">
-	<div class="col-md-4">
+	<div class="col-md-8">
 		<form action="/Admin/ManageSlide/Create" method="post">
-			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+		
 			<div class="form-group">
 			</div>
 			@Html.ValidationSummary()
@@ -33,6 +38,7 @@
 			</div>
 
 			<div class="form-group">
+				
 				@Html.LabelFor(a => a.Description)
 				@Html.EditorFor(a => a.Description)
 
@@ -51,31 +57,29 @@
 			</div>
 
 			<div class="form-group">
-				@Html.LabelFor(a => a.File)
+				@Html.LabelFor(a => a.DocumentTypeId)
 				@Html.DropDownListFor(a => a.DocumentTypeId, documentType)
 
 			</div>
 
 			<div class="form-group">
-				@Html.LabelFor(a => a.File)
+				@Html.LabelFor(a => a.DocumentCategoryId)
 				@Html.DropDownListFor(a => a.DocumentCategoryId, documentCategory)
 
 			</div>
-
-			
-
-
-
 
 			<div class="form-group">
 				<input type="submit" value="Create" class="btn btn-primary" />
 			</div>
 		</form>
+
+		</div>
+
 	</div>
-</div>
+
 
 <div>
-	<a asp-action="Index">Back to List</a>
+	<a asp-action="Index">بازگشت به منو</a>
 </div>
 
 <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
