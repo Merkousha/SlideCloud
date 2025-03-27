@@ -72,7 +72,7 @@ namespace SlideCloud.Controller
                 UserName = model.Email,
                 Email = model.Email,
                 Name = model.FullName,
-             
+                Password = model.Password,
                 PhoneNumber = model.PhoneNumber
             };
 
