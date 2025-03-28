@@ -50,7 +50,9 @@ namespace SlideCloud.Areas.User.Controllers
 
             });
             _appDbContext.SaveChanges();
-            return RedirectToAction("Index","Home");
+
+            //return  RedirectToAction("Index", "Home");
+            return Redirect("~/");
         }
 
 
