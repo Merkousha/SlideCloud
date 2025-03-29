@@ -19,7 +19,7 @@ namespace SlideCloud.Areas.User.Controllers
         }
         #region List Of Sldie
 
-        [HttpGet]
+        [HttpGet("/User/[Controller]/[Action]",Name ="ListSlideForUser")]
         public async Task<IActionResult> List()
         {
             var model = new ListSlideVM();
