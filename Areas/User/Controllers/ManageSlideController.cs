@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SlideCloud.Areas.User.Models.Slides;
 using SlideCloud.Data;
 
@@ -16,7 +17,20 @@ namespace SlideCloud.Areas.User.Controllers
             _appDbContext = appDbContext;
 
         }
+        #region List Of Sldie
 
+        [HttpGet]
+        public async Task<IActionResult> List()
+        {
+            var model = new ListSlideVM();
+            model.DocumentCategories = await _appDbContext.DocumentCategories.ToListAsync();
+            model.Documents = await _appDbContext.Documents.ToListAsync();
+            return View(model);
+        }
+
+
+        #endregion
+        [HttpGet]
         [HttpGet]
         public IActionResult Create()
         {
