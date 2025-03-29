@@ -299,7 +299,7 @@
                                     </ul>
                                 </li> *@
                                 <li>
-                                    <a href="contact.html">تماس با ما</a>
+                                    <a href="@Url.Action("Contact", "Home")">تماس با ما</a>
                                 </li>
                                 @if (!User.Identity.IsAuthenticated)
                                 {
@@ -635,6 +635,9 @@
     <script src="~/assets/vendors/isotope/isotope.js"></script>
     <script src="~/assets/vendors/jquery-circleType/jquery.circleType.js"></script>
     <script src="~/assets/vendors/jquery-lettering/jquery.lettering.min.js"></script>
+
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     <!-- template js -->
     <script src="~/assets/js/eduhive.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
