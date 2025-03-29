@@ -1,11 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using SlideCloud.Models;
 using SlideCloud.Models.DTO.User;
-using System.ComponentModel.DataAnnotations;
-using System.Security.Claims;
 
 namespace SlideCloud.Controller
 {
@@ -75,12 +73,11 @@ namespace SlideCloud.Controller
                 UserName = model.Email,
                 Email = model.Email,
                 Name = model.FullName,
-                Password = model.Password,
                 PhoneNumber = model.PhoneNumber
             };
 
             // بررسی تکراری بودن ایمیل
-            var isEmailUnique =  _userManager.Users.Any(u => u.Email == model.Email);
+            var isEmailUnique = _userManager.Users.Any(u => u.Email == model.Email);
             if (isEmailUnique)
             {
                 ModelState.AddModelError("Email", "این ایمیل قبلاً ثبت شده است.");
@@ -131,7 +128,7 @@ namespace SlideCloud.Controller
         [HttpGet]
         public async Task<IActionResult> ForgetPassword()
         {
-            
+
             return View();
         }
 
