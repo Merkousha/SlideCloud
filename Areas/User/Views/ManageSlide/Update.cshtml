@@ -1,0 +1,136 @@
+﻿@using SlideCloud.Models;
+@model SlideCloud.Areas.User.Models.Slides.UpdateSlides;
+
+@{
+    var documentTypes = ViewBag.DocumentTypes as ICollection<DocumentType>;
+    var documentCategorys = ViewBag.DocumentCategories as ICollection<DocumentCategory>;
+
+    var documentType = documentTypes.Select(a => new SelectListItem
+            {
+                Text = a.Name,
+                Value = a.Id.ToString(),
+				Selected = a.Id == Model.DocumentTypeId
+                
+            });
+    var documentCategory = documentCategorys.Select(a => new SelectListItem
+            {
+                Text = a.Name,
+                Value = a.Id.ToString(),
+	            Selected = a.Id == Model.DocumentCategoryId
+            });
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "ویرایش اسلاید";
+}
+
+
+<section class="page-header">
+    <div class="container rtl">
+        <div class="page-header__content">
+            <ul class="eduhive-breadcrumb list-unstyled">
+                <li><span class="eduhive-breadcrumb__icon"><i class="icon-home"></i></span><a href="index.html">خانه</a></li>
+                <li><span>اسلایدها</span></li>
+            </ul><!-- /.eduhive-breadcrumb list-unstyled -->
+            <h2 class="page-header__title">ویرایش اسلاید</h2>
+        </div><!-- /.page-header__content -->
+    </div><!-- /.container -->
+    <img src="~/assets/images/shapes/page-header-shape-1.png" alt="shape" class="page-header__shape-one">
+    <img src="~/assets/images/shapes/page-header-shape-2.png" alt="shape" class="page-header__shape-two">
+    <div class="page-header__shape-three"></div><!-- /.page-header__shape-three -->
+    <div class="page-header__shape-four"></div><!-- /.page-header__shape-four -->
+</section><!-- /.page-header -->
+
+<section class="become-instructor section-space-top">
+    <div class="container rtl">
+        <div class="row gutter-y-50">
+            <div class="col-lg-5 wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="300ms">
+                <div class="become-instructor__content">
+                    <div class="become-instructor__content__inner">
+                        <h3 class="become-instructor__title">قوانین انتشار اسلاید</h3>
+                        <ul class="become-instructor__list">
+                            <li>تمام اسلایدها باید محتوای اصلی و غیر کپی باشند.</li>
+                            <li>لطفاً از انتشار محتوای نامناسب یا توهین‌آمیز خودداری کنید.</li>
+                            <li>قبل از انتشار، مطمئن شوید که تمام اطلاعات صحیح و معتبر هستند.</li>
+                            <li>در صورتی که از منابع دیگر استفاده می‌کنید، حتماً به آن‌ها ارجاع دهید.</li>
+                            <li>در صورت تخلف از قوانین، اسلایدهای شما حذف خواهند شد.</li>
+                        </ul>
+                    </div><!-- /.become-instructor__content__inner -->
+
+                    <div class="become-instructor__content__inner">
+                        <h3 class="become-instructor__title">زمینه‌های تخصصی</h3>
+                        <p class="become-instructor__text">
+                            لطفاً اسلایدهای خود را در زمینه‌های تخصصی خود به اشتراک بگذارید. این می‌تواند شامل موضوعات آموزشی، علمی، و حرفه‌ای باشد که به اشتراک‌گذاری دانش و تجربیات شما کمک می‌کند.
+                        </p>
+                    </div><!-- /.become-instructor__content__inner -->
+
+                    <div class="become-instructor__content__inner">
+                        <h3 class="become-instructor__title">تحصیلات و تجربه</h3>
+                        <p class="become-instructor__text">
+                            لطفاً در صورت تمایل، اطلاعاتی درباره تحصیلات و تجربیات خود را به اشتراک بگذارید. این اطلاعات می‌تواند به دیگران کمک کند تا بهتر با شما و محتوای شما آشنا شوند.
+                        </p>
+                    </div><!-- /.become-instructor__content__inner -->
+                </div>
+            </div>
+            <div class="col-lg-7 wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="400ms">
+                <div class="become-instructor__form-box">
+                    <h3 class="become-instructor__form-box__title">برای ویرایش اسلاید اقدام کنید</h3>
+                    <form action="/User/ManageSlide/Update" method="post" class="become-instructor__form form-one">
+                        <div class="form-one__group">
+                            @Html.ValidationSummary()
+                            @Html.HiddenFor(a => a.Id)
+                            @Html.HiddenFor(a => a.ViewCount)
+                            <div class="form-one__control form-one__control--full">
+                                @Html.LabelFor(a => a.Title)
+                                @Html.EditorFor(a => a.Title)
+
+                            </div>
+
+                            <div class="form-one__control form-one__control--full">
+
+                                @Html.LabelFor(a => a.Description)
+                                @Html.TextAreaFor(a => a.Description)
+
+                            </div>
+
+                            <div class="form-one__control form-one__control--full">
+                                @Html.LabelFor(a => a.Picture)
+                                @Html.EditorFor(a => a.Picture)
+
+                            </div>
+
+                            <div class="form-one__control form-one__control--full">
+                                @Html.LabelFor(a => a.File)
+                                @Html.EditorFor(a => a.File)
+
+                            </div>
+
+                            <div class="form-one__control form-one__control--full">
+                                @Html.LabelFor(a => a.DocumentTypeId)
+                                @Html.DropDownListFor(a => a.DocumentTypeId, documentType)
+
+                            </div>
+
+                            <div class="form-one__control form-one__control--full">
+                                @Html.LabelFor(a => a.DocumentCategoryId)
+                                @Html.DropDownListFor(a => a.DocumentCategoryId, documentCategory)
+
+                            </div>
+
+                            <div class="form-one__control form-one__control--full">
+                                <button type="submit" class="eduhive-btn">
+                                    <span>ثبت اسلاید</span>
+                                    <span class="eduhive-btn__icon"><i class="icon-right-up"></i></span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- /.become-instructor section-space-top -->
+@section Scripts {
+
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+}
