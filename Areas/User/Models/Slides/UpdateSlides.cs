@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using SlideCloud.Models;
 
-namespace SlideCloud.Areas.Admin.Models.Slides
+namespace SlideCloud.Areas.User.Models.Slides
 {
     public class UpdateSlides
     {
@@ -13,8 +13,8 @@ namespace SlideCloud.Areas.Admin.Models.Slides
 
         [Required()]
         [MaxLength(255)]
-        [Display(Name ="نام")]
-        
+        [Display(Name = "نام")]
+
         public string Title { get; set; }
 
         [MaxLength(255)]
