@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SlideCloud.Areas.User.Models.Slides;
@@ -11,11 +12,13 @@ namespace SlideCloud.Areas.User.Controllers
     [Authorize]
     public class ManageSlideController : Microsoft.AspNetCore.Mvc.Controller
     {
+        UserManager<SlideCloud.Models.User> _userManager;
         private readonly AppDbContext _appDbContext;
 
-        public ManageSlideController(AppDbContext appDbContext)
+        public ManageSlideController(AppDbContext appDbContext, UserManager<SlideCloud.Models.User> userManager)
         {
             _appDbContext = appDbContext;
+            _userManager = userManager;
 
         }
 
@@ -68,25 +71,35 @@ namespace SlideCloud.Areas.User.Controllers
             {
                 return NotFound();
             }
-         
-            //check if the user is the owner of the document
-            //if()
             var documnet = await _appDbContext.Documents.FindAsync(id);
-            if (documnet != null)
+           
+            var user = await _userManager.Users.Where(a => a.Email.Equals(User.Identity.Name)).FirstOrDefaultAsync();
+            if (user != null ) 
             {
-                var model = new UpdateSlides();
+                if( documnet?.UserId == user.Id)
+                {
+                    if (documnet != null)
+                    {
+                        var model = new UpdateSlides();
 
-                model.Id = documnet.Id;
-                model.Description = documnet.Description;
-                model.DocumentCategoryId = documnet.DocumentCategoryId;
-                model.DocumentTypeId = documnet.DocumentTypeId;
-                model.File = documnet.File;
-                model.Picture = documnet.Picture;
-                model.Title = documnet.Title;
-                model.ViewCount = model.ViewCount;
-                ViewBag.DocumentTypes = _appDbContext.DocumentTypes.ToList();
-                ViewBag.DocumentCategories = _appDbContext.DocumentCategories.ToList();
-                return View(model);
+                        model.Id = documnet.Id;
+                        model.Description = documnet.Description;
+                        model.DocumentCategoryId = documnet.DocumentCategoryId;
+                        model.DocumentTypeId = documnet.DocumentTypeId;
+                        model.File = documnet.File;
+                        model.Picture = documnet.Picture;
+                        model.Title = documnet.Title;
+                        model.ViewCount = model.ViewCount;
+                        ViewBag.DocumentTypes = _appDbContext.DocumentTypes.ToList();
+                        ViewBag.DocumentCategories = _appDbContext.DocumentCategories.ToList();
+                        return View(model);
+                    }
+                }
+              
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
             }
 
             return NotFound();
@@ -99,27 +112,42 @@ namespace SlideCloud.Areas.User.Controllers
         {
             ViewBag.DocumentTypes = _appDbContext.DocumentTypes.ToList();
             ViewBag.DocumentCategories = _appDbContext.DocumentCategories.ToList();
-            //check if the user is the owner of the document
-            //if()
+      
 
             if (!ModelState.IsValid)
                 return View(model);
 
             var documnet = await _appDbContext.Documents.FindAsync(model.Id);
-            if (documnet != null)
+
+            var user = await _userManager.Users.Where(a => a.Email.Equals(User.Identity.Name)).FirstOrDefaultAsync();
+            if (user != null)
             {
+                if (documnet != null)
+                {
+                    if (documnet?.UserId == user.Id)
+                    {
+                        documnet.Description = model.Description;
+                        documnet.DocumentCategoryId = model.DocumentCategoryId;
+                        documnet.DocumentTypeId = model.DocumentTypeId;
+                        documnet.File = model.File;
+                        documnet.Picture = model.Picture;
+                        documnet.Title = model.Title;
+                        documnet.UserId = user.Id;
+                        _appDbContext.Documents.Update(documnet);
+                        await _appDbContext.SaveChangesAsync();
 
-                documnet.Description = model.Description;
-                documnet.DocumentCategoryId = model.DocumentCategoryId;
-                documnet.DocumentTypeId = model.DocumentTypeId;
-                documnet.File = model.File;
-                documnet.Picture = model.Picture;
-                documnet.Title = model.Title;
-                _appDbContext.Documents.Update(documnet);
-                await _appDbContext.SaveChangesAsync();
+                        return RedirectToAction("Detail", "Slide", new { id = model.Id });
+                    }
+                    else
+                    {
+                        return NotFound();
+                    }
 
-                return RedirectToAction("Detail", "Slide", new { id = model.Id });
+           
+                }
             }
+
+               
             return View(model);
 
         }

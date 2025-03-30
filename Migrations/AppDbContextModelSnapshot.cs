@@ -182,7 +182,7 @@ namespace SlideCloud.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Contacts");
+                    b.ToTable("Contacts", (string)null);
                 });
 
             modelBuilder.Entity("SlideCloud.Models.Document", b =>
@@ -233,7 +233,7 @@ namespace SlideCloud.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Documents");
+                    b.ToTable("Documents", (string)null);
                 });
 
             modelBuilder.Entity("SlideCloud.Models.DocumentCategory", b =>
@@ -261,7 +261,7 @@ namespace SlideCloud.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DocumentCategories");
+                    b.ToTable("DocumentCategories", (string)null);
                 });
 
             modelBuilder.Entity("SlideCloud.Models.DocumentType", b =>
@@ -289,7 +289,7 @@ namespace SlideCloud.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DocumentTypes");
+                    b.ToTable("DocumentTypes", (string)null);
                 });
 
             modelBuilder.Entity("SlideCloud.Models.Tag", b =>
@@ -307,7 +307,7 @@ namespace SlideCloud.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tags");
+                    b.ToTable("Tags", (string)null);
                 });
 
             modelBuilder.Entity("SlideCloud.Models.TagDocument", b =>
@@ -330,7 +330,7 @@ namespace SlideCloud.Migrations
 
                     b.HasIndex("TagId");
 
-                    b.ToTable("TagDocuments");
+                    b.ToTable("TagDocuments", (string)null);
                 });
 
             modelBuilder.Entity("SlideCloud.Models.User", b =>

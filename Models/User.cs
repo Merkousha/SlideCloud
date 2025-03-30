@@ -5,8 +5,7 @@ using Microsoft.AspNetCore.Identity;
 
 public class User : IdentityUser<long>
 {
-    [Key]
-    public int Id { get; set; }
+    
 
     [Required]
     [MaxLength(50)]
