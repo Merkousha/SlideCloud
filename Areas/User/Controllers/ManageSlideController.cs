@@ -17,6 +17,21 @@ namespace SlideCloud.Areas.User.Controllers
             _appDbContext = appDbContext;
 
         }
+        #region List Of Sldie
+
+
+        [HttpGet("/User/[Controller]/[Action]",Name ="ListSlideForUser")]
+        public async Task<IActionResult> List()
+        {
+            var model = new ListSlideVM();
+            model.DocumentCategories = await _appDbContext.DocumentCategories.ToListAsync();
+            model.Documents = await _appDbContext.Documents.ToListAsync();
+            return View(model);
+        }
+
+
+        #endregion
+        [HttpGet]
 
         [HttpGet("/User/ManageSlide/DetailsOfList", Name = "DetailsSlide")]
         public async Task<IActionResult> DetailsOfList(int id)
@@ -32,6 +47,7 @@ namespace SlideCloud.Areas.User.Controllers
             return View(model);
         }
         
+
 
         [HttpGet]
         public IActionResult Create()
