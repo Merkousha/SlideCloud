@@ -57,28 +57,6 @@
                                 <img src="~/assets/images/logo-light.png" alt="eduhive HTML" width="209">
                             </a>
                         </div><!-- /.main-header__logo -->
-                        <div class="main-header__courses">
-                            <div class="main-header__courses__text">
-                                <span class="main-header__courses__icon-list">
-                                    <i class="icon-list"></i>
-                                </span>
-                                دوره های ما
-                                <span class="main-header__courses__icon-arrow">
-                                    <i class="icon-chevron-down"></i>
-                                </span>
-                            </div><!-- /.main-header__courses__text -->
-                            <ul class="main-header__courses__list">
-                                <li><a href="wordpress-development.html">توسعه وردپرس</a></li>
-                                <li><a href="data-science.html">علوم داده ها</a></li>
-                                <li><a href="web-development.html">توسعه وب</a></li>
-                                <li><a href="uiux-design.html">طراحی رابط کاربری</a></li>
-                                <li><a href="graphics-design.html">طراحی گرافیک</a></li>
-                                <li><a href="digital-marketing.html">بازاریابی دیجیتال</a></li>
-                                <li><a href="search-engine-optimization.html">بهینه سازی موتور جستجو</a></li>
-                                <li><a href="apps-development.html">توسعه اپلیکیشن ها</a></li>
-                                <li><a href="web-design.html">طراحی وب سایت</a></li>
-                            </ul><!-- /.main-header__courses__list -->
-                        </div><!-- /.main-header__courses -->
                     </div><!-- /.main-header__left -->
                     <div class="main-header__right">
                         <nav class="main-header__nav main-menu">
@@ -87,20 +65,18 @@
                                 <li class="dropdown megamenu">
                                     <a href="~/">خانه</a>
                                 </li>
-                                <li >
-
-                                    <a class="btn btn-primary" href="@Url.Content("~/User/ManageSlide/Create")">
-
+                                <li>
+                                    <a  href="@Url.Content("~/User/ManageSlide/Create")">
                                         ثبت اسلاید
-
                                     </a>
-
                                 </li>
-
+                                <li>
+                                    @Html.ActionLink("لیست اسلاید ها", "Index", "Slide")
+                                </li>
                                 <li>
                                     <a href="about.html">درباره ما</a>
                                 </li>
-                               
+
                                 <li>
                                     <a href="@Url.Action("Contact", "Home")">تماس با ما</a>
                                 </li>
@@ -118,17 +94,7 @@
                                     <li class="nav-item">
                                         @Html.ActionLink("پنل کاربری", "Profile", "Account", null, new { @class = "" })
                                     </li>
-                                    <li class="nav-item">
-                                        <a  href="@Url.Content("~/User/ManageSlide/Create")">
-                                            ثبت اسلاید
-                                        </a>
-                                    </li>
 
-	                                <li class="nav-item">
-                                        <a href="@Url.RouteUrl("ListSlideForUser")">
-			                                لیست اسلاید
-		                                </a>
-	                                </li>
                                     <li class="nav-item">
                                         @Html.ActionLink("خروج", "LogOut", "Account", null, new { @class = "" })
                                     </li>
@@ -148,7 +114,7 @@
                             <i class="icon-cart" aria-hidden="true"></i>
                             <span class="sr-only">سبد خرید</span>
                         </a><!-- /.search-toggler -->
-                       
+
                     </div><!-- /.main-header__right -->
                 </div><!-- /.main-header__inner -->
             </div><!-- /.container-fluid -->
@@ -455,8 +421,8 @@
     <script src="~/assets/js/eduhive.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 
-    
-    
+
+
 </body>
 
 
