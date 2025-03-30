@@ -21,5 +21,7 @@ public class User : IdentityUser<long>
     public string PhoneNumber { get; set; }
 
 
+    public ICollection<Document> Documents { get; set; }
+
 }
 
