@@ -33,6 +33,9 @@ namespace SlideCloud.Areas.User.Models.Slides
         // کلید خارجی به DocumentCategory
         public int DocumentCategoryId { get; set; }
 
+
+        public int ViewCount { get; set; }
+
         //public ICollection<DocumentType> DocumentTypes { get; set; }
         //public ICollection<DocumentCategory> DocumentCategories { get; set; }
 
