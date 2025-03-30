@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SlideCloud.Areas.User.Models.Slides;
 using SlideCloud.Data;
 using SlideCloud.Models;
@@ -67,7 +68,7 @@ namespace SlideCloud.Areas.User.Controllers
             {
                 return NotFound();
             }
-
+         
             //check if the user is the owner of the document
             //if()
             var documnet = await _appDbContext.Documents.FindAsync(id);
@@ -117,10 +118,10 @@ namespace SlideCloud.Areas.User.Controllers
                 _appDbContext.Documents.Update(documnet);
                 await _appDbContext.SaveChangesAsync();
 
-                return RedirectToAction("Detail", "Slide", new {id=model.Id});
+                return RedirectToAction("Detail", "Slide", new { id = model.Id });
             }
             return View(model);
-           
+
         }
 
 

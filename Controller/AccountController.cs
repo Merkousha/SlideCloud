@@ -42,7 +42,7 @@ namespace SlideCloud.Controller
                 return View(model);
             }
             var additionalClaims = new List<Claim>
-            {
+            { new Claim("Id", user.Id.ToString()),
                 new Claim("Name", user.Name ), // افزودن claim سفارشی
                 new Claim("Email", user.Email) ,        // افزودن نقش کاربر
                                                                         // افزودن نقش کاربر
@@ -100,7 +100,7 @@ namespace SlideCloud.Controller
             {
                 //   var resualt = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, true);
                 var additionalClaims = new List<Claim>
-                {
+                {  new Claim("Id", user.Id.ToString()),
                     new Claim("Name", user.Name), // افزودن claim سفارشی
                     new Claim("Email", user.Email) ,        // افزودن نقش کاربر
                     new Claim("UserName", user.UserName)         // افزودن نقش کاربر
