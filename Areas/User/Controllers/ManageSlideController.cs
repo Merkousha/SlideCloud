@@ -19,6 +19,7 @@ namespace SlideCloud.Areas.User.Controllers
         }
         #region List Of Sldie
 
+
         [HttpGet("/User/[Controller]/[Action]",Name ="ListSlideForUser")]
         public async Task<IActionResult> List()
         {
@@ -31,6 +32,23 @@ namespace SlideCloud.Areas.User.Controllers
 
         #endregion
         [HttpGet]
+
+        [HttpGet("/User/ManageSlide/DetailsOfList", Name = "DetailsSlide")]
+        public async Task<IActionResult> DetailsOfList(int id)
+        {
+            var model = new DetailsSlideVM();
+            model.DocumentDetail = await _appDbContext.Documents
+                .Include(a => a.DocumentCategory)
+                .FirstOrDefaultAsync(a => a.Id == id);
+            if (model.DocumentDetail == null)
+            {
+                return NotFound();
+            }
+            return View(model);
+        }
+        
+
+
         [HttpGet]
         public IActionResult Create()
         {
