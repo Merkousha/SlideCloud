@@ -2,16 +2,19 @@
 using Microsoft.EntityFrameworkCore;
 using SlideCloud.Areas.User.Models.Slides;
 using SlideCloud.Data;
+using Syncfusion.Presentation;
+using Syncfusion.PresentationRenderer;
 
 namespace SlideCloud.Controller;
 public class SlideController : Microsoft.AspNetCore.Mvc.Controller
 {
     private readonly AppDbContext _appDbContext;
+    private readonly IWebHostEnvironment _env;
 
-    public SlideController(AppDbContext appDbContext)
+    public SlideController(AppDbContext appDbContext, IWebHostEnvironment env)
     {
         _appDbContext = appDbContext;
-
+        _env = env;
     }
 
 
@@ -37,5 +40,17 @@ public class SlideController : Microsoft.AspNetCore.Mvc.Controller
             return NotFound();
         }
         return View(model);
+    }
+    [HttpGet]
+    public IActionResult ConvertToImage()
+
+    {
+        string fullPath = Path.Combine(_env.WebRootPath, "assets/docs/Sample.pptx");
+        using FileStream fileStreamInput = new(fullPath, FileMode.Open, FileAccess.Read);
+        using IPresentation pptx = Presentation.Open(fileStreamInput);
+        pptx.PresentationRenderer = new PresentationRenderer();
+        Stream imageStream = pptx.Slides[0].ConvertToImage(ExportImageFormat.Jpeg);
+        imageStream.Position = 0;
+        return File(imageStream, "image/jpeg", "Slide.jpeg");
     }
 }

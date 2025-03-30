@@ -18,7 +18,7 @@ namespace SlideCloud
             builder.Services.AddIdentity<User, IdentityRole<long>>()
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
-
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NDAxNEAzMjM4MkUzMTJFMzlMeXJkaVJFV2Z5R3o5ZXNEVnNOQjFqUmx2MW0xZkR2TGdud2MrVGNJRlBzPQ==");
 
             builder.Services.Configure<IdentityOptions>(options =>
             {
