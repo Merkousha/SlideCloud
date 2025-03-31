@@ -1,8 +1,10 @@
 ﻿using DotNetEnv;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using SlideCloud.Areas;
 using SlideCloud.Data;
 using SlideCloud.Models;
+using SlideCloud.Services;
 
 namespace SlideCloud
 {
@@ -12,6 +14,9 @@ namespace SlideCloud
         {
             var builder = WebApplication.CreateBuilder(args);
             Env.Load();
+
+            builder.Services.AddScoped<IS3Uploader, S3Uploader>();
+
 
             #region AddIdentity and configure
 
