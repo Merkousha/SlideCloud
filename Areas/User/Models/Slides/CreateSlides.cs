@@ -16,13 +16,11 @@ namespace SlideCloud.Areas.User.Models.Slides
         
         public string Title { get; set; }
 
-        [MaxLength(255)]
         [Display(Name = "تصویر")]
-        public string Picture { get; set; }
+        public IFormFile Picture { get; set; }
 
-        [MaxLength(255)]
         [Display(Name = "فایل")]
-        public string File { get; set; }
+        public IFormFile File { get; set; }
 
         [Display(Name = "نوع فایل")]
         // کلید خارجی به DocumentType
