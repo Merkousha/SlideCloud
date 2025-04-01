@@ -20,11 +20,12 @@ namespace SlideCloud.Areas.User.Controllers
         private readonly IConfiguration _configuration;
         private readonly IS3Uploader _s3Uploader;
 
-        public ManageSlideController(AppDbContext appDbContext, IConfiguration configuration, IS3Uploader s3Uploader)
+        public ManageSlideController(AppDbContext appDbContext, IConfiguration configuration, IS3Uploader s3Uploader, UserManager<SlideCloud.Models.User> userManager)
         {
             _appDbContext = appDbContext;
             _configuration = configuration;
             _s3Uploader = s3Uploader;
+            _userManager = userManager;
         }
 
 
@@ -39,17 +40,21 @@ namespace SlideCloud.Areas.User.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create(CreateSlides model)
         {
             ViewBag.DocumentTypes = _appDbContext.DocumentTypes.ToList();
             ViewBag.DocumentCategories = _appDbContext.DocumentCategories.ToList();
-
+            if (!User.Identity.IsAuthenticated)
+            {
+                return NotFound();
+            }
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            
 
+            var user = await _userManager.Users.Where(a => a.Email.Equals(User.Identity.Name)).FirstOrDefaultAsync();
             _appDbContext.Documents.Add(new Document
             {
                 Title = model.Title,
@@ -58,6 +63,7 @@ namespace SlideCloud.Areas.User.Controllers
                 Picture = model.Picture,
                 DocumentTypeId = model.DocumentTypeId,
                 DocumentCategoryId = model.DocumentCategoryId,
+                UserId = user.Id,
                 ViewCount = 0
             });
 
