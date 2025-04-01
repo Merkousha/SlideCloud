@@ -40,7 +40,6 @@ namespace SlideCloud.Areas.User.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> Create(CreateSlides model)
         {
             ViewBag.DocumentTypes = _appDbContext.DocumentTypes.ToList();

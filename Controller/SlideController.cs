@@ -13,7 +13,7 @@ public class SlideController : Microsoft.AspNetCore.Mvc.Controller
 {
     private readonly AppDbContext _appDbContext;
     private readonly IWebHostEnvironment _env;
-    private const int PageSize = 6;
+    private const int PageSize = 15;
     private readonly UserManager<User> _userManager;
 
     public SlideController(UserManager<User> userManager,AppDbContext appDbContext, IWebHostEnvironment env)
@@ -25,7 +25,7 @@ public class SlideController : Microsoft.AspNetCore.Mvc.Controller
 
 
     #region List Of Sldie
-    public async Task<IActionResult> Index(int pageIndex = 6)
+    public async Task<IActionResult> Index(int pageIndex = 1)
     {
         IQueryable<Document> query = _appDbContext.Documents.OrderBy(u => u.Id);
         var model = await PaginationModel<Document>.CreateAsync(query, pageIndex, PageSize);
