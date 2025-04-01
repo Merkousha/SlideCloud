@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SlideCloud.Areas.User.Models.Slides;
 using SlideCloud.Data;
@@ -13,11 +14,13 @@ public class SlideController : Microsoft.AspNetCore.Mvc.Controller
     private readonly AppDbContext _appDbContext;
     private readonly IWebHostEnvironment _env;
     private const int PageSize = 6;
+    private readonly UserManager<User> _userManager;
 
-    public SlideController(AppDbContext appDbContext, IWebHostEnvironment env)
+    public SlideController(UserManager<User> userManager,AppDbContext appDbContext, IWebHostEnvironment env)
     {
         _appDbContext = appDbContext;
         _env = env;
+        _userManager = userManager;
     }
 
 
@@ -55,4 +58,23 @@ public class SlideController : Microsoft.AspNetCore.Mvc.Controller
         imageStream.Position = 0;
         return File(imageStream, "image/jpeg", "Slide.jpeg");
     }
+
+
+    #region  User's Slide custom
+    public async Task<IActionResult> ListSlidesUser()
+    {
+        var user = await _userManager.GetUserAsync(User);
+        if (user == null)
+        {
+            return RedirectToAction("Login", "Account");
+        }
+        var model = new ListSlideVM();
+
+        model.Documents = await _appDbContext.Documents
+                                      .Where(d => d.UserId == user.Id)
+                                      .ToListAsync();
+
+        return View(model); // ارسال لیست داکیومنت‌ها به ویو
+    }
+    #endregion
 }
