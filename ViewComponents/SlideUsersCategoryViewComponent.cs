@@ -9,12 +9,12 @@ using System.Drawing.Printing;
 
 namespace SlideCloud.ViewComponents
 {
-    public class SlideUsersViewComponent : ViewComponent
+    public class SlideUsersCategoryViewComponent : ViewComponent
     {
         private readonly AppDbContext _appDbContext;
         
 
-        public SlideUsersViewComponent(AppDbContext appDbContext)
+        public SlideUsersCategoryViewComponent(AppDbContext appDbContext)
         {
             _appDbContext = appDbContext;
         }
@@ -24,7 +24,7 @@ namespace SlideCloud.ViewComponents
             var model = new ListSlideVM();
             model.DocumentCategories = await _appDbContext.DocumentCategories.ToListAsync();
             
-            return View("slideList",model);
+            return View("slideListCategory",model);
         }
         #endregion  
     }
