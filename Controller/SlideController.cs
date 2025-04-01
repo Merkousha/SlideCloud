@@ -6,12 +6,14 @@ using SlideCloud.Data;
 using SlideCloud.Models;
 using Syncfusion.Presentation;
 using Syncfusion.PresentationRenderer;
+using System.Drawing.Printing;
 
 namespace SlideCloud.Controller;
 public class SlideController : Microsoft.AspNetCore.Mvc.Controller
 {
     private readonly AppDbContext _appDbContext;
     private readonly IWebHostEnvironment _env;
+    private const int PageSize = 6;
     private readonly UserManager<User> _userManager;
 
     public SlideController(UserManager<User> userManager,AppDbContext appDbContext, IWebHostEnvironment env)
@@ -23,11 +25,10 @@ public class SlideController : Microsoft.AspNetCore.Mvc.Controller
 
 
     #region List Of Sldie
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(int pageIndex = 6)
     {
-        var model = new ListSlideVM();
-        model.DocumentCategories = await _appDbContext.DocumentCategories.ToListAsync();
-        model.Documents = await _appDbContext.Documents.ToListAsync();
+        IQueryable<Document> query = _appDbContext.Documents.OrderBy(u => u.Id);
+        var model = await PaginationModel<Document>.CreateAsync(query, pageIndex, PageSize);
         return View(model);
     }
     #endregion

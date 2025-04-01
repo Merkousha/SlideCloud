@@ -1,0 +1,10 @@
+﻿@model SlideCloud.Areas.User.Models.Slides.ListSlideVM;
+@foreach (var category in Model.DocumentCategories)
+{
+    <li>
+        <a href="@Url.RouteUrl("DetailsCategory",new {id=$"{category.Id}"})">
+            <span class="product-categories__icon"><i class="icon-left-arrow"></i></span>
+            <!-- /.product-categories__icon --> @category.Name
+        </a>
+    </li>
+}

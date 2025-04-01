@@ -1,4 +1,5 @@
-﻿@model SlideCloud.Areas.User.Models.Slides.ListSlideVM
+﻿@using SlideCloud.Models;
+@model SlideCloud.Models.PaginationModel<Document>;
 @{
     Layout = "_layout";
 }
@@ -23,7 +24,7 @@
             <div class="col-xl-9 col-lg-8">
                 <div class="product__info-top rtl">
                     <div class="product__showing-text-box">
-                        <p class="product__showing-text">نمایش 1–9 از 12 نتیجه</p>
+                        <p class="product__showing-text">نمایش 1–9 از @Model.Items.Count نتیجه</p>
                     </div>
                     <div class="product__showing-sort">
                         <select class="selectpicker" aria-label="Sort by popular">
@@ -37,7 +38,7 @@
 
                 <div class="row gutter-y-30">
 
-                    @foreach (var document in Model.Documents)
+                    @foreach (var document in Model.Items)
                     {
 
                         <div class="col-xl-4 col-sm-6">
@@ -70,30 +71,46 @@
                                         <div class="product__item__price">@document.Description </div>
                                     </div><!-- /.product-content -->
                                 </div><!-- /.product-item -->
-                                </a>
+                            </a>
                         </div>
 
                         <!-- /.col-xl-4 col-sm-6 -->
                     }
                     <div class="col-lg-12">
                         <ul class="post-pagination">
-                            <li>
-                                <a href="#"><span class="post-pagination__icon"><i class="icon-left-arrow"></i></span></a>
-                            </li>
-                            <li>
-                                <a href="#">03</a>
-                            </li>
-                            <li>
-                                <a href="#">02</a>
-                            </li>
-                            <li>
-                                <a href="#">01</a>
-                            </li>
-                            <li class="active">
-                                <a href="#"><span class="post-pagination__icon"><i class="icon-right-arrow"></i></span></a>
-                            </li>
+                            @if (Model.HasPreviousPage)
+                            {
+                                <li>
+                                    <a asp-controller="Slide" asp-action="Index" asp-route-pageIndex="@(Model.PageIndex - 1)" class="btn btn-primary">
+                                        قبل
+                                        <span class="post-pagination__icon">
+                                            <i class="icon-left-arrow"></i>
+                                        </span>
+                                    </a>
+                                </li>
+                                
+                            }
+                            @for (int i = 1; i <= Model.TotalPages; i++)
+                            {
+                                <li>
+                                    <a asp-controller="Slide" asp-action="Index" asp-route-pageIndex="@i" class="btn @(i == Model.PageIndex ? "btn-success" : "btn-secondary")">@i</a>
+                                </li>
+                                
+                            }
+
+                            @if (Model.HasNextPage)
+                            {
+                                <li class="active">
+                                    <a asp-controller="Slide" asp-action="Index" asp-route-pageIndex="@(Model.PageIndex + 1)" class="btn btn-primary">بعد><span class="post-pagination__icon"><i class="icon-right-arrow"></i></span></a>
+                                </li>
+                                
+                            }
+
+                            
                         </ul><!-- /.post-pagination -->
                     </div><!-- /.col-lg-12 -->
+
+
                 </div><!-- /.row -->
             </div><!-- /.col-xl-9 col-lg-8 -->
             <div class="col-xl-3 col-lg-4">
@@ -121,7 +138,9 @@
                         <h3 class="product__sidebar__title product__categories__title">دسته بندی ها</h3>
                         <ul class="list-unstyled">
 
-                            @foreach (var category in Model.DocumentCategories)
+                            @await Component.InvokeAsync("SlideUsersCategory")
+
+                           @*  @foreach (var category in Model.DocumentCategories)
                             {
                                 <li>
                                     <a href="@Url.RouteUrl("DetailsCategory",new {id=$"{category.Id}"})">
@@ -129,7 +148,7 @@
                                         <!-- /.product-categories__icon --> @category.Name
                                     </a>
                                 </li>
-                            }
+                            } *@
                         </ul>
                     </div><!-- /.category-widget -->
                 </aside><!-- /.shop-sidebar -->
