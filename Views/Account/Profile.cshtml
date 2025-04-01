@@ -26,6 +26,9 @@
                 <h3 class="course-instructor-details__name">@Model.Name</h3><!-- /.instructor__name -->
                 <p class="course-instructor-details__designation">Email : @Model.Email</p><!-- /.instructor__designation -->
                 <p class="course-instructor-details__text">Phone Number : @Model.PhoneNumber</p><!-- /.instructor__text -->
+                <li class="nav-item">
+                    @Html.ActionLink("لیست اسلاید های من ", "ListSlidesUser", "Slide", null, new { @class = "" })
+                </li>
                 @* <div class="course-instructor-details__course-info">
                     <div class="course-instructor-details__experience">
                         تجربه: <span>10 سال</span>
