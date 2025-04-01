@@ -21,6 +21,8 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
+    <PackageReference Include="Syncfusion.Presentation.Net.Core" Version="29.1.33" />
+    <PackageReference Include="Syncfusion.PresentationRenderer.Net.Core" Version="29.1.33" />
   </ItemGroup>
 
   <ItemGroup>
