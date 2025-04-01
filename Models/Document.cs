@@ -32,6 +32,11 @@ public class Document
     [ForeignKey("DocumentCategoryId")]
     public DocumentCategory DocumentCategory { get; set; }
 
+
+    public long? UserId { get; set; }
+    [ForeignKey(nameof(UserId))]
+    public User User { get; set; }
+
     public int ViewCount { get; set; }
 
     // رابطه چند به چند با Tag از طریق جدول میانی TagDocument

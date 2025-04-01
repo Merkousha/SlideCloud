@@ -5,8 +5,7 @@ using Microsoft.AspNetCore.Identity;
 
 public class User : IdentityUser<long>
 {
-    [Key]
-    public int Id { get; set; }
+    
 
     [Required]
     [MaxLength(50)]
@@ -20,6 +19,8 @@ public class User : IdentityUser<long>
     [MaxLength(20)]
     public string PhoneNumber { get; set; }
 
+
+    public ICollection<Document> Documents { get; set; }
 
 }
 

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SlideCloud.Data;
 
@@ -11,9 +12,11 @@ using SlideCloud.Data;
 namespace SlideCloud.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250330151035_add-field-UserId-ForDocument")]
+    partial class addfieldUserIdForDocument
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -182,7 +185,7 @@ namespace SlideCloud.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Contacts", (string)null);
+                    b.ToTable("Contacts");
                 });
 
             modelBuilder.Entity("SlideCloud.Models.Document", b =>
@@ -233,7 +236,7 @@ namespace SlideCloud.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Documents", (string)null);
+                    b.ToTable("Documents");
                 });
 
             modelBuilder.Entity("SlideCloud.Models.DocumentCategory", b =>
@@ -261,7 +264,7 @@ namespace SlideCloud.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DocumentCategories", (string)null);
+                    b.ToTable("DocumentCategories");
                 });
 
             modelBuilder.Entity("SlideCloud.Models.DocumentType", b =>
@@ -289,7 +292,7 @@ namespace SlideCloud.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DocumentTypes", (string)null);
+                    b.ToTable("DocumentTypes");
                 });
 
             modelBuilder.Entity("SlideCloud.Models.Tag", b =>
@@ -307,7 +310,7 @@ namespace SlideCloud.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tags", (string)null);
+                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("SlideCloud.Models.TagDocument", b =>
@@ -330,7 +333,7 @@ namespace SlideCloud.Migrations
 
                     b.HasIndex("TagId");
 
-                    b.ToTable("TagDocuments", (string)null);
+                    b.ToTable("TagDocuments");
                 });
 
             modelBuilder.Entity("SlideCloud.Models.User", b =>
