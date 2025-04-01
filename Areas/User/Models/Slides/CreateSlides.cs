@@ -16,12 +16,12 @@ namespace SlideCloud.Areas.User.Models.Slides
         
         public string Title { get; set; }
 
-        [MaxLength(255)]
         [Display(Name = "تصویر")]
+        [MaxLength(1000)]
         public string Picture { get; set; }
 
-        [MaxLength(255)]
         [Display(Name = "فایل")]
+        [MaxLength(1000)]
         public string File { get; set; }
 
         [Display(Name = "نوع فایل")]
