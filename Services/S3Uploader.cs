@@ -16,16 +16,24 @@ namespace SlideCloud.Services
 
         public async Task<string> UploadFileAsync(IFormFile file)
         {
-            var bucketName = _configuration["AWS:BucketName"];
-            var accessKey = _configuration["AWS:AccessKey"];
-            var secretKey = _configuration["AWS:SecretKey"];
-            var region = Amazon.RegionEndpoint.GetBySystemName(_configuration["AWS:Region"]);
+            var bucketName = Environment.GetEnvironmentVariable("S3-BucketName");
+            var accessKey = Environment.GetEnvironmentVariable("S3-AccessKey");
+            var secretKey = Environment.GetEnvironmentVariable("S3-SecretKey");
+            var serviceUrl = Environment.GetEnvironmentVariable("S3-ServiceURL");
 
-            using (var client = new AmazonS3Client(accessKey, secretKey, region))
+            var config = new AmazonS3Config
+            {
+                ServiceURL = serviceUrl,
+                ForcePathStyle = true,
+                UseHttp = true
+            };
+
+            using (var client = new AmazonS3Client(accessKey, secretKey, config))
             {
                 using (var newMemoryStream = new MemoryStream())
                 {
                     await file.CopyToAsync(newMemoryStream);
+                    newMemoryStream.Position = 0;
 
                     var fileName = $"{Guid.NewGuid()}_{file.FileName}";
 
@@ -35,18 +43,15 @@ namespace SlideCloud.Services
                         Key = fileName,
                         BucketName = bucketName,
                         ContentType = file.ContentType,
-                        CannedACL = S3CannedACL.PublicRead // فایل برای همه قابل دسترسی باشه
+                        CannedACL = S3CannedACL.PublicRead
                     };
 
                     var fileTransferUtility = new TransferUtility(client);
                     await fileTransferUtility.UploadAsync(uploadRequest);
 
-                    // آدرس کامل فایل آپلود شده
-                    return $"https://{bucketName}.s3.amazonaws.com/{fileName}";
+                    return $"{serviceUrl}/{bucketName}/{fileName}".Replace("//", "/").Replace(":/", "://");
                 }
             }
         }
     }
-
-
 }

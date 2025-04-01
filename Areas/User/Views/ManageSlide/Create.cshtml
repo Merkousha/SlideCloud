@@ -9,7 +9,6 @@
             {
                 Text = a.Name,
                 Value = a.Id.ToString()
-
             });
     var documentCategory = documentCategorys.Select(a => new SelectListItem
             {
@@ -20,6 +19,52 @@
     ViewData["Title"] = "ثبت اسلاید";
 }
 
+@section Styles {
+    <style>
+        .dropzone-custom {
+            min-height: 150px;
+            border: 2px dashed #6c5ce7;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dropzone-custom:hover {
+            border-color: #4834d4;
+            background: #f1f3f5;
+        }
+
+        .dropzone-custom .dz-message {
+            margin: 2em 0;
+            font-size: 1.1em;
+            color: #666;
+        }
+
+        .dropzone-custom .dz-preview {
+            margin: 10px;
+        }
+
+        .dropzone-custom.dz-started .dz-message {
+            display: none;
+        }
+
+        .dropzone-custom .dz-remove {
+            color: #dc3545;
+            margin-top: 5px;
+            cursor: pointer;
+        }
+
+        .dropzone-custom .dz-remove:hover {
+            text-decoration: underline;
+        }
+    </style>
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 <section class="page-header">
     <div class="container rtl">
@@ -73,7 +118,8 @@
                     <h3 class="become-instructor__form-box__title">برای ثبت اسلاید اقدام کنید</h3>
 
 
-                    <form action="/User/ManageSlide/Create" method="post" enctype="multipart/form-data" id="slideDropzone" class="become-instructor__form form-one">
+                    <form action="/User/ManageSlide/Create" method="post" enctype="multipart/form-data" id="mainForm" class="become-instructor__form form-one">
+                        @Html.AntiForgeryToken()
                         <div class="form-one__group">
                             @Html.ValidationSummary()
                             <div class="form-one__control form-one__control--full">
@@ -95,20 +141,27 @@
 
                             <div class="form-one__control form-one__control--full">
                                 <label>آپلود تصویر اسلاید</label>
-                                <form action="/User/ManageSlide/UploadSlide" class="dropzone" id="pictureDropzone"></form>
+                                <div id="pictureDropzone" class="dropzone-custom" data-url="/User/ManageSlide/UploadSlide?type=picture">
+                                    <div class="dz-message" data-dz-message>
+                                        <i class="fas fa-cloud-upload-alt"></i><br>
+                                        تصویر را اینجا رها کنید یا کلیک کنید<br>
+                                        <small>(حداکثر حجم: 5 مگابایت)</small>
+                                    </div>
+                                </div>
                                 <input type="hidden" id="PictureUrl" name="Picture" />
                             </div>
 
-                            <!-- فایل اسلاید -->
-                            @* <div class="form-one__control form-one__control--full">
-                                <label>آپلود فایل اسلاید</label>
-                                <div class="dropzone" id="fileDropzone"></div>
-                                <input type="hidden" id="FileUrl" name="File" />
-                            </div> *@
+                           
 
                             <div class="form-one__control form-one__control--full">
                                 <label>آپلود فایل اسلاید</label>
-                                <form action="/User/ManageSlide/UploadSlide" class="dropzone" id="slideDropzone"></form>
+                                <div id="fileDropzone" class="dropzone-custom" data-url="/User/ManageSlide/UploadSlide?type=file">
+                                    <div class="dz-message" data-dz-message>
+                                        <i class="fas fa-cloud-upload-alt"></i><br>
+                                        فایل اسلاید را اینجا رها کنید یا کلیک کنید<br>
+                                        <small>(فرمت‌های مجاز: PDF, PPT, PPTX - حداکثر حجم: 10 مگابایت)</small>
+                                    </div>
+                                </div>
                                 <input type="hidden" id="FileUrl" name="File" />
                             </div>
 
@@ -131,61 +184,7 @@
                         </div>
                     </form>
 
-@*                     <form action="/User/ManageSlide/Create" method="post" enctype="multipart/form-data" id="slideDropzone" class="become-instructor__form form-one">
-                        <div class="form-one__group">
-                            @Html.ValidationSummary()
-                            <div class="form-one__control form-one__control--full">
-                                @Html.LabelFor(a => a.Title)
-                                @Html.EditorFor(a => a.Title)
 
-                            </div>
-
-                            <div class="form-one__control form-one__control--full">
-
-                                @Html.LabelFor(a => a.Description)
-                                @Html.TextAreaFor(a => a.Description)
-
-                            </div>
-
-                            <div class="form-one__control form-one__control--full">
-                                <label>آپلود تصویر اسلاید</label>
-                                <form action="/User/ManageSlide/UploadSlide" class="dropzone" id="pictureDropzone" enctype="multipart/form-data">
-                                    @Html.AntiForgeryToken()
-                                </form>
-                                <input type="hidden" id="PictureUrl" name="Picture" />
-                            </div>
-
-
-
-                            <div class="form-one__control form-one__control--full">
-                                <label>آپلود فایل اسلاید</label>
-                                <form action="/User/ManageSlide/UploadSlide" class="dropzone" id="slideDropzone" enctype="multipart/form-data">
-                                    @Html.AntiForgeryToken()
-                                </form>
-                                <input type="hidden" id="FileUrl" name="File" />
-                            </div>
-
-                            <div class="form-one__control form-one__control--full">
-                                @Html.LabelFor(a => a.DocumentTypeId)
-                                @Html.DropDownListFor(a => a.DocumentTypeId, documentType)
-
-                            </div>
-
-                            <div class="form-one__control form-one__control--full">
-                                @Html.LabelFor(a => a.DocumentCategoryId)
-                                @Html.DropDownListFor(a => a.DocumentCategoryId, documentCategory)
-
-                            </div>
-
-                            <div class="form-one__control form-one__control--full">
-                                <button type="submit" class="eduhive-btn">
-                                    <span>ثبت اسلاید</span>
-                                    <span class="eduhive-btn__icon"><i class="icon-right-up"></i></span>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
- *@
 
                 </div>
             </div>
@@ -193,36 +192,94 @@
     </div>
 </section><!-- /.become-instructor section-space-top -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js"></script>
 
-<script>
-Dropzone.options.pictureDropzone = {
-    paramName: "file",
-    maxFilesize: 10, // 5MB محدودیت حجم
-    acceptedFiles: "image/*",
-    success: function (file, response) {
-        $('#PictureUrl').val(response.filePath); // اطمینان حاصل کن که پاسخ درست برمی‌گرده
-    }
-};
-
-Dropzone.options.slideDropzone = {
-    paramName: "file",
-    maxFilesize: 10, // 10MB محدودیت حجم
-    acceptedFiles: ".pdf,.ppt,.pptx",
-    success: function (file, response) {
-        $('#FileUrl').val(response.filePath);
-    }
-};
-</script>
 
 @section Scripts {
+    <script>
+        $(document).ready(function() {
+            Dropzone.autoDiscover = false;
 
-    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+            var pictureDropzone = new Dropzone("#pictureDropzone", {
+                url: $("#pictureDropzone").data("url"),
+                paramName: "file",
+                maxFilesize: 5,
+                acceptedFiles: "image/*",
+                addRemoveLinks: true,
+                autoProcessQueue: true,
+                createImageThumbnails: true,
+                thumbnailWidth: 120,
+                thumbnailHeight: 120,
+                dictDefaultMessage: '<i class="fas fa-cloud-upload-alt"></i><br>تصویر را اینجا رها کنید یا کلیک کنید<br><small>(حداکثر حجم: 5 مگابایت)</small>',
+                dictRemoveFile: "حذف فایل",
+                dictFileTooBig: "حجم فایل بیشتر از حد مجاز است ({{filesize}}MB). حداکثر حجم مجاز: {{maxFilesize}}MB.",
+                dictInvalidFileType: "این نوع فایل مجاز نیست. فقط تصاویر قابل آپلود هستند.",
+                headers: {
+                    'X-CSRF-TOKEN': $('input[name="__RequestVerificationToken"]').val()
+                },
+                init: function() {
+                    this.on("addedfile", function(file) {
+                        if (this.files.length > 1) {
+                            this.removeFile(this.files[0]);
+                        }
+                    });
+                    this.on("sending", function(file, xhr, formData) {
+                        formData.append("__RequestVerificationToken", $('input[name="__RequestVerificationToken"]').val());
+                    });
+                },
+                success: function (file, response) {
+                    $('#PictureUrl').val(response.filePath);
+                },
+                error: function(file, errorMessage) {
+                    if (typeof errorMessage === 'string') {
+                        alert("خطا در آپلود تصویر: " + errorMessage);
+                    } else if (errorMessage.message) {
+                        alert("خطا در آپلود تصویر: " + errorMessage.message);
+                    } else {
+                        alert("خطا در آپلود تصویر");
+                    }
+                    this.removeFile(file);
+                }
+            });
 
- 
-
- 
-
+            var fileDropzone = new Dropzone("#fileDropzone", {
+                url: $("#fileDropzone").data("url"),
+                paramName: "file",
+                maxFilesize: 10,
+                acceptedFiles: ".pdf,.ppt,.pptx",
+                addRemoveLinks: true,
+                autoProcessQueue: true,
+                createImageThumbnails: false,
+                dictDefaultMessage: '<i class="fas fa-cloud-upload-alt"></i><br>فایل اسلاید را اینجا رها کنید یا کلیک کنید<br><small>(فرمت‌های مجاز: PDF, PPT, PPTX - حداکثر حجم: 10 مگابایت)</small>',
+                dictRemoveFile: "حذف فایل",
+                dictFileTooBig: "حجم فایل بیشتر از حد مجاز است ({{filesize}}MB). حداکثر حجم مجاز: {{maxFilesize}}MB.",
+                dictInvalidFileType: "این نوع فایل مجاز نیست. فقط فایل‌های PDF، PPT و PPTX قابل آپلود هستند.",
+                headers: {
+                    'X-CSRF-TOKEN': $('input[name="__RequestVerificationToken"]').val()
+                },
+                init: function() {
+                    this.on("addedfile", function(file) {
+                        if (this.files.length > 1) {
+                            this.removeFile(this.files[0]);
+                        }
+                    });
+                    this.on("sending", function(file, xhr, formData) {
+                        formData.append("__RequestVerificationToken", $('input[name="__RequestVerificationToken"]').val());
+                    });
+                },
+                success: function (file, response) {
+                    $('#FileUrl').val(response.filePath);
+                },
+                error: function(file, errorMessage) {
+                    if (typeof errorMessage === 'string') {
+                        alert("خطا در آپلود فایل: " + errorMessage);
+                    } else if (errorMessage.message) {
+                        alert("خطا در آپلود فایل: " + errorMessage.message);
+                    } else {
+                        alert("خطا در آپلود فایل");
+                    }
+                    this.removeFile(file);
+                }
+            });
+        });
+    </script>
 }

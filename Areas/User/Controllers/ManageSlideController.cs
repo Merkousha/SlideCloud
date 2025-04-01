@@ -46,16 +46,13 @@ namespace SlideCloud.Areas.User.Controllers
                 return View(model);
             }
             
-            // upload file to S3
-            var fileUrl = await _s3Uploader.UploadFileAsync(model.File);
-            var pictureUrl = await _s3Uploader.UploadFileAsync(model.Picture);
 
             _appDbContext.Documents.Add(new Document
             {
                 Title = model.Title,
                 Description = model.Description,
-                File = fileUrl,
-                Picture = pictureUrl,
+                File = model.File,
+                Picture = model.Picture,
                 DocumentTypeId = model.DocumentTypeId,
                 DocumentCategoryId = model.DocumentCategoryId,
                 ViewCount = 0
@@ -67,16 +64,34 @@ namespace SlideCloud.Areas.User.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> UploadSlide(IFormFile file)
+        public async Task<IActionResult> UploadSlide(IFormFile file, string type)
         {
-            if (file == null || file.Length == 0)
-                return BadRequest(new { message = "فایلی دریافت نشد" });
+            try
+            {
+                if (file == null || file.Length == 0)
+                    return BadRequest(new { message = "فایلی دریافت نشد" });
 
-            // استفاده از کلاس S3Uploader که قبلاً گفتیم
-            var uploader = new S3Uploader(_configuration);
-            var fileUrl = await uploader.UploadFileAsync(file); // برگردوندن URL کامل
+                // بررسی نوع فایل
+                if (type == "picture" && !file.ContentType.StartsWith("image/"))
+                    return BadRequest(new { message = "فایل انتخاب شده باید تصویر باشد" });
 
-            return Ok(new { fileUrl });
+                if (type == "file" && !IsValidSlideFile(file))
+                    return BadRequest(new { message = "فایل باید از نوع PDF یا PowerPoint باشد" });
+
+                var fileUrl = await _s3Uploader.UploadFileAsync(file);
+                return Ok(new { filePath = fileUrl });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = "خطا در آپلود فایل: " + ex.Message });
+            }
+        }
+
+        private bool IsValidSlideFile(IFormFile file)
+        {
+            var validExtensions = new[] { ".pdf", ".ppt", ".pptx" };
+            var extension = Path.GetExtension(file.FileName).ToLowerInvariant();
+            return validExtensions.Contains(extension);
         }
 
 
