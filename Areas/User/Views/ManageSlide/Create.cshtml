@@ -9,7 +9,6 @@
             {
                 Text = a.Name,
                 Value = a.Id.ToString()
-
             });
     var documentCategory = documentCategorys.Select(a => new SelectListItem
             {
@@ -20,6 +19,151 @@
     ViewData["Title"] = "ثبت اسلاید";
 }
 
+@section Styles {
+    <style>
+        .dropzone-custom {
+            min-height: 150px;
+            border: 2px dashed #6c5ce7;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dropzone-custom:hover {
+            border-color: #4834d4;
+            background: #f1f3f5;
+        }
+
+        .dropzone-custom .dz-message {
+            margin: 2em 0;
+            font-size: 1.1em;
+            color: #666;
+        }
+
+        .dropzone-custom .dz-preview {
+            margin: 10px;
+        }
+
+        .dropzone-custom.dz-started .dz-message {
+            display: none;
+        }
+
+        .dropzone-custom .dz-remove {
+            color: #dc3545;
+            margin-top: 5px;
+            cursor: pointer;
+        }
+
+        .dropzone-custom .dz-remove:hover {
+            text-decoration: underline;
+        }
+
+        .upload-status {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .upload-status.warning {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+        }
+
+        .upload-status.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .upload-progress {
+            height: 3px;
+            width: 100%;
+            background-color: #f0f0f0;
+            border-radius: 3px;
+            margin-top: 5px;
+            overflow: hidden;
+            display: none;
+        }
+
+        .upload-progress-bar {
+            height: 100%;
+            background-color: #6c5ce7;
+            width: 0;
+            transition: width 0.3s ease;
+        }
+
+        .success-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+            text-align: center;
+            min-width: 300px;
+        }
+
+        .success-modal .icon {
+            font-size: 50px;
+            color: #28a745;
+            margin-bottom: 20px;
+        }
+
+        .success-modal h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .success-modal p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+
+        .success-modal .progress {
+            width: 100%;
+            height: 4px;
+            background: #f0f0f0;
+            border-radius: 2px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        .success-modal .progress-bar {
+            width: 0;
+            height: 100%;
+            background: #28a745;
+            transition: width 3s linear;
+        }
+    </style>
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 <section class="page-header">
     <div class="container rtl">
@@ -71,62 +215,281 @@
             <div class="col-lg-7 wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="400ms">
                 <div class="become-instructor__form-box">
                     <h3 class="become-instructor__form-box__title">برای ثبت اسلاید اقدام کنید</h3>
-                    <form action="/User/ManageSlide/Create" method="post" class="become-instructor__form form-one">
+
+
+                    <form action="/User/ManageSlide/Create" method="post" enctype="multipart/form-data" id="mainForm" class="become-instructor__form form-one">
+                        @Html.AntiForgeryToken()
                         <div class="form-one__group">
                             @Html.ValidationSummary()
                             <div class="form-one__control form-one__control--full">
                                 @Html.LabelFor(a => a.Title)
                                 @Html.EditorFor(a => a.Title)
-
                             </div>
 
                             <div class="form-one__control form-one__control--full">
-
                                 @Html.LabelFor(a => a.Description)
                                 @Html.TextAreaFor(a => a.Description)
-
                             </div>
 
-                            <div class="form-one__control form-one__control--full">
-                                @Html.LabelFor(a => a.Picture)
-                                @Html.EditorFor(a => a.Picture)
+                            <!-- تصویر اسلاید -->
+                            @* <div class="form-one__control form-one__control--full">
+                                <label>آپلود تصویر اسلاید</label>
+                                <div class="dropzone" id="pictureDropzone"></div>
+                                <input type="hidden" id="PictureUrl" name="Picture" />
+                            </div> *@
 
+                            <div class="form-one__control form-one__control--full">
+                                <label>آپلود تصویر اسلاید</label>
+                                <div id="pictureDropzone" class="dropzone-custom" data-url="/User/ManageSlide/UploadSlide?type=picture">
+                                    <div class="dz-message" data-dz-message>
+                                        <i class="fas fa-cloud-upload-alt"></i><br>
+                                        تصویر را اینجا رها کنید یا کلیک کنید<br>
+                                        <small>(حداکثر حجم: 5 مگابایت)</small>
+                                    </div>
+                                </div>
+                                <div id="pictureUploadStatus" class="upload-status"></div>
+                                <div class="upload-progress" id="pictureProgress">
+                                    <div class="upload-progress-bar"></div>
+                                </div>
+                                <input type="hidden" id="PictureUrl" name="Picture" />
                             </div>
 
-                            <div class="form-one__control form-one__control--full">
-                                @Html.LabelFor(a => a.File)
-                                @Html.EditorFor(a => a.File)
+                           
 
+                            <div class="form-one__control form-one__control--full">
+                                <label>آپلود فایل اسلاید</label>
+                                <div id="fileDropzone" class="dropzone-custom" data-url="/User/ManageSlide/UploadSlide?type=file">
+                                    <div class="dz-message" data-dz-message>
+                                        <i class="fas fa-cloud-upload-alt"></i><br>
+                                        فایل اسلاید را اینجا رها کنید یا کلیک کنید<br>
+                                        <small>(فرمت‌های مجاز: PDF, PPT, PPTX - حداکثر حجم: 10 مگابایت)</small>
+                                    </div>
+                                </div>
+                                <div id="fileUploadStatus" class="upload-status"></div>
+                                <div class="upload-progress" id="fileProgress">
+                                    <div class="upload-progress-bar"></div>
+                                </div>
+                                <input type="hidden" id="FileUrl" name="File" />
                             </div>
 
                             <div class="form-one__control form-one__control--full">
                                 @Html.LabelFor(a => a.DocumentTypeId)
                                 @Html.DropDownListFor(a => a.DocumentTypeId, documentType)
-
                             </div>
 
                             <div class="form-one__control form-one__control--full">
                                 @Html.LabelFor(a => a.DocumentCategoryId)
                                 @Html.DropDownListFor(a => a.DocumentCategoryId, documentCategory)
-
                             </div>
 
                             <div class="form-one__control form-one__control--full">
-                                <button type="submit" class="eduhive-btn">
+                                <button type="submit" class="eduhive-btn submit-btn" id="submitBtn" disabled>
                                     <span>ثبت اسلاید</span>
                                     <span class="eduhive-btn__icon"><i class="icon-right-up"></i></span>
                                 </button>
                             </div>
                         </div>
                     </form>
+
+
+
                 </div>
             </div>
         </div>
     </div>
 </section><!-- /.become-instructor section-space-top -->
+
+<!-- اضافه کردن مودال موفقیت -->
+<div class="modal-overlay" id="modalOverlay"></div>
+<div class="success-modal" id="successModal">
+    <div class="icon">
+        <i class="fas fa-check-circle"></i>
+    </div>
+    <h3>با موفقیت ثبت شد!</h3>
+    <p>اسلاید شما با موفقیت در سیستم ثبت شد و پس از تایید نمایش داده خواهد شد.</p>
+    <div class="progress">
+        <div class="progress-bar"></div>
+    </div>
+</div>
+
 @section Scripts {
+    <script>
+        $(document).ready(function() {
+            Dropzone.autoDiscover = false;
+            var uploadsCompleted = { picture: false, file: false };
+            var $submitBtn = $('#submitBtn');
 
-    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+            function updateSubmitButton() {
+                if (uploadsCompleted.picture && uploadsCompleted.file) {
+                    $submitBtn.prop('disabled', false);
+                    showStatus('pictureUploadStatus', 'آپلود تصویر با موفقیت انجام شد', 'success');
+                    showStatus('fileUploadStatus', 'آپلود فایل با موفقیت انجام شد', 'success');
+                } else {
+                    $submitBtn.prop('disabled', true);
+                }
+            }
 
+            function showStatus(elementId, message, type) {
+                var $status = $('#' + elementId);
+                $status.html(message).removeClass('warning success').addClass(type).show();
+            }
+
+            function updateProgress(progressId, percent) {
+                var $progress = $('#' + progressId);
+                var $bar = $progress.find('.upload-progress-bar');
+                $progress.show();
+                $bar.css('width', percent + '%');
+            }
+
+            var pictureDropzone = new Dropzone("#pictureDropzone", {
+                url: $("#pictureDropzone").data("url"),
+                paramName: "file",
+                maxFilesize: 5,
+                acceptedFiles: "image/*",
+                addRemoveLinks: true,
+                autoProcessQueue: true,
+                createImageThumbnails: true,
+                thumbnailWidth: 120,
+                thumbnailHeight: 120,
+                dictDefaultMessage: '<i class="fas fa-cloud-upload-alt"></i><br>تصویر را اینجا رها کنید یا کلیک کنید<br><small>(حداکثر حجم: 5 مگابایت)</small>',
+                dictRemoveFile: "حذف فایل",
+                dictFileTooBig: "حجم فایل بیشتر از حد مجاز است ({{filesize}}MB). حداکثر حجم مجاز: {{maxFilesize}}MB.",
+                dictInvalidFileType: "این نوع فایل مجاز نیست. فقط تصاویر قابل آپلود هستند.",
+                headers: {
+                    'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
+                },
+                init: function() {
+                    this.on("addedfile", function(file) {
+                        if (this.files.length > 1) {
+                            this.removeFile(this.files[0]);
+                        }
+                        uploadsCompleted.picture = false;
+                        updateSubmitButton();
+                        showStatus('pictureUploadStatus', 'در حال آپلود تصویر...', 'warning');
+                    });
+
+                    this.on("sending", function(file, xhr, formData) {
+                        formData.append("__RequestVerificationToken", $('input[name="__RequestVerificationToken"]').val());
+                    });
+
+                    this.on("uploadprogress", function(file, progress) {
+                        updateProgress('pictureProgress', progress);
+                    });
+
+                    this.on("success", function(file, response) {
+                        $('#PictureUrl').val(response.filePath);
+                        uploadsCompleted.picture = true;
+                        updateSubmitButton();
+                        updateProgress('pictureProgress', 100);
+                    });
+
+                    this.on("error", function(file, errorMessage) {
+                        uploadsCompleted.picture = false;
+                        updateSubmitButton();
+                        if (typeof errorMessage === 'string') {
+                            showStatus('pictureUploadStatus', 'خطا در آپلود تصویر: ' + errorMessage, 'warning');
+                        } else if (errorMessage.message) {
+                            showStatus('pictureUploadStatus', 'خطا در آپلود تصویر: ' + errorMessage.message, 'warning');
+                        } else {
+                            showStatus('pictureUploadStatus', 'خطا در آپلود تصویر', 'warning');
+                        }
+                        this.removeFile(file);
+                    });
+                }
+            });
+
+            var fileDropzone = new Dropzone("#fileDropzone", {
+                url: $("#fileDropzone").data("url"),
+                paramName: "file",
+                maxFilesize: 10,
+                acceptedFiles: ".pdf,.ppt,.pptx",
+                addRemoveLinks: true,
+                autoProcessQueue: true,
+                createImageThumbnails: false,
+                dictDefaultMessage: '<i class="fas fa-cloud-upload-alt"></i><br>فایل اسلاید را اینجا رها کنید یا کلیک کنید<br><small>(فرمت‌های مجاز: PDF, PPT, PPTX - حداکثر حجم: 10 مگابایت)</small>',
+                dictRemoveFile: "حذف فایل",
+                dictFileTooBig: "حجم فایل بیشتر از حد مجاز است ({{filesize}}MB). حداکثر حجم مجاز: {{maxFilesize}}MB.",
+                dictInvalidFileType: "این نوع فایل مجاز نیست. فقط فایل‌های PDF، PPT و PPTX قابل آپلود هستند.",
+                headers: {
+                    'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
+                },
+                init: function() {
+                    this.on("addedfile", function(file) {
+                        if (this.files.length > 1) {
+                            this.removeFile(this.files[0]);
+                        }
+                        uploadsCompleted.file = false;
+                        updateSubmitButton();
+                        showStatus('fileUploadStatus', 'در حال آپلود فایل...', 'warning');
+                    });
+
+                    this.on("sending", function(file, xhr, formData) {
+                        formData.append("__RequestVerificationToken", $('input[name="__RequestVerificationToken"]').val());
+                    });
+
+                    this.on("uploadprogress", function(file, progress) {
+                        updateProgress('fileProgress', progress);
+                    });
+
+                    this.on("success", function(file, response) {
+                        $('#FileUrl').val(response.filePath);
+                        uploadsCompleted.file = true;
+                        updateSubmitButton();
+                        updateProgress('fileProgress', 100);
+                    });
+
+                    this.on("error", function(file, errorMessage) {
+                        uploadsCompleted.file = false;
+                        updateSubmitButton();
+                        if (typeof errorMessage === 'string') {
+                            showStatus('fileUploadStatus', 'خطا در آپلود فایل: ' + errorMessage, 'warning');
+                        } else if (errorMessage.message) {
+                            showStatus('fileUploadStatus', 'خطا در آپلود فایل: ' + errorMessage.message, 'warning');
+                        } else {
+                            showStatus('fileUploadStatus', 'خطا در آپلود فایل', 'warning');
+                        }
+                        this.removeFile(file);
+                    });
+                }
+            });
+
+            // تغییر رفتار ارسال فرم
+            $('#mainForm').on('submit', function(e) {
+                e.preventDefault();
+                
+                if (!uploadsCompleted.picture || !uploadsCompleted.file) {
+                    alert('لطفاً صبر کنید تا آپلود فایل‌ها تکمیل شود.');
+                    return false;
+                }
+
+                var formData = $(this).serialize();
+                
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: 'POST',
+                    data: formData,
+                    success: function(response) {
+                        // نمایش مودال موفقیت
+                        $('#modalOverlay').fadeIn();
+                        $('#successModal').fadeIn();
+                        
+                        // شروع انیمیشن پیشرفت
+                        setTimeout(function() {
+                            $('#successModal .progress-bar').css('width', '100%');
+                        }, 100);
+
+                        // ریدایرکت بعد از 3 ثانیه
+                        setTimeout(function() {
+                            window.location.href = '/';
+                        }, 3000);
+                    },
+                    error: function(xhr, status, error) {
+                        alert('خطا در ثبت اطلاعات. لطفاً دوباره تلاش کنید.');
+                    }
+                });
+
+                return false;
+            });
+        });
+    </script>
 }
