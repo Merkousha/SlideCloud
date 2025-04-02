@@ -66,7 +66,14 @@ namespace SlideCloud.Areas.Admin.Controllers
             var category = await _appDbContext.DocumentCategories.FindAsync(Id);
             if (category == null)
                 return NotFound();
-            return View(category);
+            var model = new UpdateCategoryVM
+            {
+                Id=category.Id,
+                Name = category.Name,
+                Description = category.Description,
+                Slug = category.Slug
+            };
+            return View(model);
         }
 
         [HttpPost]
