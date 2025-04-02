@@ -98,10 +98,8 @@
                                 }
                                 else
                                 {
-	                                #region Menu For Admin
-
-	                                
-	                                if(User.IsInRole("Admin"))
+	                      
+	                                @if(User.IsInRole("Admin"))
 	                                {
 		                                <li class="dropdown">
 			                                <a href="#">پنل ادمین</a>
@@ -116,7 +114,7 @@
 			                                </ul>
 		                                </li>
 	                                }
-	                                #endregion
+	                               
                          
                                
                                     <li class="nav-item">
