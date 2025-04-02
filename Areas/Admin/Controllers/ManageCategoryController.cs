@@ -99,7 +99,7 @@ namespace SlideCloud.Areas.Admin.Controllers
 
         #endregion
 
-        #region Delete Category
+        #region DeleteCategory
         [HttpGet]
         public async Task<IActionResult> DeleteCategory(int id)
         {
