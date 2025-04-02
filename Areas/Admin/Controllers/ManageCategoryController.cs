@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SlideCloud.Areas.Admin.Models.Category;
 using SlideCloud.Data;
 
 namespace SlideCloud.Areas.Admin.Controllers
@@ -18,6 +19,29 @@ namespace SlideCloud.Areas.Admin.Controllers
         public IActionResult List()
         {
 
+            return View(_appDbContext.DocumentCategories.ToList());
+        }
+        [HttpGet]
+        public IActionResult CreateCategory()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        public Task< IActionResult> CreateCategory(CreateCategoryVM model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            _appDbContext.DocumentCategories.AddAsync(new SlideCloud.Models.DocumentCategory
+            {
+                Name = model.Name,
+                Description = model.Description,
+                Slug = model.Slug
+            });
+            _appDbContext.SaveChanges();
             return View(_appDbContext.DocumentCategories.ToList());
         }
     }
