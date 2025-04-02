@@ -29,20 +29,20 @@ namespace SlideCloud.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public Task< IActionResult> CreateCategory(CreateCategoryVM model)
+        public async Task< IActionResult> CreateCategory(CreateCategoryVM model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            _appDbContext.DocumentCategories.AddAsync(new SlideCloud.Models.DocumentCategory
+         await   _appDbContext.DocumentCategories.AddAsync(new SlideCloud.Models.DocumentCategory
             {
                 Name = model.Name,
                 Description = model.Description,
                 Slug = model.Slug
             });
             _appDbContext.SaveChanges();
-            return View(_appDbContext.DocumentCategories.ToList());
+            return Redirect("/Admin/ManageCategory/List");
         }
     }
 }
