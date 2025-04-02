@@ -8,9 +8,9 @@
         <div class="page-header__content">
             <ul class="eduhive-breadcrumb list-unstyled">
                 <li><span class="eduhive-breadcrumb__icon"><i class="icon-home"></i></span><a href="/">خانه</a></li>
-                <li><span> دسته بندی ها</span></li>
+                <li><span> نوع اسلاید ها</span></li>
             </ul><!-- /.eduhive-breadcrumb list-unstyled -->
-            <h2 class="page-header__title">لیست دسته بندی ها</h2>
+            <h2 class="page-header__title">لیست  نوع اسلاید ها</h2>
         </div><!-- /.page-header__content -->
     </div><!-- /.container -->
     <img src="/assets/images/shapes/page-header-shape-1.png" alt="shape" class="page-header__shape-one">
@@ -21,10 +21,18 @@
 <section class="product-page section-space-bottom">
     <div class="container">
         <div class="row gutter-y-60">
-            <div class="col-xl-9 col-lg-8">
+            <div class="d-flex justify-content-center">
+	            <a href="/Admin/ManageDocumentType/CreateDocumentType" class="btn btn-lg text-center  btn-outline-success">نوع  اسلایدی جدید </a>
+
+
+            </div>
+	     <div class="col-xl-9 col-lg-8">
+	         
                 <div class="product__info-top rtl">
                     <div class="product__showing-text-box">
                         <p class="product__showing-text">نمایش 1–9 از @Model.Count() نتیجه</p>
+
+	                 
                     </div>
                     <div class="product__showing-sort">
                         <select class="selectpicker" aria-label="Sort by popular">
@@ -65,7 +73,7 @@
                     }
                     else
                     {
-                        <p>شما هیچ داکیومنتی ندارید.</p>
+                        <p>شما هیچ نوع اسلاید ندارید.</p>
                     }
 
                     <div class="col-lg-12">
