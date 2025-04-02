@@ -16,11 +16,22 @@ namespace SlideCloud.Areas.Admin.Controllers
             _appDbContext = appDbContext;
 
         }
+
+        #region Create List
+
+
         public IActionResult List()
         {
 
             return View(_appDbContext.DocumentCategories.ToList());
         }
+
+        #endregion
+
+
+        #region Create Category
+
+
         [HttpGet]
         public IActionResult CreateCategory()
         {
@@ -29,13 +40,13 @@ namespace SlideCloud.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task< IActionResult> CreateCategory(CreateCategoryVM model)
+        public async Task<IActionResult> CreateCategory(CreateCategoryVM model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-         await   _appDbContext.DocumentCategories.AddAsync(new SlideCloud.Models.DocumentCategory
+            await _appDbContext.DocumentCategories.AddAsync(new SlideCloud.Models.DocumentCategory
             {
                 Name = model.Name,
                 Description = model.Description,
@@ -44,5 +55,43 @@ namespace SlideCloud.Areas.Admin.Controllers
             _appDbContext.SaveChanges();
             return Redirect("/Admin/ManageCategory/List");
         }
+
+        #endregion
+
+        #region Create Update
+
+        [HttpGet]
+        public async Task<IActionResult> UpdateCategory(int Id)
+        {
+            var category = await _appDbContext.DocumentCategories.FindAsync(Id);
+            if (category == null)
+                return NotFound();
+            return View(category);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateCategory(UpdateCategoryVM model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var category = await _appDbContext.DocumentCategories.FindAsync(model.Id);
+            if (category == null)
+                return NotFound();
+
+
+            category.Name = model.Name;
+            category.Description = model.Description;
+            category.Slug = model.Slug;
+
+            _appDbContext.DocumentCategories.Update(category);
+            _appDbContext.SaveChanges();
+            return Redirect("/Admin/ManageCategory/List");
+        }
+
+        #endregion
+
+
     }
 }
