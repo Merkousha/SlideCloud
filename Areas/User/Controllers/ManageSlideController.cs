@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -192,6 +193,32 @@ namespace SlideCloud.Areas.User.Controllers
 
         }
 
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var Id = long.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            if (!User.Identity.IsAuthenticated || Id == 0)
+            {
+                return NotFound();
+            }
+
+            var Document = await _appDbContext.Documents.FirstOrDefaultAsync(a => a.Id == id);
+
+            if (Document == null)
+            {
+                return NotFound();
+            }
+
+            if (Document?.UserId == Id)
+            {
+                _appDbContext.Documents.Remove(Document);
+                await _appDbContext.SaveChangesAsync();
+                return Redirect("~/Slide/ListSlidesUser");
+            }
+            return NotFound();
+        }
 
     }
 }
