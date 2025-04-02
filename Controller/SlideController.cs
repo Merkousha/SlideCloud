@@ -40,10 +40,18 @@ public class SlideController : Microsoft.AspNetCore.Mvc.Controller
         model.DocumentDetail = await _appDbContext.Documents
             .Include(a => a.DocumentCategory)
             .FirstOrDefaultAsync(a => a.Id == id);
+
+  
         if (model.DocumentDetail == null)
         {
             return NotFound();
         }
+        #region Update View Count   
+        model.DocumentDetail.ViewCount += 1;
+        _appDbContext.Documents.Update(model.DocumentDetail);
+        _appDbContext.SaveChanges();
+        #endregion
+
         return View(model);
     }
     [HttpGet]
