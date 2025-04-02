@@ -99,6 +99,20 @@ namespace SlideCloud.Areas.Admin.Controllers
 
         #endregion
 
+        #region Delete Category
+        [HttpGet]
+        public async Task<IActionResult> DeleteCategory(int id)
+        {
+          
+            var category = await _appDbContext.DocumentCategories.FindAsync(id);
+            if (category == null)
+                return NotFound();
 
+            _appDbContext.DocumentCategories.Remove(category);
+            _appDbContext.SaveChanges();
+            return Redirect("/Admin/ManageCategory/List");
+        }
+
+        #endregion
     }
 }
