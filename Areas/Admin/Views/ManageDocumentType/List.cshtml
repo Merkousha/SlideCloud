@@ -1,0 +1,107 @@
+﻿@model IEnumerable< SlideCloud.Models.DocumentType>
+
+@{
+    Layout = "_layout";
+}
+<section class="page-header">
+    <div class="container rtl">
+        <div class="page-header__content">
+            <ul class="eduhive-breadcrumb list-unstyled">
+                <li><span class="eduhive-breadcrumb__icon"><i class="icon-home"></i></span><a href="/">خانه</a></li>
+                <li><span> دسته بندی ها</span></li>
+            </ul><!-- /.eduhive-breadcrumb list-unstyled -->
+            <h2 class="page-header__title">لیست دسته بندی ها</h2>
+        </div><!-- /.page-header__content -->
+    </div><!-- /.container -->
+    <img src="/assets/images/shapes/page-header-shape-1.png" alt="shape" class="page-header__shape-one">
+    <img src="/assets/images/shapes/page-header-shape-2.png" alt="shape" class="page-header__shape-two">
+    <div class="page-header__shape-three"></div><!-- /.page-header__shape-three -->
+    <div class="page-header__shape-four"></div><!-- /.page-header__shape-four -->
+</section><!-- /.page-header -->
+<section class="product-page section-space-bottom">
+    <div class="container">
+        <div class="row gutter-y-60">
+            <div class="col-xl-9 col-lg-8">
+                <div class="product__info-top rtl">
+                    <div class="product__showing-text-box">
+                        <p class="product__showing-text">نمایش 1–9 از @Model.Count() نتیجه</p>
+                    </div>
+                    <div class="product__showing-sort">
+                        <select class="selectpicker" aria-label="Sort by popular">
+                            <option selected>کوتاه کردن پیش فرض</option>
+                            <option value="1">مرتب سازی بر اساس جدید ترین</option>
+                            <option value="2">مرتب سازی بر اساس قدیمی ترین</option>
+                            <option value="3"> بر اساس رتبه بندی</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row gutter-y-30">
+                    @if ( Model.Any())
+                    {
+                        @foreach (var DocumentType in Model)
+                        {
+
+                            <div class="col-xl-4 col-sm-6">
+                                <a href="@Url.RouteUrl("DocumentTypeOfDetail",new {id=DocumentType.Id,title=DocumentType.Slug})">
+                                    <div class="product__item wow fadeInUp rtl" data-wow-duration='1500ms' data-wow-delay='000ms'>
+                            
+                                        <div class="product__item__content">
+                                 
+                                            <h4 class="product__item__title">
+                                                @DocumentType.Name
+                                            </h4><!-- /.product-title -->
+                                            <div class="product__item__price">@DocumentType.Description </div>
+                                            <a href="/Admin/ManageDocumentType/UpdateDocumentType?id=@DocumentType.Id" class="btn  btn-outline-warning">ویرایش </a>
+                                            <a href="/Admin/ManageDocumentType/DeleteDocumentType?id=@DocumentType.Id" class="btn  btn-outline-danger">حذف </a>
+                                        </div><!-- /.product-content -->
+                                    </div><!-- /.product-item -->
+                                </a>
+                            </div>
+
+                            <!-- /.col-xl-4 col-sm-6 -->
+                        }
+
+                    }
+                    else
+                    {
+                        <p>شما هیچ داکیومنتی ندارید.</p>
+                    }
+
+                    <div class="col-lg-12">
+                        <ul class="post-pagination">
+                            <li>
+                                <a href="#"><span class="post-pagination__icon"><i class="icon-left-arrow"></i></span></a>
+                            </li>
+                            <li>
+                                <a href="#">03</a>
+                            </li>
+                            <li>
+                                <a href="#">02</a>
+                            </li>
+                            <li>
+                                <a href="#">01</a>
+                            </li>
+                            <li class="active">
+                                <a href="#"><span class="post-pagination__icon"><i class="icon-right-arrow"></i></span></a>
+                            </li>
+                        </ul><!-- /.post-pagination -->
+                    </div><!-- /.col-lg-12 -->
+                </div><!-- /.row -->
+            </div><!-- /.col-xl-9 col-lg-8 -->
+            <div class="col-xl-3 col-lg-4">
+                <aside class="product__sidebar rtl">
+                    <div class="product__search-box product__sidebar__item">
+                        <form action="#" class="product__search">
+                            <input type="text" placeholder="جستجوی موارد" />
+                            <button type="submit" aria-label="earch submit">
+                                <span class="icon-search"></span>
+                            </button>
+                        </form><!-- /.product__search -->
+                    </div><!-- /.search-widget -->
+          
+                </aside><!-- /.shop-sidebar -->
+            </div><!-- /.col-xl-3 col-lg-4 -->
+        </div><!-- /.row -->
+    </div><!-- /.container -->
+</section><!-- /.product-page section-space-bottom -->
