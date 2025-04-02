@@ -70,11 +70,24 @@
                                 <li class="dropdown megamenu">
                                     <a href="~/">خانه</a>
                                 </li>
-                                <li>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                   <li>
                                     <a  href="@Url.Content("~/User/ManageSlide/Create")">
                                         ثبت اسلاید
                                     </a>
+                                </li> 
+                                }
+                                
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <li>
+                                    <a  href="@Url.Content("~/Admin/ManageSlide/Index")">
+                                        لیست کاربران ویژه ادمین 
+                                    </a>
                                 </li>
+                                }
+                                
                                 <li>
                                     @Html.ActionLink("لیست اسلاید ها", "Index", "Slide")
                                 </li>
