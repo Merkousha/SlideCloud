@@ -93,9 +93,32 @@
                                     <li class="nav-item">
                                         @Html.ActionLink("ثبت نام", "Register", "Account", null, new { @class = "" })
                                     </li>
+
+                         
                                 }
                                 else
                                 {
+	                                #region Menu For Admin
+
+	                                
+	                                if(User.IsInRole("Admin"))
+	                                {
+		                                <li class="dropdown">
+			                                <a href="#">پنل ادمین</a>
+			                                <ul>
+				                                <li><a href="/Admin/ManageCategory/List">مدیریت دسته بندی</a>
+					                                <ul>
+						                                <li><a href="/Admin/ManageCategory/List">لیست دسته بندی ها </a>
+						                                <li><a href="/Admin/ManageCategory/CreateCategory">دسته بندی جدید </a>
+					                                </ul>    
+				                                </li>
+        
+			                                </ul>
+		                                </li>
+	                                }
+	                                #endregion
+                         
+                               
                                     <li class="nav-item">
                                         @Html.ActionLink("پنل کاربری", "Profile", "Account", null, new { @class = "" })
                                     </li>
