@@ -9,7 +9,7 @@ public class Document
     [Key]
     public int Id { get; set; }
 
-    [MaxLength(255)]
+    [MaxLength(5000)]
     public string Description { get; set; }
 
     [Required]
