@@ -16,8 +16,15 @@ public class HomeController : Microsoft.AspNetCore.Mvc.Controller
 
     public IActionResult Index()
     {
-        return View();
+        Contact();
+       return View();
     }
+
+    //public async Task<IActionResult> LoadHomeData()
+    //{
+    //    return View();
+    //}
+
 
     [HttpGet]
     public IActionResult Contact()
