@@ -226,3 +226,14 @@
 .icon-check-2:before {
   content: "\e92f";
 }
+.btn-danger:hover {
+    background-color: darkred;
+    transform: scale(1.05);
+    transition: 0.3s ease-in-out;
+}
+
+.btn-success:hover {
+    background-color: darkgreen;
+    transform: scale(1.1);
+    transition: 0.3s ease-in-out;
+}
