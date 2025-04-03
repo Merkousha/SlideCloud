@@ -1,0 +1,73 @@
+﻿@model SlideCloud.Areas.Admin.Models.DocumentType.CreateDocumentTypeVM
+@{
+	Layout = "_layout";
+}
+
+
+
+<hr />
+<div class="container text-end ">
+
+
+	<section class="become-instructor section-space-top">
+		<div class="container rtl">
+		</div>
+		<div class="col-lg-8 wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="400ms">
+			<h4>ساخت نوع اسلاید</h4>
+			<div class="become-instructor__form-box">
+				<h3 class="become-instructor__form-box__title">برای ثبت نوع اسلاید اقدام کنید</h3>
+
+
+				<form action="/Admin/ManageDocumentType/CreateDocumentType" method="post" enctype="multipart/form-data" id="mainForm" class="become-instructor__form form-one">
+					@Html.AntiForgeryToken()
+					<div class="form-one__group">
+						@Html.ValidationSummary()
+						<div class="form-one__control form-one__control--full">
+							@Html.LabelFor(a => a.Name)
+							@Html.EditorFor(a => a.Name)
+						</div>
+
+						<div class="form-one__control form-one__control--full">
+							@Html.LabelFor(a => a.Description)
+							@Html.TextAreaFor(a => a.Description)
+						</div>
+						<div class="form-one__control form-one__control--full">
+							@Html.LabelFor(a => a.Slug)
+							@Html.EditorFor(a => a.Slug)
+						</div>
+
+
+
+
+
+						<div class="form-one__control form-one__control--full">
+							<a href="/Admin/ManageDocumentType/List" class="eduhive-btn  btn btn-danger ">بازگشت به منو</a>
+							<input type="submit" class="eduhive-btn submit-btn" id="submitBtn" value="ثبت  " />
+							
+								
+						
+
+					
+						
+						</div>
+
+					
+					</div>
+				</form>
+
+
+
+			</div>
+		</div>
+
+	</section>
+
+</div>
+
+
+
+
+
+@{
+	await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
