@@ -32,12 +32,12 @@ public class HomeController : Microsoft.AspNetCore.Mvc.Controller
 
         var latestDocuments = await _context.Documents
             .OrderByDescending(u => u.Id)
-            .Take(20)
+            .Take(21)
             .ToListAsync();
 
         var popularDocuments = await _context.Documents
             .OrderByDescending(u => u.ViewCount)
-            .Take(10)
+            .Take(9)
             .ToListAsync();
 
         var newCategories = await _context.DocumentCategories
