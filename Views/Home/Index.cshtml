@@ -559,30 +559,26 @@
                     </div>
 
 
+
                     @foreach (var item in Model.PopularDocuments)
                     {
-                        <div class="col-lg-4 col-md-6">
+                        <div class="col-md-6 col-lg-4">
+                            <!-- /.col-lg-4 col-md-6 -->
+                            <div class="blog-card wow fadeInUp rtl" data-wow-duration='1500ms' data-wow-delay='200ms'>
+                                <div class="blog-card__image text-center">
+                                    <img src="@item.Picture" alt="@item.Title" style="max-height: 150px; width:auto !important;display: inline-flex;">
+                                    <a href="blog-details-right.html" class="blog-card__image__link">
+                                        <span class="sr-only">@item.Title</span>
+                                        <!-- /.sr-only -->
+                                    </a>
+                                </div><!-- /.blog-card__image -->
+                                <div class="blog-card__content">
+                                    <h3 class="blog-card__title text-center"> @Html.ActionLink(@item.Title, "Detil", "Slide", new { id = item.Id })</h3><!-- /.blog-card__title -->
 
-                            <div class="instructor-card-two wow fadeInUp animated" data-wow-duration="1500ms" data-wow-delay="000ms" style="visibility: visible; animation-duration: 1500ms; animation-delay: 0ms; animation-name: fadeInUp;">
-                                <div class="instructor-card-two__image">
-                                    <img src="@item.Picture" alt="Mike Hardson" style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px;">
-                                </div><!-- /.instructor-card-two__image -->
-                                <div class="instructor-card-two__content">
-                                    <div class="instructor-card-two__info">
-                                        <h3 class="instructor-card-two__name">
-                                            <a href="instructor-details.html">@item.Title</a>
-                                        </h3><!-- /.instructor-card-two__name -->
-                                        <h6 class="instructor-card-two__designation"></h6><!-- /.instructor-card-two__designation -->
-                                    </div><!-- /.instructor-card-two__info -->
-
-                                </div><!-- /.instructor-card-two__content -->
+                                </div><!-- /.blog-card__content -->
                             </div>
-
-                            <!-- /.instructor-card-two -->
-
+                            <!-- /.blog-card -->
                         </div>
-
-                        <!-- /.col-lg-4 col-md-6 -->
                     }
 
                 </div><!-- /.container -->
@@ -600,28 +596,23 @@
 
                     @foreach (var item in Model.LatestDocuments)
                     {
-                        <div class="col-lg-4 col-md-6">
+                        <div class="col-md-6 col-lg-4">
+                            <!-- /.col-lg-4 col-md-6 -->
+                            <div class="blog-card wow fadeInUp rtl" data-wow-duration='1500ms' data-wow-delay='200ms'>
+                                <div class="blog-card__image text-center">
+                                    <img src="@item.Picture" alt="@item.Title" style="max-height: 150px; width:auto !important;display: inline-flex;">
+                                    <a href="blog-details-right.html" class="blog-card__image__link">
+                                        <span class="sr-only">@item.Title</span>
+                                        <!-- /.sr-only -->
+                                    </a>
+                                </div><!-- /.blog-card__image -->
+                                <div class="blog-card__content">
+                                    <h3 class="blog-card__title text-center"> @Html.ActionLink(@item.Title, "Detil", "Slide", new { id = item.Id })</h3><!-- /.blog-card__title -->
 
-                            <div class="instructor-card-two wow fadeInUp animated" data-wow-duration="1500ms" data-wow-delay="000ms" style="visibility: visible; animation-duration: 1500ms; animation-delay: 0ms; animation-name: fadeInUp;">
-                                <div class="instructor-card-two__image">
-                                    <img src="@item.Picture" alt="Mike Hardson" style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px;">
-                                </div><!-- /.instructor-card-two__image -->
-                                <div class="instructor-card-two__content">
-                                    <div class="instructor-card-two__info">
-                                        <h3 class="instructor-card-two__name">
-                                            <a href="instructor-details.html">@item.Title</a>
-                                        </h3><!-- /.instructor-card-two__name -->
-                                        <h6 class="instructor-card-two__designation"></h6><!-- /.instructor-card-two__designation -->
-                                    </div><!-- /.instructor-card-two__info -->
-
-                                </div><!-- /.instructor-card-two__content -->
+                                </div><!-- /.blog-card__content -->
                             </div>
-
-                            <!-- /.instructor-card-two -->
-
+                            <!-- /.blog-card -->
                         </div>
-
-                        <!-- /.col-lg-4 col-md-6 -->
                     }
 
                 </div><!-- /.container -->
@@ -629,9 +620,9 @@
 
 
 
-        <section class="instructors-page section-space">
+        <section class="my-5">
             <div class="container">
-                <div class="row gutter-y-30">
+                <div class="row ">
 
                     <div class="sec-title sec-title--center wow fadeInUp animated" data-wow-duration="1500ms" data-wow-delay="00ms" style="visibility: visible; animation-duration: 1500ms; animation-delay: 0ms; animation-name: fadeInUp ; margin-bottom:90px ">
                         <h3 class="sec-title__title"> <span class="sec-title__title__text">لیست دسته بندی های جدید</span> </h3><!-- /.sec-title__title -->
@@ -643,11 +634,11 @@
                         <div class="col-lg-4 col-md-6">
 
                             <div class="instructor-card-two wow fadeInUp animated" data-wow-duration="1500ms" data-wow-delay="000ms" style="visibility: visible; animation-duration: 1500ms; animation-delay: 0ms; animation-name: fadeInUp; ">
-                          
+
                                 <div class="instructor-card-two__content">
                                     <div class="instructor-card-two__info">
-                                        <h3 class="instructor-card-two__name">
-                                            <a href="instructor-details.html" class="custom-name-link" >@item.Name</a>
+                                        <h3 class="instructor-card-two__name" style="color:black">
+                                            @item.Name
                                         </h3><!-- /.instructor-card-two__name -->
                                         <h6 class="instructor-card-two__designation"></h6><!-- /.instructor-card-two__designation -->
                                     </div><!-- /.instructor-card-two__info -->
@@ -663,56 +654,19 @@
                     }
 
                 </div><!-- /.container -->
+            </div><!-- /.container -->
         </section>
 
 
 
 
 
-        <section class="testimonials-page section-space" >
-            <div class="container">
-                <div class="testimonials-page__carousel owl-carousel owl-theme" data-owl-options='{
-             "items": 1,
-             "margin": 10,
-             "loop": true,
-             "smartSpeed": 700,
-             "nav": false,
-             "dots": true,
-             "autoplay": true,
-             "responsive": {
-                 "0": { "items": 1, "nav": true, "dots": false, "margin": 10 },
-                 "768": { "items": 2, "margin": 30 },
-                 "1200": { "items": 3, "margin": 30 }
-             }
-         }'>
-
-                    @foreach (var item in Model.NewCategories)
-                    {
-                        <div class="item wow fadeInUp rtl animated" data-wow-duration="1500ms" data-wow-delay="100ms">
-                            <div class="testimonial-card">
-                                <div class="testimonial-card__top">
-                                    <div class="testimonial-card__image">
-                                        <img src="~/assets/images/User-Profile.png" alt="@item.Name" />
-                                        <span class="testimonial-card__icon"><i class="icon-quote-2"></i></span>
-                                    </div>
-                                    <div class="testimonial-card__identity">
-                                        <h5 class="testimonial-card__name">@item.Name</h5>
-                                        <p class="testimonial-card__designation"></p>
-                                    </div>
-                                </div>
-                       
-                            </div>
-                        </div>
-                    }
-                </div>
-            </div>
-        </section>
 
 
 
 
 
-        <section class="instructors-page section-space" style="margin-top:-600PX">
+        <section class="instructors-page section-space">
             <div class="container">
                 <div class="row gutter-y-30">
 
@@ -723,21 +677,16 @@
 
                     @foreach (var item in Model.NewUsers)
                     {
-                        <div class="col-lg-4 col-md-6">
+                        <div class="col-lg-2 col-3">
 
                             <div class="instructor-card-two wow fadeInUp animated" data-wow-duration="1500ms" data-wow-delay="000ms" style="visibility: visible; animation-duration: 1500ms; animation-delay: 0ms; animation-name: fadeInUp;">
                                 <div class="instructor-card-two__image">
                                     <img src="~/assets/images/User-Profile.png" alt="Mike Hardson">
                                 </div><!-- /.instructor-card-two__image -->
-                                <div class="instructor-card-two__content">
-                                    <div class="instructor-card-two__info">
-                                        <h3 class="instructor-card-two__name">
-                                            <a href="instructor-details.html">@item.Name</a>
-                                        </h3><!-- /.instructor-card-two__name -->
-                                        <h6 class="instructor-card-two__designation">@EmailHelper.MaskEmail(item.Email)</h6><!-- /.instructor-card-two__designation -->
-                                    </div><!-- /.instructor-card-two__info -->
+                                <div class="text-center">
+                                    @item.Name
+                                </div>
 
-                                </div><!-- /.instructor-card-two__content -->
                             </div>
 
                             <!-- /.instructor-card-two -->
@@ -748,20 +697,20 @@
                     }
 
                 </div><!-- /.container -->
+            </div><!-- /.container -->
         </section>
-                 
- 
-    </div><!-- /.thm-owl__slider -->
-    </div><!-- /.container -->
-    <img src="assets/images/shapes/testimonial-shape-3-1.png" alt="shape" class="testimonials-three__shape-one">
-    <img src="assets/images/shapes/testimonial-shape-3-2.png" alt="shape" class="testimonials-three__shape-two">
-    <img src="assets/images/shapes/testimonial-shape-3-3.png" alt="shape" class="testimonials-three__shape-three">
-    <div class="testimonials-three__shape-box"></div><!-- /.testimonials-three__shape-box -->
+
+
+
 </section><!-- /.testimonials-three section-space2 -->
 
 
 <section class="instructors-three section-space2" id="instructors">
     <div class="container">
+        <img src="~/assets/images/shapes/testimonial-shape-3-1.png" alt="shape" class="testimonials-three__shape-one">
+        <img src="~/assets/images/shapes/testimonial-shape-3-2.png" alt="shape" class="testimonials-three__shape-two">
+        <img src="~/assets/images/shapes/testimonial-shape-3-3.png" alt="shape" class="testimonials-three__shape-three">
+        <div class="testimonials-three__shape-box"></div><!-- /.testimonials-three__shape-box -->
         <div class="sec-title sec-title--center wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="00ms">
             <h6 class="sec-title__tagline">تیم متخصص ما</h6><!-- /.sec-title__tagline -->
             <h3 class="sec-title__title">کارشناسان <span class="sec-title__title__text">و مربیان</span> <span class="sec-title__title__shape">تیم ما</span></h3><!-- /.sec-title__title -->
@@ -1140,267 +1089,11 @@
                             </div><!-- /.instructor-card-three__identity -->
                         </div><!-- /.instructor-card-three -->
                     </div><!-- /.item -->
-                </div><!-- /.instructors-three__carousel -->
-        <div class="item">
-            <div class="blog-card wow fadeInUp rtl" data-wow-duration='1500ms' data-wow-delay='00ms'>
-                <div class="blog-card__image">
-                    <img src="~/assets/images/blog/blog-1-4.jpg" alt="My Capacity Is Full We're Building The Plane">
-                    <a href="blog-details-right.html" class="blog-card__image__link">
-                        <span class="sr-only">ظرفیت من کامل است ما در حال ساختن هواپیما هستیم</span>
-                        <!-- /.sr-only -->
-                    </a>
-                    <div class="blog-card__date">
-                        <span class="blog-card__date__day">15</span>
-                        <span class="blog-card__date__month">تیر</span>
-                    </div><!-- /.blog-card__date -->
-                </div><!-- /.blog-card__image -->
-                <div class="blog-card__content">
-                    <ul class="list-unstyled blog-card__meta">
-                        <li>
-                            <a href="#">
-                                <span class="blog-card__meta__icon">
-                                    <i class="far fa-user"></i>
-                                </span>
-                                توسط ادمین
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="blog-card__meta__icon">
-                                    <i class="icon-comments"></i>
-                                </span>
-                                2 نظرات
-                            </a>
-                        </li>
-                    </ul><!-- /.list-unstyled blog-card__meta -->
-                    <h3 class="blog-card__title"><a href="blog-details-right.html">ظرفیت من کامل است ما در حال ساختن هواپیما هستیم</a></h3><!-- /.blog-card__title -->
-                    <a href="blog-details-right.html" class="blog-card__link">
-                        ادامه مطلب
-                        <span class="blog-card__link__icon">
-                            <span class="blog-card__link__icon__inner"><i class="icon-arrow-right"></i></span>
-                        </span>
-                    </a><!-- /.blog-card__link -->
-                </div><!-- /.blog-card__content -->
-            </div><!-- /.blog-card -->
-        </div><!-- /.item -->
-        <div class="item">
-            <div class="blog-card wow fadeInUp rtl" data-wow-duration='1500ms' data-wow-delay='100ms'>
-                <div class="blog-card__image">
-                    <img src="~/assets/images/blog/blog-1-5.jpg" alt="Ny Leftovers In The Kitchen Touch Base">
-                    <a href="blog-details-right.html" class="blog-card__image__link">
-                        <span class="sr-only"><a href="blog-details-right.html" class="blog-card__image__link"><span class="sr-only">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ</span></span>
-                        <!-- /.sr-only -->
-                    </a>
-                    <div class="blog-card__date">
-                        <span class="blog-card__date__day">5</span>
-                        <span class="blog-card__date__month">مهر</span>
-                    </div><!-- /.blog-card__date -->
-                </div><!-- /.blog-card__image -->
-                <div class="blog-card__content">
-                    <ul class="list-unstyled blog-card__meta">
-                        <li>
-                            <a href="#">
-                                <span class="blog-card__meta__icon">
-                                    <i class="far fa-user"></i>
-                                </span>
-                                توسط ادمین
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="blog-card__meta__icon">
-                                    <i class="icon-comments"></i>
-                                </span>
-                                2 نظرات
-                            </a>
-                        </li>
-                    </ul><!-- /.list-unstyled blog-card__meta -->
-                    <h3 class="blog-card__title"><a href="blog-details-right.html">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ</a></h3><!-- /.blog-card__title -->
-                    <a href="blog-details-right.html" class="blog-card__link">
-                        ادامه مطلب
-                        <span class="blog-card__link__icon">
-                            <span class="blog-card__link__icon__inner"><i class="icon-arrow-right"></i></span>
-                        </span>
-                    </a><!-- /.blog-card__link -->
-                </div><!-- /.blog-card__content -->
-            </div><!-- /.blog-card -->
-        </div><!-- /.item -->
-        <div class="item">
-            <div class="blog-card wow fadeInUp rtl" data-wow-duration='1500ms' data-wow-delay='200ms'>
-                <div class="blog-card__image">
-                    <img src="~/assets/images/blog/blog-1-6.jpg" alt="Circle Back, If You Want To Motivate These">
-                    <a href="blog-details-right.html" class="blog-card__image__link">
-                        <span class="sr-only">اگر می خواهید به اینها انگیزه بدهید، دور خود حلقه بزنید</span>
-                        <!-- /.sr-only -->
-                    </a>
-                    <div class="blog-card__date">
-                        <span class="blog-card__date__day">28</span>
-                        <span class="blog-card__date__month">تیر</span>
-                    </div><!-- /.blog-card__date -->
-                </div><!-- /.blog-card__image -->
-                <div class="blog-card__content">
-                    <ul class="list-unstyled blog-card__meta">
-                        <li>
-                            <a href="#">
-                                <span class="blog-card__meta__icon">
-                                    <i class="far fa-user"></i>
-                                </span>
-                                توسط ادمین
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="blog-card__meta__icon">
-                                    <i class="icon-comments"></i>
-                                </span>
-                                2 نظرات
-                            </a>
-                        </li>
-                    </ul><!-- /.list-unstyled blog-card__meta -->
-                    <h3 class="blog-card__title"><a href="blog-details-right.html">اگر می خواهید به اینها انگیزه بدهید، دور خود حلقه بزنید</a></h3><!-- /.blog-card__title -->
-                    <a href="blog-details-right.html" class="blog-card__link">
-                        ادامه مطلب
-                        <span class="blog-card__link__icon">
-                            <span class="blog-card__link__icon__inner"><i class="icon-arrow-right"></i></span>
-                        </span>
-                    </a><!-- /.blog-card__link -->
-                </div><!-- /.blog-card__content -->
-            </div><!-- /.blog-card -->
-        </div><!-- /.item -->
-        <div class="item">
-            <div class="blog-card wow fadeInUp rtl" data-wow-duration='1500ms' data-wow-delay='00ms'>
-                <div class="blog-card__image">
-                    <img src="~/assets/images/blog/blog-1-7.jpg" alt="Nail Jelly To The Hothouse Wall Pixel Pushing">
-                    <a href="blog-details-right.html" class="blog-card__image__link">
-                        <span class="sr-only">میخ ژله به دیوار گرمخانه فشار پیکسل</span>
-                        <!-- /.sr-only -->
-                    </a>
-                    <div class="blog-card__date">
-                        <span class="blog-card__date__day">10</span>
-                        <span class="blog-card__date__month">مهر</span>
-                    </div><!-- /.blog-card__date -->
-                </div><!-- /.blog-card__image -->
-                <div class="blog-card__content">
-                    <ul class="list-unstyled blog-card__meta">
-                        <li>
-                            <a href="#">
-                                <span class="blog-card__meta__icon">
-                                    <i class="far fa-user"></i>
-                                </span>
-                                توسط ادمین
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="blog-card__meta__icon">
-                                    <i class="icon-comments"></i>
-                                </span>
-                                2 نظرات
-                            </a>
-                        </li>
-                    </ul><!-- /.list-unstyled blog-card__meta -->
-                    <h3 class="blog-card__title"><a href="blog-details-right.html">میخ ژله به دیوار گرمخانه فشار پیکسل</a></h3><!-- /.blog-card__title -->
-                    <a href="blog-details-right.html" class="blog-card__link">
-                        ادامه مطلب
-                        <span class="blog-card__link__icon">
-                            <span class="blog-card__link__icon__inner"><i class="icon-arrow-right"></i></span>
-                        </span>
-                    </a><!-- /.blog-card__link -->
-                </div><!-- /.blog-card__content -->
-            </div><!-- /.blog-card -->
-        </div><!-- /.item -->
-        <div class="item">
-            <div class="blog-card wow fadeInUp rtl" data-wow-duration='1500ms' data-wow-delay='100ms'>
-                <div class="blog-card__image">
-                    <img src="~/assets/images/blog/blog-1-8.jpg" alt="Copy And Paste From Stack Overflow Can You">
-                    <a href="blog-details-right.html" class="blog-card__image__link">
-                        <span class="sr-only">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ</span>
-                        <!-- /.sr-only -->
-                    </a>
-                    <div class="blog-card__date">
-                        <span class="blog-card__date__day">2</span>
-                        <span class="blog-card__date__month">مهر</span>
-                    </div><!-- /.blog-card__date -->
-                </div><!-- /.blog-card__image -->
-                <div class="blog-card__content">
-                    <ul class="list-unstyled blog-card__meta">
-                        <li>
-                            <a href="#">
-                                <span class="blog-card__meta__icon">
-                                    <i class="far fa-user"></i>
-                                </span>
-                                توسط ادمین
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="blog-card__meta__icon">
-                                    <i class="icon-comments"></i>
-                                </span>
-                                2 نظرات
-                            </a>
-                        </li>
-                    </ul><!-- /.list-unstyled blog-card__meta -->
-                    <h3 class="blog-card__title"><a href="blog-details-right.html">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ</a></h3><!-- /.blog-card__title -->
-                    <a href="blog-details-right.html" class="blog-card__link">
-                        ادامه مطلب
-                        <span class="blog-card__link__icon">
-                            <span class="blog-card__link__icon__inner"><i class="icon-arrow-right"></i></span>
-                        </span>
-                    </a><!-- /.blog-card__link -->
-                </div><!-- /.blog-card__content -->
-            </div><!-- /.blog-card -->
-        </div><!-- /.item -->
-        <div class="item">
-            <div class="blog-card wow fadeInUp rtl" data-wow-duration='1500ms' data-wow-delay='200ms'>
-                <div class="blog-card__image">
-                    <img src="~/assets/images/blog/blog-1-9.jpg" alt="Catching And Not Too Giant, Yet Drink From The">
-                    <a href="blog-details-right.html" class="blog-card__image__link">
-                        <span class="sr-only">گرفتن و نه خیلی غول پیکر، با این حال از آن بنوشید</span>
-                        <!-- /.sr-only -->
-                    </a>
-                    <div class="blog-card__date">
-                        <span class="blog-card__date__day">26</span>
-                        <span class="blog-card__date__month">مهر</span>
-                    </div><!-- /.blog-card__date -->
-                </div><!-- /.blog-card__image -->
-                <div class="blog-card__content">
-                    <ul class="list-unstyled blog-card__meta">
-                        <li>
-                            <a href="#">
-                                <span class="blog-card__meta__icon">
-                                    <i class="far fa-user"></i>
-                                </span>
-                                توسط ادمین
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="blog-card__meta__icon">
-                                    <i class="icon-comments"></i>
-                                </span>
-                                2 نظرات
-                            </a>
-                        </li>
-                    </ul><!-- /.list-unstyled blog-card__meta -->
-                    <h3 class="blog-card__title"><a href="blog-details-right.html">گرفتن و نه خیلی غول پیکر، با این حال از آن بنوشید</a></h3><!-- /.blog-card__title -->
-                    <a href="blog-details-right.html" class="blog-card__link">
-                        ادامه مطلب
-                        <span class="blog-card__link__icon">
-                            <span class="blog-card__link__icon__inner"><i class="icon-arrow-right"></i></span>
-                        </span>
-                    </a><!-- /.blog-card__link -->
-                </div><!-- /.blog-card__content -->
-            </div><!-- /.blog-card -->
-        </div><!-- /.item -->
+
+
     </div><!-- /.blog-three__carousel -->
     </div><!-- /.eduhive-stretch-element-inside-column -->
     </div><!-- /.col-xl-8 col-lg-5 -->
-    </div><!-- /.row gutter-y-50 align-items-center -->
-    </div><!-- /.container -->
-    <img src="~/assets/images/shapes/blog-shape-3-1.png" alt="shape" class="blog-three__shape-one">
-    <div class="blog-three__shape-two"></div><!-- /.blog-three__shape-two -->
-    <div class="blog-three__shape-three"></div><!-- /.blog-three__shape-three -->
 </section><!-- /.blog-three section-space -->
 
 <div class="client-carousel @@extraClassName">
