@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using SlideCloud.Data;
 using SlideCloud.Models.ContactUs;
 using SlideCloud.Models.DTO.Home;
+using System.Threading.Tasks;
 
 namespace SlideCloud.Controller;
 public class HomeController : Microsoft.AspNetCore.Mvc.Controller
@@ -16,17 +17,17 @@ public class HomeController : Microsoft.AspNetCore.Mvc.Controller
         _context = context;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        Contact();
-       return View();
+        var model = await LoadHomeData();
+       return View(model);
     }
 
     public async Task<HomeDTO> LoadHomeData()
     {
         var newUser = await _context.Users
             .OrderByDescending(u => u.Id)
-            .Take(10)
+            .Take(6)
             .ToListAsync();
 
         var latestDocuments = await _context.Documents
