@@ -1,12 +1,14 @@
-﻿
-
-@model SlideCloud.Areas.User.Models.Slides.DetailsSlideVM
+﻿@model SlideCloud.Areas.User.Models.Slides.DetailsSlideVM
+@using System.Web
+@using Microsoft.AspNetCore.Http.Extensions
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 
 @{
     Layout = "_Layout";
+    var currentUrl = $"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.Path}{Context.Request.QueryString}";
+    var encodedUrl = HttpUtility.UrlEncode(currentUrl);
+    var encodedTitle = HttpUtility.UrlEncode(Model.DocumentDetail.Title);
 }
-
-
 <section class="page-header">
     <div class="container rtl">
         <div class="page-header__content">
@@ -41,7 +43,7 @@
                         <h4 class="product-details__price">دسته بندی : @Model.DocumentDetail.DocumentCategory.Name</h4><!-- /.product-price -->
                     </div>
                     <div class="product-details__review">
- @*                        <div class="eduhive-ratings">
+                        @*                        <div class="eduhive-ratings">
                             <span class="eduhive-ratings__icon">
                                 <i class="fa fa-star"></i>
                             </span><!-- /.eduhive-ratings__icon -->
@@ -58,12 +60,12 @@
                                 <i class="fa fa-star"></i>
                             </span><!-- /.eduhive-ratings__icon -->
                         </div><!-- /.product-ratings --> *@
-                      @*   <a href="product-details.html">(3 نظرات مشتریان)</a> *@
+                        @*   <a href="product-details.html">(3 نظرات مشتریان)</a> *@
                     </div><!-- /.review-ratings -->
                     <div class="product-details__excerpt">
                         <p class="product-details__excerpt__text">@Html.Raw(Model.DocumentDetail.Description)</p>
                     </div><!-- /.excerp-text -->
-@*                     <div class="product-details__quantity">
+                    @*                     <div class="product-details__quantity">
                         <h3 class="product-details__quantity__title">تعداد</h3>
                         <div class="quantity-box">
                             <button type="button" class="sub"><i class="fa fa-minus"></i></button>
@@ -88,32 +90,50 @@
                     </div>
                     <div class="product-details__socials">
                         <h3 class="product-details__socials__title">با دوستان به اشتراک گذاشتن</h3>
+
+                        <!-- اضافه شده: دکمه اشتراک گذاری اصلی -->
+                        <button onclick="shareSlide()" class="eduhive-btn eduhive-btn--black" style="margin-bottom: 15px; width: 100%;">
+                            <i class="fa fa-share-alt"></i> ارسال لینک این اسلاید
+                        </button>
+
+                        <!-- اضافه شده: کپی لینک -->
+                        <div id="shareLinkContainer" style="display: none; margin-bottom: 15px;">
+                            <div class="input-group">
+                                <input type="text" id="shareLink" class="form-control" readonly />
+                                <span class="input-group-btn">
+                                    <button onclick="copyShareLink()" class="eduhive-btn eduhive-btn--primary">
+                                        <i class="fa fa-copy"></i> کپی
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+
                         <div class="social-links-two">
-                            <a href="https://facebook.com/">
+                            <a href="https://telegram.me/share/url?url=@encodedUrl&text=@encodedTitle" target="_blank">
+                                <span class="social-links-two__icon">
+                                    <i class="fab fa-telegram" aria-hidden="true"></i>
+                                </span>
+                                <span class="sr-only">تلگرام</span>
+                            </a>
+                            <a href="https://api.whatsapp.com/send?text=@encodedTitle%20@encodedUrl" target="_blank">
+                                <span class="social-links-two__icon">
+                                    <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                                </span>
+                                <span class="sr-only">واتساپ</span>
+                            </a>
+                            <a href="https://facebook.com/sharer/sharer.php?u=@encodedUrl" target="_blank">
                                 <span class="social-links-two__icon">
                                     <i class="fab fa-facebook-f" aria-hidden="true"></i>
-                                </span><!-- /.social-links-two__icon -->
+                                </span>
                                 <span class="sr-only">فیسبوک</span>
                             </a>
-                            <a href="https://twitter.com/">
+                            <a href="https://twitter.com/intent/tweet?text=@encodedTitle&url=@encodedUrl" target="_blank">
                                 <span class="social-links-two__icon">
                                     <i class="fab fa-twitter" aria-hidden="true"></i>
-                                </span><!-- /.social-links-two__icon -->
+                                </span>
                                 <span class="sr-only">توییتر</span>
                             </a>
-                            <a href="https://instagram.com/">
-                                <span class="social-links-two__icon">
-                                    <i class="fab fa-instagram" aria-hidden="true"></i>
-                                </span><!-- /.social-links-two__icon -->
-                                <span class="sr-only">اینستاگرام</span>
-                            </a>
-                            <a href="https://youtube.com/">
-                                <span class="social-links-two__icon">
-                                    <i class="fab fa-youtube" aria-hidden="true"></i>
-                                </span><!-- /.social-links-two__icon -->
-                                <span class="sr-only">یوتوب</span>
-                            </a>
-                        </div><!-- /.social-links-two -->
+                        </div>
                     </div><!-- /.product-details__socials -->
                 </div>
             </div>
@@ -135,7 +155,7 @@
 
     <div class="container rtl">
         <!-- /.product-comment -->
-      @*   <div class="comments-one product-details__comment">
+        @*   <div class="comments-one product-details__comment">
             <h3 class="comments-one__title">02 بررسی ها, صندلی غذاخوری چوب جامد</h3><!-- /.comments-one__title -->
             <ul class="list-unstyled comments-one__list">
                 <li class="comments-one__card wow fadeInUp" data-wow-delay="100ms" data-wow-duration="1500ms" style="visibility: hidden; animation-duration: 1500ms; animation-delay: 100ms; animation-name: none;">
@@ -204,7 +224,7 @@
         </div><!-- /.comments-one --> *@
         <!-- /.product-comment -->
     </div><!-- /.container -->
-@* 
+    @* 
     <div class="container rtl">
         <!-- /.product-comment-form -->
         <div class="product-details__comments-form comments-form">
@@ -263,3 +283,34 @@
         <!-- /.product-comment-form -->
     </div><!-- /.container --> *@
 </section>
+
+@section Scripts {
+    <script>
+        function shareSlide() {
+            // ساخت لینک جاری
+            var shareUrl = window.location.href;
+
+            // نمایش کادر لینک
+            document.getElementById('shareLink').value = shareUrl;
+            document.getElementById('shareLinkContainer').style.display = 'block';
+
+            // استفاده از Web Share API در صورت پشتیبانی مرورگر
+            if (navigator.share) {
+                navigator.share({
+                    title: '@Model.DocumentDetail.Title',
+                    text: 'این اسلاید را ببینید:',
+                    url: shareUrl
+                }).catch(err => {
+                    console.log('اشتراک گذاری لغو شد', err);
+                });
+            }
+        }
+
+        function copyShareLink() {
+            var copyText = document.getElementById("shareLink");
+            copyText.select();
+            document.execCommand("copy");
+            alert("لینک با موفقیت کپی شد!");
+        }
+    </script>
+}
