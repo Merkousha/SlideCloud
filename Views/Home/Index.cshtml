@@ -551,6 +551,44 @@
 
 
 
+        <section class="instructors-page section-space">
+            <div class="container">
+                <div class="row gutter-y-30">
+
+                    <div class="sec-title sec-title--center wow fadeInUp animated" data-wow-duration="1500ms" data-wow-delay="00ms" style="visibility: visible; animation-duration: 1500ms; animation-delay: 0ms; animation-name: fadeInUp;">
+                        <h3 class="sec-title__title"> <span class="sec-title__title__text">لیست آخرین اسلایدهای ساخته شده توسط کاربران</span> </h3><!-- /.sec-title__title -->
+                    </div>
+
+
+                    @foreach (var item in Model.LatestDocuments)
+                    {
+                        <div class="col-lg-4 col-md-6">
+
+                            <div class="instructor-card-two wow fadeInUp animated" data-wow-duration="1500ms" data-wow-delay="000ms" style="visibility: visible; animation-duration: 1500ms; animation-delay: 0ms; animation-name: fadeInUp;">
+                                <div class="instructor-card-two__image">
+                                    <img src="@item.Picture" alt="Mike Hardson" style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px;">
+                                </div><!-- /.instructor-card-two__image -->
+                                <div class="instructor-card-two__content">
+                                    <div class="instructor-card-two__info">
+                                        <h3 class="instructor-card-two__name">
+                                            <a href="instructor-details.html">@item.Title</a>
+                                        </h3><!-- /.instructor-card-two__name -->
+                                        <h6 class="instructor-card-two__designation"></h6><!-- /.instructor-card-two__designation -->
+                                    </div><!-- /.instructor-card-two__info -->
+
+                                </div><!-- /.instructor-card-two__content -->
+                            </div>
+
+                            <!-- /.instructor-card-two -->
+
+                        </div>
+
+                        <!-- /.col-lg-4 col-md-6 -->
+                    }
+
+                </div><!-- /.container -->
+        </section>
+
 
 
         <section class="instructors-page section-space">
