@@ -7,7 +7,7 @@ namespace SlideCloud.Areas.User.Models.Slides
     public class CreateSlides
     {
         [Display(Name = "توضیحات")]
-        [MaxLength(255)]
+        [MaxLength(5000,ErrorMessage ="متن زیادی بلد است")]
         public string Description { get; set; }
 
         [Required()]

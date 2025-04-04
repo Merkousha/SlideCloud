@@ -68,7 +68,13 @@
                                         <h4 class="product__item__title">
                                             @document.Title
                                         </h4><!-- /.product-title -->
-                                        <div class="product__item__price">@document.Description </div>
+	                                 
+
+	                                    <div>
+
+                                            @Html.Raw(document.Description.GetTextBy20Length())
+	                                    </div>
+                             @*            <div class="product__item__price">@Html.Raw(document.Description) </div> *@
                                     </div><!-- /.product-content -->
                                 </div><!-- /.product-item -->
                             </a>
