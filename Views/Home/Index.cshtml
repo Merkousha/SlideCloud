@@ -667,7 +667,52 @@
 
 
 
-        <section class="instructors-page section-space">
+
+
+        <section class="testimonials-page section-space" >
+            <div class="container">
+                <div class="testimonials-page__carousel owl-carousel owl-theme" data-owl-options='{
+             "items": 1,
+             "margin": 10,
+             "loop": true,
+             "smartSpeed": 700,
+             "nav": false,
+             "dots": true,
+             "autoplay": true,
+             "responsive": {
+                 "0": { "items": 1, "nav": true, "dots": false, "margin": 10 },
+                 "768": { "items": 2, "margin": 30 },
+                 "1200": { "items": 3, "margin": 30 }
+             }
+         }'>
+
+                    @foreach (var item in Model.NewCategories)
+                    {
+                        <div class="item wow fadeInUp rtl animated" data-wow-duration="1500ms" data-wow-delay="100ms">
+                            <div class="testimonial-card">
+                                <div class="testimonial-card__top">
+                                    <div class="testimonial-card__image">
+                                        <img src="~/assets/images/User-Profile.png" alt="@item.Name" />
+                                        <span class="testimonial-card__icon"><i class="icon-quote-2"></i></span>
+                                    </div>
+                                    <div class="testimonial-card__identity">
+                                        <h5 class="testimonial-card__name">@item.Name</h5>
+                                        <p class="testimonial-card__designation"></p>
+                                    </div>
+                                </div>
+                       
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </section>
+
+
+
+
+
+        <section class="instructors-page section-space" style="margin-top:-600PX">
             <div class="container">
                 <div class="row gutter-y-30">
 
