@@ -1,10 +1,8 @@
-﻿using AspNetCoreGeneratedDocument;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SlideCloud.Data;
 using SlideCloud.Models.ContactUs;
 using SlideCloud.Models.DTO.Home;
-using System.Threading.Tasks;
 
 namespace SlideCloud.Controller;
 public class HomeController : Microsoft.AspNetCore.Mvc.Controller
@@ -20,7 +18,7 @@ public class HomeController : Microsoft.AspNetCore.Mvc.Controller
     public async Task<IActionResult> Index()
     {
         var model = await LoadHomeData();
-       return View(model);
+        return View(model);
     }
 
     public async Task<HomeDTO> LoadHomeData()
@@ -45,13 +43,13 @@ public class HomeController : Microsoft.AspNetCore.Mvc.Controller
             .Take(10)
             .ToListAsync();
 
-        return new HomeDTO 
+        return new HomeDTO
         {
             NewUsers = newUser,
             LatestDocuments = latestDocuments,
             PopularDocuments = popularDocuments,
             NewCategories = newCategories
-          
+
         };
     }
 
@@ -76,6 +74,12 @@ public class HomeController : Microsoft.AspNetCore.Mvc.Controller
         {
             TempData["Error"] = "لطفا مقادیر خواسته شده را بطور صحیح وارد نمایید";
         }
+        return View();
+    }
+
+    [HttpGet]
+    public IActionResult AboutUs()
+    {
         return View();
     }
 }

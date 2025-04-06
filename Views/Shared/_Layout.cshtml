@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var isHomePage = Context.Request.Path == "/";
+    var logoSrc = isHomePage ? "~/assets/images/logo-light.png" :"~/assets/images/logo-dark.png";
+}
+<!DOCTYPE html>
 <html lang="en">
 
 
@@ -12,7 +16,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="~/assets/images/favicons/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="~/assets/images/favicons/favicon-16x16.png" />
     <link rel="manifest" href="~/assets/images/favicons/site.webmanifest" />
-    <meta name="description" content="Eduhive is a very modern and versatile education & online courses HTML Template. It is specially designed for LMS, online courses, education, learning management, e-learning, online training, zoom classes, and all other education related websites and businesses." />
+    <meta name="description" content="@ViewBag.Title | SlideCloud" />
 
     <!-- fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com/">
@@ -61,7 +65,7 @@
                     <div class="main-header__left">
                         <div class="main-header__logo logo-retina">
                             <a href="~/">
-                                <img src="~/assets/images/logo-light.png" alt="eduhive HTML" width="209">
+                                <img src="@Url.Content(@logoSrc)" alt="eduhive HTML" width="209">
                             </a>
                         </div><!-- /.main-header__logo -->
                     </div><!-- /.main-header__left -->
