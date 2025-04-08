@@ -43,38 +43,22 @@
                         <h4 class="product-details__price">دسته بندی : @Model.DocumentDetail.DocumentCategory.Name</h4><!-- /.product-price -->
                     </div>
                     <div class="product-details__review">
-                        @*                        <div class="eduhive-ratings">
-                            <span class="eduhive-ratings__icon">
-                                <i class="fa fa-star"></i>
-                            </span><!-- /.eduhive-ratings__icon -->
-                            <span class="eduhive-ratings__icon">
-                                <i class="fa fa-star"></i>
-                            </span><!-- /.eduhive-ratings__icon -->
-                            <span class="eduhive-ratings__icon">
-                                <i class="fa fa-star"></i>
-                            </span><!-- /.eduhive-ratings__icon -->
-                            <span class="eduhive-ratings__icon">
-                                <i class="fa fa-star"></i>
-                            </span><!-- /.eduhive-ratings__icon -->
-                            <span class="eduhive-ratings__icon">
-                                <i class="fa fa-star"></i>
-                            </span><!-- /.eduhive-ratings__icon -->
-                        </div><!-- /.product-ratings --> *@
-                        @*   <a href="product-details.html">(3 نظرات مشتریان)</a> *@
+                        
                     </div><!-- /.review-ratings -->
                     <div class="product-details__excerpt">
                         <p class="product-details__excerpt__text">@Html.Raw(Model.DocumentDetail.Description)</p>
-                    </div><!-- /.excerp-text -->
-                    @*                     <div class="product-details__quantity">
-                        <h3 class="product-details__quantity__title">تعداد</h3>
-                        <div class="quantity-box">
-                            <button type="button" class="sub"><i class="fa fa-minus"></i></button>
-                            <input type="text" id="1" value="1">
-                            <button type="button" class="add"><i class="fa fa-plus"></i></button>
-                        </div>
-                    </div> 
-                    *@<!-- /.quantity -->
+                    </div>
+                   
+
+
+                    <a asp-controller="Slide" asp-action="Author" asp-route-userId="@Model.DocumentDetail.UserId"
+                       class="btn btn-outline-primary">
+                        نمایش اسلاید های نویسنده
+                    </a>
+
+                    
                     <div class="product-details__buttons">
+                       
                         <a href="@Model.DocumentDetail.File" class="product-details__btn-1 eduhive-btn">
                             <span class="eduhive-btn__text">دانلود کنید</span>
                             <span class="eduhive-btn__icon">

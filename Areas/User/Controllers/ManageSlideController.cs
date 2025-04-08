@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SkiaSharp;
 using SlideCloud.Areas.User.Models.Slides;
 using SlideCloud.Data;
 using SlideCloud.Models;
@@ -13,6 +14,7 @@ namespace SlideCloud.Areas.User.Controllers
 {
 
     [Area("User")]
+    
     [Authorize]
     public class ManageSlideController : Microsoft.AspNetCore.Mvc.Controller
     {
@@ -113,11 +115,11 @@ namespace SlideCloud.Areas.User.Controllers
                 return NotFound();
             }
             var documnet = await _appDbContext.Documents.FindAsync(id);
-           
+
             var user = await _userManager.Users.Where(a => a.Email.Equals(User.Identity.Name)).FirstOrDefaultAsync();
-            if (user != null ) 
+            if (user != null)
             {
-                if( documnet?.UserId == user.Id)
+                if (documnet?.UserId == user.Id)
                 {
                     if (documnet != null)
                     {
@@ -136,7 +138,7 @@ namespace SlideCloud.Areas.User.Controllers
                         return View(model);
                     }
                 }
-              
+
             }
             else
             {
@@ -153,7 +155,7 @@ namespace SlideCloud.Areas.User.Controllers
         {
             ViewBag.DocumentTypes = _appDbContext.DocumentTypes.ToList();
             ViewBag.DocumentCategories = _appDbContext.DocumentCategories.ToList();
-      
+
 
             if (!ModelState.IsValid)
                 return View(model);
@@ -184,11 +186,11 @@ namespace SlideCloud.Areas.User.Controllers
                         return NotFound();
                     }
 
-           
+
                 }
             }
 
-               
+
             return View(model);
 
         }
@@ -220,5 +222,7 @@ namespace SlideCloud.Areas.User.Controllers
             return NotFound();
         }
 
+
+        
     }
 }
