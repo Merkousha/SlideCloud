@@ -76,7 +76,7 @@
                                 <li class="dropdown megamenu">
                                     <a href="~/">خانه</a>
                                 </li>
-                                
+
 
 
 
@@ -111,12 +111,17 @@
                                                 <li>
                                                     <a href="#">اسلاید های من</a>
                                                     <ul>
-                                                        <li><a href="/Slide/ListSlidesUser">لیست اسلاید های من </a>
-                                                        <li><a href="/User/ManageSlide/Create">اضافه کردن اسلاید جدید </a>
+                                                        <li>@Html.ActionLink("لیست اسلاید های من", "ListSlidesUser", "Slide")</li>
+
+                                                        <li>
+                                                            @Html.ActionLink("اضافه کردن اسلاید جدید", "Create", "ManageSlide", new { area = "User" })
+                                                        </li>
+
+
                                                     </ul>
                                                 </li>
                                                 <li>
-                                                    <a href="/Account/Profile">پروفایل من</a>
+                                                    @Html.ActionLink("پروفایل من", "Profile", "Account")
                                                 </li>
 
 
@@ -132,43 +137,50 @@
                                                 <li>
                                                     <a href="#">مدیریت دسته بندی</a>
                                                     <ul>
-                                                        <li><a href="/Admin/ManageCategory/List">لیست دسته بندی ها </a>
-                                                        <li><a href="/Admin/ManageCategory/CreateCategory">دسته بندی جدید </a>
+
+                                                        @Html.ActionLink("لیست دسته بندی ها", "List", "ManageCategory", new { area = "Admin" })
+                                                        <li>@Html.ActionLink("دسته بندی جدید", "CreateCategory", "ManageCategory", new { area = "Admin" })</li>
+
+                                                
                                                     </ul>
                                                 </li>
                                                 <li>
                                                     <a href="#">مدیریت نوع اسلاید</a>
                                                     <ul>
-                                                        <li><a href="/Admin/ManageDocumentType/List">لیست نوع اسلاید </a>
-                                                        <li><a href="/Admin/ManageDocumentType/CreateDocumentType">نوع اسلاید جدید </a>
+                                                        <li>@Html.ActionLink("لیست نوع اسلاید", "List", "ManageDocumentType", new { area = "Admin" })</li>
+                                                        <li>@Html.ActionLink("نوع اسلاید جدید", "CreateDocumentType", "ManageDocumentType", new { area = "Admin" })</li>
+
+                                                  
                                                     </ul>
                                                 </li>
                                                 <li>
                                                     <a href="#">مدیریت اسلاید</a>
                                                     <ul>
-                                                        <li><a href="/Admin/ManageSlide/Index">لیست اسلاید </a>
-                                                        <li><a href="/Admin/ManageSlide/Create">اضافه کردن اسلاید جدید </a>
+                                                        <li>@Html.ActionLink("لیست اسلاید", "Index", "ManageSlide", new { area = "Admin" })</li>
+                                                        <li>@Html.ActionLink("اضافه کردن اسلاید جدید", "Create", "ManageSlide", new { area = "Admin" })</li>
+
+                                                        
                                                     </ul>
                                                 </li>
                                                 <li>
-                                                    <a href="@Url.Content("~/Admin/ManageSlide/Index")">
-                                                        لیست کاربران ویژه ادمین
-                                                    </a>
-                                                </li>
 
-                                            </ul>
+                                                <li>@Html.ActionLink("لیست کاربران ویژه ادمین", "Index", "ManageSlide", new { area = "Admin" })</li>
+
                                         </li>
+
+                                    </ul>
+                                    </li>
                                     }
 
 
 
 
 
-                                    
 
-                                    <li class="nav-item">
+
+                                <li class="nav-item">
                                         @Html.ActionLink("خروج", "LogOut", "Account", null, new { @class = "" })
-                                    </li>
+                                </li>
                                 }
                             </ul>
                         </nav><!-- /.main-header__nav -->
