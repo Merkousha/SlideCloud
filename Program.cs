@@ -1,10 +1,13 @@
-﻿using DotNetEnv;
+﻿using System.IO.Compression;
+using DotNetEnv;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using SlideCloud.Areas;
 using SlideCloud.Data;
 using SlideCloud.Models;
 using SlideCloud.Services;
+using WebMarkupMin.AspNetCoreLatest;
 
 namespace SlideCloud
 {
@@ -14,10 +17,30 @@ namespace SlideCloud
         {
             var builder = WebApplication.CreateBuilder(args);
             Env.Load();
-
+            builder.Services.AddResponseCaching();
+            // تنظیمات سطح فشرده‌سازی
+            builder.Services.Configure<BrotliCompressionProviderOptions>(options => options.Level = CompressionLevel.Optimal);
+            builder.Services.Configure<GzipCompressionProviderOptions>(options => options.Level = CompressionLevel.Optimal);
             builder.Services.AddScoped<IS3Uploader, S3Uploader>();
 
+            builder.Services.AddResponseCompression(options =>
+            {
+                options.EnableForHttps = true;
+                options.Providers.Add<GzipCompressionProvider>(); // فقط GZip
+                options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[]
+                {
+                    "text/html",
+                    "text/css",
+                    "application/javascript"
+                });
+            });
+     
+            builder.Services.Configure<GzipCompressionProviderOptions>(options => options.Level = CompressionLevel.Optimal);
 
+            builder.Services.Configure<BrotliCompressionProviderOptions>(options =>
+            {
+                options.Level = CompressionLevel.Optimal;
+            });
             #region AddIdentity and configure
 
             builder.Services.AddIdentity<User, IdentityRole<long>>()
@@ -53,9 +76,18 @@ namespace SlideCloud
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(ConnectionString));
-
+            builder.Services.AddWebMarkupMin(options =>
+                {
+                    options.AllowMinificationInDevelopmentEnvironment = true;
+                    options.AllowCompressionInDevelopmentEnvironment = true;
+                })
+                .AddHtmlMinification()
+                
+                .AddHttpCompression()
+                .AddXmlMinification();
             var app = builder.Build();
-
+     
+ 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
@@ -65,26 +97,43 @@ namespace SlideCloud
             }
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
+
+
+            app.UseResponseCompression();
+            app.UseResponseCaching();
+            app.UseWebMarkupMin();
+            app.UseStaticFiles(
+                new StaticFileOptions
+                {
+                    HttpsCompression = Microsoft.AspNetCore.Http.Features.HttpsCompressionMode.Compress,
+                    OnPrepareResponse = ctx =>
+                    {
+
+                        ctx.Context.Response.Headers.Append("Cache-Control", "public, max-age=3600");
+                    }
+                });
+
 
             app.UseRouting();
 
             app.UseAuthentication(); // قبل از UseAuthorization قرار دارد
             app.UseAuthorization();
+
+            app.MapControllerRoute(
+                name: "areas",
+                pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+            );
+
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                  name: "areas",
-                  pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
-                );
-            });
+
+     
 
             app.MapRazorPages();
-
+   
+            // app.UseResponseCompression();
             app.Run();
         }
     }

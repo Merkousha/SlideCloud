@@ -14,32 +14,35 @@
     <link rel="manifest" href="~/assets/images/favicons/site.webmanifest" />
     <meta name="description" content="Eduhive is a very modern and versatile education & online courses HTML Template. It is specially designed for LMS, online courses, education, learning management, e-learning, online training, zoom classes, and all other education related websites and businesses." />
 
-    <!-- fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com/">
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&amp;family=Cormorant:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&amp;family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&amp;display=swap" rel="stylesheet">
+@*     <!-- fonts -->
 
     <!-- Dropzone CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.css" />
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  *@    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&amp;family=Cormorant:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&amp;family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&amp;display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="~/assets/vendors/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/assets/vendors/bootstrap-select/bootstrap-select.min.css" />
-    <link rel="stylesheet" href="~/assets/vendors/animate/animate.min.css" />
-    <link rel="stylesheet" href="~/assets/vendors/fontawesome/css/all.min.css" />
-    <link rel="stylesheet" href="~/assets/vendors/jquery-ui/jquery-ui.css" />
-    <link rel="stylesheet" href="~/assets/vendors/jarallax/jarallax.css" />
-    <link rel="stylesheet" href="~/assets/vendors/jquery-magnific-popup/jquery.magnific-popup.css" />
-    <link rel="stylesheet" href="~/assets/vendors/nouislider/nouislider.min.css" />
-    <link rel="stylesheet" href="~/assets/vendors/nouislider/nouislider.pips.css" />
-    <link rel="stylesheet" href="~/assets/vendors/tiny-slider/tiny-slider.css" />
-    <link rel="stylesheet" href="~/assets/vendors/eduhive-icons/style.css" />
-    <link rel="stylesheet" href="~/assets/vendors/owl-carousel/css/owl.carousel.min.css" />
-    <link rel="stylesheet" href="~/assets/vendors/owl-carousel/css/owl.theme.default.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    @*   <link rel="stylesheet" href="~/assets/bundle.css" /> *@
+
+    <link rel="stylesheet" href="/assets/vendors/bootstrap/css/bootstrap.min.css" defer />
+    <link rel="stylesheet" href="/assets/css/eduhive.min.css" defer />
+    <link rel="stylesheet" href="/assets/vendors/bootstrap-select/bootstrap-select.min.css" />
+    <link rel="stylesheet" href="/assets/vendors/animate/animate.min.css" />
+    <link rel="stylesheet" href="/assets/vendors/fontawesome/css/all.min.css" />
+    <link rel="stylesheet" href="/assets/vendors/jquery-ui/jquery-ui.min.css" />
+    <link rel="stylesheet" href="/assets/vendors/jarallax/jarallax.min.css" />
+    <link rel="stylesheet" href="/assets/vendors/jquery-magnific-popup/jquery.magnific-popup.min.css" />
+    <link rel="stylesheet" href="/assets/vendors/nouislider/nouislider.min.css" />
+    <link rel="stylesheet" href="/assets/vendors/nouislider/nouislider.pips.min.css" />
+    <link rel="stylesheet" href="/assets/vendors/tiny-slider/tiny-slider.min.css" />
+    <link rel="stylesheet" href="/assets/vendors/eduhive-icons/style.min.css" />
+    <link rel="stylesheet" href="/assets/vendors/owl-carousel/css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="/assets/vendors/owl-carousel/css/owl.theme.default.min.css" />
 
     <!-- template styles -->
-    <link rel="stylesheet" href="~/assets/css/eduhive.css" />
+  
     @await RenderSectionAsync("Styles", required: false)
 
 
@@ -50,9 +53,9 @@
     <div class="custom-cursor__cursor"></div>
     <div class="custom-cursor__cursor-two"></div>
 
-    <div class="preloader">
+ @*    <div class="preloader">
         <div class="preloader__image" style="background-image: url('@Url.Content("~/assets/images/loader.png")');"></div>
-    </div>
+    </div> *@
     <!-- /.preloader -->
     <div class="page-wrapper">
         <header class="main-header main-header--two main-header--three sticky-header sticky-header--three sticky-header--normal">
@@ -61,7 +64,7 @@
                     <div class="main-header__left">
                         <div class="main-header__logo logo-retina">
                             <a href="~/">
-                                <img src="~/assets/images/logo-light.png" alt="eduhive HTML" width="209">
+                                <img src="~/assets/images/logo-light-e.png" alt="eduhive HTML"width="209" height="50">
                             </a>
                         </div><!-- /.main-header__logo -->
                     </div><!-- /.main-header__left -->
@@ -69,6 +72,7 @@
                         <nav class="main-header__nav main-menu">
                             <ul class="main-menu__list">
 
+                                <a asp-area="User" asp-controller="ManageSlide" asp-action="Create">11111خانه</a>
                                 <li class="dropdown megamenu">
                                     <a href="~/">خانه</a>
                                 </li>
@@ -130,9 +134,8 @@
 		                                </li>
 	                                }
 	                               
-                         
-                               
-                                    <li class="nav-item">
+	                            
+	                                <li class="nav-item">
                                         @Html.ActionLink("پنل کاربری", "Profile", "Account", null, new { @class = "" })
                                     </li>
 
@@ -169,7 +172,7 @@
             <div class="container rtl">
                 <div class="main-footer__top">
                     <a href="index.html" class="main-footer__logo">
-                        <img src="~/assets/images/logo-dark.png" width="209" alt="Eduhive HTML Template">
+                        <img src="~/assets/images/logo-dark.png" width="209" height="50" alt="Eduhive HTML Template">
                     </a><!-- /.main-footer__logo -->
                     <div class="main-footer__top__inner">
                         <div class="main-footer__newsletter">
@@ -205,11 +208,12 @@
                     <div class="col-xl-3 col-lg-4 wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="00ms">
                         <div class="footer-widget footer-widget--about">
                             <h2 class="footer-widget__title">درباره ما</h2><!-- /.footer-widget__title -->
-                            <p class="footer-widget__about-text">
+                         @*    <p class="footer-widget__about-text">
                                 لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ
                                 لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ
                                 لورم ایپسوم متن ساختگی با تولید
-                            </p><!-- /.footer-widget__about-text -->
+                            </p> *@
+                            <!-- /.footer-widget__about-text -->
                             <ul class="footer-widget__info">
                                 <li>
                                     <span class="footer-widget__info__icon"><i class="icon-location"></i></span>
@@ -324,7 +328,7 @@
                         <div class="footer-widget footer-widget--gallery">
                             <h2 class="footer-widget__title">گالری ما</h2><!-- /.footer-widget__title -->
                             <div class="footer-widget__gallery">
-                                <a href="gallery.html" class="footer-widget__gallery__link">
+                 @*                <a href="gallery.html" class="footer-widget__gallery__link">
                                     <img src="~/assets/images/gallery/footer-widget-gallery-1.jpg" alt="footer-widget-gallery">
                                     <span class="footer-widget__gallery__icon icon-plus"></span>
                                 </a><!-- /.footer-widget__gallery__link -->
@@ -347,7 +351,7 @@
                                 <a href="gallery.html" class="footer-widget__gallery__link">
                                     <img src="~/assets/images/gallery/footer-widget-gallery-6.jpg" alt="footer-widget-gallery">
                                     <span class="footer-widget__gallery__icon icon-plus"></span>
-                                </a><!-- /.footer-widget__gallery__link -->
+                                </a><!-- /.footer-widget__gallery__link --> *@
                             </div><!-- /.footer-widget__gallery -->
                         </div><!-- /.footer-widget -->
                     </div><!-- /.col-xl-3 col-md-4 -->
@@ -362,10 +366,10 @@
                     </div><!-- /.main-footer__inner -->
                 </div><!-- /.container -->
             </div><!-- /.main-footer__bottom -->
-            <img src="~/assets/images/shapes/footer-shape-1.png" alt="shape" class="main-footer__shape-one">
+@*             <img src="~/assets/images/shapes/footer-shape-1.png" alt="shape" class="main-footer__shape-one">
             <img src="~/assets/images/shapes/footer-shape-2.png" alt="shape" class="main-footer__shape-two">
             <img src="~/assets/images/shapes/footer-shape-4.png" alt="shape" class="main-footer__shape-four">
-            <img src="~/assets/images/shapes/footer-shape-5.png" alt="shape" class="main-footer__shape-five">
+            <img src="~/assets/images/shapes/footer-shape-5.png" alt="shape" class="main-footer__shape-five"> *@
         </footer><!-- /.main-footer section-space-top -->
 
     </div><!-- /.page-wrapper -->
@@ -376,7 +380,7 @@
             <span class="mobile-nav__close mobile-nav__toggler"><i class="icon-close"></i></span>
             <div class="logo-box logo-retina">
                 <a href="index.html" aria-label="logo image">
-                    <img src="~/assets/images/logo-light.png" width="209" alt="" />
+                    <img src="~/assets/images/logo-light-e.png" width="209" height="50" alt="" />
                 </a>
             </div><!-- /.logo-box -->
             <div class="mobile-nav__container"></div><!-- /.mobile-nav__container -->
@@ -438,35 +442,34 @@
         <span class="scroll-to-top__wrapper"><span class="scroll-to-top__inner"></span></span>
     </a>
 
-    <script src="~/assets/vendors/jquery/jquery-3.7.0.min.js"></script>
-    <script src="~/assets/vendors/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="~/assets/vendors/bootstrap-select/bootstrap-select.min.js"></script>
-    <script src="~/assets/vendors/jarallax/jarallax.min.js"></script>
-    <script src="~/assets/vendors/jquery-ui/jquery-ui.js"></script>
-    <script src="~/assets/vendors/jquery-ajaxchimp/jquery.ajaxchimp.min.js"></script>
-    <script src="~/assets/vendors/jquery-appear/jquery.appear.min.js"></script>
-    <script src="~/assets/vendors/jquery-circle-progress/jquery.circle-progress.min.js"></script>
-    <script src="~/assets/vendors/jquery-magnific-popup/jquery.magnific-popup.min.js"></script>
+    <script src="/assets/vendors/jquery/jquery-3.7.0.min.js" ></script>
+    <script src="/assets/vendors/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/vendors/bootstrap-select/bootstrap-select.min.js"></script>
+    <script src="/assets/vendors/jarallax/jarallax.min.js"></script>
+    <script src="/assets/vendors/jquery-ui/jquery-ui.min.js"></script>
+    <script src="/assets/vendors/jquery-ajaxchimp/jquery.ajaxchimp.min.js"></script>
+    <script src="/assets/vendors/jquery-appear/jquery.appear.min.js"></script>
+    <script src="/assets/vendors/jquery-circle-progress/jquery.circle-progress.min.js"></script>
+    <script src="/assets/vendors/jquery-magnific-popup/jquery.magnific-popup.min.js"></script>
     <script src="~/assets/vendors/jquery-validate/jquery.validate.min.js"></script>
-    <script src="~/assets/vendors/nouislider/nouislider.min.js"></script>
-    <script src="~/assets/vendors/tiny-slider/tiny-slider.js"></script>
-    <script src="~/assets/vendors/wnumb/wNumb.min.js"></script>
-    <script src="~/assets/vendors/owl-carousel/js/owl.carousel.min.js"></script>
-    <script src="~/assets/vendors/owl-carousel/js/owlcarousel2-filter.min.js"></script>
-    <script src="~/assets/vendors/owl-carousel/js/owlcarousel2-progressbar.js"></script>
-    <script src="~/assets/vendors/wow/wow.js"></script>
-    <script src="~/assets/vendors/imagesloaded/imagesloaded.min.js"></script>
-    <script src="~/assets/vendors/isotope/isotope.js"></script>
-    <script src="~/assets/vendors/jquery-circleType/jquery.circleType.js"></script>
-    <script src="~/assets/vendors/jquery-lettering/jquery.lettering.min.js"></script>
+    <script src="/assets/vendors/nouislider/nouislider.min.js"></script>
+    <script src="/assets/vendors/tiny-slider/tiny-slider.min.js"></script>
+    <script src="/assets/vendors/wnumb/wNumb.min.js"></script>
+    <script src="/assets/vendors/owl-carousel/js/owl.carousel.min.js"></script>
+    <script src="/assets/vendors/owl-carousel/js/owlcarousel2-filter.min.js"></script>
+    <script src="/assets/vendors/owl-carousel/js/owlcarousel2-progressbar.min.js"></script>
+    <script src="/assets/vendors/wow/wow.min.js"></script>
+    <script src="/assets/vendors/imagesloaded/imagesloaded.min.js"></script>
+     <script src="/assets/vendors/isotope/isotope.min.js"></script>
+    <script src="/assets/vendors/jquery-circleType/jquery.circleType.min.js"></script> 
+    <script src="/assets/vendors/jquery-lettering/jquery.lettering.min.js"></script>
 
-    <!-- Dropzone JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js"></script>
+  @*   <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js"></script> *@
 
-    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-    <!-- template js -->
-    <script src="~/assets/js/eduhive.js"></script>
+    <script src="/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+    <script src="/assets/js/eduhive.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 
 

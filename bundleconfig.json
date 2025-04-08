@@ -1,0 +1,147 @@
+[
+  {
+    "outputFileName": "wwwroot/js/custom_tinymce.min.js",
+    "inputFiles": [
+      "wwwroot/js/custom_tinymce.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/assets/css/eduhive.min.css",
+    "inputFiles": [
+      "wwwroot/assets/css/eduhive.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/assets/css/eduhive-custom-rtl.min.css",
+    "inputFiles": [
+      "wwwroot/assets/css/eduhive-custom-rtl.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/assets/css/eduhive-dark.min.css",
+    "inputFiles": [
+      "wwwroot/assets/css/eduhive-dark.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/assets/css/eduhive-rtl.min.css",
+    "inputFiles": [
+      "wwwroot/assets/css/eduhive-rtl.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/assets/vendors/jquery-ui/jquery-ui.min.css",
+    "inputFiles": [
+      "wwwroot/assets/vendors/jquery-ui/jquery-ui.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/assets/vendors/jarallax/jarallax.min.css",
+    "inputFiles": [
+      "wwwroot/assets/vendors/jarallax/jarallax.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/assets/vendors/jquery-magnific-popup/jquery.magnific-popup.min.css",
+    "inputFiles": [
+      "wwwroot/assets/vendors/jquery-magnific-popup/jquery.magnific-popup.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/assets/vendors/nouislider/nouislider.pips.min.css",
+    "inputFiles": [
+      "wwwroot/assets/vendors/nouislider/nouislider.pips.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/assets/vendors/tiny-slider/tiny-slider.min.css",
+    "inputFiles": [
+      "wwwroot/assets/vendors/tiny-slider/tiny-slider.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/assets/vendors/eduhive-icons/style.min.css",
+    "inputFiles": [
+      "wwwroot/assets/vendors/eduhive-icons/style.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/assets/bundle.css",
+    "inputFiles": [
+      "wwwroot/assets/css/eduhive.min.css",
+      "wwwroot/assets/vendors/bootstrap/css/bootstrap.min.css",
+      "wwwroot/assets/vendors/bootstrap-select/bootstrap-select.min.css",
+      "wwwroot/assets/vendors/animate/animate.min.css",
+      "wwwroot/assets/vendors/fontawesome/css/all.min.css",
+      "wwwroot/assets/vendors/jquery-ui/jquery-ui.min.css",
+      "wwwroot/assets/vendors/jarallax/jarallax.min.css",
+      "wwwroot/assets/vendors/jquery-magnific-popup/jquery.magnific-popup.min.css",
+      "wwwroot/assets/vendors/nouislider/nouislider.min.css",
+      "wwwroot/assets/vendors/nouislider/nouislider.pips.min.css",
+      "wwwroot/assets/vendors/tiny-slider/tiny-slider.min.css",
+      "wwwroot/assets/vendors/eduhive-icons/style.min.css",
+      "wwwroot/assets/vendors/owl-carousel/css/owl.carousel.min.css",
+      "wwwroot/assets/vendors/owl-carousel/css/owl.theme.default.min.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/assets/bundle - Copy.min.css",
+    "inputFiles": [
+      "wwwroot/assets/bundle - Copy.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/assets/html.min.css",
+    "inputFiles": [
+      "wwwroot/assets/html.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/assets/js/eduhive.min.js",
+    "inputFiles": [
+      "wwwroot/assets/js/eduhive.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/assets/vendors/jquery-ui/jquery-ui.min.js",
+    "inputFiles": [
+      "wwwroot/assets/vendors/jquery-ui/jquery-ui.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/assets/vendors/wow/wow.min.js",
+    "inputFiles": [
+      "wwwroot/assets/vendors/wow/wow.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/assets/vendors/owl-carousel/js/owlcarousel2-progressbar.min.js",
+    "inputFiles": [
+      "wwwroot/assets/vendors/owl-carousel/js/owlcarousel2-progressbar.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/assets/vendors/tiny-slider/tiny-slider.min.js",
+    "inputFiles": [
+      "wwwroot/assets/vendors/tiny-slider/tiny-slider.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/assets/vendors/isotope/isotope.min.js",
+    "inputFiles": [
+      "wwwroot/assets/vendors/isotope/isotope.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/assets/vendors/jquery-circleType/jquery.circleType.min.js",
+    "inputFiles": [
+      "wwwroot/assets/vendors/jquery-circleType/jquery.circleType.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/assets/vendors/animate/animate.min.css",
+    "inputFiles": [
+      "wwwroot/assets/vendors/animate/animate.css"
+    ]
+  }
+]

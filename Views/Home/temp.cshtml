@@ -1,0 +1,1156 @@
+﻿@using SlideCloud.Static
+@using SlideCloud.Models.DTO.Home
+@model HomeDTO
+
+@{
+    ViewData["Title"] = "SlideCloud - اشتراک گذاری و ساخت اسلاید با هوش مصنوعی";
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+@section Styles {
+    <link rel="stylesheet" href="/assets/css/eduhive-dark.min.css" />
+}
+<section class="main-slider-three" id="home">
+    <div class="main-slider-three__carousel eduhive-owl__carousel eduhive-owl__carousel--basic-nav owl-carousel owl-theme" data-owl-options='{
+         "items" : 1,
+         "margin" : 0,
+         "animateIn" : "fadeIn" ,
+         "animateOut" : "fadeOut" ,
+         "loop" : true,
+         "smartSpeed" : 1000,
+         "nav" : false,
+         "dots" : false,
+         "autoplay" : true,
+         "navText" : ["<span class=\"icon-arrow-left\"></span>","<span class=\"icon-arrow-right\"></span>"]
+    }'>
+                <div class="main-slider-three__item">
+                    <div class="main-slider-three__bg" style="background-image: url(assets/images/shapes/main-slider-bg-2-1.png);"></div><!-- /.main-slider-three__bg -->
+                    <div class="container">
+                        <div class="row gutter-y-60 align-items-center">
+                            <div class="col-lg-12">
+                                <div class="main-slider-three__content">
+                                    <div class="main-slider-three__video">
+                                        <a href="https://www.youtube.com/watch?v=h9MbznbxlLc" class="main-slider-three__video__btn video-btn video-popup">
+                                            <i class="icon-play"></i>
+                                            <span></span>
+                                            <span></span>
+                                            <span></span>
+                                            <span></span>
+                                        </a><!-- /.video-btn -->
+                                    </div><!-- /.main-slider-three__video -->
+                                    <h2 class="main-slider-three__title">
+                                        <span class="main-slider-three__title__inner">
+                                            <span class="main-slider-three__title__text main-slider-three__title__text--1">ساخت اسلاید با <span class="main-slider-three__title__highlight">هوش مصنوعی</span></span>
+                                        </span><!-- /.main-slider-three__title__inner -->
+                                        <span class="main-slider-three__title__inner">
+                                            <span class="main-slider-three__title__text main-slider-three__title__text--2">به اشتراک گذاری اسلاید با همه</span>
+                                        </span><!-- /.main-slider-three__title__inner -->
+                                    </h2><!-- /.title -->
+                                    <div class="main-slider-three__bottom">
+                                        <div class="main-slider-three__bottom__inner rtl">
+                                            <a href="courses.html" class="main-slider-three__btn eduhive-btn">
+                                                <span class="eduhive-btn__text">شروع کنید</span>
+                                                <span class="eduhive-btn__icon">
+                                                    <span class="eduhive-btn__icon__inner"><i class="icon-left-arrow"></i></span>
+                                                </span>
+                                            </a><!-- /.eduhive-btn -->
+                                        </div><!-- /.main-slider-three__bottom__inner -->
+                                        <div class="main-slider-three__bottom__inner">
+                                            <div class="main-slider-three__student">
+                                                <div class="main-slider-three__student__image">
+                                                    <img src="~/assets/images/main-slider/main-slider-student-2-1.png" alt="student">
+                                                    <img src="~/assets/images/main-slider/main-slider-student-2-2.png" alt="student">
+                                                    <img src="~/assets/images/main-slider/main-slider-student-2-3.png" alt="student">
+                                                    <img src="~/assets/images/main-slider/main-slider-student-2-4.png" alt="student">
+                                                    <h4 class="main-slider-three__student__count count-box">
+                                                        <span class="count-text" data-stop="2" data-speed="1500">0</span><span>k+</span>
+                                                    </h4><!-- /.student__count -->
+                                                </div><!-- /.main-slider-three__student__image -->
+                                                <p class="main-slider-three__student__text">کاربران فعال</p>
+                                            </div><!-- /.main-slider-three__student -->
+                                        </div><!-- /.main-slider-three__bottom__inner -->
+                                    </div><!-- /.button -->
+                                    <div class="main-slider-three__content__circle-one main-slider-three__circle"></div><!-- /.circle-one -->
+                                    <div class="main-slider-three__content__circle-two main-slider-three__circle"></div><!-- /.circle-two -->
+                                </div><!-- /.main-slider-three__content -->
+                                <div class="main-slider-three__images">
+                                    <div class="main-slider-three__image main-slider-three__image--top">
+                                        <img src="~/assets/images/main-slider/main-slider-3-1.jpg" alt="main-slider" class="slider-image">
+                                    </div><!-- /.main-slider-three__image -->
+                                    <div class="main-slider-three__image">
+                                        <img src="~/assets/images/main-slider/main-slider-3-2.jpg" alt="main-slider" class="slider-image">
+                                    </div><!-- /.main-slider-three__image -->
+                                    <div class="main-slider-three__image">
+                                        <img src="~/assets/images/main-slider/main-slider-3-3.jpg" alt="main-slider" class="slider-image">
+                                    </div><!-- /.main-slider-three__image -->
+                                    <div class="main-slider-three__image main-slider-three__image--top">
+                                        <img src="~/assets/images/main-slider/main-slider-3-4.jpg" alt="main-slider" class="slider-image">
+                                    </div><!-- /.main-slider-three__image -->
+                                </div><!-- /.main-slider-three__images -->
+                            </div><!-- /.col-lg-12 -->
+                        </div><!-- /.row gutter-y-60 -->
+                    </div><!-- /.container -->
+                    <img src="~/assets/images/shapes/main-slider-shape-3-1.png" alt="shape" class="main-slider-three__shape-one slider-image">
+                    <img src="~/assets/images/shapes/main-slider-shape-3-2.png" alt="shape" class="main-slider-three__shape-two slider-image">
+                    <div class="main-slider-three__box-one"></div><!-- /.box-one -->
+                    <div class="main-slider-three__box-two"></div><!-- /.box-two -->
+                    <div class="main-slider-three__circle-one main-slider-three__circle"></div><!-- /.circle-one -->
+                    <div class="main-slider-three__circle-two main-slider-three__circle"></div><!-- /.circle-two -->
+                    <div class="main-slider-three__circle-three main-slider-three__circle"></div><!-- /.circle-three -->
+                    <div class="main-slider-three__circle-four main-slider-three__circle"></div><!-- /.circle-four -->
+                </div><!-- /.main-slider-three__item -->
+                <div class="main-slider-three__item">
+                    <div class="main-slider-three__bg" style="background-image: url(assets/images/shapes/main-slider-bg-2-1.png);"></div><!-- /.main-slider-three__bg -->
+                    <div class="container">
+                        <div class="row gutter-y-60 align-items-center">
+                            <div class="col-lg-12">
+                                <div class="main-slider-three__content">
+                                    <div class="main-slider-three__video">
+                                        <a href="https://www.youtube.com/watch?v=h9MbznbxlLc" class="main-slider-three__video__btn video-btn video-popup">
+                                            <i class="icon-play"></i>
+                                            <span></span>
+                                            <span></span>
+                                            <span></span>
+                                            <span></span>
+                                        </a><!-- /.video-btn -->
+                                    </div><!-- /.main-slider-three__video -->
+                                    <h2 class="main-slider-three__title">
+                                        <span class="main-slider-three__title__inner">
+                                            <span class="main-slider-three__title__text main-slider-three__title__text--1">ساخت اسلاید با هوش مصنوعی</span>
+                                        </span><!-- /.main-slider-three__title__inner -->
+                                        <span class="main-slider-three__title__inner">
+                                            <span class="main-slider-three__title__text main-slider-three__title__text--2">یک پیشنهاد عالی<span class="main-slider-three__title__highlight"> برای شما</span></span>
+                                        </span><!-- /.main-slider-three__title__inner -->
+                                    </h2><!-- /.title -->
+                                    <div class="main-slider-three__bottom">
+                                        <div class="main-slider-three__bottom__inner rtl">
+                                            <a href="courses.html" class="main-slider-three__btn eduhive-btn">
+                                                <span class="eduhive-btn__text">شروع کنید</span>
+                                                <span class="eduhive-btn__icon">
+                                                    <span class="eduhive-btn__icon__inner"><i class="icon-left-arrow"></i></span>
+                                                </span>
+                                            </a><!-- /.eduhive-btn -->
+                                        </div><!-- /.main-slider-three__bottom__inner -->
+                                        <div class="main-slider-three__bottom__inner">
+                                            <div class="main-slider-three__student">
+                                                <div class="main-slider-three__student__image">
+                                                    <img src="~/assets/images/main-slider/main-slider-student-2-1.png" alt="student">
+                                                    <img src="~/assets/images/main-slider/main-slider-student-2-2.png" alt="student">
+                                                    <img src="~/assets/images/main-slider/main-slider-student-2-3.png" alt="student">
+                                                    <img src="~/assets/images/main-slider/main-slider-student-2-4.png" alt="student">
+                                                    <h4 class="main-slider-three__student__count count-box">
+                                                        <span class="count-text" data-stop="2" data-speed="1500">0</span><span>k+</span>
+                                                    </h4><!-- /.student__count -->
+                                                </div><!-- /.main-slider-three__student__image -->
+                                                <p class="main-slider-three__student__text">کاربران فعال</p>
+                                            </div><!-- /.main-slider-three__student -->
+                                        </div><!-- /.main-slider-three__bottom__inner -->
+                                    </div><!-- /.button -->
+                                    <div class="main-slider-three__content__circle-one main-slider-three__circle"></div><!-- /.circle-one -->
+                                    <div class="main-slider-three__content__circle-two main-slider-three__circle"></div><!-- /.circle-two -->
+                                </div><!-- /.main-slider-three__content -->
+                                <div class="main-slider-three__images">
+                                    <div class="main-slider-three__image main-slider-three__image--top">
+                                        <img src="~/assets/images/main-slider/main-slider-3-5.jpg" alt="main-slider" class="slider-image">
+                                    </div><!-- /.main-slider-three__image -->
+                                    <div class="main-slider-three__image">
+                                        <img src="~/assets/images/main-slider/main-slider-3-6.jpg" alt="main-slider" class="slider-image">
+                                    </div><!-- /.main-slider-three__image -->
+                                    <div class="main-slider-three__image">
+                                        <img src="~/assets/images/main-slider/main-slider-3-7.jpg" alt="main-slider" class="slider-image">
+                                    </div><!-- /.main-slider-three__image -->
+                                    <div class="main-slider-three__image main-slider-three__image--top">
+                                        <img src="~/assets/images/main-slider/main-slider-3-8.jpg" alt="main-slider" class="slider-image">
+                                    </div><!-- /.main-slider-three__image -->
+                                </div><!-- /.main-slider-three__images -->
+                            </div><!-- /.col-lg-12 -->
+                        </div><!-- /.row gutter-y-60 -->
+                    </div><!-- /.container -->
+                    <img src="~/assets/images/shapes/main-slider-shape-3-1.png" alt="shape" class="main-slider-three__shape-one slider-image">
+                    <img src="~/assets/images/shapes/main-slider-shape-3-2.png" alt="shape" class="main-slider-three__shape-two slider-image">
+                    <div class="main-slider-three__box-one"></div><!-- /.box-one -->
+                    <div class="main-slider-three__box-two"></div><!-- /.box-two -->
+                    <div class="main-slider-three__circle-one main-slider-three__circle"></div><!-- /.circle-one -->
+                    <div class="main-slider-three__circle-two main-slider-three__circle"></div><!-- /.circle-two -->
+                    <div class="main-slider-three__circle-three main-slider-three__circle"></div><!-- /.circle-three -->
+                    <div class="main-slider-three__circle-four main-slider-three__circle"></div><!-- /.circle-four -->
+                </div><!-- /.main-slider-three__item -->
+            </div><!-- /.main-slider-three__carousel -->
+</section><!-- /.main-slider-three -->
+
+
+<section class="course-category course-category--home-3 section-space-bottom">
+    <div class="container rtl">
+        <div class="row gutter-y-30">
+            <div class="col-xl-3 col-lg-4 col-sm-6 wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="00ms">
+                <div class="course-category__card course-category__card--1">
+                    <div class="course-category__card__content">
+                        <div class="course-category__card__icon-box course-category__card__icon-box--secondary">
+                            <span class="course-category__card__icon">
+                                <i class="icon-robot"></i>
+                            </span>
+                        </div><!-- /.course-category__card__icon-box -->
+                        <h4 class="course-category__card__title">ساخت اسلاید با هوش مصنوعی</h4><!-- /.course-category__card__title -->
+                    </div><!-- /.course-category__card__content -->
+                </div><!-- /.course-category__card -->
+            </div><!-- /.col-xl-3 col-lg-4 col-sm-6 -->
+            <div class="col-xl-3 col-lg-4 col-sm-6 wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="100ms">
+                <div class="course-category__card course-category__card--2">
+                    <div class="course-category__card__content">
+                        <div class="course-category__card__icon-box course-category__card__icon-box--pink">
+                            <span class="course-category__card__icon">
+                                <i class="icon-share"></i>
+                            </span>
+                        </div><!-- /.course-category__card__icon-box -->
+                        <h4 class="course-category__card__title">اشتراک گذاری اسلاید</h4><!-- /.course-category__card__title -->
+                    </div><!-- /.course-category__card__content -->
+                </div><!-- /.course-category__card -->
+            </div><!-- /.col-xl-3 col-lg-4 col-sm-6 -->
+            <div class="col-xl-3 col-lg-4 col-sm-6 wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="200ms">
+                <div class="course-category__card course-category__card--3">
+                    <div class="course-category__card__content">
+                        <div class="course-category__card__icon-box course-category__card__icon-box--secondary">
+                            <span class="course-category__card__icon">
+                                <i class="icon-premium"></i>
+                            </span>
+                        </div><!-- /.course-category__card__icon-box -->
+                        <h4 class="course-category__card__title">دوره‌های پولی</h4><!-- /.course-category__card__title -->
+                    </div><!-- /.course-category__card__content -->
+                </div><!-- /.course-category__card -->
+            </div><!-- /.col-xl-3 col-lg-4 col-sm-6 -->
+            <div class="col-xl-3 col-lg-4 col-sm-6 wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="300ms">
+                <div class="course-category__card course-category__card--4">
+                    <div class="course-category__card__content">
+                        <div class="course-category__card__icon-box course-category__card__icon-box--yellow2">
+                            <span class="course-category__card__icon">
+                                <i class="icon-free"></i>
+                            </span>
+                        </div><!-- /.course-category__card__icon-box -->
+                        <h4 class="course-category__card__title">دوره‌های رایگان</h4><!-- /.course-category__card__title -->
+                    </div><!-- /.course-category__card__content -->
+                </div><!-- /.course-category__card -->
+            </div><!-- /.col-xl-3 col-lg-4 col-sm-6 -->
+        </div><!-- /.row gutter-y-30 -->
+    </div><!-- /.container -->
+</section><!-- /.course-category section-space-bottom -->
+
+
+
+        <section class="about-three" id="about">
+            <div class="container-fluid">
+                <div class="about-three__inner section-space">
+                    <div class="container rtl">
+                        <div class="row gutter-y-50 align-items-center">
+                            <div class="col-lg-6 wow fadeInLeft" data-wow-duration="1500ms">
+                                <div class="about-three__image">
+                                    <div class="about-three__image__inner">
+                                        <img src="~/assets/images/about/about-3-1.jpg" alt="about">
+                                        <div class="about-three__experience">
+                                            <span class="about-three__experience__icon">
+                                                <i class="icon-connectibity"></i>
+                                            </span><!-- /.about-three__experience__icon -->
+                                            <div class="about-three__experience__content">
+                                                <h3 class="about-three__experience__title">25+</h3><!-- /.experience__title -->
+                                                <p class="about-three__experience__text">سال ها تجربه</p><!-- /.experience__text -->
+                                            </div><!-- /.about-three__experience__content -->
+                                        </div><!-- /.about-three__experience -->
+                                        <div class="total-student">
+                                            <div class="total-student__inner">
+                                                <div class="total-student__image">
+                                                    <img src="~/assets/images/about/about-student-3-1.png" alt="student" class="slider-image">
+                                                    <img src="~/assets/images/about/about-student-3-2.png" alt="student" class="slider-image">
+                                                </div><!-- /.total-student__image -->
+                                                <h4 class="total-student__text count-box">
+                                                    <span class="count-text" data-stop="20" data-speed="1500">0</span><span>+<br> دانش آموز</span>
+                                                </h4><!-- /.total-student__text -->
+                                            </div><!-- /.total-student__inner -->
+                                        </div><!-- /.total-student -->
+                                        <div class="about-three__image__shape-one"></div><!-- /.about-three__image__shape-one -->
+                                        <div class="about-three__image__shape-two"></div><!-- /.about-three__image__shape-two -->
+                                    </div><!-- /.about-three__image__inner -->
+                                    <div class="about-three__image__box"></div><!-- /.about-three__image__box -->
+                                    <img src="~/assets/images/shapes/about-shape-3-2.png" alt="shape" class="about-three__image__shape-three">
+                                </div><!-- /.about-three__image -->
+                            </div><!-- /.col-lg-6 -->
+                            <div class="col-lg-6">
+                                <div class="about-three__content">
+                                    <div class="sec-title wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="00ms">
+                                        <h6 class="sec-title__tagline">درباره ما</h6><!-- /.sec-title__tagline -->
+                                        <h3 class="sec-title__title">مهارت های خود را <span class="sec-title__title__text">از هر</span> جایی <span class="sec-title__title__shape">بیاموزید</span></h3><!-- /.sec-title__title -->
+                                    </div><!-- /.sec-title -->
+                                    <div class="about-three__description wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="00ms">
+                                        <p class="about-three__text">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ</p><!-- /.about-three__text -->
+                                    </div><!-- /.about-three__description -->
+                                    <div class="about-three__content__inner">
+                                        <div class="row gutter-y-30">
+                                            <div class="col-sm-6 wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="00ms">
+                                                <div class="about-three__info">
+                                                    <h3 class="about-three__info__title">زمان بندی انعطاف پذیر</h3><!-- /.about-three__info__title -->
+                                                    <p class="about-three__info__text">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ</p><!-- /.about-three__info__text -->
+                                                </div><!-- /.about-three__info -->
+                                            </div><!-- /.col-sm-6 -->
+                                            <div class="col-sm-6 wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="100ms">
+                                                <div class="about-three__info">
+                                                    <h3 class="about-three__info__title">مربی متخصص</h3><!-- /.about-three__info__title -->
+                                                    <p class="about-three__info__text">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ</p><!-- /.about-three__info__text -->
+                                                </div><!-- /.about-three__info -->
+                                            </div><!-- /.col-sm-6 -->
+                                        </div><!-- /.row gutter-y-30 -->
+                                    </div><!-- /.about-three__content__inner -->
+                                    <div class="about-three__bottom wow fadeInUp" data-wow-duration="1500ms">
+                                        <a href="about.html" class="eduhive-btn">
+                                            <span>درباره ما</span>
+                                            <span class="eduhive-btn__icon">
+                                                <span class="eduhive-btn__icon__inner"><i class="icon-left-arrow"></i></span>
+                                            </span>
+                                        </a><!-- /.eduhive-btn -->
+                                        <div class="about-three__call">
+                                            <span class="about-three__call__icon">
+                                                <i class="icon-telephone"></i>
+                                            </span><!-- /.about-three__call__icon -->
+                                            <div class="about-three__call__content">
+                                                <p class="about-three__call__title">اکنون با ما تماس بگیرید</p><!-- /.call__title -->
+                                                <h4 class="about-three__call__number">
+                                                    <a href="tel:+208-555-0112">+989127661646</a>
+                                                </h4><!-- /.about-three__call__number -->
+                                            </div><!-- /.about-three__call__content -->
+                                        </div><!-- /.about-three__call -->
+                                    </div><!-- /.about-three__bottom -->
+                                </div><!-- /.about-three__content -->
+                            </div><!-- /.col-lg-6 -->
+                        </div><!-- /.row gutter-y-50 -->
+                    </div><!-- /.container -->
+                    <img src="~/assets/images/shapes/about-shape-3-1.png" alt="shape" class="about-three__shape-one">
+                    <div class="about-three__circle-one"></div><!-- /.about-three__circle-one -->
+                    <div class="about-three__circle-two"></div><!-- /.about-three__circle-two -->
+                    <div class="about-three__circle-three"></div><!-- /.about-three__circle-three -->
+                </div><!-- /.about-three__inner section-space -->
+            </div><!-- /.container-fluid -->
+            <img src="~/assets/images/shapes/about-shape-3-3.png" alt="shape" class="about-three__shape-two">
+        </section><!-- /.about-three -->
+
+        <section class="funfact-one funfact-one--home-3 funfact-one--round">
+            <div class="container">
+                <div class="funfact-one__grid">
+                    <div class="funfact-one__item funfact-one__item--secondary wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="00ms">
+                        <div class="funfact-one__icon">
+                            <span class="funfact-one__icon__inner"><i class="icon-robot"></i></span>
+                        </div>
+                        <h3 class="funfact-one__title count-box">
+                            <span class="count-text" data-stop="30" data-speed="1500">0</span>
+                            <span>k+</span>
+                        </h3>
+                        <p class="funfact-one__text">اسلاید ساخته شده با AI</p>
+                    </div>
+                    <div class="funfact-one__item funfact-one__item--primary wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="100ms">
+                        <div class="funfact-one__icon">
+                            <span class="funfact-one__icon__inner"><i class="icon-share"></i></span>
+                        </div>
+                        <h3 class="funfact-one__title count-box">
+                            <span class="count-text" data-stop="6500" data-speed="1500">0</span>
+                            <span>+</span>
+                        </h3>
+                        <p class="funfact-one__text">اسلاید به اشتراک گذاشته شده</p>
+                    </div>
+                    <div class="funfact-one__item funfact-one__item--secondary wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="200ms">
+                        <div class="funfact-one__icon">
+                            <span class="funfact-one__icon__inner"><i class="icon-users"></i></span>
+                        </div>
+                        <h3 class="funfact-one__title count-box">
+                            <span class="count-text" data-stop="6561" data-speed="1500">0</span>
+                            <span>+</span>
+                        </h3>
+                        <p class="funfact-one__text">کاربران فعال</p>
+                    </div>
+                    <div class="funfact-one__item funfact-one__item--primary wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="300ms">
+                        <div class="funfact-one__icon">
+                            <span class="funfact-one__icon__inner"><i class="icon-templates"></i></span>
+                        </div>
+                        <h3 class="funfact-one__title count-box">
+                            <span class="count-text" data-stop="400" data-speed="1500">0</span>
+                            <span>+</span>
+                        </h3>
+                        <p class="funfact-one__text">قالب آماده</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="courses-three section-space2" id="courses">
+            <div class="container">
+                <div class="sec-title sec-title--center wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="00ms">
+                    <h6 class="sec-title__tagline">ویژگی‌های ما</h6>
+                    <h3 class="sec-title__title"><span>مزایای</span> <span class="sec-title__title__shape">استفاده</span> <span>از</span> <span class="sec-title__title__text">SlideCloud</span></h3>
+                </div>
+                <div class="row gutter-y-30">
+                    <div class="col-lg-6">
+                        <div class="course-card course-card--two wow fadeInUp" data-wow-duration='1500ms' data-wow-delay='00ms'>
+                            <div class="course-card__image">
+                                <img src="~/assets/images/courses/course-2-1.jpg" alt="AI Slide Creation">
+                            </div>
+                            <div class="course-card__content rtl">
+                                <div class="course-card__content__top">
+                                    <div class="course-card__category">هوش مصنوعی</div>
+                                    <div class="course-card__duration">
+                                        <span class="course-card__duration__icon">
+                                            <i class="icon-clock"></i>
+                                        </span>
+                                        چند دقیقه
+                                    </div>
+                                </div>
+                                <h3 class="course-card__title"><a href="#">ساخت اسلاید با هوش مصنوعی</a></h3>
+                                <div class="course-card__info">
+                                    <div class="course-card__lessons">
+                                        <span class="course-card__lessons__icon">
+                                            <i class="icon-robot"></i>
+                                        </span>
+                                        تولید هوشمند
+                                    </div>
+                                    <div class="course-card__students">
+                                        <span class="course-card__students__icon">
+                                            <i class="icon-users"></i>
+                                        </span>
+                                        مناسب همه
+                                    </div>
+                                </div>
+                                <div class="course-card__ratings">
+                                    <div class="eduhive-ratings">
+                                        <span class="eduhive-ratings__icon">
+                                            <i class="fa fa-star"></i>
+                                        </span>
+                                        <span class="eduhive-ratings__icon">
+                                            <i class="fa fa-star"></i>
+                                        </span>
+                                        <span class="eduhive-ratings__icon">
+                                            <i class="fa fa-star"></i>
+                                        </span>
+                                        <span class="eduhive-ratings__icon">
+                                            <i class="fa fa-star"></i>
+                                        </span>
+                                        <span class="eduhive-ratings__icon">
+                                            <i class="fa fa-star"></i>
+                                        </span>
+                                    </div>
+                                    <p class="course-card__ratings__text">امتیاز 5</p>
+                                </div>
+                                <h4 class="course-card__price">رایگان<span></span></h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="course-card course-card--two wow fadeInUp" data-wow-duration='1500ms' data-wow-delay='100ms'>
+                            <div class="course-card__image">
+                                <img src="~/assets/images/courses/course-2-2.jpg" alt="Premium Features">
+                            </div>
+                            <div class="course-card__content rtl">
+                                <div class="course-card__content__top">
+                                    <div class="course-card__category">نسخه حرفه‌ای</div>
+                                    <div class="course-card__duration">
+                                        <span class="course-card__duration__icon">
+                                            <i class="icon-premium"></i>
+                                        </span>
+                                        نامحدود
+                                    </div>
+                                </div>
+                                <h3 class="course-card__title"><a href="#">ویژگی‌های حرفه‌ای</a></h3>
+                                <div class="course-card__info">
+                                    <div class="course-card__lessons">
+                                        <span class="course-card__lessons__icon">
+                                            <i class="icon-templates"></i>
+                                        </span>
+                                        قالب‌های ویژه
+                                    </div>
+                                    <div class="course-card__students">
+                                        <span class="course-card__students__icon">
+                                            <i class="icon-export"></i>
+                                        </span>
+                                        خروجی‌های متنوع
+                                    </div>
+                                </div>
+                                <div class="course-card__ratings">
+                                    <div class="eduhive-ratings">
+                                        <span class="eduhive-ratings__icon">
+                                            <i class="fa fa-star"></i>
+                                        </span>
+                                        <span class="eduhive-ratings__icon">
+                                            <i class="fa fa-star"></i>
+                                        </span>
+                                        <span class="eduhive-ratings__icon">
+                                            <i class="fa fa-star"></i>
+                                        </span>
+                                        <span class="eduhive-ratings__icon">
+                                            <i class="fa fa-star"></i>
+                                        </span>
+                                        <span class="eduhive-ratings__icon">
+                                            <i class="fa fa-star"></i>
+                                        </span>
+                                    </div>
+                                    <p class="course-card__ratings__text">امتیاز 5</p>
+                                </div>
+                                <h4 class="course-card__price">690<span> تومان</span></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="offer-one section-space-top">
+            <div class="container rtl">
+                <div class="row gutter-y-60">
+                    <div class="col-lg-6 wow fadeInUp" data-wow-duration="1500ms">
+                        <div class="offer-one__image">
+                            <img src="~/assets/images/resources/offer-1-1.jpg" alt="offer image" class="offer-one__image__one">
+                            <img src="~/assets/images/resources/offer-1-2.jpg" alt="offer image" class="offer-one__image__two">
+                            <img src="~/assets/images/shapes/offer-shape-1-1.png" alt="offer shape" class="offer-one__image__shape">
+                        </div><!-- /.offer-one__image -->
+                    </div><!-- /.col-lg-6 -->
+                    <div class="col-lg-6">
+                        <div class="offer-one__content">
+                            <div class="sec-title wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="00ms">
+                                <h6 class="sec-title__tagline">ما کی هستیم</h6><!-- /.sec-title__tagline -->
+                                <h3 class="sec-title__title"><span class="sec-title__title__shape">مجموعه ما</span> بهترین <span class="sec-title__title__text">را ارائه میدهد</span></h3><!-- /.sec-title__title -->
+                            </div><!-- /.sec-title -->
+                            <div class="offer-one__inner">
+                                <div class="offer-one__item wow fadeInUp" data-wow-duration="1500ms">
+                                    <div class="offer-one__item__icon offer-one__item__icon--primary">
+                                        <i class="icon-instructors"></i>
+                                    </div><!-- /.offer-one__item__icon -->
+                                    <div class="offer-one__item__content">
+                                        <h4 class="offer-one__item__title">مدرس کارشناس صنعت</h4>
+                                        <p class="offer-one__item__text">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است</p>
+                                    </div><!-- /.offer-one__item__content -->
+                                </div><!-- /.offer-one__item -->
+                                <div class="offer-one__item wow fadeInUp" data-wow-duration="1500ms">
+                                    <div class="offer-one__item__icon offer-one__item__icon--secondary">
+                                        <i class="icon-copy-writing"></i>
+                                    </div><!-- /.offer-one__item__icon -->
+                                    <div class="offer-one__item__content">
+                                        <h4 class="offer-one__item__title">محتوای دوره به روز</h4>
+                                        <p class="offer-one__item__text">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است</p>
+                                    </div><!-- /.offer-one__item__content -->
+                                </div><!-- /.offer-one__item -->
+                                <div class="offer-one__item wow fadeInUp" data-wow-duration="1500ms">
+                                    <div class="offer-one__item__icon offer-one__item__icon--base">
+                                        <i class="icon-community"></i>
+                                    </div><!-- /.offer-one__item__icon -->
+                                    <div class="offer-one__item__content">
+                                        <h4 class="offer-one__item__title">بزرگترین انجمن دانشجویی</h4>
+                                        <p class="offer-one__item__text">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است</p>
+                                    </div><!-- /.offer-one__item__content -->
+                                </div><!-- /.offer-one__item -->
+                            </div><!-- /.offer-one__inner -->
+                        </div><!-- /.offer-one__content -->
+                    </div><!-- /.col-lg-6 -->
+                </div><!-- /.row gutter-y-60 -->
+            </div><!-- /.container -->
+            <img src="~/assets/images/shapes/offer-shape-1-3.png" alt="shape" class="offer-one__shape">
+            <div class="offer-one__shape-box"></div><!-- /.offer-one__shape -->
+        </section><!-- /.offer-one section-space-top -->
+
+
+        <section class="instructors-page section-space">
+            <div class="container">
+                <div class="row gutter-y-30">
+
+                    <div class="sec-title sec-title--center wow fadeInUp animated" data-wow-duration="1500ms" data-wow-delay="00ms" style="visibility: visible; animation-duration: 1500ms; animation-delay: 0ms; animation-name: fadeInUp;">
+                        <h3 class="sec-title__title"> <span class="sec-title__title__text">پر بازدیدترین اسلایدها</span> </h3><!-- /.sec-title__title -->
+                    </div>
+
+
+
+                    @foreach (var item in Model.PopularDocuments)
+                    {
+                        <div class="col-md-6 col-lg-4">
+                            <!-- /.col-lg-4 col-md-6 -->
+                            <div class="blog-card wow fadeInUp rtl" data-wow-duration='1500ms' data-wow-delay='200ms'>
+                                <div class="blog-card__image text-center">
+                                    <img src="@item.Picture" alt="@item.Title" style="max-height: 150px; width:auto !important;display: inline-flex;">
+                                    <a href="blog-details-right.html" class="blog-card__image__link">
+                                        <span class="sr-only">@item.Title</span>
+                                        <!-- /.sr-only -->
+                                    </a>
+                                </div><!-- /.blog-card__image -->
+                                <div class="blog-card__content">
+                                    <h3 class="blog-card__title text-center"> @Html.ActionLink(@item.Title, "Detil", "Slide", new { id = item.Id })</h3><!-- /.blog-card__title -->
+
+                                </div><!-- /.blog-card__content -->
+                            </div>
+                            <!-- /.blog-card -->
+                        </div>
+                    }
+
+                </div><!-- /.container -->
+                </div>
+        </section>
+
+
+        <section class="instructors-page section-space">
+            <div class="container">
+                <div class="row gutter-y-30">
+
+                    <div class="sec-title sec-title--center wow fadeInUp animated" data-wow-duration="1500ms" data-wow-delay="00ms" style="visibility: visible; animation-duration: 1500ms; animation-delay: 0ms; animation-name: fadeInUp;">
+                        <h3 class="sec-title__title"> <span class="sec-title__title__text">لیست آخرین اسلایدهای ساخته شده توسط کاربران</span> </h3><!-- /.sec-title__title -->
+                    </div>
+
+
+                    @foreach (var item in Model.LatestDocuments)
+                    {
+                        <div class="col-md-6 col-lg-4">
+                            <!-- /.col-lg-4 col-md-6 -->
+                            <div class="blog-card wow fadeInUp rtl" data-wow-duration='1500ms' data-wow-delay='200ms'>
+                                <div class="blog-card__image text-center">
+                                    <img src="@item.Picture" alt="@item.Title" style="max-height: 150px; width:auto !important;display: inline-flex;">
+                                    <a href="blog-details-right.html" class="blog-card__image__link">
+                                        <span class="sr-only">@item.Title</span>
+                                        <!-- /.sr-only -->
+                                    </a>
+                                </div><!-- /.blog-card__image -->
+                                <div class="blog-card__content">
+                                    <h3 class="blog-card__title text-center"> @Html.ActionLink(@item.Title, "Detil", "Slide", new { id = item.Id })</h3><!-- /.blog-card__title -->
+
+                                </div><!-- /.blog-card__content -->
+                            </div>
+                            <!-- /.blog-card -->
+                        </div>
+                    }
+
+                </div><!-- /.container -->
+            </div>
+        </section>
+
+
+
+        <section class="my-5">
+            <div class="container">
+                <div class="row ">
+
+                    <div class="sec-title sec-title--center wow fadeInUp animated" data-wow-duration="1500ms" data-wow-delay="00ms" style="visibility: visible; animation-duration: 1500ms; animation-delay: 0ms; animation-name: fadeInUp ; margin-bottom:90px ">
+                        <h3 class="sec-title__title"> <span class="sec-title__title__text">لیست دسته بندی های جدید</span> </h3><!-- /.sec-title__title -->
+                    </div>
+
+
+                    @foreach (var item in Model.NewCategories)
+                    {
+                        <div class="col-lg-4 col-md-6">
+
+                            <div class="instructor-card-two wow fadeInUp animated" data-wow-duration="1500ms" data-wow-delay="000ms" style="visibility: visible; animation-duration: 1500ms; animation-delay: 0ms; animation-name: fadeInUp; ">
+
+                                <div class="instructor-card-two__content">
+                                    <div class="instructor-card-two__info">
+                                        <h3 class="instructor-card-two__name" style="color:black">
+                                            @item.Name
+                                        </h3><!-- /.instructor-card-two__name -->
+                                        <h6 class="instructor-card-two__designation"></h6><!-- /.instructor-card-two__designation -->
+                                    </div><!-- /.instructor-card-two__info -->
+
+                                </div><!-- /.instructor-card-two__content -->
+                            </div>
+
+                            <!-- /.instructor-card-two -->
+
+                        </div>
+
+                        <!-- /.col-lg-4 col-md-6 -->
+                    }
+
+                </div><!-- /.container -->
+            </div><!-- /.container -->
+        </section>
+
+
+
+
+
+
+
+
+
+
+        <section class="instructors-page section-space">
+            <div class="container">
+                <div class="row gutter-y-30">
+
+                    <div class="sec-title sec-title--center wow fadeInUp animated" data-wow-duration="1500ms" data-wow-delay="00ms" style="visibility: visible; animation-duration: 1500ms; animation-delay: 0ms; animation-name: fadeInUp;">
+                        <h3 class="sec-title__title"> <span class="sec-title__title__text">کاربران جدید</span> </h3><!-- /.sec-title__title -->
+                    </div>
+
+
+                    @foreach (var item in Model.NewUsers)
+                    {
+                        <div class="col-lg-2 col-3">
+
+                            <div class="instructor-card-two wow fadeInUp animated" data-wow-duration="1500ms" data-wow-delay="000ms" style="visibility: visible; animation-duration: 1500ms; animation-delay: 0ms; animation-name: fadeInUp;">
+                                <div class="instructor-card-two__image">
+                                    <img src="~/assets/images/User-Profile.png" alt="Mike Hardson">
+                                </div><!-- /.instructor-card-two__image -->
+                                <div class="text-center">
+                                    @item.Name
+                                </div>
+
+                            </div>
+
+                            <!-- /.instructor-card-two -->
+
+                        </div>
+
+                        <!-- /.col-lg-4 col-md-6 -->
+                    }
+
+                </div><!-- /.container -->
+            </div><!-- /.container -->
+        </section>
+
+
+
+
+<section class="instructors-three section-space2" id="instructors">
+    <div class="container">
+        <img src="/assets/images/shapes/testimonial-shape-3-1.png" alt="shape" class="testimonials-three__shape-one">
+        <img src="/assets/images/shapes/testimonial-shape-3-2.png" alt="shape" class="testimonials-three__shape-two">
+        <img src="/assets/images/shapes/testimonial-shape-3-3.png" alt="shape" class="testimonials-three__shape-three">
+        <div class="testimonials-three__shape-box"></div><!-- /.testimonials-three__shape-box -->
+        <div class="sec-title sec-title--center wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="00ms">
+            <h6 class="sec-title__tagline">تیم متخصص ما</h6><!-- /.sec-title__tagline -->
+            <h3 class="sec-title__title">کارشناسان @* <span class="sec-title__title__text">و مربیان</span> <span class="sec-title__title__shape">تیم ما</span> *@</h3><!-- /.sec-title__title -->
+        </div><!-- /.sec-title -->
+        <div class="instructors-three__carousel eduhive-owl__carousel eduhive-owl__carousel--with-shadow eduhive-owl__carousel--basic-nav owl-carousel owl-theme" data-owl-options='{
+             "items" : 1,
+             "margin" : 10,
+             "loop" : true,
+             "smartSpeed" : 700,
+             "nav" : false,
+             "dots" : true,
+             "navText" : ["<span class=\"icon-arrow-left\"></span>","<span class=\"icon-arrow-right\"></span>"],
+            "autoplay": true,
+            "responsive": {
+                "0": {
+                    "items": 1,
+                    "nav": true,
+                    "dots": false,
+                    "margin": 10
+                },
+                "576": {
+                    "items": 2,
+                    "margin": 30
+                },
+                "992": {
+                    "items": 3,
+                    "margin": 30
+                },
+                "1200": {
+                    "items": 4,
+                    "margin": 30,
+                    "dots": false
+                }
+            }
+        }'>
+                    <div class="item">
+                        <div class="instructor-card-three instructor-card-three--top-identity wow fadeInUp rtl" data-wow-duration='1500ms' data-wow-delay='100ms'>
+                            <div class="instructor-card-three__image">
+                                <div class="instructor-card-three__image__inner">
+                                    <img src="/assets/images/team/mohammad-hossein.webp"width="240" height="240" loading="lazy" alt="Anthony B. Castillo">
+                                    <div class="instructor-card-three__social social-links-two">
+                                        <div class="social-links-two__item">
+                                            <a href="https://facebook.com/">
+                                                <span class="social-links-two__icon">
+                                                    <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                                                </span><!-- /.social-links-two__icon -->
+                                                <span class="sr-only">فیسبوک</span>
+                                            </a>
+                                        </div><!-- /.social-links-two__item -->
+                                        <div class="social-links-two__item">
+                                            <a href="https://twitter.com/">
+                                                <span class="social-links-two__icon">
+                                                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                                                </span><!-- /.social-links-two__icon -->
+                                                <span class="sr-only">توییتر</span>
+                                            </a>
+                                        </div><!-- /.social-links-two__item -->
+                                        <div class="social-links-two__item">
+                                            <a href="https://instagram.com/">
+                                                <span class="social-links-two__icon">
+                                                    <i class="fab fa-instagram" aria-hidden="true"></i>
+                                                </span><!-- /.social-links-two__icon -->
+                                                <span class="sr-only">اینستاگرام</span>
+                                            </a>
+                                        </div><!-- /.social-links-two__item -->
+                                        <div class="social-links-two__item">
+                                            <a href="https://youtube.com/">
+                                                <span class="social-links-two__icon">
+                                                    <i class="fab fa-youtube" aria-hidden="true"></i>
+                                                </span><!-- /.social-links-two__icon -->
+                                                <span class="sr-only">یوتوب</span>
+                                            </a>
+                                        </div><!-- /.social-links-two__item -->
+                                    </div><!-- /.instructor-card-three__social -->
+                                </div><!-- /.instructor-card-three__image__inner -->
+                            </div><!-- /.instructor-card-three__image -->
+                            <div class="instructor-card-three__identity">
+                                <h3 class="instructor-card-three__name">
+                                    <a href="instructor-details.html">محمد حسین دریاباری </a>
+                                </h3><!-- /.instructor-card-three__name -->
+                                <p class="instructor-card-three__designation">توسعه دهنده NET.</p><!-- /.instructor-card-three__designation -->
+                            </div><!-- /.instructor-card-three__identity -->
+                        </div><!-- /.instructor-card-three -->
+                    </div><!-- /.item -->
+                    <div class="item">
+                        <div class="instructor-card-three wow fadeInUp rtl" data-wow-duration='1500ms' data-wow-delay='200ms'>
+                            <div class="instructor-card-three__image">
+                                <div class="instructor-card-three__image__inner">
+                                    <img src="/assets/images/team/Mohammad-Mahdi.webp"width="240" height="240" loading="lazy"  alt="david cooper">
+                                    <div class="instructor-card-three__social social-links-two">
+                                        <div class="social-links-two__item">
+                                            <a href="https://facebook.com/">
+                                                <span class="social-links-two__icon">
+                                                    <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                                                </span><!-- /.social-links-two__icon -->
+                                                <span class="sr-only">فیسبوک</span>
+                                            </a>
+                                        </div><!-- /.social-links-two__item -->
+                                        <div class="social-links-two__item">
+                                            <a href="https://twitter.com/">
+                                                <span class="social-links-two__icon">
+                                                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                                                </span><!-- /.social-links-two__icon -->
+                                                <span class="sr-only">توییتر</span>
+                                            </a>
+                                        </div><!-- /.social-links-two__item -->
+                                        <div class="social-links-two__item">
+                                            <a href="https://instagram.com/">
+                                                <span class="social-links-two__icon">
+                                                    <i class="fab fa-instagram" aria-hidden="true"></i>
+                                                </span><!-- /.social-links-two__icon -->
+                                                <span class="sr-only">اینستاگرام</span>
+                                            </a>
+                                        </div><!-- /.social-links-two__item -->
+                                        <div class="social-links-two__item">
+                                            <a href="https://youtube.com/">
+                                                <span class="social-links-two__icon">
+                                                    <i class="fab fa-youtube" aria-hidden="true"></i>
+                                                </span><!-- /.social-links-two__icon -->
+                                                <span class="sr-only">یوتوب</span>
+                                            </a>
+                                        </div><!-- /.social-links-two__item -->
+                                    </div><!-- /.instructor-card-three__social -->
+                                </div><!-- /.instructor-card-three__image__inner -->
+                            </div><!-- /.instructor-card-three__image -->
+                            <div class="instructor-card-three__identity">
+                                <h3 class="instructor-card-three__name">
+                                    <a href="instructor-details.html">محمد مهدی خدابنده </a>
+                                </h3><!-- /.instructor-card-three__name -->
+                                <p class="instructor-card-three__designation">توسعه دهنده NET.</p><!-- /.instructor-card-three__designation -->
+                            </div><!-- /.instructor-card-three__identity -->
+                        </div><!-- /.instructor-card-three -->
+                    </div><!-- /.item -->
+                    <div class="item">
+                        <div class="instructor-card-three instructor-card-three--top-identity wow fadeInUp rtl" data-wow-duration='1500ms' data-wow-delay='100ms'>
+                            <div class="instructor-card-three__image">
+                                <div class="instructor-card-three__image__inner">
+                                    <img src="/assets/images/team/Mohammad-Salamat.webp"width="240" height="240" loading="lazy"  alt="Anthony B. Castillo">
+                                    <div class="instructor-card-three__social social-links-two">
+                                        <div class="social-links-two__item">
+                                            <a href="https://facebook.com/">
+                                                <span class="social-links-two__icon">
+                                                    <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                                                </span><!-- /.social-links-two__icon -->
+                                                <span class="sr-only">فیسبوک</span>
+                                            </a>
+                                        </div><!-- /.social-links-two__item -->
+                                        <div class="social-links-two__item">
+                                            <a href="https://twitter.com/">
+                                                <span class="social-links-two__icon">
+                                                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                                                </span><!-- /.social-links-two__icon -->
+                                                <span class="sr-only">توییتر</span>
+                                            </a>
+                                        </div><!-- /.social-links-two__item -->
+                                        <div class="social-links-two__item">
+                                            <a href="https://instagram.com/">
+                                                <span class="social-links-two__icon">
+                                                    <i class="fab fa-instagram" aria-hidden="true"></i>
+                                                </span><!-- /.social-links-two__icon -->
+                                                <span class="sr-only">اینستاگرام</span>
+                                            </a>
+                                        </div><!-- /.social-links-two__item -->
+                                        <div class="social-links-two__item">
+                                            <a href="https://youtube.com/">
+                                                <span class="social-links-two__icon">
+                                                    <i class="fab fa-youtube" aria-hidden="true"></i>
+                                                </span><!-- /.social-links-two__icon -->
+                                                <span class="sr-only">یوتوب</span>
+                                            </a>
+                                        </div><!-- /.social-links-two__item -->
+                                    </div><!-- /.instructor-card-three__social -->
+                                </div><!-- /.instructor-card-three__image__inner -->
+                            </div><!-- /.instructor-card-three__image -->
+                            <div class="instructor-card-three__identity">
+                                <h3 class="instructor-card-three__name">
+                                    <a href="instructor-details.html">محمد سلامت</a>
+                                </h3><!-- /.instructor-card-three__name -->
+                                <p class="instructor-card-three__designation">توسعه دهنده NET.</p><!-- /.instructor-card-three__designation -->
+                            </div><!-- /.instructor-card-three__identity -->
+                        </div><!-- /.instructor-card-three -->
+                    </div><!-- /.item -->
+                    <div class="item">
+                        <div class="instructor-card-three wow fadeInUp rtl" data-wow-duration='1500ms' data-wow-delay='200ms'>
+                            <div class="instructor-card-three__image">
+                                <div class="instructor-card-three__image__inner">
+                                    <img src="/assets/images/team/soheil.webp"width="240" height="240"  alt="david cooper">
+                                    <div class="instructor-card-three__social social-links-two">
+                                        <div class="social-links-two__item">
+                                            <a href="https://facebook.com/">
+                                                <span class="social-links-two__icon">
+                                                    <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                                                </span><!-- /.social-links-two__icon -->
+                                                <span class="sr-only">فیسبوک</span>
+                                            </a>
+                                        </div><!-- /.social-links-two__item -->
+                                        <div class="social-links-two__item">
+                                            <a href="https://twitter.com/">
+                                                <span class="social-links-two__icon">
+                                                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                                                </span><!-- /.social-links-two__icon -->
+                                                <span class="sr-only">توییتر</span>
+                                            </a>
+                                        </div><!-- /.social-links-two__item -->
+                                        <div class="social-links-two__item">
+                                            <a href="https://instagram.com/">
+                                                <span class="social-links-two__icon">
+                                                    <i class="fab fa-instagram" aria-hidden="true"></i>
+                                                </span><!-- /.social-links-two__icon -->
+                                                <span class="sr-only">اینستاگرام</span>
+                                            </a>
+                                        </div><!-- /.social-links-two__item -->
+                                        <div class="social-links-two__item">
+                                            <a href="https://youtube.com/">
+                                                <span class="social-links-two__icon">
+                                                    <i class="fab fa-youtube" aria-hidden="true"></i>
+                                                </span><!-- /.social-links-two__icon -->
+                                                <span class="sr-only">یوتوب</span>
+                                            </a>
+                                        </div><!-- /.social-links-two__item -->
+                                    </div><!-- /.instructor-card-three__social -->
+                                </div><!-- /.instructor-card-three__image__inner -->
+                            </div><!-- /.instructor-card-three__image -->
+                            <div class="instructor-card-three__identity">
+                                <h3 class="instructor-card-three__name">
+                                    <a href="instructor-details.html"> سهیل ایمانی </a>
+                                </h3><!-- /.instructor-card-three__name -->
+                                <p class="instructor-card-three__designation">توسعه دهنده NET.</p><!-- /.instructor-card-three__designation -->
+                            </div><!-- /.instructor-card-three__identity -->
+                        </div><!-- /.instructor-card-three -->
+                    </div><!-- /.item -->
+                    <div class="item">
+                        <div class="instructor-card-three instructor-card-three--top-identity wow fadeInUp rtl" data-wow-duration='1500ms' data-wow-delay='200ms'>
+                            <div class="instructor-card-three__image">
+                                <div class="instructor-card-three__image__inner">
+                                    <img src="/assets/images/team/MohammadFaraji.webp"width="240" height="240"  alt="kevin martin">
+                                    <div class="instructor-card-three__social social-links-two">
+                                        <div class="social-links-two__item">
+                                            <a href="https://facebook.com/">
+                                                <span class="social-links-two__icon">
+                                                    <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                                                </span><!-- /.social-links-two__icon -->
+                                                <span class="sr-only">فیسبوک</span>
+                                            </a>
+                                        </div><!-- /.social-links-two__item -->
+                                        <div class="social-links-two__item">
+                                            <a href="https://twitter.com/">
+                                                <span class="social-links-two__icon">
+                                                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                                                </span><!-- /.social-links-two__icon -->
+                                                <span class="sr-only">توییتر</span>
+                                            </a>
+                                        </div><!-- /.social-links-two__item -->
+                                        <div class="social-links-two__item">
+                                            <a href="https://instagram.com/">
+                                                <span class="social-links-two__icon">
+                                                    <i class="fab fa-instagram" aria-hidden="true"></i>
+                                                </span><!-- /.social-links-two__icon -->
+                                                <span class="sr-only">اینستاگرام</span>
+                                            </a>
+                                        </div><!-- /.social-links-two__item -->
+                                        <div class="social-links-two__item">
+                                            <a href="https://youtube.com/">
+                                                <span class="social-links-two__icon">
+                                                    <i class="fab fa-youtube" aria-hidden="true"></i>
+                                                </span><!-- /.social-links-two__icon -->
+                                                <span class="sr-only">یوتوب</span>
+                                            </a>
+                                        </div><!-- /.social-links-two__item -->
+                                    </div><!-- /.instructor-card-three__social -->
+                                </div><!-- /.instructor-card-three__image__inner -->
+                            </div><!-- /.instructor-card-three__image -->
+                            <div class="instructor-card-three__identity">
+                                <h3 class="instructor-card-three__name">
+                                    <a href="instructor-details.html">محمد فرجی</a>
+                                </h3><!-- /.instructor-card-three__name -->
+                                <p class="instructor-card-three__designation">توسعه دهنده NET.</p><!-- /.instructor-card-three__designation -->
+                            </div><!-- /.instructor-card-three__identity -->
+                        </div><!-- /.instructor-card-three -->
+                    </div><!-- /.item -->
+                    <div class="item">
+                        <div class="instructor-card-three wow fadeInUp rtl" data-wow-duration='1500ms' data-wow-delay='300ms'>
+                            <div class="instructor-card-three__image">
+                                <div class="instructor-card-three__image__inner">
+                                    <img src="/assets/images/team/TiamBakhSian.webp"width="240" height="240"  alt="Adlof Carone">
+                                    <div class="instructor-card-three__social social-links-two">
+                                        <div class="social-links-two__item">
+                                            <a href="https://facebook.com/">
+                                                <span class="social-links-two__icon">
+                                                    <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                                                </span><!-- /.social-links-two__icon -->
+                                                <span class="sr-only">فیسبوک</span>
+                                            </a>
+                                        </div><!-- /.social-links-two__item -->
+                                        <div class="social-links-two__item">
+                                            <a href="https://twitter.com/">
+                                                <span class="social-links-two__icon">
+                                                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                                                </span><!-- /.social-links-two__icon -->
+                                                <span class="sr-only">توییتر</span>
+                                            </a>
+                                        </div><!-- /.social-links-two__item -->
+                                        <div class="social-links-two__item">
+                                            <a href="https://instagram.com/">
+                                                <span class="social-links-two__icon">
+                                                    <i class="fab fa-instagram" aria-hidden="true"></i>
+                                                </span><!-- /.social-links-two__icon -->
+                                                <span class="sr-only">اینستاگرام</span>
+                                            </a>
+                                        </div><!-- /.social-links-two__item -->
+                                        <div class="social-links-two__item">
+                                            <a href="https://youtube.com/">
+                                                <span class="social-links-two__icon">
+                                                    <i class="fab fa-youtube" aria-hidden="true"></i>
+                                                </span><!-- /.social-links-two__icon -->
+                                                <span class="sr-only">یوتوب</span>
+                                            </a>
+                                        </div><!-- /.social-links-two__item -->
+                                    </div><!-- /.instructor-card-three__social -->
+                                </div><!-- /.instructor-card-three__image__inner -->
+                            </div><!-- /.instructor-card-three__image -->
+                            <div class="instructor-card-three__identity">
+                                <h3 class="instructor-card-three__name">
+                                    <a href="instructor-details.html">تیام بخشیان</a>
+                                </h3><!-- /.instructor-card-three__name -->
+                                <p class="instructor-card-three__designation">توسعه دهنده NET.</p><!-- /.instructor-card-three__designation -->
+                            </div><!-- /.instructor-card-three__identity -->
+                        </div><!-- /.instructor-card-three -->
+                    </div><!-- /.item -->
+                     <div class="item">
+                        <div class="instructor-card-three instructor-card-three--top-identity wow fadeInUp rtl" data-wow-duration='1500ms' data-wow-delay='200ms'>
+                            <div class="instructor-card-three__image">
+                                <div class="instructor-card-three__image__inner">
+                                    <img src="/assets/images/team/AmirHoseinShiravandi.webp" width="240" height="240" alt="kevin martin">
+                                    <div class="instructor-card-three__social social-links-two">
+                                        <div class="social-links-two__item">
+                                            <a href="https://facebook.com/">
+                                                <span class="social-links-two__icon">
+                                                    <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                                                </span><!-- /.social-links-two__icon -->
+                                                <span class="sr-only">فیسبوک</span>
+                                            </a>
+                                        </div><!-- /.social-links-two__item -->
+                                        <div class="social-links-two__item">
+                                            <a href="https://twitter.com/">
+                                                <span class="social-links-two__icon">
+                                                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                                                </span><!-- /.social-links-two__icon -->
+                                                <span class="sr-only">توییتر</span>
+                                            </a>
+                                        </div><!-- /.social-links-two__item -->
+                                        <div class="social-links-two__item">
+                                            <a href="https://instagram.com/">
+                                                <span class="social-links-two__icon">
+                                                    <i class="fab fa-instagram" aria-hidden="true"></i>
+                                                </span><!-- /.social-links-two__icon -->
+                                                <span class="sr-only">اینستاگرام</span>
+                                            </a>
+                                        </div><!-- /.social-links-two__item -->
+                                        <div class="social-links-two__item">
+                                            <a href="https://youtube.com/">
+                                                <span class="social-links-two__icon">
+                                                    <i class="fab fa-youtube" aria-hidden="true"></i>
+                                                </span><!-- /.social-links-two__icon -->
+                                                <span class="sr-only">یوتوب</span>
+                                            </a>
+                                        </div><!-- /.social-links-two__item -->
+                                    </div><!-- /.instructor-card-three__social -->
+                                </div><!-- /.instructor-card-three__image__inner -->
+                            </div><!-- /.instructor-card-three__image -->
+                            <div class="instructor-card-three__identity">
+                                <h3 class="instructor-card-three__name">
+                                    <a href="instructor-details.html"> امیرحسین شیراوندی</a>
+                                </h3><!-- /.instructor-card-three__name -->
+                                <p class="instructor-card-three__designation">توسعه دهنده NET.</p><!-- /.instructor-card-three__designation -->
+                            </div><!-- /.instructor-card-three__identity -->
+                        </div><!-- /.instructor-card-three -->
+                    </div><!-- /.item -->
+
+
+    </div><!-- /.blog-three__carousel -->
+    </div><!-- /.eduhive-stretch-element-inside-column -->
+    <!-- /.col-xl-8 col-lg-5 -->
+</section><!-- /.blog-three section-space -->
+
+<div class="client-carousel @@extraClassName">
+    <div class="container-fluid">
+        <div class="client-carousel__inner">
+            <div class="container">
+                <div class="client-carousel__content">
+                    <h4 class="client-carousel__title">هزاران برند به ما اعتماد دارند</h4><!-- /.client-carousel__title -->
+                </div><!-- /.client-carousel__content -->
+                <div class="client-carousel__carousel eduhive-owl__carousel owl-theme owl-carousel" data-owl-options='{
+                     "items" : 5,
+                     "margin" : 65,
+                     "smartSpeed" : 700,
+                     "loop" :true,
+                     "autoplay" : 6000,
+                     "nav" :false,
+                     "dots" :false,
+                     "navText" : ["<span class=\"icon-arrow-left\"></span>","<span class=\"icon-arrow-right\"></span>"],
+                    "responsive":{
+                        "0":{
+                            "items": 2,
+                            "margin": 50
+                        },
+                        "500":{
+                            "items": 3,
+                            "margin": 60
+                        },
+                        "768":{
+                            "items": 3,
+                            "margin": 80
+                        },
+                        "992":{
+                            "items": 4,
+                            "margin": 60
+                        },
+                        "1200":{
+                            "items": 5,
+                            "margin": 163
+                        }
+                    }
+                    }'>
+                            <div class="client-carousel__item">
+                                <img src="/assets/images/brand/1.webp" alt="eduhive"width="100" height="80"  class="client-carousel__image">
+                                <img src="/assets/images/brand/1.webp" alt="eduhive"width="100" height="80"  class="client-carousel__hover-image">
+                            </div><!-- /.owl-slide-item-->
+                            <div class="client-carousel__item">
+                                <img src="/assets/images/brand/1.webp" alt="eduhive"width="100" height="80"  class="client-carousel__image">
+                                <img src="/assets/images/brand/1.webp" alt="eduhive"width="100" height="80"  class="client-carousel__hover-image">
+                            </div><!-- /.owl-slide-item-->
+                            <div class="client-carousel__item">
+                                <img src="/assets/images/brand/1.webp" alt="eduhive"width="100" height="80"  class="client-carousel__image">
+                                <img src="/assets/images/brand/1.webp" alt="eduhive"width="100" height="80"  class="client-carousel__hover-image">
+                            </div><!-- /.owl-slide-item-->
+                            <div class="client-carousel__item">
+	                            <img src="/assets/images/brand/1.webp" width="100" height="80" alt="eduhive" class="client-carousel__image">
+                                <img src="/assets/images/brand/1.webp" alt="eduhive"width="100" height="80"  class="client-carousel__hover-image">
+                            </div><!-- /.owl-slide-item-->
+                        </div><!-- /.client-carousel__carousel -->
+            </div><!-- /.container -->
+        </div><!-- /.client-carousel__inner -->
+    </div><!-- /.container-fluid -->
+</div><!-- /.client-carousel -->
