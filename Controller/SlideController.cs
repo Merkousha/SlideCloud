@@ -6,7 +6,6 @@ using SlideCloud.Data;
 using SlideCloud.Models;
 using Syncfusion.Presentation;
 using Syncfusion.PresentationRenderer;
-using System.Drawing.Printing;
 
 namespace SlideCloud.Controller;
 public class SlideController : Microsoft.AspNetCore.Mvc.Controller
