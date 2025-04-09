@@ -14,7 +14,7 @@ namespace SlideCloud.Areas.User.Controllers
 {
 
     [Area("User")]
-    [Route("User/[controller]/[action]")]
+    
     [Authorize]
     public class ManageSlideController : Microsoft.AspNetCore.Mvc.Controller
     {
@@ -223,19 +223,6 @@ namespace SlideCloud.Areas.User.Controllers
         }
 
 
-        [HttpGet("{userId}")]
-        public async Task<IActionResult> OtherSlideTheAuthor(long userId)
-        {
-            var userSlides = await _appDbContext.Documents
-            .Where(d => d.UserId == userId)
-            .Include(d => d.DocumentType)
-            .Include(d => d.DocumentCategory)
-            .ToListAsync();
-
-            var author = await _appDbContext.Users.FindAsync(userId);
-            ViewBag.AuthorName = author?.Name ?? "بدون نام";
-
-            return View(userSlides);
-        }
+        
     }
 }

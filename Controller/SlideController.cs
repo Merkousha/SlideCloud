@@ -8,6 +8,7 @@ using Syncfusion.Presentation;
 using Syncfusion.PresentationRenderer;
 
 namespace SlideCloud.Controller;
+
 public class SlideController : Microsoft.AspNetCore.Mvc.Controller
 {
     private readonly AppDbContext _appDbContext;
@@ -83,5 +84,24 @@ public class SlideController : Microsoft.AspNetCore.Mvc.Controller
 
         return View(model); // ارسال لیست داکیومنت‌ها به ویو
     }
+    #endregion
+
+    #region
+
+    [HttpGet]
+    public async Task<IActionResult> OtherSlideTheAuthor(long userId)
+    {
+        var userSlides = await _appDbContext.Documents
+        .Where(d => d.UserId == userId)
+        .Include(d => d.DocumentType)
+        .Include(d => d.DocumentCategory)
+        .ToListAsync();
+
+        var author = await _appDbContext.Users.FindAsync(userId);
+        ViewBag.AuthorName = author?.Name ?? "بدون نام";
+
+        return View(userSlides);
+    }
+
     #endregion
 }
