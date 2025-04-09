@@ -89,7 +89,7 @@ public class SlideController : Microsoft.AspNetCore.Mvc.Controller
     #region
 
     [HttpGet]
-    public async Task<IActionResult> OtherSlideTheAuthor(long userId)
+    public async Task<IActionResult> Author(long userId)
     {
         var userSlides = await _appDbContext.Documents
         .Where(d => d.UserId == userId)
