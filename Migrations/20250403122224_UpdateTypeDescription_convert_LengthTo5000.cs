@@ -12,7 +12,7 @@ namespace SlideCloud.Migrations
         {
             migrationBuilder.AlterColumn<string>(
                 name: "Description",
-                table: "Documents",
+                table: "Pagination",
                 type: "nvarchar(max)",
                 maxLength: 5000,
                 nullable: false,
@@ -26,7 +26,7 @@ namespace SlideCloud.Migrations
         {
             migrationBuilder.AlterColumn<string>(
                 name: "Description",
-                table: "Documents",
+                table: "Pagination",
                 type: "nvarchar(255)",
                 maxLength: 255,
                 nullable: false,

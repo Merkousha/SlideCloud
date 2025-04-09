@@ -12,18 +12,18 @@ namespace SlideCloud.Migrations
         {
             migrationBuilder.AddColumn<long>(
                 name: "UserId",
-                table: "Documents",
+                table: "Pagination",
                 type: "bigint",
                 nullable: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Documents_UserId",
-                table: "Documents",
+                table: "Pagination",
                 column: "UserId");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Documents_AspNetUsers_UserId",
-                table: "Documents",
+                table: "Pagination",
                 column: "UserId",
                 principalTable: "AspNetUsers",
                 principalColumn: "Id");
@@ -34,15 +34,15 @@ namespace SlideCloud.Migrations
         {
             migrationBuilder.DropForeignKey(
                 name: "FK_Documents_AspNetUsers_UserId",
-                table: "Documents");
+                table: "Pagination");
 
             migrationBuilder.DropIndex(
                 name: "IX_Documents_UserId",
-                table: "Documents");
+                table: "Pagination");
 
             migrationBuilder.DropColumn(
                 name: "UserId",
-                table: "Documents");
+                table: "Pagination");
         }
     }
 }

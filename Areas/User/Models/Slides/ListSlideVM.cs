@@ -4,7 +4,8 @@ namespace SlideCloud.Areas.User.Models.Slides
 {
     public class ListSlideVM
     {
-        public IEnumerable<Document> Documents { get; set; }
+        public PaginationModel<Document> Pagination { get; set; }
         public IEnumerable<DocumentCategory> DocumentCategories { get; set; }
+        
     }
 }

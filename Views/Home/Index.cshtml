@@ -549,7 +549,10 @@
                                 <div class="instructor-card-two__content">
                                     <div class="instructor-card-two__info">
                                         <h3 class="instructor-card-two__name" style="color:black">
-                                            @item.Name
+                                            <a href="@Url.Action("ListSlide_Category", "Slide", new { categoryId = item.Id })">
+                                                @item.Name
+                                            </a>
+                                            
                                         </h3><!-- /.instructor-card-two__name -->
                                         <h6 class="instructor-card-two__designation"></h6><!-- /.instructor-card-two__designation -->
                                     </div><!-- /.instructor-card-two__info -->

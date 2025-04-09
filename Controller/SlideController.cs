@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using SlideCloud.Areas.User.Models.Slides;
 using SlideCloud.Data;
 using SlideCloud.Models;
+using SlideCloud.Tools;
 using Syncfusion.Presentation;
 using Syncfusion.PresentationRenderer;
 using System.Drawing.Printing;
@@ -16,7 +17,7 @@ public class SlideController : Microsoft.AspNetCore.Mvc.Controller
     private const int PageSize = 15;
     private readonly UserManager<User> _userManager;
 
-    public SlideController(UserManager<User> userManager,AppDbContext appDbContext, IWebHostEnvironment env)
+    public SlideController(UserManager<User> userManager, AppDbContext appDbContext, IWebHostEnvironment env)
     {
         _appDbContext = appDbContext;
         _env = env;
@@ -25,10 +26,17 @@ public class SlideController : Microsoft.AspNetCore.Mvc.Controller
 
 
     #region List Of Sldie
-    public async Task<IActionResult> Index(int pageIndex = 1)
+    public async Task<IActionResult> Index(int pageIndex = 1, int? categoryId = null)
     {
-        IQueryable<Document> query = _appDbContext.Documents.OrderBy(u => u.Id);
-        var model = await PaginationModel<Document>.CreateAsync(query, pageIndex, PageSize);
+        var pagination = await DocumentHelper.GetDocuments(_appDbContext, pageIndex, categoryId, PageSize);
+        var categories = await _appDbContext.DocumentCategories.ToListAsync();
+
+        var model = new ListSlideVM
+        {
+            Pagination = pagination,
+            DocumentCategories = categories
+        };
+
         return View(model);
     }
     #endregion
@@ -41,7 +49,7 @@ public class SlideController : Microsoft.AspNetCore.Mvc.Controller
             .Include(a => a.DocumentCategory)
             .FirstOrDefaultAsync(a => a.Id == id);
 
-  
+
         if (model.DocumentDetail == null)
         {
             return NotFound();
@@ -69,7 +77,7 @@ public class SlideController : Microsoft.AspNetCore.Mvc.Controller
 
 
     #region  User's Slide custom
-    public async Task<IActionResult> ListSlidesUser()
+    public async Task<IActionResult> ListSlidesUser(int pageIndex = 1)
     {
         var user = await _userManager.GetUserAsync(User);
         if (user == null)
@@ -78,11 +86,30 @@ public class SlideController : Microsoft.AspNetCore.Mvc.Controller
         }
         var model = new ListSlideVM();
 
-        model.Documents = await _appDbContext.Documents
-                                      .Where(d => d.UserId == user.Id)
-                                      .ToListAsync();
+        model.Pagination = await PaginationModel<Document>.CreateAsync(
+            _appDbContext.Documents
+            .Where(d => d.UserId == user.Id)
+            .OrderBy(d => d.Id),  // برای داشتن ترتیب مشخص
+             pageIndex,
+             PageSize
+             );
 
         return View(model); // ارسال لیست داکیومنت‌ها به ویو
     }
     #endregion
+
+
+    public async Task<IActionResult> ListSlide_Category(int pageIndex = 1, int? categoryId = null)
+    {
+        var pagination = await DocumentHelper.GetDocuments(_appDbContext, pageIndex, categoryId, PageSize);
+        var categories = await _appDbContext.DocumentCategories.ToListAsync();
+
+        var model = new ListSlideVM
+        {
+            Pagination = pagination,
+            DocumentCategories = categories
+        };
+
+        return View(model);
+    }
 }

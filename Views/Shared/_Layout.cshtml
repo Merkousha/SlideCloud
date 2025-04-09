@@ -1,6 +1,6 @@
 ﻿@{
     var isHomePage = Context.Request.Path == "/";
-    var logoSrc = isHomePage ? "~/assets/images/logo-light.png" :"~/assets/images/logo-dark.png";
+    var logoSrc = isHomePage ? "~/assets/images/logo-light.png" : "~/assets/images/logo-dark.png";
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -78,22 +78,14 @@
                                 </li>
                                 @if (User.Identity.IsAuthenticated)
                                 {
-                                   <li>
-                                    <a  href="@Url.Content("~/User/ManageSlide/Create")">
-                                        ثبت اسلاید
-                                    </a>
-                                </li> 
-                                }
-                                
-                                @if (User.IsInRole("Admin"))
-                                {
                                     <li>
-                                    <a  href="@Url.Content("~/Admin/ManageSlide/Index")">
-                                        لیست کاربران ویژه ادمین 
-                                    </a>
-                                </li>
+                                        <a href="@Url.Content("~/User/ManageSlide/Create")">
+                                            ثبت اسلاید
+                                        </a>
+                                    </li>
                                 }
-                                
+
+
                                 <li>
                                     @Html.ActionLink("لیست اسلاید ها", "Index", "Slide")
                                 </li>
@@ -113,36 +105,51 @@
                                         @Html.ActionLink("ثبت نام", "Register", "Account", null, new { @class = "" })
                                     </li>
 
-                         
+
                                 }
                                 else
                                 {
-	                      
-	                                @if(User.IsInRole("Admin"))
-	                                {
-		                                <li class="dropdown">
-			                                <a href="#">پنل ادمین</a>
-			                                <ul>
-				                                <li><a href="/Admin/ManageCategory/List">مدیریت دسته بندی</a>
-					                                <ul>
-						                                <li><a href="/Admin/ManageCategory/List">لیست دسته بندی ها </a>
-						                                <li><a href="/Admin/ManageCategory/CreateCategory">دسته بندی جدید </a>
-					                                </ul>    
-				                                </li>
-        
-			                                </ul>
-		                                </li>
-	                                }
-	                               
-                         
-                               
-                                    <li class="nav-item">
-                                        @Html.ActionLink("پنل کاربری", "Profile", "Account", null, new { @class = "" })
+
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <li class="dropdown">
+                                            <a href="#">پنل ادمین</a>
+                                            <ul>
+                                                <li>
+                                                    <a href="/Admin/ManageCategory/List">مدیریت دسته بندی</a>
+                                                    <ul>
+                                                        <li><a href="/Admin/ManageCategory/List">لیست دسته بندی ها </a>
+                                                        <li><a href="/Admin/ManageCategory/CreateCategory">دسته بندی جدید </a>
+                                                    </ul>
+                                                <li>
+                                                    <a href="@Url.Content("~/Admin/ManageSlide/Index")">
+                                                        لیست کاربران ویژه ادمین
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+
+                                    }
+
+
+
+                                    <li class="dropdown">
+                                        <a href="#">پنل کابری</a>
+                                        <ul>
+                                            <li>
+                                                @Html.ActionLink("پنل کاربری", "Profile", "Account", null, new { @class = "" })
+                                                @* <a href="@Url.Content("~/Admin/ManageSlide/Index")">
+                                            لیست کاربران ویژه ادمین
+                                            </a> *@
+                                            </li>
+                                            <li class="nav-item">
+                                                @Html.ActionLink("لیست اسلاید های من ", "ListSlidesUser", "Slide", null, new { @class = "" })
+                                            </li>
+                                        </ul>
                                     </li>
 
-                                    <li class="nav-item">
-                                        @Html.ActionLink("لیست اسلاید های من ", "ListSlidesUser", "Slide", null, new { @class = "" })
-                                    </li>
+                                    
 
                                     <li class="nav-item">
                                         @Html.ActionLink("خروج", "LogOut", "Account", null, new { @class = "" })
@@ -185,28 +192,24 @@
                             </form><!-- /.main-footer__newsletter__form mc-form -->
                             <div class="mc-form__response"></div><!-- /.mc-form__response -->
                         </div><!-- /.main-footer__newsletter -->
-                      
+
                     </div><!-- /.main-footer__top__inner -->
                 </div><!-- /.main-footer__top -->
                 <div class="row gutter-y-40 rtl">
                     <div class="col-xl-3 col-lg-4 wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="00ms">
                         <div class="footer-widget footer-widget--about">
-                      
                         </div><!-- /.footer-widget -->
                     </div><!-- /.col-xl-3 col-lg-4 -->
                     <div class="col-xl-3 col-md-4 col-sm-6 wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="100ms">
                         <div class="footer-widget footer-widget--links">
-                          
                         </div><!-- /.footer-widget -->
                     </div><!-- /.col-xl-3 col-md-4 col-sm-6 -->
                     <div class="col-xl-3 col-md-4 col-sm-6 wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="200ms">
                         <div class="footer-widget footer-widget--links">
-                           
                         </div><!-- /.footer-widget -->
                     </div><!-- /.col-xl-3 col-md-4 col-sm-6 -->
                     <div class="col-xl-3 col-md-4 wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="300ms">
                         <div class="footer-widget footer-widget--gallery">
-                           
                         </div><!-- /.footer-widget -->
                     </div><!-- /.col-xl-3 col-md-4 -->
                 </div><!-- /.row gutter-y-40 -->
