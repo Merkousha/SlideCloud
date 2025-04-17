@@ -67,7 +67,7 @@ namespace SlideCloud.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Pagination",
+                name: "Documents",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -135,7 +135,7 @@ namespace SlideCloud.Migrations
                     table.ForeignKey(
                         name: "FK_TagDocuments_Documents_DocumentId",
                         column: x => x.DocumentId,
-                        principalTable: "Pagination",
+                        principalTable: "Documents",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -148,12 +148,12 @@ namespace SlideCloud.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_Documents_DocumentCategoryId",
-                table: "Pagination",
+                table: "Documents",
                 column: "DocumentCategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Documents_DocumentTypeId",
-                table: "Pagination",
+                table: "Documents",
                 column: "DocumentTypeId");
 
             migrationBuilder.CreateIndex(
@@ -182,7 +182,7 @@ namespace SlideCloud.Migrations
                 name: "Users");
 
             migrationBuilder.DropTable(
-                name: "Pagination");
+                name: "Documents");
 
             migrationBuilder.DropTable(
                 name: "Tags");

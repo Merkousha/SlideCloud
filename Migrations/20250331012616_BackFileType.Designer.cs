@@ -231,7 +231,7 @@ namespace SlideCloud.Migrations
 
                     b.HasIndex("DocumentTypeId");
 
-                    b.ToTable("Pagination");
+                    b.ToTable("Documents");
                 });
 
             modelBuilder.Entity("SlideCloud.Models.DocumentCategory", b =>
@@ -461,13 +461,13 @@ namespace SlideCloud.Migrations
             modelBuilder.Entity("SlideCloud.Models.Document", b =>
                 {
                     b.HasOne("SlideCloud.Models.DocumentCategory", "DocumentCategory")
-                        .WithMany("Pagination")
+                        .WithMany("Documents")
                         .HasForeignKey("DocumentCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("SlideCloud.Models.DocumentType", "DocumentType")
-                        .WithMany("Pagination")
+                        .WithMany("Documents")
                         .HasForeignKey("DocumentTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -503,12 +503,12 @@ namespace SlideCloud.Migrations
 
             modelBuilder.Entity("SlideCloud.Models.DocumentCategory", b =>
                 {
-                    b.Navigation("Pagination");
+                    b.Navigation("Documents");
                 });
 
             modelBuilder.Entity("SlideCloud.Models.DocumentType", b =>
                 {
-                    b.Navigation("Pagination");
+                    b.Navigation("Documents");
                 });
 
             modelBuilder.Entity("SlideCloud.Models.Tag", b =>

@@ -233,7 +233,7 @@ namespace SlideCloud.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Pagination");
+                    b.ToTable("Documents");
                 });
 
             modelBuilder.Entity("SlideCloud.Models.DocumentCategory", b =>
@@ -463,19 +463,19 @@ namespace SlideCloud.Migrations
             modelBuilder.Entity("SlideCloud.Models.Document", b =>
                 {
                     b.HasOne("SlideCloud.Models.DocumentCategory", "DocumentCategory")
-                        .WithMany("Pagination")
+                        .WithMany("Documents")
                         .HasForeignKey("DocumentCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("SlideCloud.Models.DocumentType", "DocumentType")
-                        .WithMany("Pagination")
+                        .WithMany("Documents")
                         .HasForeignKey("DocumentTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("SlideCloud.Models.User", "User")
-                        .WithMany("Pagination")
+                        .WithMany("Documents")
                         .HasForeignKey("UserId");
 
                     b.Navigation("DocumentCategory");
@@ -511,12 +511,12 @@ namespace SlideCloud.Migrations
 
             modelBuilder.Entity("SlideCloud.Models.DocumentCategory", b =>
                 {
-                    b.Navigation("Pagination");
+                    b.Navigation("Documents");
                 });
 
             modelBuilder.Entity("SlideCloud.Models.DocumentType", b =>
                 {
-                    b.Navigation("Pagination");
+                    b.Navigation("Documents");
                 });
 
             modelBuilder.Entity("SlideCloud.Models.Tag", b =>
@@ -526,7 +526,7 @@ namespace SlideCloud.Migrations
 
             modelBuilder.Entity("SlideCloud.Models.User", b =>
                 {
-                    b.Navigation("Pagination");
+                    b.Navigation("Documents");
                 });
 #pragma warning restore 612, 618
         }
