@@ -1,0 +1,135 @@
+﻿@model SlideCloud.Application.DTO.User.RegisterDto
+
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "CreateUser";
+}
+
+@section Styles {
+
+	<style>
+		.password-container {
+			position: relative;
+			display: flex;
+			align-items: center;
+		}
+
+		.toggle-password-input {
+			width: 100%;
+			padding-left: 2.5rem; /* فضای مناسب برای آیکون */
+		}
+
+		.toggle-password-icon {
+			position: absolute;
+			left: 10px; /* فاصله از سمت راست */
+			top: 50%;
+			transform: translateY(-50%);
+			cursor: pointer;
+			color: #888;
+		}
+	</style>
+}
+<section class="page-header">
+	<div class="container rtl">
+		<div class="page-header__content">
+			<ul class="eduhive-breadcrumb list-unstyled">
+				<li><span class="eduhive-breadcrumb__icon"><i class="icon-home"></i></span><a href="index.html">خانه</a></li>
+				<li><span>ثبت نام</span></li>
+			</ul><!-- /.eduhive-breadcrumb list-unstyled -->
+			<h2 class="page-header__title">ثبت نام</h2>
+		</div><!-- /.page-header__content -->
+	</div><!-- /.container -->
+	<img src="~/assets/images/shapes/page-header-shape-1.png" alt="shape" class="page-header__shape-one">
+	<img src="~/assets/images/shapes/page-header-shape-2.png" alt="shape" class="page-header__shape-two">
+	<div class="page-header__shape-three"></div><!-- /.page-header__shape-three -->
+	<div class="page-header__shape-four"></div><!-- /.page-header__shape-four -->
+</section>
+<section class="login-page section-space">
+	<div class="container rtl">
+		<div class="row gutter-y-50 align-items-center">
+			<div class="col-lg-6 wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="00ms">
+				<div class="login-page__image">
+					<div class="login-page__image__inner">
+						<img src="~/assets/images/resources/login-1-1.jpg" alt="login">
+					</div><!-- /.login-page__image__inner -->
+				</div><!-- /.login-page__image -->
+			</div><!-- /.col-lg-6 -->
+			<div class="col-lg-6 wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="100ms">
+					<form action="/Account/Register" method="post" class="login-page__form">
+						<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+						<div class="form-group">
+						</div>
+						@Html.ValidationSummary()
+
+					<div class="login-page__form__inner">
+						<div class="login-page__form__top">
+							<img src="~/assets/images/resources/login-logo-1-1.png" alt="logo" width="167" class="login-page__form__logo">
+							<h3 class="login-page__form__title">خوش آمدی! برای حساب کاربری خود ثبت نام کنید</h3>
+						</div><!-- /.login-page__form__top -->
+						<div class="login-page__form__input-box">
+							<div class="form-group">
+								@Html.LabelFor(a => a.FullName, new { @class = "page__form__label" })
+								@Html.EditorFor(a => a.FullName)
+							</div>
+							<div class="login-page__form__input-box">
+								@Html.ValidationMessageFor(a => a.Email)
+								@Html.LabelFor(a => a.Email, new { @class = "page__form__label" })
+								@Html.EditorFor(a => a.Email)
+							</div>
+
+							<div class="login-page__form__input-box">
+								@Html.LabelFor(a => a.Password, new { @class = "login-page__form__label" })
+								<div class="password-container">
+									@Html.PasswordFor(a => a.Password, new { @placeholder = "رمز عبور را وارد کنید", @class = "toggle-password-input" })
+									<i class="toggle-password-icon fa fa-fw fa-eye-slash" onclick="togglePassword()"></i>
+								</div>
+							</div>
+							<div class="login-page__form__input-box">
+								@Html.LabelFor(a => a.RePassword, new { @class = "login-page__form__label" })
+								<div class="password-container">
+									@Html.PasswordFor(a => a.RePassword, new { @placeholder = "رمز عبور را وارد کنید", @class = "toggle-password-input" })
+									<i class="toggle-password-icon fa fa-fw fa-eye-slash" onclick="togglePassword()"></i>
+								</div>
+							</div>
+							<div class="login-page__form__input-box">
+								@Html.ValidationMessageFor(a => a.PhoneNumber)
+								@Html.LabelFor(a => a.PhoneNumber, new { @class = "page__form__label" })
+								@Html.EditorFor(a => a.PhoneNumber)
+							</div>
+
+						
+							<div class="login-page__form__input-box login-page__form__input-box--3">
+								<label class="login-page__form__checked-box" for="remember-policy">
+									<input type="checkbox" name="remember-policy" id="remember-policy">
+									<span></span>
+									من سیاست حفظ حریم خصوصی شرکت را می پذیرم.
+								</label>
+							</div>
+							<div class="login-page__form__input-box login-page__form__input-box--4">
+								<button type="submit" class="login-page__form__btn eduhive-btn eduhive-btn--normal">ثبت نام</button>
+							</div>
+						</div><!-- /.login-page__form__wrapp -->
+						<div class="login-page__form__bottom">
+							<button type="button" class="login-page__form__signin-google">
+								<img src="~/assets/images/shapes/google.png" alt="google">
+								یا با گوگل وارد شوید
+							</button>
+
+							<p class="login-page__form__register-text">
+								از قبل حساب کاربری دارید؟ @Html.ActionLink("ورود", "Login", "Account")
+
+							</p>
+						</div><!-- /.login-page__form__bottom -->
+					</div><!-- /.login-page__form__inner -->
+				</form><!-- /.login-page__form -->
+			</div><!-- /.col-lg-6 -->
+		</div><!-- /.row gutter-y-50 -->
+	</div><!-- /.container -->
+</section><!-- /.login-page section-space -->
+
+
+
+@section Scripts {
+
+	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,182 @@
+﻿@using SlideCloud.Domain.Entities
+@using Microsoft.AspNetCore.Mvc.Rendering
+@model SlideCloud.Application.DTO.Slide.DetailsSlideDTO
+
+@{
+    var documentTypes = ViewBag.DocumentTypes as ICollection<DocumentType>;
+    var documentCategorys = ViewBag.DocumentCategories as ICollection<DocumentCategory>;
+
+    var documentType = documentTypes.Select(a => new SelectListItem
+            {
+                Text = a.Name,
+                Value = a.Id.ToString(),
+				Selected = a.Id == Model.DocumentDetail.DocumentTypeId
+                
+            });
+    var documentCategory = documentCategorys.Select(a => new SelectListItem
+            {
+                Text = a.Name,
+                Value = a.Id.ToString(),
+	            Selected = a.Id == Model.DocumentDetail.DocumentCategoryId
+            });
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "ویرایش اسلاید";
+}
+
+
+<section class="page-header">
+    <div class="container rtl">
+        <div class="page-header__content">
+            <ul class="eduhive-breadcrumb list-unstyled">
+                <li><span class="eduhive-breadcrumb__icon"><i class="icon-home"></i></span><a href="index.html">خانه</a></li>
+                <li><span>اسلایدها</span></li>
+            </ul><!-- /.eduhive-breadcrumb list-unstyled -->
+            <h2 class="page-header__title">ویرایش اسلاید</h2>
+        </div><!-- /.page-header__content -->
+    </div><!-- /.container -->
+    <img src="~/assets/images/shapes/page-header-shape-1.png" alt="shape" class="page-header__shape-one">
+    <img src="~/assets/images/shapes/page-header-shape-2.png" alt="shape" class="page-header__shape-two">
+    <div class="page-header__shape-three"></div><!-- /.page-header__shape-three -->
+    <div class="page-header__shape-four"></div><!-- /.page-header__shape-four -->
+</section><!-- /.page-header -->
+
+<section class="become-instructor section-space-top">
+    <div class="container rtl">
+        <div class="row gutter-y-50">
+            <div class="col-lg-5 wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="300ms">
+                <div class="become-instructor__content">
+                    <div class="become-instructor__content__inner">
+                        <h3 class="become-instructor__title">قوانین انتشار اسلاید</h3>
+                        <ul class="become-instructor__list">
+                            <li>تمام اسلایدها باید محتوای اصلی و غیر کپی باشند.</li>
+                            <li>لطفاً از انتشار محتوای نامناسب یا توهین‌آمیز خودداری کنید.</li>
+                            <li>قبل از انتشار، مطمئن شوید که تمام اطلاعات صحیح و معتبر هستند.</li>
+                            <li>در صورتی که از منابع دیگر استفاده می‌کنید، حتماً به آن‌ها ارجاع دهید.</li>
+                            <li>در صورت تخلف از قوانین، اسلایدهای شما حذف خواهند شد.</li>
+                        </ul>
+                    </div><!-- /.become-instructor__content__inner -->
+
+                    <div class="become-instructor__content__inner">
+                        <h3 class="become-instructor__title">زمینه‌های تخصصی</h3>
+                        <p class="become-instructor__text">
+                            لطفاً اسلایدهای خود را در زمینه‌های تخصصی خود به اشتراک بگذارید. این می‌تواند شامل موضوعات آموزشی، علمی، و حرفه‌ای باشد که به اشتراک‌گذاری دانش و تجربیات شما کمک می‌کند.
+                        </p>
+                    </div><!-- /.become-instructor__content__inner -->
+
+                    <div class="become-instructor__content__inner">
+                        <h3 class="become-instructor__title">تحصیلات و تجربه</h3>
+                        <p class="become-instructor__text">
+                            لطفاً در صورت تمایل، اطلاعاتی درباره تحصیلات و تجربیات خود را به اشتراک بگذارید. این اطلاعات می‌تواند به دیگران کمک کند تا بهتر با شما و محتوای شما آشنا شوند.
+                        </p>
+                    </div><!-- /.become-instructor__content__inner -->
+                </div>
+            </div>
+            <div class="col-lg-7 wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="400ms">
+                <div class="become-instructor__form-box">
+                    <h3 class="become-instructor__form-box__title">برای ویرایش اسلاید اقدام کنید</h3>
+                    <form asp-action="Update" method="post" enctype="multipart/form-data" class="become-instructor__form form-one">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="DocumentDetail.Id" />
+                        <input type="hidden" asp-for="DocumentDetail.ViewCount" />
+
+                        <div class="form-one__group">
+                            <div class="form-one__control form-one__control--full">
+                                <label asp-for="DocumentDetail.Title" class="control-label"></label>
+                                <input asp-for="DocumentDetail.Title" class="form-control" />
+                                <span asp-validation-for="DocumentDetail.Title" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-one__control form-one__control--full">
+                                <label asp-for="DocumentDetail.Description" class="control-label"></label>
+                                <textarea asp-for="DocumentDetail.Description" class="form-control myTextarea" id="myTextarea"></textarea>
+                                <span asp-validation-for="DocumentDetail.Description" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-one__control form-one__control--full">
+                                <label asp-for="DocumentDetail.File" class="control-label"></label>
+                                <input type="file" id="file" name="file" class="form-control" />
+                                <input type="hidden" asp-for="DocumentDetail.File" />
+                                <span asp-validation-for="DocumentDetail.File" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-one__control form-one__control--full">
+                                <label asp-for="DocumentDetail.Picture" class="control-label"></label>
+                                <input type="file" id="picture" name="picture" class="form-control" />
+                                <input type="hidden" asp-for="DocumentDetail.Picture" />
+                                <span asp-validation-for="DocumentDetail.Picture" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-one__control form-one__control--full">
+                                <label asp-for="DocumentDetail.DocumentTypeId" class="control-label"></label>
+                                <select asp-for="DocumentDetail.DocumentTypeId" class="form-control" asp-items="ViewBag.DocumentTypes"></select>
+                                <span asp-validation-for="DocumentDetail.DocumentTypeId" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-one__control form-one__control--full">
+                                <label asp-for="DocumentDetail.DocumentCategoryId" class="control-label"></label>
+                                <select asp-for="DocumentDetail.DocumentCategoryId" class="form-control" asp-items="ViewBag.DocumentCategories"></select>
+                                <span asp-validation-for="DocumentDetail.DocumentCategoryId" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-one__control form-one__control--full">
+                                <button type="submit" class="eduhive-btn">
+                                    <span>ویرایش اسلاید</span>
+                                    <span class="eduhive-btn__icon"><i class="icon-right-up"></i></span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- /.become-instructor section-space-top -->
+@section Scripts {
+	<script src="https://cdn.tiny.cloud/1/7at3pq1ag4a2zejio7k06fy3a1kzkyi4ctywq47k8f3carzc/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+	<script src="/js/custom_tinymce.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#file").change(function () {
+                var formData = new FormData();
+                formData.append("file", $(this)[0].files[0]);
+                formData.append("type", "file");
+
+                $.ajax({
+                    url: "/Admin/ManageSlide/UploadSlide",
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        $("#DocumentDetail_File").val(response.filePath);
+                    },
+                    error: function (error) {
+                        alert(error.responseJSON.message);
+                    }
+                });
+            });
+
+            $("#picture").change(function () {
+                var formData = new FormData();
+                formData.append("file", $(this)[0].files[0]);
+                formData.append("type", "picture");
+
+                $.ajax({
+                    url: "/Admin/ManageSlide/UploadSlide",
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        $("#DocumentDetail_Picture").val(response.filePath);
+                    },
+                    error: function (error) {
+                        alert(error.responseJSON.message);
+                    }
+                });
+            });
+        });
+    </script>
+}

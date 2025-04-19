@@ -1,0 +1,329 @@
+﻿@using SlideCloud.Domain.Entities
+@using Microsoft.AspNetCore.Mvc.Rendering
+@model SlideCloud.Application.DTO.Slide.DetailsSlideDTO
+
+@{
+    var documentTypes = ViewBag.DocumentTypes as ICollection<DocumentType>;
+    var documentCategorys = ViewBag.DocumentCategories as ICollection<DocumentCategory>;
+
+    var documentType = documentTypes.Select(a => new SelectListItem
+            {
+                Text = a.Name,
+                Value = a.Id.ToString()
+            });
+    var documentCategory = documentCategorys.Select(a => new SelectListItem
+            {
+                Text = a.Name,
+                Value = a.Id.ToString()
+            });
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Create Slide";
+}
+
+@section Styles {
+    <style>
+        .dropzone-custom {
+            min-height: 150px;
+            border: 2px dashed #6c5ce7;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+            .dropzone-custom:hover {
+                border-color: #4834d4;
+                background: #f1f3f5;
+            }
+
+            .dropzone-custom .dz-message {
+                margin: 2em 0;
+                font-size: 1.1em;
+                color: #666;
+            }
+
+            .dropzone-custom .dz-preview {
+                margin: 10px;
+            }
+
+            .dropzone-custom.dz-started .dz-message {
+                display: none;
+            }
+
+            .dropzone-custom .dz-remove {
+                color: #dc3545;
+                margin-top: 5px;
+                cursor: pointer;
+            }
+
+                .dropzone-custom .dz-remove:hover {
+                    text-decoration: underline;
+                }
+
+        .upload-status {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+
+            .upload-status.warning {
+                background-color: #fff3cd;
+                color: #856404;
+                border: 1px solid #ffeeba;
+            }
+
+            .upload-status.success {
+                background-color: #d4edda;
+                color: #155724;
+                border: 1px solid #c3e6cb;
+            }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .upload-progress {
+            height: 3px;
+            width: 100%;
+            background-color: #f0f0f0;
+            border-radius: 3px;
+            margin-top: 5px;
+            overflow: hidden;
+            display: none;
+        }
+
+        .upload-progress-bar {
+            height: 100%;
+            background-color: #6c5ce7;
+            width: 0;
+            transition: width 0.3s ease;
+        }
+
+        .success-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+            text-align: center;
+            min-width: 300px;
+        }
+
+            .success-modal .icon {
+                font-size: 50px;
+                color: #28a745;
+                margin-bottom: 20px;
+            }
+
+            .success-modal h3 {
+                color: #333;
+                margin-bottom: 15px;
+            }
+
+            .success-modal p {
+                color: #666;
+                margin-bottom: 20px;
+            }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+
+        .success-modal .progress {
+            width: 100%;
+            height: 4px;
+            background: #f0f0f0;
+            border-radius: 2px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        .success-modal .progress-bar {
+            width: 0;
+            height: 100%;
+            background: #28a745;
+            transition: width 3s linear;
+        }
+    </style>
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<section class="page-header">
+    <div class="container rtl">
+        <div class="page-header__content">
+            <ul class="eduhive-breadcrumb list-unstyled">
+                <li><span class="eduhive-breadcrumb__icon"><i class="icon-home"></i></span><a href="index.html">خانه</a></li>
+                <li><span>اسلایدها</span></li>
+            </ul><!-- /.eduhive-breadcrumb list-unstyled -->
+            <h2 class="page-header__title">ثبت اسلاید</h2>
+        </div><!-- /.page-header__content -->
+    </div><!-- /.container -->
+    <img src="~/assets/images/shapes/page-header-shape-1.png" alt="shape" class="page-header__shape-one">
+    <img src="~/assets/images/shapes/page-header-shape-2.png" alt="shape" class="page-header__shape-two">
+    <div class="page-header__shape-three"></div><!-- /.page-header__shape-three -->
+    <div class="page-header__shape-four"></div><!-- /.page-header__shape-four -->
+</section><!-- /.page-header -->
+
+<section class="become-instructor section-space-top">
+    <div class="container rtl">
+        <div class="row gutter-y-50">
+            <div class="col-lg-5 wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="300ms">
+                <div class="become-instructor__content">
+                    <div class="become-instructor__content__inner">
+                        <h3 class="become-instructor__title">قوانین انتشار اسلاید</h3>
+                        <ul class="become-instructor__list">
+                            <li>تمام اسلایدها باید محتوای اصلی و غیر کپی باشند.</li>
+                            <li>لطفاً از انتشار محتوای نامناسب یا توهین‌آمیز خودداری کنید.</li>
+                            <li>قبل از انتشار، مطمئن شوید که تمام اطلاعات صحیح و معتبر هستند.</li>
+                            <li>در صورتی که از منابع دیگر استفاده می‌کنید، حتماً به آن‌ها ارجاع دهید.</li>
+                            <li>در صورت تخلف از قوانین، اسلایدهای شما حذف خواهند شد.</li>
+                        </ul>
+                    </div><!-- /.become-instructor__content__inner -->
+
+                    <div class="become-instructor__content__inner">
+                        <h3 class="become-instructor__title">زمینه‌های تخصصی</h3>
+                        <p class="become-instructor__text">
+                            لطفاً اسلایدهای خود را در زمینه‌های تخصصی خود به اشتراک بگذارید. این می‌تواند شامل موضوعات آموزشی، علمی، و حرفه‌ای باشد که به اشتراک‌گذاری دانش و تجربیات شما کمک می‌کند.
+                        </p>
+                    </div><!-- /.become-instructor__content__inner -->
+
+                    <div class="become-instructor__content__inner">
+                        <h3 class="become-instructor__title">تحصیلات و تجربه</h3>
+                        <p class="become-instructor__text">
+                            لطفاً در صورت تمایل، اطلاعاتی درباره تحصیلات و تجربیات خود را به اشتراک بگذارید. این اطلاعات می‌تواند به دیگران کمک کند تا بهتر با شما و محتوای شما آشنا شوند.
+                        </p>
+                    </div><!-- /.become-instructor__content__inner -->
+                </div>
+            </div>
+            <div class="col-lg-7 wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="400ms">
+                <div class="become-instructor__form-box">
+                    <h3 class="become-instructor__form-box__title">برای ثبت اسلاید اقدام کنید</h3>
+
+                    <form asp-action="Create" method="post" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="form-group">
+                            <label asp-for="DocumentDetail.Title" class="control-label"></label>
+                            <input asp-for="DocumentDetail.Title" class="form-control" />
+                            <span asp-validation-for="DocumentDetail.Title" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="DocumentDetail.Description" class="control-label"></label>
+                            <textarea asp-for="DocumentDetail.Description" class="form-control"></textarea>
+                            <span asp-validation-for="DocumentDetail.Description" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="DocumentDetail.File" class="control-label"></label>
+                            <input type="file" id="file" name="file" class="form-control" />
+                            <input type="hidden" asp-for="DocumentDetail.File" />
+                            <span asp-validation-for="DocumentDetail.File" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="DocumentDetail.Picture" class="control-label"></label>
+                            <input type="file" id="picture" name="picture" class="form-control" />
+                            <input type="hidden" asp-for="DocumentDetail.Picture" />
+                            <span asp-validation-for="DocumentDetail.Picture" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="DocumentDetail.DocumentTypeId" class="control-label"></label>
+                            <select asp-for="DocumentDetail.DocumentTypeId" class="form-control" asp-items="ViewBag.DocumentTypes"></select>
+                            <span asp-validation-for="DocumentDetail.DocumentTypeId" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="DocumentDetail.DocumentCategoryId" class="control-label"></label>
+                            <select asp-for="DocumentDetail.DocumentCategoryId" class="form-control" asp-items="ViewBag.DocumentCategories"></select>
+                            <span asp-validation-for="DocumentDetail.DocumentCategoryId" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" value="Create" class="btn btn-primary" />
+                            <a asp-action="ListOfSlide" class="btn btn-secondary">Back to List</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- /.become-instructor section-space-top -->
+<!-- اضافه کردن مودال موفقیت -->
+<div class="modal-overlay" id="modalOverlay"></div>
+<div class="success-modal" id="successModal">
+    <div class="icon">
+        <i class="fas fa-check-circle"></i>
+    </div>
+    <h3>با موفقیت ثبت شد!</h3>
+    <p>اسلاید شما با موفقیت در سیستم ثبت شد و پس از تایید نمایش داده خواهد شد.</p>
+    <div class="progress">
+        <div class="progress-bar"></div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(document).ready(function () {
+            $("#file").change(function () {
+                var formData = new FormData();
+                formData.append("file", $(this)[0].files[0]);
+                formData.append("type", "file");
+
+                $.ajax({
+                    url: "/Admin/ManageSlide/UploadSlide",
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        $("#DocumentDetail_File").val(response.filePath);
+                    },
+                    error: function (error) {
+                        alert(error.responseJSON.message);
+                    }
+                });
+            });
+
+            $("#picture").change(function () {
+                var formData = new FormData();
+                formData.append("file", $(this)[0].files[0]);
+                formData.append("type", "picture");
+
+                $.ajax({
+                    url: "/Admin/ManageSlide/UploadSlide",
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        $("#DocumentDetail_Picture").val(response.filePath);
+                    },
+                    error: function (error) {
+                        alert(error.responseJSON.message);
+                    }
+                });
+            });
+        });
+    </script>
+}
