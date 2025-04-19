@@ -76,8 +76,14 @@
                                 <li class="dropdown megamenu">
                                     <a href="~/">خانه</a>
                                 </li>
-
-
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <li>
+                                        <a href="@Url.Content("~/User/ManageSlide/Create")">
+                                            ثبت اسلاید
+                                        </a>
+                                    </li>
+                                }
 
 
                                 <li>
@@ -178,7 +184,9 @@
 
 
 
-                                <li class="nav-item">
+                                    
+
+                                    <li class="nav-item">
                                         @Html.ActionLink("خروج", "LogOut", "Account", null, new { @class = "" })
                                 </li>
                                 }

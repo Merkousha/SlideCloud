@@ -37,9 +37,9 @@
                 </div>
 
                 <div class="row gutter-y-30">
-                    @if (Model != null && Model.Documents.Any())
+                    @if (Model != null && Model.Pagination.Items.Any())
                     {
-                        @foreach (var document in Model.Documents)
+                        @foreach (var document in Model.Pagination.Items)
                         {
 
                             <div class="col-xl-4 col-sm-6">
@@ -69,7 +69,7 @@
                                             <h4 class="product__item__title">
                                                 @document.Title
                                             </h4><!-- /.product-title -->
-                                         @*    <div class="product__item__price">      @Html.Raw(document.Description.GetTextBy20Length()) </div> *@
+                                            @*    <div class="product__item__price">      @Html.Raw(document.Description.GetTextBy20Length()) </div> *@
                                             <div> <a href="/User/ManageSlide/Delete?id=@document.Id" class="btn  btn-outline-danger"> حذف اسلاید </a> </div>
                                         </div><!-- /.product-content -->
                                     </div><!-- /.product-item -->
