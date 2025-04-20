@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using SlideCloud.Application.DTO.Slide;
 using SlideCloud.Application.Interfaces;
 using SlideCloud.Domain.Entities;
-using SlideCloud.Domain.Models.Pagination;
 using SlideCloud.Web.Models;
-using System.Security.Claims;
 
 namespace SlideCloud.Web.Controllers
 {
@@ -25,12 +25,12 @@ namespace SlideCloud.Web.Controllers
         {
             const int pageSize = 12;
             var slides = await _slideService.GetSlidesAsync(pageIndex, categoryId, pageSize);
+            var categories = await _slideService.GetAllCategoriesAsync();
 
-            var viewModel = new SlideIndexViewModel
+            var viewModel = new ListSlideDTO
             {
                 Pagination = slides,
-                Categories = await _slideService.GetAllCategoriesAsync(),
-                SelectedCategoryId = categoryId
+                DocumentCategories = categories.Select(c => new DocumentCategory { Id = c.Id, Name = c.Name }).ToList()
             };
 
             return View(viewModel);
@@ -60,14 +60,15 @@ namespace SlideCloud.Web.Controllers
             }
 
             var slides = await _slideService.GetUserSlidesAsync(userId, pageIndex, pageSize);
+            var categories = await _slideService.GetAllCategoriesAsync();
 
-            var viewModel = new SlideIndexViewModel
+            var viewModel = new ListSlideDTO
             {
                 Pagination = slides,
-                Categories = await _slideService.GetAllCategoriesAsync()
+                DocumentCategories = categories.Select(c => new DocumentCategory { Id = c.Id, Name = c.Name }).ToList()
             };
 
-            return View("Index", viewModel);
+            return View(viewModel);
         }
 
         public async Task<IActionResult> ListSlide_Category(int pageIndex = 1, int? categoryId = null)

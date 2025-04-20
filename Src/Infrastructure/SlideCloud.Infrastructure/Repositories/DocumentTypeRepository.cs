@@ -8,9 +8,9 @@ namespace SlideCloud.Infrastructure.Repositories;
 
 public class DocumentTypeRepository : IDocumentTypeRepository
 {
-    private readonly ApplicationDbContext _context;
+    private readonly AppDbContext _context;
 
-    public DocumentTypeRepository(ApplicationDbContext context)
+    public DocumentTypeRepository(AppDbContext context)
     {
         _context = context;
     }

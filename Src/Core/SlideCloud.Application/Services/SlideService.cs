@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using SlideCloud.Application.DTO.Slide;
 using SlideCloud.Application.DTO.Category;
 using SlideCloud.Application.DTO.DocumentType;
+using SlideCloud.Application.DTO.Slide;
 using SlideCloud.Application.Interfaces;
 using SlideCloud.Domain.Entities;
 using SlideCloud.Domain.Interfaces;
@@ -54,12 +54,7 @@ namespace SlideCloud.Application.Services
 
         public async Task<DetailsSlideDTO> GetSlideByIdAsync(int id)
         {
-            var document = await _unitOfWork.Documents.GetAll()
-                .Include(d => d.DocumentCategory)
-                .Include(d => d.DocumentType)
-                .Include(d => d.User)
-                .FirstOrDefaultAsync(d => d.Id == id);
-
+            var document = await _unitOfWork.Documents.GetByIdAsync(id);
             if (document == null)
                 return null;
 
@@ -201,7 +196,7 @@ namespace SlideCloud.Application.Services
 
         public async Task DeleteSlideAsync(int id)
         {
-            var document = await GetSlideByIdAsync(id);
+            var document = await _unitOfWork.Documents.GetByIdAsync(id);
             if (document != null)
             {
                 if (document.File != null)
@@ -212,7 +207,7 @@ namespace SlideCloud.Application.Services
                 {
                     await _fileService.DeleteFileAsync(document.Picture);
                 }
-                _unitOfWork.Documents.Delete(await _unitOfWork.Documents.GetByIdAsync(id));
+                _unitOfWork.Documents.Delete(document);
                 await _unitOfWork.SaveChangesAsync();
             }
         }

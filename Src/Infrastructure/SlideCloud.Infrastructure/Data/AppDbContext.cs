@@ -22,7 +22,34 @@ namespace SlideCloud.Infrastructure.Data
         {
             base.OnModelCreating(builder);
 
-            // Add any additional model configurations here
+            // Configure Document entity
+            builder.Entity<Document>()
+                .HasOne(d => d.DocumentType)
+                .WithMany(dt => dt.Documents)
+                .HasForeignKey(d => d.DocumentTypeId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Document>()
+                .HasOne(d => d.DocumentCategory)
+                .WithMany(dc => dc.Documents)
+                .HasForeignKey(d => d.DocumentCategoryId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Configure TagDocument entity (many-to-many relationship)
+            builder.Entity<TagDocument>()
+                .HasKey(td => td.Id);
+
+            builder.Entity<TagDocument>()
+                .HasOne(td => td.Tag)
+                .WithMany(t => t.TagDocuments)
+                .HasForeignKey(td => td.TagId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<TagDocument>()
+                .HasOne(td => td.Document)
+                .WithMany(d => d.TagDocuments)
+                .HasForeignKey(td => td.DocumentId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 } 

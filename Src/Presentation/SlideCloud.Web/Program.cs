@@ -1,10 +1,8 @@
-using Amazon.S3;
 using DotNetEnv;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SlideCloud.Application.Interfaces;
 using SlideCloud.Application.Services;
-using SlideCloud.Application.Services.Services;
 using SlideCloud.Domain.Entities;
 using SlideCloud.Domain.Interfaces;
 using SlideCloud.Infrastructure.Data;
@@ -17,7 +15,7 @@ builder.Services.AddControllersWithViews();
 
 // Add DbContext
 var ConnectionString = Environment.GetEnvironmentVariable("DefaultConnection");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
+builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(ConnectionString));
 
 // Add Identity
@@ -29,7 +27,7 @@ builder.Services.AddIdentity<User, IdentityRole<long>>(options =>
     options.Password.RequireNonAlphanumeric = true;
     options.Password.RequiredLength = 8;
 })
-.AddEntityFrameworkStores<ApplicationDbContext>()
+.AddEntityFrameworkStores<AppDbContext>()
 .AddDefaultTokenProviders();
 
 builder.Services.AddHttpContextAccessor();
@@ -37,9 +35,8 @@ builder.Services.AddHttpContextAccessor();
 // Add AWS S3
 builder.Services.AddSingleton<IS3Uploader>(sp =>
 {
-    var s3Client = sp.GetRequiredService<IAmazonS3>();
-    var bucketName = Environment.GetEnvironmentVariable("AWS_BUCKET_NAME") ?? "slidecloud-bucket";
-    return new S3Uploader(s3Client, bucketName);
+    var bucketName = Environment.GetEnvironmentVariable("S3-BucketName") ?? "slidecloud-bucket";
+    return new S3Uploader();
 });
 
 // Add UnitOfWork

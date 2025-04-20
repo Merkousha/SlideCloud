@@ -1,0 +1,145 @@
+﻿@using SlideCloud.Web.Extensions
+@model SlideCloud.Application.DTO.Slide.ListSlideDTO
+@{
+    Layout = "_layout";
+    ViewData["Title"] = "اسلایدهای من";
+}
+
+<section class="page-header">
+    <div class="container rtl">
+        <div class="page-header__content">
+            <ul class="eduhive-breadcrumb list-unstyled">
+                <li><span class="eduhive-breadcrumb__icon"><i class="icon-home"></i></span><a href="/">خانه</a></li>
+                <li><span>اسلایدهای من</span></li>
+            </ul>
+            <h2 class="page-header__title">اسلایدهای من</h2>
+            <div class="text-left">
+                <a href="@Url.Action("Create", "ManageSlide", new { area = "User" })" class="eduhive-btn">
+                    <span>ثبت اسلاید جدید</span>
+                    <span class="eduhive-btn__icon"><i class="icon-plus"></i></span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <img src="/assets/images/shapes/page-header-shape-1.png" alt="shape" class="page-header__shape-one">
+    <img src="/assets/images/shapes/page-header-shape-2.png" alt="shape" class="page-header__shape-two">
+    <div class="page-header__shape-three"></div>
+    <div class="page-header__shape-four"></div>
+</section>
+
+<section class="product-page section-space-bottom">
+    <div class="container">
+        <div class="row gutter-y-60">
+            <div class="col-xl-9 col-lg-8">
+                @if (!Model.Pagination.Items.Any())
+                {
+                    <div class="alert alert-info rtl">
+                        شما هنوز هیچ اسلایدی ثبت نکرده‌اید.
+                    </div>
+                }
+                else
+                {
+                    <div class="row gutter-y-30">
+                        @foreach (var document in Model.Pagination.Items)
+                        {
+                            <div class="col-xl-4 col-sm-6">
+                                <div class="product__item wow fadeInUp rtl" data-wow-duration='1500ms' data-wow-delay='000ms'>
+                                    <div class="product__item__image">
+                                        <img src="@document.Picture" alt="@document.Title">
+                                    </div>
+                                    <div class="product__item__content">
+                                        <h4 class="product__item__title">@document.Title</h4>
+                                        <div class="product__item__meta">
+                                            <span><i class="fa fa-eye"></i> @document.ViewCount بازدید</span>
+                                            <span><i class="fa fa-calendar"></i> @document.CreatedAt.ToPersianDate()</span>
+                                        </div>
+                                        <div class="product__item__actions">
+                                            <a href="@Url.Action("Detail", "Slide", new { id = document.Id })" class="btn btn-sm btn-primary">
+                                                <i class="fa fa-eye"></i> مشاهده
+                                            </a>
+                                            <a href="@Url.Action("Update", "ManageSlide", new { area = "User", id = document.Id })" class="btn btn-sm btn-warning">
+                                                <i class="fa fa-edit"></i> ویرایش
+                                            </a>
+                                            <form asp-area="User" asp-controller="ManageSlide" asp-action="Delete" asp-route-id="@document.Id" 
+                                                  method="post" style="display: inline;" 
+                                                  onsubmit="return confirm('آیا از حذف این اسلاید اطمینان دارید؟');">
+                                                @Html.AntiForgeryToken()
+                                                <button type="submit" class="btn btn-sm btn-danger">
+                                                    <i class="fa fa-trash"></i> حذف
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    @if (Model.Pagination.TotalPages > 1)
+                    {
+                        <div class="col-lg-12">
+                            <ul class="post-pagination">
+                                @if (Model.Pagination.HasPreviousPage)
+                                {
+                                    <li>
+                                        <a asp-action="MySlides" asp-route-pageIndex="@(Model.Pagination.PageIndex - 1)" class="btn btn-primary">
+                                            قبلی
+                                            <span class="post-pagination__icon">
+                                                <i class="icon-left-arrow"></i>
+                                            </span>
+                                        </a>
+                                    </li>
+                                }
+
+                                @for (int i = 1; i <= Model.Pagination.TotalPages; i++)
+                                {
+                                    <li>
+                                        <a asp-action="MySlides" asp-route-pageIndex="@i" 
+                                           class="btn @(i == Model.Pagination.PageIndex ? "btn-success" : "btn-secondary")">@i</a>
+                                    </li>
+                                }
+
+                                @if (Model.Pagination.HasNextPage)
+                                {
+                                    <li>
+                                        <a asp-action="MySlides" asp-route-pageIndex="@(Model.Pagination.PageIndex + 1)" class="btn btn-primary">
+                                            بعدی
+                                            <span class="post-pagination__icon">
+                                                <i class="icon-right-arrow"></i>
+                                            </span>
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    }
+                }
+            </div>
+
+            <div class="col-xl-3 col-lg-4">
+                <aside class="product__sidebar rtl">
+                    <div class="product__categories product__sidebar__item">
+                        <h3 class="product__sidebar__title">دسته‌بندی‌ها</h3>
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="@Url.Action("MySlides", "Slide")">
+                                    <span class="product-categories__icon"><i class="icon-left-arrow"></i></span>
+                                    همه
+                                </a>
+                            </li>
+                            @foreach (var category in Model.DocumentCategories)
+                            {
+                                <li>
+                                    <a href="@Url.Action("MySlides", "Slide", new { categoryId = category.Id })">
+                                        <span class="product-categories__icon"><i class="icon-left-arrow"></i></span>
+                                        @category.Name
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+</section>

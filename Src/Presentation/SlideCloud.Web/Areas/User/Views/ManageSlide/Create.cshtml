@@ -1,10 +1,11 @@
-﻿@using SlideCloud.Domain.Entities
+﻿@using SlideCloud.Application.DTO.DocumentType
+@using SlideCloud.Application.DTO.Category
 @using Microsoft.AspNetCore.Mvc.Rendering
 @model SlideCloud.Application.DTO.Slide.DetailsSlideDTO
 
 @{
-    var documentTypes = ViewBag.DocumentTypes as ICollection<DocumentType>;
-    var documentCategorys = ViewBag.DocumentCategories as ICollection<DocumentCategory>;
+    var documentTypes = ViewBag.DocumentTypes as ICollection<DocumentTypeDTO> ?? new List<DocumentTypeDTO>();
+    var documentCategorys = ViewBag.DocumentCategories as ICollection<CategoryDTO> ?? new List<CategoryDTO>();
 
     var documentType = documentTypes.Select(a => new SelectListItem
             {
@@ -252,7 +253,7 @@
                                 <div class="upload-progress" id="pictureProgress">
                                     <div class="upload-progress-bar"></div>
                                 </div>
-                                <input type="hidden" id="PictureUrl" name="Picture" />
+                                @Html.HiddenFor(m => m.Picture)
                             </div>
 
                            
@@ -270,17 +271,19 @@
                                 <div class="upload-progress" id="fileProgress">
                                     <div class="upload-progress-bar"></div>
                                 </div>
-                                <input type="hidden" id="FileUrl" name="File" />
+                                @Html.HiddenFor(m => m.File)
                             </div>
 
                             <div class="form-one__control form-one__control--full">
                                 @Html.LabelFor(a => a.DocumentTypeId)
-                                @Html.DropDownListFor(a => a.DocumentTypeId, documentType)
+                                @Html.DropDownListFor(a => a.DocumentTypeId, (IEnumerable<SelectListItem>)ViewBag.DocumentTypeList, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(a => a.DocumentTypeId)
                             </div>
 
                             <div class="form-one__control form-one__control--full">
                                 @Html.LabelFor(a => a.DocumentCategoryId)
-                                @Html.DropDownListFor(a => a.DocumentCategoryId, documentCategory)
+                                @Html.DropDownListFor(a => a.DocumentCategoryId, (IEnumerable<SelectListItem>)ViewBag.DocumentCategoryList, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(a => a.DocumentCategoryId)
                             </div>
 
                             <div class="form-one__control form-one__control--full">
@@ -380,7 +383,7 @@
                     });
 
                     this.on("success", function(file, response) {
-                        $('#PictureUrl').val(response.filePath);
+                        $('#Picture').val(response.filePath);
                         uploadsCompleted.picture = true;
                         updateSubmitButton();
                         updateProgress('pictureProgress', 100);
@@ -435,7 +438,7 @@
                     });
 
                     this.on("success", function(file, response) {
-                        $('#FileUrl').val(response.filePath);
+                        $('#File').val(response.filePath);
                         uploadsCompleted.file = true;
                         updateSubmitButton();
                         updateProgress('fileProgress', 100);

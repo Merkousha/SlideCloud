@@ -1,8 +1,6 @@
-using SlideCloud.Domain.Interfaces;
-
 namespace SlideCloud.Domain.Interfaces
 {
-    public interface IUnitOfWork : IDisposable
+    public interface IUnitOfWork
     {
         IDocumentRepository Documents { get; }
         ICategoryRepository Categories { get; }
@@ -10,4 +8,4 @@ namespace SlideCloud.Domain.Interfaces
         IUserRepository Users { get; }
         Task<int> SaveChangesAsync();
     }
-} 
+}

@@ -1,20 +1,18 @@
-using Microsoft.EntityFrameworkCore;
 using SlideCloud.Domain.Interfaces;
-using SlideCloud.Infrastructure.Data;
 using SlideCloud.Infrastructure.Repositories;
 
 namespace SlideCloud.Infrastructure.Data
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly ApplicationDbContext _context;
+        private readonly AppDbContext _context;
         private IDocumentRepository _documentRepository;
         private ICategoryRepository _categoryRepository;
         private IDocumentTypeRepository _documentTypeRepository;
         private IUserRepository _userRepository;
         private bool _disposed = false;
 
-        public UnitOfWork(ApplicationDbContext context)
+        public UnitOfWork(AppDbContext context)
         {
             _context = context;
         }
@@ -60,19 +58,7 @@ namespace SlideCloud.Infrastructure.Data
             return await _context.SaveChangesAsync();
         }
 
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!_disposed && disposing)
-            {
-                _context.Dispose();
-            }
-            _disposed = true;
-        }
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
+
     }
-} 
+}
