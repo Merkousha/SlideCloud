@@ -1,0 +1,77 @@
+.slide-preview {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.slide-preview h6 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.slide-preview .content {
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.slide-preview .mermaid {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 4px;
+    margin: 15px 0;
+}
+
+.slide-preview .speaker-notes {
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+    margin-top: 10px;
+    font-style: italic;
+}
+
+#topicsContent ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+#topicsContent li {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+#topicsContent li:last-child {
+    border-bottom: none;
+}
+
+.btn-primary {
+    background-color: #3498db;
+    border-color: #3498db;
+}
+
+.btn-success {
+    background-color: #2ecc71;
+    border-color: #2ecc71;
+}
+
+.card {
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #eee;
+}
+
+.card-title {
+    color: #2c3e50;
+    margin: 0;
+}
+
+.form-control:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+} 

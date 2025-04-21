@@ -1,0 +1,135 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Presentation Generator";
+}
+<section class="page-header">
+    <div class="container rtl">
+        <div class="page-header__content">
+            <ul class="eduhive-breadcrumb list-unstyled">
+                <li><span class="eduhive-breadcrumb__icon"><i class="icon-home"></i></span><a href"https: //SlideCloud.ir">خانه</a></li>
+                <li><span> اسلاید ها</span></li>
+            </ul><!-- /.eduhive-breadcrumb list-unstyled -->
+            <h2 class="page-header__title">ساخت اسلاید با هوش مصنوعی</h2>
+        </div><!-- /.page-header__content -->
+    </div><!-- /.container -->
+    <img src="/assets/images/shapes/page-header-shape-1.png" alt="shape" class="page-header__shape-one">
+    <img src="/assets/images/shapes/page-header-shape-2.png" alt="shape" class="page-header__shape-two">
+    <div class="page-header__shape-three"></div><!-- /.page-header__shape-three -->
+    <div class="page-header__shape-four"></div><!-- /.page-header__shape-four -->
+</section><!-- /.page-header -->
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12 offset-md-2">
+            <div class="card">
+                <div class="card-body">
+                    <form id="presentationForm">
+                        <div class="form-group mb-3">
+                            <label for="topic">عنوان کلی ارائه ی خود را بدهید</label>
+                            <input type="text" class="form-control" id="topic" name="topic" required>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">ایجاد سرفصل‌ها</button>
+                        </div>
+                    </form>
+
+                    <div id="topicsSection" class="mt-4 d-none">
+                        <h3>سرفصل‌های ساخته شده</h3>
+                        <div id="topicsList" class="list-group mb-3"></div>
+                        <button id="generateContentBtn" class="btn btn-success">محتوای نهایی رو بساز</button>
+                    </div>
+
+                    <div id="contentSection" class="mt-4 d-none">
+                        <h3>Generated Content</h3>
+                        <div id="contentPreview" class="border p-3 mb-3"></div>
+                        <button id="createPowerPointBtn" class="btn btn-info">پاورپوینتش رو بساز!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            $('#presentationForm').on('submit', function(e) {
+                e.preventDefault();
+                const topic = $('#topic').val();
+                
+                $.ajax({
+                    url: '/Presentation/GenerateTopics',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(topic),
+                    success: function(response) {
+                        $('#topicsList').empty();
+                        response.subtopics.forEach(function(subtopic) {
+                            $('#topicsList').append(
+                                `<div class="list-group-item">
+                                    <h5>${subtopic}</h5>
+                                    <small class="text-muted">Keywords: ${response.keywords.join(', ')}</small>
+                                </div>`
+                            );
+                        });
+                        $('#topicsSection').removeClass('d-none');
+                    },
+                    error: function(xhr) {
+                        alert('Error generating topics: ' + xhr.responseText);
+                    }
+                });
+            });
+
+            $('#generateContentBtn').click(function() {
+                const topics = {
+                    title: $('#topic').val(),
+                    subtopics: $('#topicsList .list-group-item h5').map(function() {
+                        return $(this).text();
+                    }).get(),
+                    keywords: $('#topicsList .text-muted').first().text().replace('Keywords: ', '').split(', ')
+                };
+
+                $.ajax({
+                    url: '/Presentation/GenerateContent',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(topics),
+                    success: function(response) {
+                        $('#contentPreview').empty();
+                        response.slides.forEach(function(slide) {
+                            $('#contentPreview').append(
+                                `<div class="card mb-3">
+                                    <div class="card-header">
+                                        <h4>${slide.title}</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <p>${slide.content}</p>
+                                        ${slide.speakerNotes ? `<div class="text-muted"><small>Speaker Notes: ${slide.speakerNotes}</small></div>` : ''}
+                                        ${slide.mermaidDiagram ? `<pre class="mermaid">${slide.mermaidDiagram}</pre>` : ''}
+                                    </div>
+                                </div>`
+                            );
+                        });
+                        $('#contentSection').removeClass('d-none');
+                    },
+                    error: function(xhr) {
+                        alert('Error generating content: ' + xhr.responseText);
+                    }
+                });
+            });
+
+            $('#createPowerPointBtn').click(function() {
+                window.location.href = '/Presentation/CreatePowerPoint?' + $.param({
+                    mainTitle: $('#topic').val(),
+                    slides: $('#contentPreview .card').map(function() {
+                        return {
+                            title: $(this).find('h4').text(),
+                            content: $(this).find('p').text(),
+                            speakerNotes: $(this).find('.text-muted small').text().replace('Speaker Notes: ', ''),
+                            mermaidDiagram: $(this).find('pre.mermaid').text()
+                        };
+                    }).get()
+                });
+            });
+        });
+    </script>
+} 

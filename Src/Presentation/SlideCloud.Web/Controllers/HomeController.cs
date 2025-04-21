@@ -10,7 +10,7 @@ namespace SlideCloud.Web.Controllers
         private readonly IHomeService _homeService;
         private readonly IContactService _contactService;
 
-        public HomeController(IHomeService homeService, IContactService contactService)
+        public HomeController(IHomeService homeService, IContactService contactService, IPresentationGeneratorService presentationGeneratorService)
         {
             _homeService = homeService;
             _contactService = contactService;

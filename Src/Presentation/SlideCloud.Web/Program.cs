@@ -58,6 +58,7 @@ builder.Services.AddScoped<IAdminSlideService, AdminSlideService>();
 builder.Services.AddScoped<ISlideService, SlideService>();
 builder.Services.AddScoped<IFileService, FileService>();
 builder.Services.AddScoped<IContactService, ContactService>();
+builder.Services.AddScoped<IPresentationGeneratorService, PresentationGeneratorService>();
 
 var app = builder.Build();
 
