@@ -6,6 +6,7 @@ namespace SlideCloud.Domain.Interfaces
         ICategoryRepository Categories { get; }
         IDocumentTypeRepository DocumentTypes { get; }
         IUserRepository Users { get; }
+        IContactRepository Contacts { get; }
         Task<int> SaveChangesAsync();
     }
 }

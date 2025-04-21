@@ -26,7 +26,7 @@
                 <a asp-action="Create" class="btn btn-lg text-center  btn-outline-success">ایجاد اسلاید جدید </a>
 
             </div>
-            <div class="col-xl-9 col-lg-8">
+            <div class="col-xl-12 col-lg-8">
                 <div class="product__info-top rtl">
                     <div class="product__showing-text-box">
                         <p class="product__showing-text">نمایش 1–9 از @Model.Count() نتیجه</p>
@@ -47,7 +47,6 @@
                         <thead>
                             <tr>
                                 <th>Title</th>
-                                <th>Description</th>
                                 <th>File</th>
                                 <th>Picture</th>
                                 <th>View Count</th>
@@ -59,9 +58,8 @@
                             {
                                 <tr>
                                     <td>@item.Title</td>
-                                    <td>@item.Description</td>
-                                    <td>@item.File</td>
-                                    <td>@item.Picture</td>
+                                    <td><a href="@item.File">دریافت فایل</a> </td>
+                                    <td><img src="@item.Picture" class="img-fluid img-thumbnail" style="max-height:150px;" /></td>
                                     <td>@item.ViewCount</td>
                                     <td>
                                         <a asp-action="Update" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
@@ -74,46 +72,7 @@
 
                 </div><!-- /.row -->
             </div><!-- /.col-xl-9 col-lg-8 -->
-            <div class="col-xl-3 col-lg-4">
-                <aside class="product__sidebar rtl">
-                    <div class="product__search-box product__sidebar__item">
-                        <form action="#" class="product__search">
-                            <input type="text" placeholder="جستجوی موارد" />
-                            <button type="submit" aria-label="earch submit">
-                                <span class="icon-search"></span>
-                            </button>
-                        </form><!-- /.product__search -->
-                    </div><!-- /.search-widget -->
-                    <div class="product__price-ranger product__sidebar__item">
-                        <h3 class="product__sidebar__title">فیلتر بر اساس قیمت</h3>
-                        <form action="#" class="price-ranger">
-                            <div id="slider-range"></div>
-                            <div class="ranger-min-max-block">
-                                <input type="text" readonly class="min">
-                                <span>-</span>
-                                <input type="text" readonly class="max">
-                            </div>
-                        </form>
-                    </div><!-- /.price-slider -->
-                    <div class="product__categories product__sidebar__item">
-                        <h3 class="product__sidebar__title product__categories__title">دسته بندی ها</h3>
-                        <ul class="list-unstyled">
-
-                            @await Component.InvokeAsync("SlideUsersCategory")
-
-                            @*  @foreach (var category in Model.DocumentCategories)
-                            {
-                                <li>
-                                    <a href="@Url.RouteUrl("DetailsCategory",new {id=$"{category.Id}"})">
-                                        <span class="product-categories__icon"><i class="icon-left-arrow"></i></span>
-                                        <!-- /.product-categories__icon --> @category.Name
-                                    </a>
-                                </li>
-                            } *@
-                        </ul>
-                    </div><!-- /.category-widget -->
-                </aside><!-- /.shop-sidebar -->
-            </div><!-- /.col-xl-3 col-lg-4 -->
+       
         </div><!-- /.row -->
     </div><!-- /.container -->
 </section><!-- /.product-page section-space-bottom -->

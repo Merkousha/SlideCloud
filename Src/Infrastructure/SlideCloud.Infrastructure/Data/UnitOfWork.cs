@@ -10,6 +10,7 @@ namespace SlideCloud.Infrastructure.Data
         private ICategoryRepository _categoryRepository;
         private IDocumentTypeRepository _documentTypeRepository;
         private IUserRepository _userRepository;
+        private IContactRepository _contactRepository;
         private bool _disposed = false;
 
         public UnitOfWork(AppDbContext context)
@@ -50,6 +51,15 @@ namespace SlideCloud.Infrastructure.Data
             {
                 _userRepository ??= new UserRepository(_context);
                 return _userRepository;
+            }
+        }
+
+        public IContactRepository Contacts
+        {
+            get
+            {
+                _contactRepository ??= new ContactRepository(_context);
+                return _contactRepository;
             }
         }
 

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SlideCloud.Application.DTO.Category;
 using SlideCloud.Application.Interfaces;
+using SlideCloud.Domain.Entities;
 
 namespace SlideCloud.Web.Areas.Admin.Controllers
 {
@@ -19,7 +20,14 @@ namespace SlideCloud.Web.Areas.Admin.Controllers
         #region List Categories
         public async Task<IActionResult> List()
         {
-            var categories = await _categoryService.GetAllCategoriesAsync();
+            var categoryDtos = await _categoryService.GetAllCategoriesAsync();
+            var categories = categoryDtos.Select(dto => new DocumentCategory
+            {
+                Id = dto.Id,
+                Name = dto.Name,
+                Description = dto.Description,
+                Slug = dto.Slug
+            });
             return View(categories);
         }
         #endregion

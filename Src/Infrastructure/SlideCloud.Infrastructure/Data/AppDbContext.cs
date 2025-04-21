@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SlideCloud.Domain.Interfaces;
 using SlideCloud.Domain.Entities;
+using SlideCloud.Domain.Models.ContactUs;
 
 namespace SlideCloud.Infrastructure.Data
 {
@@ -17,6 +18,7 @@ namespace SlideCloud.Infrastructure.Data
         public DbSet<DocumentType> DocumentTypes { get; set; } = null!;
         public DbSet<Tag> Tags { get; set; } = null!;
         public DbSet<TagDocument> TagDocuments { get; set; } = null!;
+        public DbSet<Contact> Contacts { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

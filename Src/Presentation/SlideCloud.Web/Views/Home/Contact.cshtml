@@ -5,152 +5,88 @@
     ViewData["Title"] = "تماس با ما";
 }
 
-
-
 <section class="page-header">
     <div class="container rtl">
         <div class="page-header__content">
             <ul class="eduhive-breadcrumb list-unstyled">
                 <li><span class="eduhive-breadcrumb__icon"><i class="icon-home"></i></span><a href="index.html">خانه</a></li>
                 <li><span>تماس با ما</span></li>
-            </ul><!-- /.eduhive-breadcrumb list-unstyled -->
+            </ul>
             <h2 class="page-header__title">تماس با ما</h2>
-        </div><!-- /.page-header__content -->
-    </div><!-- /.container -->
+        </div>
+    </div>
     <img src="~/assets/images/shapes/page-header-shape-1.png" alt="shape" class="page-header__shape-one">
     <img src="~/assets/images/shapes/page-header-shape-2.png" alt="shape" class="page-header__shape-two">
-    <div class="page-header__shape-three"></div><!-- /.page-header__shape-three -->
-    <div class="page-header__shape-four"></div><!-- /.page-header__shape-four -->
-</section><!-- /.page-header -->
+    <div class="page-header__shape-three"></div>
+    <div class="page-header__shape-four"></div>
+</section>
 
-<section class="contact-page section-space">
-    <div class="container">
-        <div class="row gutter-y-40 rtl">
-            <div class="col-lg-6 wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="00ms">
-                <div class="contact-page__content">
-                    <div class="contact-page__content__bg" style="background-image: url(assets/images/shapes/contact-form-bg-1-1.png);"></div>
-                    <!-- /.contact-page__content__bg -->
-                    <div class="contact-page__content__image">
-                        <img src="~/assets/images/resources/contact-1-1.jpg" alt="contact">
-                    </div><!-- /.contact-page__content__image -->
-                    <div class="contact-page__content__inner">
-                        <div class="sec-title">
-                            <h6 class="sec-title__tagline">در تماس باشید</h6><!-- /.sec-title__tagline -->
-                            <h3 class="sec-title__title">فقط بگو <span>سلام!</span></h3><!-- /.sec-title__title -->
-                        </div><!-- /.sec-title -->
-                        <ul class="list-unstyled contact-page__info">
-                            <li>
-                                <div class="contact-page__info__icon">
-                                    <span class="contact-page__info__icon__inner">
-                                        <i class="icon-telephone"></i>
-                                    </span><!-- /.contact-page__info__icon__inner -->
-                                </div><!-- /.contact-page__info__icon -->
-                                <div class="contact-page__info__content">
-                                    <h3 class="contact-page__info__title">الان تماس بگیر</h3>
-                                    <a href="tel:+989127661646" class="contact-page__info__text">09127661646</a>
-                                </div><!-- /.contact-page__info__content -->
-                            </li>
-                            <li>
-                                <div class="contact-page__info__icon">
-                                    <span class="contact-page__info__icon__inner">
-                                        <i class="icon-paper-plane"></i>
-                                    </span><!-- /.contact-page__info__icon__inner -->
-                                </div><!-- /.contact-page__info__icon -->
-                                <div class="contact-page__info__content">
-                                    <h3 class="contact-page__info__title">پست الکترونیک</h3>
-                                    <a href="mailto:email@gmail.com" class="contact-page__info__text contact-page__info__text--email">email@gmail.com</a>
-                                </div><!-- /.contact-page__info__content -->
-                            </li>
-                            <li>
-                                <div class="contact-page__info__icon">
-                                    <span class="contact-page__info__icon__inner">
-                                        <i class="icon-location"></i>
-                                    </span><!-- /.contact-page__info__icon__inner -->
-                                </div><!-- /.contact-page__info__icon -->
-                                <div class="contact-page__info__content">
-                                    <h3 class="contact-page__info__title">نشانی</h3>
-                                    <a href="https://www.google.com/maps" class="contact-page__info__text">
-                                        کرج، عظیمیه
-                                        میدان مهران
-                                    </a>
-                                </div><!-- /.contact-page__info__content -->
-                            </li>
-                        </ul><!-- /.list-unstyled -->
-                        <div class="contact-page__student">
-                            <div class="contact-page__student__inner">
-                                <div class="contact-page__student__image">
-                                    <img src="~/assets/images/resources/contact-student-1-1.png" alt="student">
-                                    <img src="~/assets/images/resources/contact-student-1-2.png" alt="student">
-                                    <img src="~/assets/images/resources/contact-student-1-3.png" alt="student">
-                                    <img src="~/assets/images/resources/contact-student-1-4.png" alt="student">
-                                </div><!-- /.contact-page__student__image -->
-                                <p class="contact-page__student__text">1.5k دانش آموز شاد</p>
-                                <!-- /.contact-page__student__text -->
-                            </div><!-- /.contact-page__student__inner -->
-                        </div><!-- /.contact-page__student -->
-                    </div><!-- /.contact-page__content__inner -->
-                </div><!-- /.contact-page__content -->
-            </div><!-- /.col-lg-6 -->
-            <div class="col-lg-6 wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="100ms">
-
-                <div class="col-md-12 mb-3">
-
-                    @if(TempData["success"] != null){
-                        <div class="alert alert-success">
-                            @TempData["success"]
-                        </div>
-                    }
-                    @if (TempData["error"] != null)
-                    {
-                        <div class="alert alert-success">
-                            @TempData["error"]
-                        </div>
-                    }
+<section class="contact-one">
+    <div class="container rtl">
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success">
+                @TempData["SuccessMessage"]
+            </div>
+        }
+        <div class="row">
+            <div class="col-xl-6">
+                <div class="contact-one__content">
+                    <div class="section-title text-left">
+                        <span class="section-title__tagline">تماس با ما</span>
+                        <h2 class="section-title__title">با ما در تماس باشید</h2>
+                    </div>
+                    <p class="contact-one__text">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.</p>
+                    <div class="contact-one__btn-box">
+                        <a href="tel:123456789" class="contact-one__btn">
+                            <span class="contact-one__btn-icon"><i class="icon-phone"></i></span>
+                            <div class="contact-one__btn-content">
+                                <span>تماس با ما</span>
+                                <p>123-456-789</p>
+                            </div>
+                        </a>
+                    </div>
                 </div>
-
-                <form class="contact-page__form contact-form-validated form-one" asp-action="Contact", method="post">
+            </div>
+            <div class="col-xl-6">
+                <form class="contact-page__form contact-form-validated form-one" asp-action="Contact" method="post">
                     <div class="form-one__group">
-
                         <div class="form-one__control form-one__control--full">
                             <input type="text" asp-for="FullName" placeholder="مشخصات کامل">
                             <span asp-validation-for="FullName" class="text-danger"></span>
-                        </div><!-- /.form-one__control form-one__control--full -->
+                        </div>
 
                         <div class="form-one__control form-one__control--full">
                             <input type="email" asp-for="Email" placeholder="آدرس ایمیل">
                             <span asp-validation-for="Email" class="text-danger"></span>
-                        </div><!-- /.form-one__control form-one__control--full -->
+                        </div>
 
                         <div class="form-one__control form-one__control--full">
                             <input type="tel" asp-for="PhoneNumber" placeholder="شماره تماس">
                             <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-                        </div><!-- /.form-one__control form-one__control--full -->
+                        </div>
 
                         <div class="form-one__control form-one__control--full">
-                            <textarea asp-for="Message" placeholder="پیام بنویس . ."></textarea><!-- /# -->
+                            <textarea asp-for="Message" placeholder="پیام بنویس . ."></textarea>
                             <span asp-validation-for="Message" class="text-danger"></span>
-                        </div><!-- /.form-one__control -->
+                        </div>
 
                         <div class="form-one__control form-one__control--full">
                             <button type="submit" class="eduhive-btn">
                                 <span>اکنون ارسال کنید</span>
                                 <span class="eduhive-btn__icon rtlicon2"><i class="icon-right-up"></i></span>
                             </button>
-                        </div><!-- /.form-one__control -->
-                    </div><!-- /.form-one__group -->
+                        </div>
+                    </div>
                     <div class="contact-page__form__image">
                         <img src="~/assets/images/resources/contact-1-2.jpg" alt="contact">
-                    </div><!-- /.contact-page__form__image -->
-                </form><!-- /.contact-page__form -->
-            </div><!-- /.col-lg-6 -->
-        </div><!-- /.row gutter-y-40 -->
-    </div><!-- /.container -->
-</section><!-- /.contact-page section-space -->
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
 
-<section class="contact-map">
-    <div class="container-fluid">
-        <div style="width: 100%"><iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=400&amp;hl=en&amp;q=karaj+(irancode)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.gps.ie/">gps vehicle tracker</a></iframe></div>
-
-        <!-- /.google-map -->
-    </div><!-- /.container-fluid -->
-</section><!-- /.contact-map -->
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

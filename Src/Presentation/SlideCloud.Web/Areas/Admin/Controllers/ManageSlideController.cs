@@ -20,7 +20,7 @@ namespace SlideCloud.Web.Areas.Admin.Controllers
         }
 
         #region List Slides
-        public async Task<IActionResult> ListOfSlide()
+        public async Task<IActionResult> Index()
         {
             var slides = await _slideService.GetAllSlidesAsync();
             return View(slides);
@@ -70,7 +70,7 @@ namespace SlideCloud.Web.Areas.Admin.Controllers
 
             await _slideService.CreateSlideAsync(document);
 
-            return RedirectToAction(nameof(ListOfSlide));
+            return RedirectToAction(nameof(Index));
         }
         #endregion
 
@@ -149,7 +149,7 @@ namespace SlideCloud.Web.Areas.Admin.Controllers
 
             await _slideService.UpdateSlideAsync(document);
 
-            return RedirectToAction(nameof(ListOfSlide));
+            return RedirectToAction(nameof(Index));
         }
         #endregion
 
@@ -163,7 +163,7 @@ namespace SlideCloud.Web.Areas.Admin.Controllers
             }
 
             await _slideService.DeleteSlideAsync(id);
-            return RedirectToAction(nameof(ListOfSlide));
+            return RedirectToAction(nameof(Index));
         }
         #endregion
 

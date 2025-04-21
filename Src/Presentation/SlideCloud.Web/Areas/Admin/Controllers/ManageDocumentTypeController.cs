@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SlideCloud.Application.DTO.DocumentType;
 using SlideCloud.Application.Interfaces;
+using SlideCloud.Domain.Entities;
 
 namespace SlideCloud.Web.Areas.Admin.Controllers
 {
@@ -19,7 +20,14 @@ namespace SlideCloud.Web.Areas.Admin.Controllers
         #region List Document Types
         public async Task<IActionResult> List()
         {
-            var documentTypes = await _documentTypeService.GetAllDocumentTypesAsync();
+            var documentTypeDtos = await _documentTypeService.GetAllDocumentTypesAsync();
+            var documentTypes = documentTypeDtos.Select(dto => new DocumentType
+            {
+                Id = dto.Id,
+                Name = dto.Name,
+                Description = dto.Description,
+                Slug = dto.Slug
+            });
             return View(documentTypes);
         }
         #endregion

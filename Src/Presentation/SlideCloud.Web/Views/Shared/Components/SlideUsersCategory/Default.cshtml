@@ -1,0 +1,12 @@
+@using SlideCloud.Domain.Entities
+@model IEnumerable<DocumentCategory>
+
+@foreach (var category in Model)
+{
+    <li>
+        <a href="@Url.RouteUrl("DetailsCategory", new { id = category.Id, title = category.Slug })">
+            <span class="product-categories__icon"><i class="icon-left-arrow"></i></span>
+            @category.Name
+        </a>
+    </li>
+} 
