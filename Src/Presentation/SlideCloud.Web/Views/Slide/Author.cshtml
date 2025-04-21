@@ -17,7 +17,7 @@
                         @foreach (var slide in Model.Slides)
                         {
                             <div class="col-xl-4 col-sm-6">
-                                <a href="@Url.ActionLink("Detail","Slide" ,new {id=slide.Id})">
+                                <a href="@Url.ActionLink("Detail","Slide" ,new {id=slide.Id, slug=slide.Slug})">
                                     <div class="product__item wow fadeInUp rtl" data-wow-duration='1500ms' data-wow-delay='000ms'>
                                         <div class="product__item__image">
                                             <img src="@slide.Picture" alt="Dining Chair">

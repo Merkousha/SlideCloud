@@ -65,7 +65,7 @@ else
                                         تایم مطالعه : 4 دقیقه
                                     </div><!-- /.course-card__duration -->
                                 </div><!-- /.course-card__content__top -->
-                                <h3 class="course-card__title"><a href="@Url.ActionLink("Detail","Slide" ,new {id=item.Id})">@item.Title</a></h3><!-- /.course-card__title -->
+                                <h3 class="course-card__title"><a href="@Url.ActionLink("Detail","Slide" ,new {id=item.Id, slug=item.Slug})">@item.Title</a></h3><!-- /.course-card__title -->
                                 <div class="course-card__info">
                                     <div class="course-card__lessons">
                                         <span class="course-card__lessons__icon">
@@ -103,7 +103,7 @@ else
                                         <p class="course-card__text"> منتشر کننده مشخص نیست. </p>
                                     }
 
-                                    <a href="@Url.ActionLink("Detail","Slide" ,new {id=item.Id})" class="course-card__btn eduhive-btn eduhive-btn--border">
+                                    <a href="@Url.ActionLink("Detail","Slide" ,new {id=item.Id, slug=item.Slug})" class="course-card__btn eduhive-btn eduhive-btn--border">
                                         <span>خواندن مقاله </span>
                                         <span class="eduhive-btn__icon">
                                             <span class="eduhive-btn__icon__inner"><i class="icon-left-arrow"></i></span>

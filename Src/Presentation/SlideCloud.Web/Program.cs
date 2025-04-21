@@ -81,6 +81,11 @@ app.MapControllerRoute(
     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
+    name: "slideDetail",
+    pattern: "Slide/Detail/{id:int}/{slug?}",
+    defaults: new { controller = "Slide", action = "Detail" });
+
+app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 

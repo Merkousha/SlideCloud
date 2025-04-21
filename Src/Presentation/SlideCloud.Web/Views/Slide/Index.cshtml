@@ -66,7 +66,7 @@
                             @foreach (var slide in Model.Pagination.Items)
                             {
                                 <div class="col-xl-4 col-sm-6">
-                                    <a href="@Url.Action("Detail", new { id = slide.Id })">
+                                    <a href="@Url.Action("Detail", new { id = slide.Id, slug = slide.Slug })">
 
                                         <div class="product__item wow fadeInUp rtl" data-wow-duration='1500ms' data-wow-delay='000ms'>
                                             <div class="product__item__image">

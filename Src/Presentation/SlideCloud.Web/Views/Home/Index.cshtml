@@ -254,10 +254,10 @@
                                     <div class="blog-card wow fadeInUp rtl h-100 d-flex flex-column justify-content-center" data-wow-duration='1500ms' data-wow-delay='200ms'>
                                         <div class="blog-card__image text-center">
                                             <img src="@item.Picture" alt="@item.Title" style="max-height: 150px; width:auto !important;display: inline-flex;">
-                                            @Html.ActionLink(@item.Title, "Detail", "Slide", new { id = item.Id }, new { @class = "blog-card__image__link" })
+                                            @Html.ActionLink(@item.Title, "Detail", "Slide", new { id = item.Id, slug = item.Slug }, new { @class = "blog-card__image__link" })
                                         </div><!-- /.blog-card__image -->
                                         <div class="blog-card__content">
-                                            <h3 class="blog-card__title text-center"> @Html.ActionLink(@item.Title, "Detail", "Slide", new { id = item.Id })</h3><!-- /.blog-card__title -->
+                                            <h3 class="blog-card__title text-center"> @Html.ActionLink(@item.Title, "Detail", "Slide", new { id = item.Id, slug = item.Slug })</h3><!-- /.blog-card__title -->
 
                                         </div><!-- /.blog-card__content -->
                                     </div>
@@ -514,10 +514,10 @@
                             <div class="blog-card wow fadeInUp rtl h-100 d-flex flex-column justify-content-center" data-wow-duration='1500ms' data-wow-delay='200ms'>
                                 <div class="blog-card__image text-center">
                                     <img src="@item.Picture" alt="@item.Title" style="max-height: 150px; width:auto !important;display: inline-flex;">
-                                    @Html.ActionLink(@item.Title, "Detail", "Slide", new { id = item.Id }, new { @class = "blog-card__image__link" })
+                                    @Html.ActionLink(@item.Title, "Detail", "Slide", new { id = item.Id, slug = item.Slug }, new { @class = "blog-card__image__link" })
                                 </div><!-- /.blog-card__image -->
                                 <div class="blog-card__content">
-                                    <h3 class="blog-card__title text-center"> @Html.ActionLink(@item.Title, "Detail", "Slide", new { id = item.Id })</h3><!-- /.blog-card__title -->
+                                    <h3 class="blog-card__title text-center"> @Html.ActionLink(@item.Title, "Detail", "Slide", new { id = item.Id, slug = item.Slug })</h3><!-- /.blog-card__title -->
 
                                 </div><!-- /.blog-card__content -->
                             </div>

@@ -18,6 +18,8 @@ namespace SlideCloud.Application.DTO.Slide
 
         public string? Picture { get; set; }
 
+        public string Slug { get; set; } = string.Empty;
+
         [Required(ErrorMessage = "Document Type is required")]
         public int DocumentTypeId { get; set; }
 

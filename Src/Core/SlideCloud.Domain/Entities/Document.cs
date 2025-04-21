@@ -7,6 +7,7 @@ public class Document
     public string Title { get; set; }
     public string Picture { get; set; }
     public string File { get; set; }
+    public string Slug { get; set; }
     public int ViewCount { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
@@ -28,5 +29,6 @@ public class Document
         CreatedAt = DateTime.UtcNow;
         ViewCount = 0;
         TagDocuments = new List<TagDocument>();
+        Slug = Title?.ToLower().Replace(" ", "-") ?? string.Empty;
     }
 }

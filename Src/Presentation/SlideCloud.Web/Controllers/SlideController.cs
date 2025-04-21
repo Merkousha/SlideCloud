@@ -30,12 +30,19 @@ namespace SlideCloud.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Detail(int id)
+        [Route("Slide/Detail/{id:int}/{slug?}")]
+        public async Task<IActionResult> Detail(int id, string slug = null)
         {
             var slide = await _slideService.GetSlideDetailAsync(id);
             if (slide == null)
             {
                 return NotFound();
+            }
+
+            // If a slug was provided but doesn't match the slide's slug, redirect to the correct URL
+            if (slug != null && slug != slide.Slug)
+            {
+                return RedirectToAction(nameof(Detail), new { id = id, slug = slide.Slug });
             }
 
             await _slideService.IncrementViewCountAsync(id);
