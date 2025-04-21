@@ -1,12 +1,16 @@
-﻿@model SlideCloud.Application.DTO.Slide.ListSlideDTO
+﻿@using SlideCloud.Web.Extensions
+@model SlideCloud.Application.DTO.Slide.ListSlideDTO
+
 @{
-    Layout = "_layout";
+    Layout = "_Layout";
+    ViewData["Title"] = "اسلایدها";
 }
+
 <section class="page-header">
     <div class="container rtl">
         <div class="page-header__content">
             <ul class="eduhive-breadcrumb list-unstyled">
-                <li><span class="eduhive-breadcrumb__icon"><i class="icon-home"></i></span><a href="index.html">خانه</a></li>
+                <li><span class="eduhive-breadcrumb__icon"><i class="icon-home"></i></span><a href"https: //SlideCloud.ir">خانه</a></li>
                 <li><span> اسلاید ها</span></li>
             </ul><!-- /.eduhive-breadcrumb list-unstyled -->
             <h2 class="page-header__title">لیست اسلاید ها</h2>
@@ -17,159 +21,120 @@
     <div class="page-header__shape-three"></div><!-- /.page-header__shape-three -->
     <div class="page-header__shape-four"></div><!-- /.page-header__shape-four -->
 </section><!-- /.page-header -->
-<section class="product-page section-space-bottom">
+
+<div class="section-padding rtl">
     <div class="container">
-        <div class="row gutter-y-60">
-            <div class="col-xl-9 col-lg-8">
-                <div class="product__info-top rtl">
-                    <div class="product__showing-text-box">
-                        <p class="product__showing-text">نمایش 1–9 از @Model.Pagination.Items.Count() نتیجه</p>
-                    </div>
-                    <div class="product__showing-sort">
-                        <select class="selectpicker" aria-label="Sort by popular">
-                            <option selected>کوتاه کردن پیش فرض</option>
-                            <option value="1">مرتب سازی بر اساس نمای</option>
-                            <option value="2">مرتب سازی بر اساس قیمت</option>
-                            <option value="3"> بر اساس رتبه بندی</option>
-                        </select>
+        <div class="row mt-5">
+            <div class="col-lg-12">
+                <div class="search-bar mb-4">
+                    <form method="get" asp-action="Index">
+                        <div class="input-group">
+                            <input type="text" name="searchTerm" class="form-control" placeholder="جستجو در اسلایدها..." value="@Context.Request.Query["searchTerm"]">
+                            <button class="input-group-append-rtl btn btn-primary rtl" type="submit">جستجو</button>
+                        </div>
+                      
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-filter mb-1">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="filter-categories">
+                        <a href="@Url.Action("Index")" class="btn @(Context.Request.Query["categoryId"].Count == 0 ? "btn-primary" : "btn-outline-primary")">همه</a>
+                        @foreach (var category in Model.DocumentCategories)
+                        {
+                            <a href="@Url.Action("Index", new { categoryId = category.Id })"
+                               class="btn @(Context.Request.Query["categoryId"] == category.Id.ToString() ? "btn-primary" : "btn-outline-primary")">
+                                @category.Name
+                            </a>
+                        }
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <div class="row gutter-y-30">
-
-                    @foreach (var document in Model.Pagination.Items)
+        <div class="tab-content mb-5">
+            <div id="list-view" class="tab-pane fade active show">
+                <div class="row">
+                    @if (Model.Pagination.Items.Any())
                     {
 
-                        <div class="col-xl-4 col-sm-6">
-                            <a href="@Url.ActionLink("Detail","Slide" ,new {id=document.Id})">
-                                <div class="product__item wow fadeInUp rtl" data-wow-duration='1500ms' data-wow-delay='000ms'>
-                                    <div class="product__item__image">
-                                        <img src="@document.Picture" alt="Dining Chair">
-                                    </div><!-- /.product-image -->
-                                    <div class="product__item__content">
-                                        <div class="eduhive-ratings">
-                                            <span class="eduhive-ratings__icon">
-                                                <i class="fa fa-star"></i>
-                                            </span><!-- /.eduhive-ratings__icon -->
-                                            <span class="eduhive-ratings__icon">
-                                                <i class="fa fa-star"></i>
-                                            </span><!-- /.eduhive-ratings__icon -->
-                                            <span class="eduhive-ratings__icon">
-                                                <i class="fa fa-star"></i>
-                                            </span><!-- /.eduhive-ratings__icon -->
-                                            <span class="eduhive-ratings__icon">
-                                                <i class="fa fa-star"></i>
-                                            </span><!-- /.eduhive-ratings__icon -->
-                                            <span class="eduhive-ratings__icon">
-                                                <i class="fa fa-star"></i>
-                                            </span><!-- /.eduhive-ratings__icon -->
-                                        </div><!-- /.product-ratings -->
-                                        <h4 class="product__item__title">
-                                            @document.Title
-                                        </h4><!-- /.product-title -->
-	                                    
-                             @*            <div class="product__item__price">@Html.Raw(document.Description) </div> *@
-                                    </div><!-- /.product-content -->
-                                </div><!-- /.product-item -->
-                            </a>
+                        <div class="row gutter-y-30">
+                            @foreach (var slide in Model.Pagination.Items)
+                            {
+                                <div class="col-xl-4 col-sm-6">
+                                    <a href="@Url.Action("Detail", new { id = slide.Id })">
+
+                                        <div class="product__item wow fadeInUp rtl" data-wow-duration='1500ms' data-wow-delay='000ms'>
+                                            <div class="product__item__image">
+                                                <img src="@slide.Picture" alt="@slide.Title">
+                                            </div>
+                                            <div class="product__item__content">
+                                                <div class="product__item__meta mb-2">
+                                                    <span><i class="fa fa-eye"></i> @slide.ViewCount بازدید</span>
+                                                    <span><i class="fa fa-calendar"></i> @slide.CreatedAt.ToPersianDate()</span>
+                                                </div>
+                                                <h4 class="product__item__title">@slide.Title</h4>
+                                               
+                                                <div class="product__item__actions">
+                                                    <span>
+                                                        <a href="@Url.Action("Author", new { id = slide.UserId })">
+                                                            <i class="lni-user"></i> @slide.User.UserName
+                                                        </a>
+                                                    </span>
+                                                   
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            }
                         </div>
 
-                        <!-- /.col-xl-4 col-sm-6 -->
                     }
-                    <div class="col-lg-12">
-                        <ul class="post-pagination">
-                            @if (Model.Pagination.HasPreviousPage)
-                            {
-                                <li>
-                                    <a asp-controller="Slide" asp-action="Index" asp-route-pageIndex="@(Model.Pagination.PageIndex - 1)" class="btn btn-primary">
-                                        قبل
-                                        <span class="post-pagination__icon">
-                                            <i class="icon-left-arrow"></i>
-                                        </span>
-                                    </a>
-                                </li>
-                                
-                            }
-                            @for (int i = 1; i <= Model.Pagination.TotalPages; i++)
-                            {
-                                <li>
-                                    <a asp-controller="Slide" asp-action="Index" asp-route-pageIndex="@i" class="btn @(i == Model.Pagination.PageIndex ? "btn-success" : "btn-secondary")">@i</a>
-                                </li>
-                                
-                            }
-
-                            @if (Model.Pagination.HasNextPage)
-                            {
-                                <li class="active">
-                                    <a asp-controller="Slide" asp-action="Index" asp-route-pageIndex="@(Model.Pagination.PageIndex + 1)" class="btn btn-primary">بعد><span class="post-pagination__icon"><i class="icon-right-arrow"></i></span></a>
-                                </li>
-                                
-                            }
-
-                            
-                        </ul><!-- /.post-pagination -->
-                    </div><!-- /.col-lg-12 -->
-
-
-                </div><!-- /.row -->
-            </div><!-- /.col-xl-9 col-lg-8 -->
-            <div class="col-xl-3 col-lg-4">
-                <aside class="product__sidebar rtl">
-                    <div class="product__search-box product__sidebar__item">
-                        <form action="#" class="product__search">
-                            <input type="text" placeholder="جستجوی موارد" />
-                            <button type="submit" aria-label="earch submit">
-                                <span class="icon-search"></span>
-                            </button>
-                        </form><!-- /.product__search -->
-                    </div><!-- /.search-widget -->
-                    <div class="product__price-ranger product__sidebar__item">
-                        <h3 class="product__sidebar__title">فیلتر بر اساس قیمت</h3>
-                        <form action="#" class="price-ranger">
-                            <div id="slider-range"></div>
-                            <div class="ranger-min-max-block">
-                                <input type="text" readonly class="min">
-                                <span>-</span>
-                                <input type="text" readonly class="max">
+                    else
+                    {
+                        <div class="col-12">
+                            <div class="alert alert-info">
+                                هیچ اسلایدی یافت نشد.
                             </div>
-                        </form>
-                    </div><!-- /.price-slider -->
-                    <div id="slideComponent" class="product__categories product__sidebar__item">
-                        <h3 class="product__sidebar__title product__categories__title">دسته بندی ها</h3>
-                        <ul class="list-unstyled">
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
 
-                            <li>
-                                <a href="/Slide">
-                                    <span class="product-categories__icon"><i class="icon-left-arrow"></i></span>
-                                    <!-- /.product-categories__icon --> همه
-                                </a>
-                                    
-                                
+        @if (Model.Pagination.TotalPages > 1)
+        {
+            <div class="pagination-bar" style="direction:ltr">
+                <nav>
+                    <ul class="pagination justify-content-center">
+                        @if (Model.Pagination.HasPreviousPage)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="@Url.Action("Index", new { pageIndex = Model.Pagination.PageIndex - 1, categoryId = Context.Request.Query["categoryId"], searchTerm = Context.Request.Query["searchTerm"] })">قبلی</a>
                             </li>
-                            @foreach (var category in Model.DocumentCategories)
-                            {
-                                <li>
-                                    <a href="@Url.Action("Index", "Slide", new { categoryId = category.Id })">
-                                        <span class="product-categories__icon"><i class="icon-left-arrow"></i></span>
-                                        <!-- /.product-categories__icon --> @category.Name
-                                    </a>
-                                </li>
-                            }
+                        }
 
+                        @for (var i = 1; i <= Model.Pagination.TotalPages; i++)
+                        {
+                            <li class="page-item @(i == Model.Pagination.PageIndex ? "active" : "")">
+                                <a class="page-link" href="@Url.Action("Index", new { pageIndex = i, categoryId = Context.Request.Query["categoryId"], searchTerm = Context.Request.Query["searchTerm"] })">@i</a>
+                            </li>
+                        }
 
-                           @*  @foreach (var category in Model.DocumentCategories)
-                            {
-                                <li>
-                                    <a href="@Url.RouteUrl("DetailsCategory",new {id=$"{category.Id}"})">
-                                        <span class="product-categories__icon"><i class="icon-left-arrow"></i></span>
-                                        <!-- /.product-categories__icon --> @category.Name
-                                    </a>
-                                </li>
-                            } *@
-                        </ul>
-                    </div><!-- /.category-widget -->
-                </aside><!-- /.shop-sidebar -->
-            </div><!-- /.col-xl-3 col-lg-4 -->
-        </div><!-- /.row -->
-    </div><!-- /.container -->
-</section><!-- /.product-page section-space-bottom -->
+                        @if (Model.Pagination.HasNextPage)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="@Url.Action("Index", new { pageIndex = Model.Pagination.PageIndex + 1, categoryId = Context.Request.Query["categoryId"], searchTerm = Context.Request.Query["searchTerm"] })">بعدی</a>
+                            </li>
+                        }
+                    </ul>
+                </nav>
+            </div>
+        }
+    </div>
+</div>

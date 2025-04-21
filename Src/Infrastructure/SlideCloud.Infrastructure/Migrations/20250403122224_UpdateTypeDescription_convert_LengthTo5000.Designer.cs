@@ -3,21 +3,24 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SlideCloud.Infrastructure.Data;
 
 #nullable disable
 
-namespace SlideCloud.Infrastructure.Migrations
+namespace  SlideCloud.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250403122224_UpdateTypeDescription_convert_LengthTo5000")]
+    partial class UpdateTypeDescription_convert_LengthTo5000
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.0")
+                .HasAnnotation("ProductVersion", "9.0.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -155,7 +158,7 @@ namespace SlideCloud.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("SlideCloud.Domain.Entities.Document", b =>
+            modelBuilder.Entity("SlideCloud.Domain.Models.ContactUs.Contact", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -163,11 +166,39 @@ namespace SlideCloud.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Contacts");
+                });
+
+            modelBuilder.Entity("SlideCloud.Domain.Models.Document", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
                         .IsRequired()
+                        .HasMaxLength(5000)
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("DocumentCategoryId")
@@ -178,21 +209,18 @@ namespace SlideCloud.Infrastructure.Migrations
 
                     b.Property<string>("File")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsShared")
-                        .HasColumnType("bit");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Picture")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<long?>("UserId")
                         .HasColumnType("bigint");
@@ -211,7 +239,7 @@ namespace SlideCloud.Infrastructure.Migrations
                     b.ToTable("Documents");
                 });
 
-            modelBuilder.Entity("SlideCloud.Domain.Entities.DocumentCategory", b =>
+            modelBuilder.Entity("SlideCloud.Domain.Models.DocumentCategory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -219,30 +247,27 @@ namespace SlideCloud.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Slug")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
                     b.ToTable("DocumentCategories");
                 });
 
-            modelBuilder.Entity("SlideCloud.Domain.Entities.DocumentType", b =>
+            modelBuilder.Entity("SlideCloud.Domain.Models.DocumentType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -252,25 +277,25 @@ namespace SlideCloud.Infrastructure.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Slug")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
                     b.ToTable("DocumentTypes");
                 });
 
-            modelBuilder.Entity("SlideCloud.Domain.Entities.Tag", b =>
+            modelBuilder.Entity("SlideCloud.Domain.Models.Tag", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -280,14 +305,15 @@ namespace SlideCloud.Infrastructure.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Tags");
                 });
 
-            modelBuilder.Entity("SlideCloud.Domain.Entities.TagDocument", b =>
+            modelBuilder.Entity("SlideCloud.Domain.Models.TagDocument", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -310,7 +336,7 @@ namespace SlideCloud.Infrastructure.Migrations
                     b.ToTable("TagDocuments");
                 });
 
-            modelBuilder.Entity("SlideCloud.Domain.Entities.User", b =>
+            modelBuilder.Entity("SlideCloud.Domain.Models.User", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -325,10 +351,8 @@ namespace SlideCloud.Infrastructure.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
@@ -343,7 +367,8 @@ namespace SlideCloud.Infrastructure.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -357,7 +382,9 @@ namespace SlideCloud.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
@@ -396,7 +423,7 @@ namespace SlideCloud.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<long>", b =>
                 {
-                    b.HasOne("SlideCloud.Domain.Entities.User", null)
+                    b.HasOne("SlideCloud.Domain.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -405,7 +432,7 @@ namespace SlideCloud.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<long>", b =>
                 {
-                    b.HasOne("SlideCloud.Domain.Entities.User", null)
+                    b.HasOne("SlideCloud.Domain.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -420,7 +447,7 @@ namespace SlideCloud.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SlideCloud.Domain.Entities.User", null)
+                    b.HasOne("SlideCloud.Domain.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -429,28 +456,28 @@ namespace SlideCloud.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<long>", b =>
                 {
-                    b.HasOne("SlideCloud.Domain.Entities.User", null)
+                    b.HasOne("SlideCloud.Domain.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SlideCloud.Domain.Entities.Document", b =>
+            modelBuilder.Entity("SlideCloud.Domain.Models.Document", b =>
                 {
-                    b.HasOne("SlideCloud.Domain.Entities.DocumentCategory", "DocumentCategory")
+                    b.HasOne("SlideCloud.Domain.Models.DocumentCategory", "DocumentCategory")
                         .WithMany("Documents")
                         .HasForeignKey("DocumentCategoryId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SlideCloud.Domain.Entities.DocumentType", "DocumentType")
+                    b.HasOne("SlideCloud.Domain.Models.DocumentType", "DocumentType")
                         .WithMany("Documents")
                         .HasForeignKey("DocumentTypeId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SlideCloud.Domain.Entities.User", "User")
+                    b.HasOne("SlideCloud.Domain.Models.User", "User")
                         .WithMany("Documents")
                         .HasForeignKey("UserId");
 
@@ -461,15 +488,15 @@ namespace SlideCloud.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("SlideCloud.Domain.Entities.TagDocument", b =>
+            modelBuilder.Entity("SlideCloud.Domain.Models.TagDocument", b =>
                 {
-                    b.HasOne("SlideCloud.Domain.Entities.Document", "Document")
+                    b.HasOne("SlideCloud.Domain.Models.Document", "Document")
                         .WithMany("TagDocuments")
                         .HasForeignKey("DocumentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SlideCloud.Domain.Entities.Tag", "Tag")
+                    b.HasOne("SlideCloud.Domain.Models.Tag", "Tag")
                         .WithMany("TagDocuments")
                         .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -480,27 +507,27 @@ namespace SlideCloud.Infrastructure.Migrations
                     b.Navigation("Tag");
                 });
 
-            modelBuilder.Entity("SlideCloud.Domain.Entities.Document", b =>
+            modelBuilder.Entity("SlideCloud.Domain.Models.Document", b =>
                 {
                     b.Navigation("TagDocuments");
                 });
 
-            modelBuilder.Entity("SlideCloud.Domain.Entities.DocumentCategory", b =>
+            modelBuilder.Entity("SlideCloud.Domain.Models.DocumentCategory", b =>
                 {
                     b.Navigation("Documents");
                 });
 
-            modelBuilder.Entity("SlideCloud.Domain.Entities.DocumentType", b =>
+            modelBuilder.Entity("SlideCloud.Domain.Models.DocumentType", b =>
                 {
                     b.Navigation("Documents");
                 });
 
-            modelBuilder.Entity("SlideCloud.Domain.Entities.Tag", b =>
+            modelBuilder.Entity("SlideCloud.Domain.Models.Tag", b =>
                 {
                     b.Navigation("TagDocuments");
                 });
 
-            modelBuilder.Entity("SlideCloud.Domain.Entities.User", b =>
+            modelBuilder.Entity("SlideCloud.Domain.Models.User", b =>
                 {
                     b.Navigation("Documents");
                 });

@@ -29,7 +29,7 @@ namespace SlideCloud.Web.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index(int pageIndex = 1, int? categoryId = null, int pageSize = 10)
         {
-            var documents = await _slideService.GetSlidesAsync(pageIndex, categoryId, pageSize);
+            var documents = await _slideService.GetSlidesAsync(pageIndex, categoryId, null);
             var categories = await _categoryService.GetAllCategoriesAsync();
 
             var model = new ListSlideVM

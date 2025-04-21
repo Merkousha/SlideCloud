@@ -1,14 +1,14 @@
-using SlideCloud.Domain.Entities;
-using SlideCloud.Domain.Models.Pagination;
-using SlideCloud.Application.DTO.Slide;
 using SlideCloud.Application.DTO.Category;
 using SlideCloud.Application.DTO.DocumentType;
+using SlideCloud.Application.DTO.Slide;
+using SlideCloud.Domain.Entities;
+using SlideCloud.Domain.Models.Pagination;
 
 namespace SlideCloud.Application.Interfaces
 {
     public interface ISlideService
     {
-        Task<PaginationModel<Document>> GetSlidesAsync(int pageIndex, int? categoryId, int pageSize);
+        Task<PaginationModel<Document>> GetSlidesAsync(int pageIndex, int? categoryId, string? searchTerm);
         Task<DetailsSlideDTO> GetSlideByIdAsync(int id);
         Task<DetailsSlideDTO> GetSlideDetailAsync(int id);
         Task IncrementViewCountAsync(int id);

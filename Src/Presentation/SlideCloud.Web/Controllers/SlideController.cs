@@ -1,36 +1,29 @@
 ﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SlideCloud.Application.DTO.Slide;
 using SlideCloud.Application.Interfaces;
-using SlideCloud.Domain.Entities;
-using SlideCloud.Web.Models;
 
 namespace SlideCloud.Web.Controllers
 {
     public class SlideController : Controller
     {
-        private const int PageSize = 15;
-        private readonly UserManager<User> _userManager;
         private readonly ISlideService _slideService;
 
-        public SlideController(UserManager<User> userManager, ISlideService slideService)
+        public SlideController(ISlideService slideService)
         {
-            _userManager = userManager;
             _slideService = slideService;
         }
 
-        public async Task<IActionResult> Index(int pageIndex = 1, int? categoryId = null)
+        public async Task<IActionResult> Index(int? categoryId = null, string searchTerm = null, int pageIndex = 1)
         {
-            const int pageSize = 12;
-            var slides = await _slideService.GetSlidesAsync(pageIndex, categoryId, pageSize);
+            var slides = await _slideService.GetSlidesAsync(pageIndex, categoryId, searchTerm);
             var categories = await _slideService.GetAllCategoriesAsync();
 
             var viewModel = new ListSlideDTO
             {
                 Pagination = slides,
-                DocumentCategories = categories.Select(c => new DocumentCategory { Id = c.Id, Name = c.Name }).ToList()
+                DocumentCategories = categories
             };
 
             return View(viewModel);
@@ -65,34 +58,18 @@ namespace SlideCloud.Web.Controllers
             var viewModel = new ListSlideDTO
             {
                 Pagination = slides,
-                DocumentCategories = categories.Select(c => new DocumentCategory { Id = c.Id, Name = c.Name }).ToList()
+                DocumentCategories = categories
             };
 
             return View(viewModel);
         }
 
-        public async Task<IActionResult> ListSlide_Category(int pageIndex = 1, int? categoryId = null)
-        {
-            var pagination = await _slideService.GetSlidesAsync(pageIndex, categoryId, PageSize);
-            var categories = await _slideService.GetAllCategoriesAsync();
-
-            var model = new ListSlideVM
-            {
-                Pagination = pagination,
-                DocumentCategories = categories,
-                SelectedCategoryId = categoryId
-            };
-
-            return View(model);
-        }
-
-        [HttpGet]
         public async Task<IActionResult> Author(string userId)
         {
             var authorName = await _slideService.GetAuthorNameAsync(userId);
             var authorSlides = await _slideService.GetAuthorSlidesAsync(userId);
 
-            var viewModel = new AuthorViewModel
+            var viewModel = new AuthorSlideDTO
             {
                 AuthorName = authorName,
                 Slides = authorSlides

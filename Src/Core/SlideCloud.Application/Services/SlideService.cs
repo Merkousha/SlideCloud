@@ -20,13 +20,14 @@ namespace SlideCloud.Application.Services
             _fileService = fileService;
         }
 
-        public async Task<PaginationModel<Document>> GetSlidesAsync(int pageIndex, int? categoryId, int pageSize)
+        public async Task<PaginationModel<Document>> GetSlidesAsync(int pageIndex, int? categoryId, string searchTerm)
         {
+            int pageSize = 12;
             var query = _unitOfWork.Documents.GetAll()
-                .Include(d => d.DocumentCategory)
-                .Include(d => d.DocumentType)
-                .Include(d => d.User)
-                .AsQueryable();
+                 .Include(d => d.DocumentCategory)
+                 .Include(d => d.DocumentType)
+                 .Include(d => d.User)
+                 .AsQueryable();
 
             if (categoryId.HasValue)
             {

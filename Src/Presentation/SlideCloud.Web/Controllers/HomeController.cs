@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SlideCloud.Application.DTO.Contact;
 using SlideCloud.Application.Interfaces;
-using SlideCloud.Domain.Models.ContactUs;
 
 namespace SlideCloud.Web.Controllers
 {
@@ -26,7 +26,7 @@ namespace SlideCloud.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Contact(Contact model)
+        public IActionResult Contact(ContactDTO model)
         {
             if (!ModelState.IsValid)
             {
