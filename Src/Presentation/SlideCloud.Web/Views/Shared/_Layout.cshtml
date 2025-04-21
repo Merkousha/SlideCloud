@@ -3,20 +3,42 @@
     var logoSrc = isHomePage ? "~/assets/images/logo-light.png" : "~/assets/images/logo-dark.png";
 }
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
 
 
 <!-- Mirrored from pixydrops.com/eduhive-html/index-dark.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jun 2024 10:42:01 GMT -->
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewBag.Title | SlideCloud</title>
+    <title>@ViewData["Title"] | SlideCloud - اشتراک گذاری و ساخت اسلاید با هوش مصنوعی</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="@ViewData["Description"]" />
+    <meta name="keywords" content="@ViewData["Keywords"]" />
+    <meta name="author" content="SlideCloud" />
+    <meta name="robots" content="index, follow" />
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="@ViewData["Title"] | SlideCloud" />
+    <meta property="og:description" content="@ViewData["Description"]" />
+    <meta property="og:image" content="@ViewData["OgImage"]" />
+    <meta property="og:url" content="@Context.Request.Scheme://@Context.Request.Host@Context.Request.Path" />
+    <meta property="og:type" content="website" />
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="@ViewData["Title"] | SlideCloud" />
+    <meta name="twitter:description" content="@ViewData["Description"]" />
+    <meta name="twitter:image" content="@ViewData["OgImage"]" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="@Context.Request.Scheme://@Context.Request.Host@Context.Request.Path" />
+    
     <!-- favicons Icons -->
     <link rel="apple-touch-icon" sizes="180x180" href="~/assets/images/favicons/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="~/assets/images/favicons/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="~/assets/images/favicons/favicon-16x16.png" />
     <link rel="manifest" href="~/assets/images/favicons/site.webmanifest" />
-    <meta name="description" content="@ViewBag.Title | SlideCloud" />
 
     <!-- fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com/">

@@ -45,6 +45,16 @@ namespace SlideCloud.Web.Controllers
                 return RedirectToAction(nameof(Detail), new { id = id, slug = slide.Slug });
             }
 
+            // Set SEO metadata
+            ViewData["Title"] = slide.Title;
+            ViewData["Description"] = !string.IsNullOrEmpty(slide.Description) 
+                ? slide.Description 
+                : $"اسلاید {slide.Title} در دسته‌بندی {slide.DocumentCategory?.Name}";
+            ViewData["Keywords"] = $"{slide.Title}, {slide.DocumentCategory?.Name}, {slide.DocumentType?.Name}, اسلاید, پاورپوینت, ارائه";
+            ViewData["OgImage"] = !string.IsNullOrEmpty(slide.Picture) 
+                ? $"{Request.Scheme}://{Request.Host}{slide.Picture}" 
+                : $"{Request.Scheme}://{Request.Host}/assets/images/default-slide.jpg";
+
             await _slideService.IncrementViewCountAsync(id);
             return View(slide);
         }

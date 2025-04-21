@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+Allow: /Slide/Detail/
+Allow: /Slide/Index
+Allow: /Home/AboutUs
+Allow: /Home/Contact
+
+Disallow: /Admin/
+Disallow: /User/ManageSlide/
+Disallow: /Account/
+Disallow: /Slide/MySlides
+
+Sitemap: https://slidecloud.ir/sitemap.xml 
