@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using ClosedXML.Excel;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.ChatCompletion;
@@ -86,8 +86,8 @@ public class PresentationGeneratorService : IPresentationGeneratorService
 
         try
         {
-            return JsonSerializer.Deserialize<TopicSuggestion>(
-                        CleanChatMessageContent(result)) ?? throw new InvalidOperationException("Failed to deserialize topic suggestion")
+            var ClearResult = CleanChatMessageContent(result);
+            return JsonSerializer.Deserialize<TopicSuggestion>(ClearResult) ?? throw new InvalidOperationException("Failed to deserialize topic suggestion")
                 ?? throw new InvalidOperationException("Failed to deserialize topic suggestion");
         }
         catch (Exception ex)
@@ -97,16 +97,7 @@ public class PresentationGeneratorService : IPresentationGeneratorService
         }
     }
 
-    private static string CleanChatMessageContent(ChatMessageContent result)
-    {
-        return result.Content
-                            .Replace("\\n", "")
-                            .Replace("\n", "")
-                            .Replace("\n\n", "")
-                            .Replace("\\", "\"")
-                            .Replace("\\\"", "\"")
-                            .Replace("```json", "").Replace("```", "");
-    }
+
 
     public async Task<PresentationContent> GenerateContent(TopicSuggestion approvedTopics)
     {
@@ -211,7 +202,7 @@ public class PresentationGeneratorService : IPresentationGeneratorService
             row++;
 
             // Slide content
-            worksheet.Cell($"A{row}").Value = slide.Content;
+            worksheet.Cell($"A{row}").Value = slide.Content[0];
             row++;
 
             // Speaker notes
@@ -229,5 +220,15 @@ public class PresentationGeneratorService : IPresentationGeneratorService
         using var stream = new MemoryStream();
         workbook.SaveAs(stream);
         return stream.ToArray();
+    }
+    private static string CleanChatMessageContent(ChatMessageContent result)
+    {
+        return result.Content
+            .Replace("```", "") // Convert literal \n to actual newline
+                                //.Replace("\\n", "") // Convert literal \n to actual newline
+                                //.Replace("\r", "") // Remove \r characters
+                                //.Replace("\\", "")  // Escape the backslash
+                                //.Replace("\"", "")  // Remove quotes
+            .Replace("json", ""); // Remove 'json' if needed
     }
 }

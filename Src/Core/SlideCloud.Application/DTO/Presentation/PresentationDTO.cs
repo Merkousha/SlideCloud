@@ -16,7 +16,7 @@ public class PresentationContent
 public class Slide
 {
     public string Title { get; set; } = string.Empty;
-    public string Content { get; set; } = string.Empty;
+    public List<string> Content { get; set; } = new(); // Change from string to List<string>
     public string? MermaidDiagram { get; set; }
     public string SpeakerNotes { get; set; } = string.Empty;
 }
