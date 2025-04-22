@@ -31,20 +31,33 @@
                             <input type="text" class="form-control" id="topic" name="topic" required>
                         </div>
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary">ایجاد سرفصل‌ها</button>
+                            <button type="submit" class="btn btn-primary" id="generateTopicsBtn">ایجاد سرفصل‌ها</button>
+                            <div id="topicsLoader" class="spinner-border text-primary d-none" role="status">
+                                <span class="visually-hidden">در حال بارگذاری...</span>
+                            </div>
                         </div>
                     </form>
 
                     <div id="topicsSection" class="mt-4 d-none">
                         <h3>سرفصل‌های ساخته شده</h3>
                         <div id="topicsList" class="list-group mb-3"></div>
-                        <button id="generateContentBtn" class="btn btn-success">محتوای نهایی رو بساز</button>
+                        <div class="text-center">
+                            <button id="generateContentBtn" class="btn btn-success">محتوای نهایی رو بساز</button>
+                            <div id="contentLoader" class="spinner-border text-success d-none" role="status">
+                                <span class="visually-hidden">در حال بارگذاری...</span>
+                            </div>
+                        </div>
                     </div>
 
                     <div id="contentSection" class="mt-4 d-none">
                         <h3>Generated Content</h3>
                         <div id="contentPreview" class="border p-3 mb-3"></div>
-                        <button id="createPowerPointBtn" class="btn btn-info">پاورپوینتش رو بساز!</button>
+                        <div class="text-center">
+                            <button id="createPowerPointBtn" class="btn btn-info">پاورپوینتش رو بساز!</button>
+                            <div id="pptLoader" class="spinner-border text-info d-none" role="status">
+                                <span class="visually-hidden">در حال بارگذاری...</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -59,6 +72,10 @@
             $('#presentationForm').on('submit', function(e) {
                 e.preventDefault();
                 const topic = $('#topic').val();
+                
+                // نمایش لودینگ
+                $('#generateTopicsBtn').addClass('d-none');
+                $('#topicsLoader').removeClass('d-none');
                 
                 $.ajax({
                     url: '/Presentation/GenerateTopics',
@@ -76,9 +93,17 @@
                             );
                         });
                         $('#topicsSection').removeClass('d-none');
+                        
+                        // مخفی کردن لودینگ
+                        $('#generateTopicsBtn').removeClass('d-none');
+                        $('#topicsLoader').addClass('d-none');
                     },
                     error: function(xhr) {
                         alert('Error generating topics: ' + xhr.responseText);
+                        
+                        // مخفی کردن لودینگ
+                        $('#generateTopicsBtn').removeClass('d-none');
+                        $('#topicsLoader').addClass('d-none');
                     }
                 });
             });
@@ -91,6 +116,10 @@
                     }).get(),
                     keywords: $('#topicsList .text-muted').first().text().replace('Keywords: ', '').split(', ')
                 };
+
+                // نمایش لودینگ
+                $('#generateContentBtn').addClass('d-none');
+                $('#contentLoader').removeClass('d-none');
 
                 $.ajax({
                     url: '/Presentation/GenerateContent',
@@ -114,7 +143,12 @@
                             );
                         });
                         $('#contentSection').removeClass('d-none');
-                          if (!isMermaidLoaded) {
+                        
+                        // مخفی کردن لودینگ
+                        $('#generateContentBtn').removeClass('d-none');
+                        $('#contentLoader').addClass('d-none');
+                        
+                        if (!isMermaidLoaded) {
                                 import('https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs').then((mermaidModule) => {
                                     mermaidModule.default.initialize({ startOnLoad: true });
                                     mermaidModule.default.contentLoaded(); // رندر کردن دیاگرام‌های جدید
@@ -126,22 +160,33 @@
                     },
                     error: function(xhr) {
                         alert('Error generating content: ' + xhr.responseText);
+                        
+                        // مخفی کردن لودینگ
+                        $('#generateContentBtn').removeClass('d-none');
+                        $('#contentLoader').addClass('d-none');
                     }
                 });
             });
 
             $('#createPowerPointBtn').click(function() {
-                window.location.href = '/Presentation/CreatePowerPoint?' + $.param({
-                    mainTitle: $('#topic').val(),
-                    slides: $('#contentPreview .card').map(function() {
-                        return {
-                            title: $(this).find('h4').text(),
-                            content: $(this).find('p').text(),
-                            speakerNotes: $(this).find('.text-muted small').text().replace('Speaker Notes: ', ''),
-                            mermaidDiagram: $(this).find('pre.mermaid').text()
-                        };
-                    }).get()
-                });
+                // نمایش لودینگ
+                $('#createPowerPointBtn').addClass('d-none');
+                $('#pptLoader').removeClass('d-none');
+                
+                // با تأخیر اندک ریدایرکت میکنیم تا لودینگ نمایش داده شود
+                setTimeout(function() {
+                    window.location.href = '/Presentation/CreatePowerPoint?' + $.param({
+                        mainTitle: $('#topic').val(),
+                        slides: $('#contentPreview .card').map(function() {
+                            return {
+                                title: $(this).find('h4').text(),
+                                content: $(this).find('p').text(),
+                                speakerNotes: $(this).find('.text-muted small').text().replace('Speaker Notes: ', ''),
+                                mermaidDiagram: $(this).find('pre.mermaid').text()
+                            };
+                        }).get()
+                    });
+                }, 500);
             });
         });
     </script>
