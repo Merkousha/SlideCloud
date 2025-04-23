@@ -1,10 +1,14 @@
 ﻿using System.Text.Json;
-using ClosedXML.Excel;
+using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Presentation;
+using DocumentFormat.OpenXml.Wordprocessing;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.ChatCompletion;
 using Microsoft.SemanticKernel.Connectors.OpenAI;
 using OpenAI;
 using SlideCloud.Application.DTO.Presentation;
+using Text = DocumentFormat.OpenXml.Presentation.Text;
 
 namespace SlideCloud.Application.Services;
 
@@ -55,7 +59,7 @@ public class PresentationGeneratorService : IPresentationGeneratorService
         string topicSkillPrompt = $@"
         Based on the following presentation topic, suggest:
         1. A clear title
-        2. 3-5 relevant subtopics
+        2. 5-10 relevant subtopics
         3. Keywords related to this topic
 
         User Topic: {mainTitle}
@@ -137,7 +141,7 @@ public class PresentationGeneratorService : IPresentationGeneratorService
         1. Slide title
         2. Slide content (in bullet points)
         3. Mermaid diagram (if applicable)
-        4. Speaker notes
+        4. Speaker notes that explains Slide content
 
         Format the response in JSON:";
 
@@ -182,53 +186,122 @@ public class PresentationGeneratorService : IPresentationGeneratorService
 
     }
 
-    public async Task<byte[]> CreatePowerPoint(PresentationContent content)
+
+
+
+    public Task<byte[]> CreatePowerPoint(PresentationContent content)
     {
-        using var workbook = new XLWorkbook();
-        var worksheet = workbook.Worksheets.Add("Presentation");
-
-        // Add title slide
-        worksheet.Cell("A1").Value = content.MainTitle;
-        worksheet.Cell("A1").Style.Font.FontSize = 24;
-        worksheet.Cell("A1").Style.Font.Bold = true;
-
-        int row = 3;
-        foreach (var slide in content.Slides)
+        using (var memoryStream = new MemoryStream())
+        using (var presentationDocument = PresentationDocument.Create(memoryStream, PresentationDocumentType.Presentation))
         {
-            // Slide title
-            worksheet.Cell($"A{row}").Value = slide.Title;
-            worksheet.Cell($"A{row}").Style.Font.FontSize = 18;
-            worksheet.Cell($"A{row}").Style.Font.Bold = true;
-            row++;
+            var presentationPart = CreatePresentationPart(presentationDocument);
+            var slideMasterPart = CreateSlideMasterPart(presentationPart);
+            var slideIdList = new SlideIdList();
 
-            // Slide content
-            worksheet.Cell($"A{row}").Value = slide.Content[0];
-            row++;
-
-            // Speaker notes
-            if (!string.IsNullOrEmpty(slide.SpeakerNotes))
+            uint slideId = 255;
+            foreach (var slideContent in content.Slides)
             {
-                worksheet.Cell($"B{row}").Value = "Notes:";
-                worksheet.Cell($"B{row}").Style.Font.Italic = true;
-                worksheet.Cell($"C{row}").Value = slide.SpeakerNotes;
-                row++;
+                var slidePart = CreateSlidePart(presentationPart, slideContent);
+                AddSlideToSlideIdList(slideIdList, slideId, slidePart, presentationPart);
+                slideId++;
+
+                if (!string.IsNullOrEmpty(slideContent.SpeakerNotes))
+                {
+                    AddSpeakerNotes(slidePart, slideContent);
+                }
             }
 
-            row += 2; // Add space between slides
+            presentationPart.Presentation.AppendChild(slideIdList);
+            return Task.FromResult(memoryStream.ToArray());
+        }
+    }
+
+    private PresentationPart CreatePresentationPart(PresentationDocument presentationDocument)
+    {
+        var presentationPart = presentationDocument.AddPresentationPart();
+        presentationPart.Presentation = new Presentation();
+        return presentationPart;
+    }
+
+    private SlideMasterPart CreateSlideMasterPart(PresentationPart presentationPart)
+    {
+        var slideMasterPart = presentationPart.AddNewPart<SlideMasterPart>();
+        var slideMaster = new SlideMaster();
+        slideMaster.AddNamespaceDeclaration("a", "http://schemas.openxmlformats.org/drawingml/2006/main");
+        slideMaster.AddNamespaceDeclaration("r", "http://schemas.openxmlformats.org/officeDocument/2006/relationships");
+        slideMasterPart.SlideMaster = slideMaster;
+
+        var slideLayoutPart = slideMasterPart.AddNewPart<SlideLayoutPart>();
+        slideLayoutPart.SlideLayout = new SlideLayout();
+
+        return slideMasterPart;
+    }
+
+    private SlidePart CreateSlidePart(PresentationPart presentationPart, DTO.Presentation.Slide slideContent)
+    {
+        var slidePart = presentationPart.AddNewPart<SlidePart>();
+        var slide = new DocumentFormat.OpenXml.Presentation.Slide(
+            new CommonSlideData(
+                new ShapeTree(
+                    new Shape(
+                        new TextBody(
+                            new Paragraph(
+                                new Run(new Text(slideContent.Title))
+                            )
+                        )
+                    )
+                )
+            )
+        );
+        slidePart.Slide = slide;
+
+        if (slideContent.Content.Any())
+        {
+            var contentShape = new Shape(
+                new TextBody(
+                    new Paragraph(
+                        new Run(new Text(string.Join("\n", slideContent.Content)))
+                    )
+                )
+            );
+            slide.CommonSlideData.ShapeTree.AppendChild(contentShape);
         }
 
-        using var stream = new MemoryStream();
-        workbook.SaveAs(stream);
-        return stream.ToArray();
+        return slidePart;
     }
+
+    private void AddSlideToSlideIdList(SlideIdList slideIdList, uint slideId, SlidePart slidePart, PresentationPart presentationPart)
+    {
+        slideIdList.AppendChild(new SlideId
+        {
+            Id = slideId,
+            RelationshipId = presentationPart.GetIdOfPart(slidePart)
+        });
+    }
+
+    private void AddSpeakerNotes(SlidePart slidePart, DTO.Presentation.Slide slideContent)
+    {
+        var notesSlidePart = slidePart.AddNewPart<NotesSlidePart>();
+        var notesSlide = new NotesSlide(
+            new CommonSlideData(
+                new ShapeTree(
+                    new Shape(
+                        new TextBody(
+                            new Paragraph(
+                                new Run(new Text(slideContent.SpeakerNotes))
+                            )
+                        )
+                    )
+                )
+            )
+        );
+        notesSlidePart.NotesSlide = notesSlide;
+    }
+
     private static string CleanChatMessageContent(ChatMessageContent result)
     {
         return result.Content
-            .Replace("```", "") // Convert literal \n to actual newline
-                                //.Replace("\\n", "") // Convert literal \n to actual newline
-                                //.Replace("\r", "") // Remove \r characters
-                                //.Replace("\\", "")  // Escape the backslash
-                                //.Replace("\"", "")  // Remove quotes
-            .Replace("json", ""); // Remove 'json' if needed
+            .Replace("```", "")
+            .Replace("json", "");
     }
 }

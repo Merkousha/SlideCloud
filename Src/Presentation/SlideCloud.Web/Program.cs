@@ -17,7 +17,6 @@ builder.Services.AddControllersWithViews();
 var ConnectionString = Environment.GetEnvironmentVariable("DefaultConnection");
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(ConnectionString));
-
 // Add Identity
 builder.Services.AddIdentity<User, IdentityRole<long>>(options =>
 {
@@ -31,6 +30,13 @@ builder.Services.AddIdentity<User, IdentityRole<long>>(options =>
 .AddDefaultTokenProviders();
 
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
 
 // Add AWS S3
 builder.Services.AddSingleton<IS3Uploader>(sp =>
@@ -61,7 +67,7 @@ builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddScoped<IPresentationGeneratorService, PresentationGeneratorService>();
 
 var app = builder.Build();
-
+app.UseSession();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

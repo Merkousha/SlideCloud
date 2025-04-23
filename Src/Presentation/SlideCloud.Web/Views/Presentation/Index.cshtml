@@ -2,6 +2,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Presentation Generator";
 }
+@section Styles {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/AlertifyJS/1.13.1/css/alertify.css" integrity="sha512-MpdEaY2YQ3EokN6lCD6bnWMl5Gwk7RjBbpKLovlrH6X+DRokrPRAF3zQJl1hZUiLXfo2e9MrOt+udOnHCAmi5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/AlertifyJS/1.13.1/css/alertify.rtl.css" integrity="sha512-ESMNMKMBWQP7MhGIc/vk75n2qBzCfLhP8q4Ww43m+hhQeUn+aiPCYWV1eyP1uZ7tWda8VtZypCZavihltM+xhw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+}
 <script>
        // رندر کردن دیاگرام‌ها اگر Mermaid قبلاً بارگذاری شده باشد
 </script>
@@ -66,9 +70,14 @@
 </div>
 
 @section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/AlertifyJS/1.13.1/alertify.js" integrity="sha512-eOUPKZXJTfgptSYQqVilRmxUNYm0XVHwcRHD4mdtCLWf/fC9XWe98IT8H1xzBkLL4Mo9GL0xWMSJtgS5te9rQA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-        let isMermaidLoaded =false;
+        let isMermaidLoaded = false;
         $(document).ready(function() {
+            // Configure Alertify
+            alertify.set('notifier', 'position', 'top-right');
+            alertify.set('notifier', 'delay', 3);
+
             $('#presentationForm').on('submit', function(e) {
                 e.preventDefault();
                 const topic = $('#topic').val();
@@ -81,7 +90,7 @@
                     url: '/Presentation/GenerateTopics',
                     type: 'POST',
                     contentType: 'application/json',
-                    data: JSON.stringify(topic),
+                    data: JSON.stringify({ topic: topic }),
                     success: function(response) {
                         $('#topicsList').empty();
                         response.subtopics.forEach(function(subtopic) {
@@ -99,7 +108,7 @@
                         $('#topicsLoader').addClass('d-none');
                     },
                     error: function(xhr) {
-                        alert('Error generating topics: ' + xhr.responseText);
+                        alertify.error('خطا در ایجاد سرفصل‌ها. لطفاً دوباره تلاش کنید.');
                         
                         // مخفی کردن لودینگ
                         $('#generateTopicsBtn').removeClass('d-none');
@@ -109,14 +118,6 @@
             });
 
             $('#generateContentBtn').click(function() {
-                const topics = {
-                    title: $('#topic').val(),
-                    subtopics: $('#topicsList .list-group-item h5').map(function() {
-                        return $(this).text();
-                    }).get(),
-                    keywords: $('#topicsList .text-muted').first().text().replace('Keywords: ', '').split(', ')
-                };
-
                 // نمایش لودینگ
                 $('#generateContentBtn').addClass('d-none');
                 $('#contentLoader').removeClass('d-none');
@@ -125,7 +126,6 @@
                     url: '/Presentation/GenerateContent',
                     type: 'POST',
                     contentType: 'application/json',
-                    data: JSON.stringify(topics),
                     success: function(response) {
                         $('#contentPreview').empty();
                         response.slides.forEach(function(slide) {
@@ -149,17 +149,21 @@
                         $('#contentLoader').addClass('d-none');
                         
                         if (!isMermaidLoaded) {
-                                import('https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs').then((mermaidModule) => {
-                                    mermaidModule.default.initialize({ startOnLoad: true });
-                                    mermaidModule.default.contentLoaded(); // رندر کردن دیاگرام‌های جدید
-                                    isMermaidLoaded = true;
-                                });
-                            } else {
-                                mermaid.contentLoaded();
-                            }
+                            import('https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs').then((mermaidModule) => {
+                                mermaidModule.default.initialize({ startOnLoad: true });
+                                mermaidModule.default.contentLoaded();
+                                isMermaidLoaded = true;
+                            });
+                        } else {
+                            import('https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs').then((mermaidModule) => {
+                                mermaidModule.default.initialize({ startOnLoad: true });
+                                mermaidModule.default.contentLoaded();
+                                isMermaidLoaded = true;
+                            });
+                        }
                     },
                     error: function(xhr) {
-                        alert('Error generating content: ' + xhr.responseText);
+                        alertify.error('خطا در ایجاد محتوا. لطفاً دوباره تلاش کنید.');
                         
                         // مخفی کردن لودینگ
                         $('#generateContentBtn').removeClass('d-none');
@@ -172,23 +176,32 @@
                 // نمایش لودینگ
                 $('#createPowerPointBtn').addClass('d-none');
                 $('#pptLoader').removeClass('d-none');
-                
-                // با تأخیر اندک ریدایرکت میکنیم تا لودینگ نمایش داده شود
-                setTimeout(function() {
-                    window.location.href = '/Presentation/CreatePowerPoint?' + $.param({
-                        mainTitle: $('#topic').val(),
-                        slides: $('#contentPreview .card').map(function() {
-                            return {
-                                title: $(this).find('h4').text(),
-                                content: $(this).find('p').text(),
-                                speakerNotes: $(this).find('.text-muted small').text().replace('Speaker Notes: ', ''),
-                                mermaidDiagram: $(this).find('pre.mermaid').text()
-                            };
-                        }).get()
-                    });
-                }, 500);
+
+                $.ajax({
+                    url: '/Presentation/CreatePowerPoint',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    success: function(response) {
+                        if (response.success) {
+                            // دانلود فایل پاورپوینت
+                            window.location.href = response.fileUrl;
+                        } else {
+                            alertify.error(response.errorMessage || 'خطا در ساخت پاورپوینت. لطفاً دوباره تلاش کنید.');
+                        }
+                        
+                        // مخفی کردن لودینگ
+                        $('#createPowerPointBtn').removeClass('d-none');
+                        $('#pptLoader').addClass('d-none');
+                    },
+                    error: function(xhr) {
+                        alertify.error('خطا در ساخت پاورپوینت. لطفاً دوباره تلاش کنید.');
+                        
+                        // مخفی کردن لودینگ
+                        $('#createPowerPointBtn').removeClass('d-none');
+                        $('#pptLoader').addClass('d-none');
+                    }
+                });
             });
         });
     </script>
-
 } 

@@ -20,3 +20,10 @@ public class Slide
     public string? MermaidDiagram { get; set; }
     public string SpeakerNotes { get; set; } = string.Empty;
 }
+
+public class PresentationResponse
+{
+    public bool Success { get; set; }
+    public string FileUrl { get; set; }
+    public string ErrorMessage { get; set; }
+}
