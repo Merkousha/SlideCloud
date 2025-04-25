@@ -71,7 +71,7 @@ public class BlogController : Controller
                 return RedirectToAction("Login", "Account");
             }
 
-
+            blog.IsPublished = true;
             await _blogService.CreateBlogAsync(blog, currentUser.Id);
             return RedirectToAction(nameof(MyBlogs));
         }

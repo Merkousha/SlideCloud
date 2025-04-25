@@ -1,4 +1,11 @@
+﻿using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.SemanticKernel.ChatCompletion;
+using Microsoft.SemanticKernel.Connectors.OpenAI;
+using Microsoft.SemanticKernel;
+using OpenAI;
+using SlideCloud.Application.DTO.Presentation;
 using SlideCloud.Application.Interfaces;
 using SlideCloud.Domain.Interfaces;
 using SlideCloud.Domain.Models.Blog;
@@ -8,7 +15,11 @@ namespace SlideCloud.Application.Services;
 public class BlogService : IBlogService
 {
     private readonly IUnitOfWork _unitOfWork;
-
+    string modelId = "gpt-4o-2024-11-20";
+    string endpoint = "https://api.avalai.ir/v1";
+    string apiKey = "aa-VckNj9CcU1uLMczXGigPhavLokYY4V2meOFzglIDDq3j6kIJ";
+    // Create a history store the conversation
+    ChatHistory history = new ChatHistory();
     public BlogService(IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
@@ -43,8 +54,10 @@ public class BlogService : IBlogService
     {
         blog.AuthorId = authorId;
         blog.CreatedAt = DateTime.UtcNow;
-        blog.IsPublished = false;
-
+        if (blog.Summary == "*****")
+        { 
+            blog.Content = await GenerateBlogPostAsync(blog.Title);
+        }
         await _unitOfWork.Blogs.AddAsync(blog);
         await _unitOfWork.SaveChangesAsync();
 
@@ -104,5 +117,64 @@ public class BlogService : IBlogService
     {
         var blog = await _unitOfWork.Blogs.GetByIdAsync(blogId);
         return blog?.AuthorId == userId;
+    }
+
+    private async Task<string> GenerateBlogPostAsync(string mainTitle)
+    {
+        // Simple slug generation logic
+        // Create a kernel with Azure OpenAI chat completion
+        var openAiClientOption = new OpenAIClientOptions
+        {
+            Endpoint = new Uri(endpoint),
+        };
+        var apiCredential = new System.ClientModel.ApiKeyCredential(apiKey);
+        var openAiClient = new OpenAIClient(apiCredential, openAiClientOption);
+        var builder = Kernel.CreateBuilder();
+        builder.Services.AddOpenAIChatCompletion(modelId, openAiClient);
+
+        // Build the kernel
+        Kernel kernel = builder.Build();
+        var chatCompletionService = kernel.GetRequiredService<IChatCompletionService>();
+
+        // Enable planning
+        OpenAIPromptExecutionSettings openAIPromptExecutionSettings = new()
+        {
+            FunctionChoiceBehavior = FunctionChoiceBehavior.Auto()
+        };
+
+        // مرحله دوم: تولید پست HTML با Bootstrap 5
+        var htmlPrompt = @$"
+    [system]
+    شما یک نویسنده حرفه‌ای وبلاگ هستید. بر اساس موضوعی که توسط کاربر ارائه می‌شود، یک پست وبلاگ کامل و جذاب بنویس که برای خواننده قابل فهم و از نظر سئو بهینه باشد.
+
+    خروجی شما باید فقط و فقط شامل محتوای HTML پست باشد.  
+    از ساختار HTML و کلاس‌های Bootstrap 5 استفاده کن تا نتیجه ظاهری زیبا و ریسپانسیو داشته باشد.
+
+    راهنمایی‌های مهم:
+    - خروجی را فقط در قالب تگ‌های HTML ارائه بده.
+    - از کلاس‌هایی مانند `container`, `row`, `col`, `card`, `lead` و دیگر کلاس‌های Bootstrap 5 به‌صورت مناسب استفاده کن.
+    - عنوان اصلی پست را در یک تگ `<h1 class=""mb-4"">` قرار بده.
+    - از پاراگراف‌ها و هدینگ‌های فرعی مانند `<h2>` و `<h3>` برای دسته‌بندی مطالب استفاده کن.
+    - هیچ متن یا توصیفی خارج از ساختار HTML و پست تولید نکن. هیچ تفسیر یا توضیحی نده.
+
+    [user]
+    موضوع پست: {mainTitle}
+    ";
+
+        // ارسال درخواست دوم
+        ChatHistory htmlHistory = new();
+        htmlHistory.AddSystemMessage(htmlPrompt);
+        htmlHistory.AddUserMessage($"موضوع پست: {mainTitle}");
+
+        var htmlResult = await chatCompletionService.GetChatMessageContentAsync(
+            htmlHistory,
+            executionSettings: openAIPromptExecutionSettings,
+            kernel: kernel);
+
+        // خروجی HTML نهایی
+        string blogHtml = htmlResult.Content ?? throw new InvalidOperationException("No blog HTML generated");
+
+        // در اینجا می‌تونی HTML رو در یک فایل ذخیره کنی یا برگردونی
+        return blogHtml;
     }
 } 
