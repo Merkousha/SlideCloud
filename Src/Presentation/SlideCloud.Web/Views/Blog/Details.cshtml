@@ -1,0 +1,63 @@
+@model SlideCloud.Domain.Models.Blog.Blog
+@{
+    ViewData["Title"] = Model.Title;
+    Layout = "_Layout";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-action="Index">Blog Posts</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">@Model.Title</li>
+                </ol>
+            </nav>
+
+            @if (!string.IsNullOrEmpty(Model.FeaturedImage))
+            {
+                <img src="@Model.FeaturedImage" class="img-fluid rounded mb-4" alt="@Model.Title">
+            }
+
+            <h1 class="mb-3">@Model.Title</h1>
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <span class="text-muted">By @Model.Author.Name</span>
+                    <span class="text-muted ms-2">|</span>
+                    <span class="text-muted ms-2">Published on @Model.PublishedAt?.ToString("MMMM dd, yyyy")</span>
+                </div>
+                @if (User.Identity.IsAuthenticated && Model.AuthorId.ToString() == User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value)
+                {
+                    <div>
+                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger ms-2">Delete</a>
+                    </div>
+                }
+            </div>
+
+            <div class="blog-content">
+                @Html.Raw(Model.Content)
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        .blog-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .blog-content img {
+            max-width: 100%;
+            height: auto;
+            margin: 1rem 0;
+        }
+
+        .blog-content p {
+            margin-bottom: 1.5rem;
+        }
+    </style>
+} 

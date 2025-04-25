@@ -1,0 +1,53 @@
+@model IEnumerable<SlideCloud.Domain.Models.Blog.Blog>
+@{
+    ViewData["Title"] = "My Blog Posts";
+    Layout = "_Layout";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="mb-4">My Blog Posts</h1>
+            <a asp-action="Create" class="btn btn-primary mb-4">Create New Post</a>
+            <a asp-action="Index" class="btn btn-secondary mb-4 ms-2">View All Posts</a>
+        </div>
+    </div>
+
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    @if (!string.IsNullOrEmpty(item.FeaturedImage))
+                    {
+                        <img src="@item.FeaturedImage" class="card-img-top" alt="@item.Title">
+                    }
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Title</h5>
+                        <p class="card-text">@item.Summary</p>
+                        <p class="card-text">
+                            <small class="text-muted">
+                                Created on @item.CreatedAt.ToString("MMMM dd, yyyy")
+                                @if (item.IsPublished)
+                                {
+                                    <span>| Published on @item.PublishedAt?.ToString("MMMM dd, yyyy")</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-warning">Draft</span>
+                                }
+                            </small>
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="btn-group">
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">View</a>
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div> 

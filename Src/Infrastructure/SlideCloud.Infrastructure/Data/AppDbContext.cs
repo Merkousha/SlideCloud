@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using SlideCloud.Domain.Interfaces;
 using SlideCloud.Domain.Entities;
 using SlideCloud.Domain.Models.ContactUs;
+using SlideCloud.Domain.Models.Blog;
 
 namespace SlideCloud.Infrastructure.Data
 {
@@ -19,6 +20,7 @@ namespace SlideCloud.Infrastructure.Data
         public DbSet<Tag> Tags { get; set; } = null!;
         public DbSet<TagDocument> TagDocuments { get; set; } = null!;
         public DbSet<Contact> Contacts { get; set; } = null!;
+        public DbSet<Blog> Blogs { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -52,6 +54,35 @@ namespace SlideCloud.Infrastructure.Data
                 .WithMany(d => d.TagDocuments)
                 .HasForeignKey(td => td.DocumentId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            // Configure Blog entity
+            builder.Entity<Blog>()
+                .HasOne(b => b.Author)
+                .WithMany()
+                .HasForeignKey(b => b.AuthorId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Blog>()
+                .Property(b => b.Title)
+                .IsRequired()
+                .HasMaxLength(200);
+
+            builder.Entity<Blog>()
+                .Property(b => b.Slug)
+                .IsRequired()
+                .HasMaxLength(200);
+
+            builder.Entity<Blog>()
+                .Property(b => b.Summary)
+                .HasMaxLength(500);
+
+            builder.Entity<Blog>()
+                .Property(b => b.FeaturedImage)
+                .HasMaxLength(500);
+
+            builder.Entity<Blog>()
+                .HasIndex(b => b.Slug)
+                .IsUnique();
         }
     }
 } 

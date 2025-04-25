@@ -14,7 +14,7 @@ Env.Load();
 builder.Services.AddControllersWithViews();
 
 // Add DbContext
-var ConnectionString = Environment.GetEnvironmentVariable("DefaultConnection");
+var ConnectionString = "Data Source=sahand.liara.cloud,34477;Initial Catalog=slidecloud;User Id=sa;Password=eqezZhqlE4FCzR5j9EykdooT;Encrypt=False;";
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(ConnectionString));
 // Add Identity
@@ -65,6 +65,8 @@ builder.Services.AddScoped<ISlideService, SlideService>();
 builder.Services.AddScoped<IFileService, FileService>();
 builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddScoped<IPresentationGeneratorService, PresentationGeneratorService>();
+builder.Services.AddScoped<IBlogService, BlogService>();
+
 
 var app = builder.Build();
 app.UseSession();
