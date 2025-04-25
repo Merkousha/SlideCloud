@@ -7,8 +7,17 @@ using SlideCloud.Domain.Entities;
 using SlideCloud.Domain.Interfaces;
 using SlideCloud.Infrastructure.Data;
 using SlideCloud.Infrastructure.Repositories;
+using Sentry;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.WebHost.UseSentry(o =>
+{
+    o.Dsn = "https://bc38a43cefded4a3a06d505a00c9c207@o4506168508940288.ingest.us.sentry.io/4509213508370432";
+    // When configuring for the first time, to see what the SDK is doing:
+    o.Debug = true;
+});
+
 Env.Load();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
