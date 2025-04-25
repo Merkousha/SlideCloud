@@ -18,7 +18,6 @@ namespace SlideCloud.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            SentrySdk.CaptureMessage("Hello Sentry");
             var homeData = await _homeService.LoadHomeDataAsync();
             return View(homeData);
         }
