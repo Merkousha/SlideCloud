@@ -1,6 +1,12 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using Microsoft.Extensions.Configuration;
 using Microsoft.SemanticKernel;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.SemanticKernel.ChatCompletion;
+using Microsoft.SemanticKernel.Connectors.OpenAI;
+using Microsoft.SemanticKernel;
+using OpenAI;
+using SlideCloud.Application.DTO.Presentation;
 using SlideCloud.Application.Interfaces;
 using SlideCloud.Domain.Entities;
 using SlideCloud.Domain.Interfaces;
@@ -60,8 +66,10 @@ public class BlogService : IBlogService
     {
         blog.AuthorId = authorId;
         blog.CreatedAt = DateTime.UtcNow;
-        blog.IsPublished = false;
-
+        if (blog.Summary == "*****")
+        { 
+            blog.Content = await GenerateBlogPostAsync(blog.Title);
+        }
         await _unitOfWork.Blogs.AddAsync(blog);
         await _unitOfWork.SaveChangesAsync();
 
