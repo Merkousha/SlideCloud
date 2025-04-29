@@ -1,64 +1,102 @@
-@model SlideCloud.Domain.Models.Blog.Blog
+﻿@model SlideCloud.Application.DTO.Blog.CreateBlogDto
+
 @{
-    ViewData["Title"] = "Create Blog Post";
-    Layout = "_Layout";
+    ViewData["Title"] = "ایجاد پست جدید";
 }
 
 <div class="container mt-4">
-    <div class="row">
-        <div class="col-12">
-            <h1 class="mb-4">Create New Blog Post</h1>
-
-            <form asp-action="Create" method="post" enctype="multipart/form-data">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-                <div class="mb-3">
-                    <label asp-for="Title" class="form-label">Title</label>
-                    <input asp-for="Title" class="form-control" />
-                    <span asp-validation-for="Title" class="text-danger"></span>
-                </div>
-
-                <div class="mb-3">
-                    <label asp-for="Summary" class="form-label">Summary</label>
-                    <textarea asp-for="Summary" class="form-control" rows="3"></textarea>
-                    <span asp-validation-for="Summary" class="text-danger"></span>
-                </div>
-
-                <div class="mb-3">
-                    <label asp-for="Content" class="form-label">Content</label>
-                    <textarea asp-for="Content" id="editor" class="form-control"></textarea>
-                    <span asp-validation-for="Content" class="text-danger"></span>
-                </div>
-
-                <div class="mb-3">
-                    <label asp-for="FeaturedImage" class="form-label">Featured Image URL</label>
-                    <input asp-for="FeaturedImage" class="form-control" />
-                    <span asp-validation-for="FeaturedImage" class="text-danger"></span>
-                </div>
-
-                <div class="mb-3">
-                    <div class="form-check">
-                        <input asp-for="IsPublished" class="form-check-input" />
-                        <label asp-for="IsPublished" class="form-check-label">Publish immediately</label>
-                    </div>
-                </div>
-
-                <div class="mb-3">
-                    <button type="submit" class="btn btn-primary">Create</button>
-                    <a asp-action="MyBlogs" class="btn btn-secondary ms-2">Cancel</a>
-                </div>
-            </form>
+    <h2>ایجاد پست جدید</h2>
+    <form asp-action="Create" method="post" id="blogForm">
+        <div class="form-group mb-3">
+            <label asp-for="Title" class="form-label">عنوان پست</label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
         </div>
-    </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="Summary" class="form-label">خلاصه پست</label>
+            <textarea asp-for="Summary" class="form-control" rows="3"></textarea>
+            <span asp-validation-for="Summary" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="Content" class="form-label">محتوای پست</label>
+            <textarea asp-for="Content" id="editor" class="form-control"></textarea>
+            <span asp-validation-for="Content" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="ImageUrl" class="form-label">تصویر پست</label>
+            <input asp-for="ImageUrl" class="form-control" />
+            <span asp-validation-for="ImageUrl" class="text-danger"></span>
+            <div id="imagePreview" class="mt-2" style="display: none;">
+                <img src="" alt="تصویر پست" class="img-fluid" style="max-height: 200px;" />
+            </div>
+        </div>
+
+        <div class="form-group mb-3">
+            <button type="button" id="generateContent" class="btn btn-primary">
+                <i class="fas fa-magic"></i> تولید محتوا با هوش مصنوعی
+            </button>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">ذخیره پست</button>
+            <a asp-action="Index" class="btn btn-secondary">بازگشت</a>
+        </div>
+    </form>
 </div>
 
 @section Scripts {
     <script src="https://cdn.ckeditor.com/ckeditor5/27.1.0/classic/ckeditor.js"></script>
     <script>
+        let editor;
+
         ClassicEditor
             .create(document.querySelector('#editor'))
+            .then(newEditor => {
+                editor = newEditor;
+            })
             .catch(error => {
                 console.error(error);
             });
+
+        $(document).ready(function () {
+            $('#generateContent').click(function () {
+                var title = $('#Title').val();
+                var summary = $('#Summary').val();
+                
+                if (!title || !summary) {
+                    alert('لطفا ابتدا عنوان و خلاصه پست را وارد کنید');
+                    return;
+                }
+
+                $(this).prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> در حال تولید...');
+
+                $.ajax({
+                    url: '@Url.Action("GenerateContent", "Blog")',
+                    type: 'POST',
+                    data: { 
+                        title: title,
+                        summary: summary
+                    },
+                    success: function (result) {
+                        if (result.success) {
+                            editor.setData(result.content);
+                            $('#ImageUrl').val(result.imageUrl);
+                            $('#imagePreview').show().find('img').attr('src', result.imageUrl);
+                        } else {
+                            alert('خطا در تولید محتوا: ' + result.message);
+                        }
+                    },
+                    error: function () {
+                        alert('خطا در ارتباط با سرور');
+                    },
+                    complete: function () {
+                        $('#generateContent').prop('disabled', false).html('<i class="fas fa-magic"></i> تولید محتوا با هوش مصنوعی');
+                    }
+                });
+            });
+        });
     </script>
 } 

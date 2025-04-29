@@ -1,4 +1,4 @@
-using SlideCloud.Domain.Models.Blog;
+using SlideCloud.Domain.Entities;
 
 namespace SlideCloud.Application.Interfaces;
 
@@ -13,4 +13,5 @@ public interface IBlogService
     Task<Blog> UpdateBlogAsync(long id, Blog blog, long userId);
     Task DeleteBlogAsync(long id, long userId);
     Task<bool> IsBlogAuthorAsync(long blogId, long userId);
-} 
+    Task<(string Content, string ImageUrl)> GenerateAIContentAsync(string title, string summary);
+}

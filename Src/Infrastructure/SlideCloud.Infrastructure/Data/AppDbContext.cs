@@ -1,9 +1,8 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using SlideCloud.Domain.Interfaces;
 using SlideCloud.Domain.Entities;
+using SlideCloud.Domain.Interfaces;
 using SlideCloud.Domain.Models.ContactUs;
-using SlideCloud.Domain.Models.Blog;
 
 namespace SlideCloud.Infrastructure.Data
 {
@@ -85,4 +84,4 @@ namespace SlideCloud.Infrastructure.Data
                 .IsUnique();
         }
     }
-} 
+}

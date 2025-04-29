@@ -1,17 +1,33 @@
-@model IEnumerable<SlideCloud.Domain.Models.Blog.Blog>
+﻿@model IEnumerable<SlideCloud.Domain.Entities.Blog>
 @{
-    ViewData["Title"] = "Blog Posts";
+    ViewData["Title"] = "وبلاگ";
     Layout = "_Layout";
 }
-
+<section class="page-header">
+    <div class="container rtl">
+        <div class="page-header__content">
+            <nav aria-label="breadcrumb">
+                <ol class="eduhive-breadcrumb list-unstyled">
+                    <li class="breadcrumb-item"><a href="/"><i class="icon-home"></i> خانه</a></li>
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Blog")">بلاگ</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">لیست وبلاگ</li>
+                </ol>
+            </nav>
+            <h1 class="page-header__title">وبلاگ</h1>
+        </div>
+    </div>
+    <img src="~/assets/images/shapes/page-header-shape-1.png" alt="" class="page-header__shape-one">
+    <img src="~/assets/images/shapes/page-header-shape-2.png" alt="" class="page-header__shape-two">
+    <div class="page-header__shape-three"></div>
+    <div class="page-header__shape-four"></div>
+</section>
 <div class="container mt-4">
     <div class="row">
         <div class="col-12">
-            <h1 class="mb-4">Blog Posts</h1>
             @if (User.Identity.IsAuthenticated)
             {
-                <a asp-action="Create" class="btn btn-primary mb-4">Create New Post</a>
-                <a asp-action="MyBlogs" class="btn btn-secondary mb-4 ms-2">My Posts</a>
+                <a asp-action="Create" class="btn btn-primary mb-4">ساخت پست جدید</a>
+                <a asp-action="MyBlogs" class="btn btn-secondary mb-4 ms-2">پست های من</a>
             }
         </div>
     </div>
@@ -35,7 +51,7 @@
                         </p>
                     </div>
                     <div class="card-footer">
-                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">Read More</a>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">مطالعه بیشتر</a>
                     </div>
                 </div>
             </div>

@@ -3,10 +3,10 @@ using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Presentation;
 using DocumentFormat.OpenXml.Wordprocessing;
+using Microsoft.Extensions.Configuration;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.ChatCompletion;
 using Microsoft.SemanticKernel.Connectors.OpenAI;
-using OpenAI;
 using SlideCloud.Application.DTO.Presentation;
 using Text = DocumentFormat.OpenXml.Presentation.Text;
 
@@ -21,33 +21,36 @@ public interface IPresentationGeneratorService
 
 public class PresentationGeneratorService : IPresentationGeneratorService
 {
-    Kernel _kernel;
-    string modelId = "gpt-4o-2024-11-20";
-    string endpoint = "https://api.avalai.ir/v1";
-    string apiKey = "aa-VckNj9CcU1uLMczXGigPhavLokYY4V2meOFzglIDDq3j6kIJ";
-    // Create a history store the conversation
-    ChatHistory history = new ChatHistory();
+    private readonly IConfiguration _configuration;
+    private readonly Kernel _kernel;
+    ChatHistory history = [];
 
+    public PresentationGeneratorService(IConfiguration configuration)
+    {
+        _configuration = configuration;
+        _kernel = CreateKernel();
+    }
 
+    private Kernel CreateKernel()
+    {
+        var builder = Kernel.CreateBuilder();
+#pragma warning disable SKEXP0010
+        builder.AddOpenAIChatCompletion(
+            modelId: "gpt-4o-2024-11-20",
+            apiKey: "aa-VckNj9CcU1uLMczXGigPhavLokYY4V2meOFzglIDDq3j6kIJ",
+            endpoint: new Uri("https://api.avalai.ir/v1") // Replace with your actual endpoint
+            );
 
+        return builder.Build();
+    }
 
     public async Task<TopicSuggestion> GenerateTopics(string mainTitle)
     {
 
-        // Create a kernel with Azure OpenAI chat completion
-        var openAiClientOption = new OpenAIClientOptions
-        {
-            Endpoint = new Uri(endpoint),
-        };
-        var apiCredential = new System.ClientModel.ApiKeyCredential(apiKey);
-        var openAiClient = new OpenAIClient(apiCredential, openAiClientOption);
-        var builder = Kernel.CreateBuilder();
-        builder.Services.AddOpenAIChatCompletion(modelId, openAiClient);
 
 
         // Build the kernel
-        Kernel kernel = builder.Build();
-        var chatCompletionService = kernel.GetRequiredService<IChatCompletionService>();
+        var chatCompletionService = _kernel.GetRequiredService<IChatCompletionService>();
 
         // Enable planning
         OpenAIPromptExecutionSettings openAIPromptExecutionSettings = new()
@@ -80,7 +83,7 @@ public class PresentationGeneratorService : IPresentationGeneratorService
         var result = await chatCompletionService.GetChatMessageContentAsync(
             history,
             executionSettings: openAIPromptExecutionSettings,
-            kernel: kernel);
+            kernel: _kernel);
 
 
         // Add the message from the agent to the chat history
@@ -105,20 +108,8 @@ public class PresentationGeneratorService : IPresentationGeneratorService
 
     public async Task<PresentationContent> GenerateContent(TopicSuggestion approvedTopics)
     {
-        // Create a kernel with Azure OpenAI chat completion
-        var openAiClientOption = new OpenAIClientOptions
-        {
-            Endpoint = new Uri(endpoint),
-        };
-        var apiCredential = new System.ClientModel.ApiKeyCredential(apiKey);
-        var openAiClient = new OpenAIClient(apiCredential, openAiClientOption);
-        var builder = Kernel.CreateBuilder();
-        builder.Services.AddOpenAIChatCompletion(modelId, openAiClient);
 
-
-        // Build the kernel
-        Kernel kernel = builder.Build();
-        var chatCompletionService = kernel.GetRequiredService<IChatCompletionService>();
+        var chatCompletionService = _kernel.GetRequiredService<IChatCompletionService>();
 
         // Enable planning
         OpenAIPromptExecutionSettings openAIPromptExecutionSettings = new()
@@ -166,7 +157,7 @@ public class PresentationGeneratorService : IPresentationGeneratorService
         var result = await chatCompletionService.GetChatMessageContentAsync(
             history,
             executionSettings: openAIPromptExecutionSettings,
-            kernel: kernel);
+            kernel: _kernel);
 
 
         // Add the message from the agent to the chat history

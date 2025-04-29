@@ -1,4 +1,4 @@
-using SlideCloud.Domain.Models.Blog;
+using SlideCloud.Domain.Entities;
 
 namespace SlideCloud.Domain.Interfaces;
 

@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SlideCloud.Application.DTO.Blog;
 using SlideCloud.Application.Interfaces;
-using SlideCloud.Domain.Models.Blog;
+using SlideCloud.Domain.Entities;
 
 namespace SlideCloud.Web.Controllers;
 
@@ -9,6 +10,9 @@ public class BlogController : Controller
 {
     private readonly IBlogService _blogService;
     private readonly IUserService _userService;
+    private readonly string _modelId = "gpt-4o-2024-11-20";
+    private readonly string _endpoint = "https://api.avalai.ir/v1";
+    private readonly string _apiKey = "aa-VckNj9CcU1uLMczXGigPhavLokYY4V2meOFzglIDDq3j6kIJ";
 
     public BlogController(IBlogService blogService, IUserService userService)
     {
@@ -53,16 +57,15 @@ public class BlogController : Controller
     [Authorize]
     public IActionResult Create()
     {
-        return View();
+        return View(new CreateBlogDto());
     }
 
     // POST: Blog/Create
     [HttpPost]
     [ValidateAntiForgeryToken]
     [Authorize]
-    public async Task<IActionResult> Create(Blog blog)
+    public async Task<IActionResult> Create(CreateBlogDto createBlogDto)
     {
-        blog.Slug = GenerateSlug(blog.Title);
         if (ModelState.IsValid)
         {
             var currentUser = await _userService.GetCurrentUser();
@@ -71,12 +74,20 @@ public class BlogController : Controller
                 return RedirectToAction("Login", "Account");
             }
 
+            var blog = new Blog
+            {
+                Title = createBlogDto.Title,
+                Summary = createBlogDto.Summary,
+                Slug = GenerateSlug(createBlogDto.Title),
+                AuthorId = currentUser.Id,
+                CreatedAt = DateTime.UtcNow
+            };
 
             await _blogService.CreateBlogAsync(blog, currentUser.Id);
             return RedirectToAction(nameof(MyBlogs));
         }
 
-        return View(blog);
+        return View(createBlogDto);
     }
 
     // GET: Blog/Edit/5
@@ -189,6 +200,31 @@ public class BlogController : Controller
         catch (KeyNotFoundException)
         {
             return NotFound();
+        }
+    }
+
+    [HttpPost]
+    [Authorize]
+    public async Task<IActionResult> GenerateContent(string title, string summary)
+    {
+        try
+        {
+            var (content, imageUrl) = await _blogService.GenerateAIContentAsync(title, summary);
+
+            return Json(new
+            {
+                success = true,
+                content = content,
+                imageUrl = imageUrl
+            });
+        }
+        catch (Exception ex)
+        {
+            return Json(new
+            {
+                success = false,
+                message = ex.Message
+            });
         }
     }
 

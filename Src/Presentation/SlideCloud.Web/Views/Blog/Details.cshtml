@@ -1,19 +1,29 @@
-@model SlideCloud.Domain.Models.Blog.Blog
+﻿@model SlideCloud.Domain.Entities.Blog
 @{
     ViewData["Title"] = Model.Title;
     Layout = "_Layout";
 }
-
+<section class="page-header">
+    <div class="container rtl">
+        <div class="page-header__content">
+            <nav aria-label="breadcrumb">
+                <ol class="eduhive-breadcrumb list-unstyled">
+                    <li class="breadcrumb-item"><a href="/"><i class="icon-home"></i> خانه</a></li>
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Blog")">بلاگ</a></li>
+                </ol>
+            </nav>
+            <h1 class="page-header__title">@Model.Title</h1>
+        </div>
+    </div>
+    <img src="~/assets/images/shapes/page-header-shape-1.png" alt="" class="page-header__shape-one">
+    <img src="~/assets/images/shapes/page-header-shape-2.png" alt="" class="page-header__shape-two">
+    <div class="page-header__shape-three"></div>
+    <div class="page-header__shape-four"></div>
+</section>
 <div class="container mt-4">
     <div class="row">
         <div class="col-12">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a asp-action="Index">Blog Posts</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">@Model.Title</li>
-                </ol>
-            </nav>
-
+       
             @if (!string.IsNullOrEmpty(Model.FeaturedImage))
             {
                 <img src="@Model.FeaturedImage" class="img-fluid rounded mb-4" alt="@Model.Title">

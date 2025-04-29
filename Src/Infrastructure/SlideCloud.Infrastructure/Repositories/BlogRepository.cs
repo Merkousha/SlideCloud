@@ -1,8 +1,9 @@
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
+using SlideCloud.Domain.Entities;
 using SlideCloud.Domain.Interfaces;
-using SlideCloud.Domain.Models.Blog;
 using SlideCloud.Infrastructure.Data;
+
 
 namespace SlideCloud.Infrastructure.Repositories;
 
