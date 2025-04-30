@@ -1,15 +1,30 @@
-@model IEnumerable<SlideCloud.Domain.Entities.Blog>
+﻿@model IEnumerable<SlideCloud.Domain.Entities.Blog>
 @{
     ViewData["Title"] = "My Blog Posts";
     Layout = "_Layout";
 }
+<section class="page-header">
+    <div class="container rtl">
+        <div class="page-header__content">
+            <ul class="eduhive-breadcrumb list-unstyled">
+                <li><span class="eduhive-breadcrumb__icon"><i class="icon-home"></i></span><a href="~/">خانه</a></li>
+                <li><span><a href="~/blog"> وبلاگ ما</a></span></li>
+                <li><span>پست های من</span></li>
+            </ul><!-- /.eduhive-breadcrumb list-unstyled -->
+            <h2 class="page-header__title">پست های من</h2>
+        </div><!-- /.page-header__content -->
+    </div><!-- /.container -->
+    <img src="~/assets/images/shapes/page-header-shape-1.png" alt="shape" class="page-header__shape-one">
+    <img src="~/assets/images/shapes/page-header-shape-2.png" alt="shape" class="page-header__shape-two">
+    <div class="page-header__shape-three"></div><!-- /.page-header__shape-three -->
+    <div class="page-header__shape-four"></div><!-- /.page-header__shape-four -->
+</section><!-- /.page-header -->
 
-<div class="container mt-4">
+<div class="container mt-4 rtl">
     <div class="row">
         <div class="col-12">
-            <h1 class="mb-4">My Blog Posts</h1>
-            <a asp-action="Create" class="btn btn-primary mb-4">Create New Post</a>
-            <a asp-action="Index" class="btn btn-secondary mb-4 ms-2">View All Posts</a>
+            <a asp-action="Create" class="btn btn-primary mb-4">پست جدید</a>
+            <a asp-action="Index" class="btn btn-secondary mb-4 ms-2">همه ی پست ها</a>
         </div>
     </div>
 
@@ -41,9 +56,9 @@
                     </div>
                     <div class="card-footer">
                         <div class="btn-group">
-                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">View</a>
-                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
-                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">مشاهده</a>
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">ویرایش</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">حذف</a>
                         </div>
                     </div>
                 </div>

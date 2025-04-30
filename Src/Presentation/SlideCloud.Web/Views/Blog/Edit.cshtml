@@ -1,14 +1,27 @@
-@model SlideCloud.Domain.Entities.Blog
+﻿@model SlideCloud.Domain.Entities.Blog
 @{
     ViewData["Title"] = "Edit Blog Post";
     Layout = "_Layout";
 }
-
-<div class="container mt-4">
+<section class="page-header">
+    <div class="container rtl">
+        <div class="page-header__content">
+            <ul class="eduhive-breadcrumb list-unstyled">
+                <li><span class="eduhive-breadcrumb__icon"><i class="icon-home"></i></span><a href="~/">خانه</a></li>
+                <li><span><a href="~/blog"> وبلاگ ما</a></span></li>
+                <li><span>ویرایش پست</span></li>
+            </ul><!-- /.eduhive-breadcrumb list-unstyled -->
+            <h2 class="page-header__title">@Model.Title</h2>
+        </div><!-- /.page-header__content -->
+    </div><!-- /.container -->
+    <img src="~/assets/images/shapes/page-header-shape-1.png" alt="shape" class="page-header__shape-one">
+    <img src="~/assets/images/shapes/page-header-shape-2.png" alt="shape" class="page-header__shape-two">
+    <div class="page-header__shape-three"></div><!-- /.page-header__shape-three -->
+    <div class="page-header__shape-four"></div><!-- /.page-header__shape-four -->
+</section><!-- /.page-header -->
+<div class="container mt-4 rtl">
     <div class="row">
         <div class="col-12">
-            <h1 class="mb-4">Edit Blog Post</h1>
-
             <form asp-action="Edit" method="post" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="Id" />

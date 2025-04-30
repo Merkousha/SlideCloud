@@ -1,26 +1,27 @@
-﻿@model SlideCloud.Domain.Entities.Blog
+﻿@using SlideCloud.Web.Extensions;
+@model SlideCloud.Domain.Entities.Blog
 @{
     ViewData["Title"] = Model.Title;
     Layout = "_Layout";
 }
+
 <section class="page-header">
     <div class="container rtl">
         <div class="page-header__content">
-            <nav aria-label="breadcrumb">
-                <ol class="eduhive-breadcrumb list-unstyled">
-                    <li class="breadcrumb-item"><a href="/"><i class="icon-home"></i> خانه</a></li>
-                    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Blog")">بلاگ</a></li>
-                </ol>
-            </nav>
-            <h1 class="page-header__title">@Model.Title</h1>
-        </div>
-    </div>
-    <img src="~/assets/images/shapes/page-header-shape-1.png" alt="" class="page-header__shape-one">
-    <img src="~/assets/images/shapes/page-header-shape-2.png" alt="" class="page-header__shape-two">
-    <div class="page-header__shape-three"></div>
-    <div class="page-header__shape-four"></div>
-</section>
-<div class="container mt-4">
+            <ul class="eduhive-breadcrumb list-unstyled">
+                <li><span class="eduhive-breadcrumb__icon"><i class="icon-home"></i></span><a href="~/">خانه</a></li>
+                <li><span><a href="~/blog"> وبلاگ ما</a></span></li>
+                <li><span>@Model.Title</span></li>
+            </ul><!-- /.eduhive-breadcrumb list-unstyled -->
+            <h2 class="page-header__title">@Model.Title</h2>
+        </div><!-- /.page-header__content -->
+    </div><!-- /.container -->
+    <img src="~/assets/images/shapes/page-header-shape-1.png" alt="shape" class="page-header__shape-one">
+    <img src="~/assets/images/shapes/page-header-shape-2.png" alt="shape" class="page-header__shape-two">
+    <div class="page-header__shape-three"></div><!-- /.page-header__shape-three -->
+    <div class="page-header__shape-four"></div><!-- /.page-header__shape-four -->
+</section><!-- /.page-header -->
+<div class="container mt-4 rtl">
     <div class="row">
         <div class="col-12">
        
@@ -33,9 +34,9 @@
 
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <div>
-                    <span class="text-muted">By @Model.Author.Name</span>
+                    <span class="text-muted">توسط @Model.Author.Name</span>
                     <span class="text-muted ms-2">|</span>
-                    <span class="text-muted ms-2">Published on @Model.PublishedAt?.ToString("MMMM dd, yyyy")</span>
+                    <span class="text-muted ms-2">منتشر شده در @Model.CreatedAt.ToPersianDate()</span>
                 </div>
                 @if (User.Identity.IsAuthenticated && Model.AuthorId.ToString() == User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value)
                 {

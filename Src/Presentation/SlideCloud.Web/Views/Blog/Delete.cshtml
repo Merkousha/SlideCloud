@@ -1,17 +1,33 @@
+﻿@using SlideCloud.Web.Extensions;
 @model SlideCloud.Domain.Entities.Blog
 @{
     ViewData["Title"] = "Delete Blog Post";
     Layout = "_Layout";
 }
-
-<div class="container mt-4">
+<section class="page-header">
+    <div class="container rtl">
+        <div class="page-header__content">
+            <ul class="eduhive-breadcrumb list-unstyled">
+                <li><span class="eduhive-breadcrumb__icon"><i class="icon-home"></i></span><a href="~/">خانه</a></li>
+                <li><span><a href="~/blog"> وبلاگ ما</a></span></li>
+                <li><span>حذف پست</span></li>
+            </ul><!-- /.eduhive-breadcrumb list-unstyled -->
+            <h2 class="page-header__title">@Model.Title</h2>
+        </div><!-- /.page-header__content -->
+    </div><!-- /.container -->
+    <img src="~/assets/images/shapes/page-header-shape-1.png" alt="shape" class="page-header__shape-one">
+    <img src="~/assets/images/shapes/page-header-shape-2.png" alt="shape" class="page-header__shape-two">
+    <div class="page-header__shape-three"></div><!-- /.page-header__shape-three -->
+    <div class="page-header__shape-four"></div><!-- /.page-header__shape-four -->
+</section><!-- /.page-header -->
+<div class="container mt-4 rtl">
     <div class="row">
         <div class="col-12">
             <h1 class="mb-4">Delete Blog Post</h1>
 
             <div class="alert alert-danger">
-                <h4>Are you sure you want to delete this blog post?</h4>
-                <p>This action cannot be undone.</p>
+                <h4>از حذف کردن این پست مطمئنید؟</h4>
+                <p>برگشت نداره ها!</p>
             </div>
 
             <div class="card mb-4">
@@ -20,10 +36,10 @@
                     <p class="card-text">@Model.Summary</p>
                     <p class="card-text">
                         <small class="text-muted">
-                            Created on @Model.CreatedAt.ToString("MMMM dd, yyyy")
+                            ساخته شده در:  @Model.CreatedAt.ToPersianDate()
                             @if (Model.IsPublished)
                             {
-                                <span>| Published on @Model.PublishedAt?.ToString("MMMM dd, yyyy")</span>
+                                <span>| منتشر شده در: @Model.PublishedAt?.ToPersianDate()</span>
                             }
                         </small>
                     </p>
@@ -32,8 +48,8 @@
 
             <form asp-action="Delete" method="post">
                 <input type="hidden" asp-for="Id" />
-                <button type="submit" class="btn btn-danger">Delete</button>
-                <a asp-action="MyBlogs" class="btn btn-secondary ms-2">Cancel</a>
+                <button type="submit" class="btn btn-danger">حذف</button>
+                <a asp-action="MyBlogs" class="btn btn-secondary ms-2">انصراف</a>
             </form>
         </div>
     </div>

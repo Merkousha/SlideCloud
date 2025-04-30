@@ -113,11 +113,7 @@
                                     @Html.ActionLink("لیست اسلاید ها", "Index", "Slide")
                                 </li>
                                 <li>
-                                    <a href="/Home/AboutUs">درباره ما</a>
-                                </li>
-
-                                <li>
-                                    <a href="@Url.Action("Contact", "Home")">تماس با ما</a>
+                                    @Html.ActionLink("وبلاگ", "Index", "Blog")
                                 </li>
 
                                 @if (!User.Identity.IsAuthenticated)
@@ -204,7 +200,7 @@
         </header><!-- /.main-header -->
         @RenderBody()
         <footer class="main-footer section-space-top">
-            <div class="container rtl">
+            <div class="container ">
                 <div class="main-footer__top">
                     <a href="index.html" class="main-footer__logo">
                         <img src="~/assets/images/logo-dark.png" width="209" alt="Eduhive HTML Template">
@@ -224,8 +220,17 @@
                 </div><!-- /.main-footer__top -->
                 <div class="row gutter-y-40 rtl">
                     <div class="col-xl-3 col-lg-4 wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="00ms">
-                        <div class="footer-widget footer-widget--about">
-                        </div><!-- /.footer-widget -->
+                            <div class="footer-widget footer-widget--about">
+                                <ul class="footer-widget__info">
+                                    <li>
+                                        <a href="/Home/AboutUs">درباره ما</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="@Url.Action("Contact", "Home")">تماس با ما</a>
+                                    </li>
+                                </ul><!-- /.footer-widget__info -->
+                            </div><!-- /.footer-widget -->
                     </div><!-- /.col-xl-3 col-lg-4 -->
                     <div class="col-xl-3 col-md-4 col-sm-6 wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="100ms">
                         <div class="footer-widget footer-widget--links">
@@ -240,13 +245,15 @@
                         </div><!-- /.footer-widget -->
                     </div><!-- /.col-xl-3 col-md-4 -->
                 </div><!-- /.row gutter-y-40 -->
-            </div><!-- /.container -->
+            </div>
+
             <div class="main-footer__bottom">
-                <div class="container">
+                <div class="container rtl">
                     <div class="main-footer__bottom__inner">
                         <p class="main-footer__copyright">
                             &copy; تمامی حقوق<span class="dynamic-year"></span> محفوظ میباشد
                         </p>
+                       
                     </div><!-- /.main-footer__inner -->
                 </div><!-- /.container -->
             </div><!-- /.main-footer__bottom -->

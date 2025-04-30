@@ -7,23 +7,20 @@
 <section class="page-header">
     <div class="container rtl">
         <div class="page-header__content">
-            <nav aria-label="breadcrumb">
-                <ol class="eduhive-breadcrumb list-unstyled">
-                    <li class="breadcrumb-item"><a href="/"><i class="icon-home"></i> خانه</a></li>
-                    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Blog")">بلاگ</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">لیست وبلاگ</li>
-                </ol>
-            </nav>
-            <h1 class="page-header__title">وبلاگ</h1>
-        </div>
-    </div>
-    <img src="~/assets/images/shapes/page-header-shape-1.png" alt="" class="page-header__shape-one">
-    <img src="~/assets/images/shapes/page-header-shape-2.png" alt="" class="page-header__shape-two">
-    <div class="page-header__shape-three"></div>
-    <div class="page-header__shape-four"></div>
-</section>
-<div class="container mt-4">
-    <h2>ایجاد پست جدید</h2>
+            <ul class="eduhive-breadcrumb list-unstyled">
+                <li><span class="eduhive-breadcrumb__icon"><i class="icon-home"></i></span><a href="~/">خانه</a></li>
+                <li><span><a href="~/blog"> وبلاگ ما</a></span></li>
+                <li><span>پست جدید</span></li>
+            </ul><!-- /.eduhive-breadcrumb list-unstyled -->
+            <h2 class="page-header__title">ساخت پست جدید</h2>
+        </div><!-- /.page-header__content -->
+    </div><!-- /.container -->
+    <img src="~/assets/images/shapes/page-header-shape-1.png" alt="shape" class="page-header__shape-one">
+    <img src="~/assets/images/shapes/page-header-shape-2.png" alt="shape" class="page-header__shape-two">
+    <div class="page-header__shape-three"></div><!-- /.page-header__shape-three -->
+    <div class="page-header__shape-four"></div><!-- /.page-header__shape-four -->
+</section><!-- /.page-header -->
+<div class="container mt-4 mb-4 rtl ">
     <form asp-action="Create" method="post" id="blogForm">
         <div class="form-group mb-3">
             <label asp-for="Title" class="form-label">عنوان پست</label>
@@ -32,11 +29,15 @@
         </div>
 
         <div class="form-group mb-3">
-            <label asp-for="Summary" class="form-label">خلاصه پست</label>
+            <label asp-for="Summary" class="form-label">اینجا بگو محتواش چی باشه تا برات بسازیمش</label>
             <textarea asp-for="Summary" class="form-control" rows="3"></textarea>
             <span asp-validation-for="Summary" class="text-danger"></span>
         </div>
-
+        <div class="form-group mb-3">
+            <button type="button" id="generateContent" class="btn btn-primary">
+                <i class="fas fa-magic"></i> تولید محتوا با هوش مصنوعی
+            </button>
+        </div>
         <div class="form-group mb-3">
             <label asp-for="Content" class="form-label">محتوای پست</label>
             <textarea asp-for="Content" id="editor" class="form-control rtl"></textarea>
@@ -52,11 +53,7 @@
             </div>
         </div>
 
-        <div class="form-group mb-3">
-            <button type="button" id="generateContent" class="btn btn-primary">
-                <i class="fas fa-magic"></i> تولید محتوا با هوش مصنوعی
-            </button>
-        </div>
+        
 
         <div class="form-group">
             <button type="submit" class="btn btn-success">ذخیره پست</button>

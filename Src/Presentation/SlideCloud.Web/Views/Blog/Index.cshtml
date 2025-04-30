@@ -1,10 +1,12 @@
-﻿@model IEnumerable<SlideCloud.Domain.Entities.Blog>
+﻿@using SlideCloud.Web.Extensions;
+
+@model IEnumerable<SlideCloud.Domain.Entities.Blog>
 @{
     ViewData["Title"] = "وبلاگ";
     Layout = "_Layout";
 }
 <section class="page-header">
-    <div class="container rtl">
+    <div class="container">
         <div class="page-header__content">
             <nav aria-label="breadcrumb">
                 <ol class="eduhive-breadcrumb list-unstyled">
@@ -21,7 +23,7 @@
     <div class="page-header__shape-three"></div>
     <div class="page-header__shape-four"></div>
 </section>
-<div class="container mt-4">
+<div class="container mt-4 rtl">
     <div class="row">
         <div class="col-12">
             @if (User.Identity.IsAuthenticated)
@@ -32,7 +34,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row ">
         @foreach (var item in Model)
         {
             <div class="col-md-6 col-lg-4 mb-4">
@@ -43,10 +45,9 @@
                     }
                     <div class="card-body">
                         <h5 class="card-title">@item.Title</h5>
-                        <p class="card-text">@item.Summary</p>
                         <p class="card-text">
                             <small class="text-muted">
-                                By @item.Author.Name on @item.PublishedAt?.ToString("MMMM dd, yyyy")
+                                توسط @item.Author.Name در @item.CreatedAt.ToPersianDate()
                             </small>
                         </p>
                     </div>
