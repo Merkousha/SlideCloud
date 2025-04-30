@@ -67,6 +67,7 @@ public class BlogService : IBlogService
     {
         blog.AuthorId = authorId;
         blog.CreatedAt = DateTime.UtcNow;
+        blog.IsPublished = true;
         await _unitOfWork.Blogs.AddAsync(blog);
         await _unitOfWork.SaveChangesAsync();
 
