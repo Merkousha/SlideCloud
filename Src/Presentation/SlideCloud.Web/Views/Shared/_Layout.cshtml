@@ -66,8 +66,6 @@
 
     <!-- template styles -->
     <link rel="stylesheet" href="~/assets/css/eduhive.css" />
-    <link rel="stylesheet" href="~/assets/css/eduhive-rtl.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/presentation.css" asp-append-version="true" />
     @await RenderSectionAsync("Styles", required: false)
 
@@ -387,11 +385,10 @@
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     <!-- template js -->
-    <script src="~/assets/js/eduhive.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 
 
-
+    <script src="~/assets/js/eduhive.js"></script>
 </body>
 
 
