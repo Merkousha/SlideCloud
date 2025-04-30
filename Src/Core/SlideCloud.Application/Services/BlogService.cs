@@ -1,12 +1,6 @@
 ﻿using System.Text.Json;
 using Microsoft.Extensions.Configuration;
 using Microsoft.SemanticKernel;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.SemanticKernel.ChatCompletion;
-using Microsoft.SemanticKernel.Connectors.OpenAI;
-using Microsoft.SemanticKernel;
-using OpenAI;
-using SlideCloud.Application.DTO.Presentation;
 using SlideCloud.Application.Interfaces;
 using SlideCloud.Domain.Entities;
 using SlideCloud.Domain.Interfaces;
@@ -31,9 +25,13 @@ public class BlogService : IBlogService
     private Kernel CreateKernel()
     {
         var builder = Kernel.CreateBuilder();
+#pragma warning disable SKEXP0010
         builder.AddOpenAIChatCompletion(
             modelId: "gpt-4o-2024-11-20",
-            apiKey: _configuration["OpenAI:ApiKey"]!);
+            apiKey: "aa-VckNj9CcU1uLMczXGigPhavLokYY4V2meOFzglIDDq3j6kIJ",
+            endpoint: new Uri("https://api.avalai.ir/v1") // Replace with your actual endpoint
+            );
+
         return builder.Build();
     }
 
@@ -66,10 +64,6 @@ public class BlogService : IBlogService
     {
         blog.AuthorId = authorId;
         blog.CreatedAt = DateTime.UtcNow;
-        if (blog.Summary == "*****")
-        { 
-            blog.Content = await GenerateBlogPostAsync(blog.Title);
-        }
         await _unitOfWork.Blogs.AddAsync(blog);
         await _unitOfWork.SaveChangesAsync();
 
@@ -137,15 +131,24 @@ public class BlogService : IBlogService
     {
         var prompt = $@"Generate a blog post with the following title and summary. The response should be in JSON format with the following structure:
         {{
-            ""content"": ""The main content of the blog post"",
-            ""imagePrompt"": ""A detailed prompt for generating an image that represents the blog post""
+            ""Content"": ""The main HTML content of the post "",
+            ""ImagePrompt"": ""A detailed prompt for generating an image that represents the blog post""
         }}
 
+        the Content field should only contain the HTML content of the post.
+Use HTML structure and Bootstrap 5 classes to create a beautiful and responsive result.
+Important tips:
+- Provide output only in HTML tags.
+- Use classes like `container`, `row`, `col`, `card`, `lead` and other Bootstrap 5 classes appropriately.
+- Put the main title of the post in a `<h1 class=""mb-4"">` tag.
+- Use paragraphs and subheadings like `<h2>` and `<h3>` to categorize content.
+- Do not generate any text or description outside the HTML structure and post. Do not provide any commentary or explanation.
         Title: {title}
         Summary: {summary}";
 
         var result = await _kernel.InvokePromptAsync(prompt);
-        var response = JsonSerializer.Deserialize<BlogGenerationResponse>(result.ToString());
+        var cleanedResult = CleanChatMessageContent(result.ToString());
+        var response = JsonSerializer.Deserialize<BlogGenerationResponse>(cleanedResult);
 
         if (response == null)
         {
@@ -157,10 +160,18 @@ public class BlogService : IBlogService
 
         return (response.Content, imageUrl);
     }
-}
 
-public class BlogGenerationResponse
-{
-    public string Content { get; set; } = string.Empty;
-    public string ImagePrompt { get; set; } = string.Empty;
+    private static string CleanChatMessageContent(string result)
+    {
+        return result
+            .Replace("```", "")
+            .Replace("json", "");
+    }
+
+    public class BlogGenerationResponse
+    {
+        public string Content { get; set; } = string.Empty;
+        public string ImagePrompt { get; set; } = string.Empty;
+    }
+
 }

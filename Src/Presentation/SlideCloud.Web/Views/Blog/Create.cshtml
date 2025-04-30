@@ -1,9 +1,27 @@
 ﻿@model SlideCloud.Application.DTO.Blog.CreateBlogDto
 
 @{
+    Layout = "_Layout";
     ViewData["Title"] = "ایجاد پست جدید";
 }
-
+<section class="page-header">
+    <div class="container rtl">
+        <div class="page-header__content">
+            <nav aria-label="breadcrumb">
+                <ol class="eduhive-breadcrumb list-unstyled">
+                    <li class="breadcrumb-item"><a href="/"><i class="icon-home"></i> خانه</a></li>
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Blog")">بلاگ</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">لیست وبلاگ</li>
+                </ol>
+            </nav>
+            <h1 class="page-header__title">وبلاگ</h1>
+        </div>
+    </div>
+    <img src="~/assets/images/shapes/page-header-shape-1.png" alt="" class="page-header__shape-one">
+    <img src="~/assets/images/shapes/page-header-shape-2.png" alt="" class="page-header__shape-two">
+    <div class="page-header__shape-three"></div>
+    <div class="page-header__shape-four"></div>
+</section>
 <div class="container mt-4">
     <h2>ایجاد پست جدید</h2>
     <form asp-action="Create" method="post" id="blogForm">
@@ -21,7 +39,7 @@
 
         <div class="form-group mb-3">
             <label asp-for="Content" class="form-label">محتوای پست</label>
-            <textarea asp-for="Content" id="editor" class="form-control"></textarea>
+            <textarea asp-for="Content" id="editor" class="form-control rtl"></textarea>
             <span asp-validation-for="Content" class="text-danger"></span>
         </div>
 
@@ -53,7 +71,16 @@
         let editor;
 
         ClassicEditor
-            .create(document.querySelector('#editor'))
+                .create(document.querySelector('#editor'), {
+            // ... Other con figuration options ...
+            language: {
+                // The UI will be English.
+                ui: 'en',
+
+                // But the content will be edited in Arabic.
+                content: 'fa'
+            }
+            } )
             .then(newEditor => {
                 editor = newEditor;
             })
@@ -65,7 +92,7 @@
             $('#generateContent').click(function () {
                 var title = $('#Title').val();
                 var summary = $('#Summary').val();
-                
+
                 if (!title || !summary) {
                     alert('لطفا ابتدا عنوان و خلاصه پست را وارد کنید');
                     return;
@@ -76,7 +103,7 @@
                 $.ajax({
                     url: '@Url.Action("GenerateContent", "Blog")',
                     type: 'POST',
-                    data: { 
+                    data: {
                         title: title,
                         summary: summary
                     },

@@ -7,7 +7,6 @@ using SlideCloud.Domain.Entities;
 using SlideCloud.Domain.Interfaces;
 using SlideCloud.Infrastructure.Data;
 using SlideCloud.Infrastructure.Repositories;
-using Sentry;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -62,6 +61,7 @@ builder.Services.AddScoped<IDocumentRepository, DocumentRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IDocumentTypeRepository, DocumentTypeRepository>();
+builder.Services.AddScoped<IBlogRepository, BlogRepository>();
 
 // Add Services
 builder.Services.AddScoped<IHomeService, HomeService>();
