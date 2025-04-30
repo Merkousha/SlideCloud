@@ -1,6 +1,9 @@
-﻿using System.Text.Json;
+﻿using System.ClientModel;
+using System.Text.Json;
 using Microsoft.Extensions.Configuration;
 using Microsoft.SemanticKernel;
+using OpenAI;
+using OpenAI.Images;
 using SlideCloud.Application.Interfaces;
 using SlideCloud.Domain.Entities;
 using SlideCloud.Domain.Interfaces;
@@ -129,7 +132,7 @@ public class BlogService : IBlogService
 
     public async Task<(string Content, string ImageUrl)> GenerateAIContentAsync(string title, string summary)
     {
-        var prompt = $@"Generate a blog post with the following title and summary. The response should be in JSON format with the following structure:
+        var prompt = $@"Generate a blog post (in persian) with the following title and summary. The response should be in JSON format with the following structure:
         {{
             ""Content"": ""The main HTML content of the post "",
             ""ImagePrompt"": ""A detailed prompt for generating an image that represents the blog post""
@@ -156,10 +159,34 @@ Important tips:
         }
 
         // For now, we'll return a placeholder image URL since image generation is not yet implemented
-        var imageUrl = "https://placeholder.com/800x600";
+        var imageUrl = await GenerateImageAsync(response.ImagePrompt);
 
         return (response.Content, imageUrl);
     }
+
+    private async Task<string> GenerateImageAsync(string prompt)
+    {
+        ApiKeyCredential key = new ApiKeyCredential("aa-VckNj9CcU1uLMczXGigPhavLokYY4V2meOFzglIDDq3j6kIJ");
+        OpenAIClientOptions options = new OpenAIClientOptions
+        {
+            Endpoint = new Uri("https://api.avalai.ir/v1")
+        };
+        ImageClient client = new("dall-e-3", key, options);
+
+        // Generate the image
+        GeneratedImage generatedImage = await client.GenerateImageAsync(prompt,
+      new ImageGenerationOptions
+      {
+          Size = GeneratedImageSize.W1024xH1024
+      });
+
+        // Save the image to a file or return the URL
+        // Convert the stream to a byte array
+
+
+        return generatedImage.ImageUri.AbsoluteUri;
+    }
+
 
     private static string CleanChatMessageContent(string result)
     {

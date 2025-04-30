@@ -107,6 +107,7 @@
                         title: title,
                         summary: summary
                     },
+                    timeout:120000,
                     success: function (result) {
                         if (result.success) {
                             editor.setData(result.content);

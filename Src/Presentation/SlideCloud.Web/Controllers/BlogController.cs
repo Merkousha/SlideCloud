@@ -10,9 +10,6 @@ public class BlogController : Controller
 {
     private readonly IBlogService _blogService;
     private readonly IUserService _userService;
-    private readonly string _modelId = "gpt-4o-2024-11-20";
-    private readonly string _endpoint = "https://api.avalai.ir/v1";
-    private readonly string _apiKey = "aa-VckNj9CcU1uLMczXGigPhavLokYY4V2meOFzglIDDq3j6kIJ";
 
     public BlogController(IBlogService blogService, IUserService userService)
     {
@@ -80,6 +77,8 @@ public class BlogController : Controller
                 Summary = createBlogDto.Summary,
                 Slug = GenerateSlug(createBlogDto.Title),
                 AuthorId = currentUser.Id,
+                Content = createBlogDto.Content,
+                FeaturedImage = createBlogDto.ImageUrl,
                 CreatedAt = DateTime.UtcNow
             };
 

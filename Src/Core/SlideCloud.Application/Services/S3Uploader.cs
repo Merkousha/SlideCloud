@@ -1,4 +1,5 @@
-﻿using Amazon.S3;
+﻿using System.Net.Mime;
+using Amazon.S3;
 using Amazon.S3.Model;
 using Amazon.S3.Transfer;
 using Microsoft.AspNetCore.Http;
@@ -44,6 +45,45 @@ namespace SlideCloud.Application.Services
                         Key = fileName,
                         BucketName = bucketName,
                         ContentType = file.ContentType,
+                        CannedACL = S3CannedACL.PublicRead
+                    };
+
+                    var fileTransferUtility = new TransferUtility(client);
+                    await fileTransferUtility.UploadAsync(uploadRequest);
+
+                    return $"{serviceUrl}/{bucketName}/{fileName}".Replace("//", "/").Replace(":/", "://");
+                }
+            }
+        }
+
+        public async Task<string> UploadFileAsync(MemoryStream fileMemoryStram)
+        {
+            var bucketName = Environment.GetEnvironmentVariable("S3-BucketName");
+            var accessKey = Environment.GetEnvironmentVariable("S3-AccessKey");
+            var secretKey = Environment.GetEnvironmentVariable("S3-SecretKey");
+            var serviceUrl = Environment.GetEnvironmentVariable("S3-ServiceURL");
+
+            var config = new AmazonS3Config
+            {
+                ServiceURL = serviceUrl,
+                ForcePathStyle = true,
+                UseHttp = true
+            };
+
+            using (var client = new AmazonS3Client(accessKey, secretKey, config))
+            {
+                using (fileMemoryStram)
+                {
+                    fileMemoryStram.Position = 0;
+
+                    var fileName = $"{Guid.NewGuid()}_blog.png";
+
+                    var uploadRequest = new TransferUtilityUploadRequest
+                    {
+                        InputStream = fileMemoryStram,
+                        Key = fileName,
+                        BucketName = bucketName,
+                        ContentType = MediaTypeNames.Image.Png,
                         CannedACL = S3CannedACL.PublicRead
                     };
 
