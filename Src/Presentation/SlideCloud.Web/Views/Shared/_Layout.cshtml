@@ -3,7 +3,7 @@
     var logoSrc = isHomePage ? "~/assets/images/logo-light.png" : "~/assets/images/logo-dark.png";
 }
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa" >
 
 
 <!-- Mirrored from pixydrops.com/eduhive-html/index-dark.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jun 2024 10:42:01 GMT -->
@@ -11,29 +11,29 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] | SlideCloud - اشتراک گذاری و ساخت اسلاید با هوش مصنوعی</title>
-    
+
     <!-- SEO Meta Tags -->
     <meta name="description" content="@ViewData["Description"]" />
     <meta name="keywords" content="@ViewData["Keywords"]" />
     <meta name="author" content="SlideCloud" />
     <meta name="robots" content="index, follow" />
-    
+
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="@ViewData["Title"] | SlideCloud" />
     <meta property="og:description" content="@ViewData["Description"]" />
     <meta property="og:image" content="@ViewData["OgImage"]" />
     <meta property="og:url" content="@Context.Request.Scheme://@Context.Request.Host@Context.Request.Path" />
     <meta property="og:type" content="website" />
-    
+
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="@ViewData["Title"] | SlideCloud" />
     <meta name="twitter:description" content="@ViewData["Description"]" />
     <meta name="twitter:image" content="@ViewData["OgImage"]" />
-    
+
     <!-- Canonical URL -->
     <link rel="canonical" href="@Context.Request.Scheme://@Context.Request.Host@Context.Request.Path" />
-    
+
     <!-- favicons Icons -->
     <link rel="apple-touch-icon" sizes="180x180" href="~/assets/images/favicons/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="~/assets/images/favicons/favicon-32x32.png" />
@@ -119,6 +119,7 @@
                                 <li>
                                     <a href="@Url.Action("Contact", "Home")">تماس با ما</a>
                                 </li>
+
                                 @if (!User.Identity.IsAuthenticated)
                                 {
                                     <li class="nav-item">
@@ -127,8 +128,6 @@
                                     <li class="nav-item">
                                         @Html.ActionLink("ثبت نام", "Register", "Account", null, new { @class = "" })
                                     </li>
-
-
                                 }
                                 else
                                 {
@@ -137,23 +136,10 @@
                                         <li class="dropdown">
                                             <a href="#">پنل کاربری</a>
                                             <ul>
-                                                <li>
-                                                    <a href="#">اسلاید های من</a>
-                                                    <ul>
-                                                        <li>@Html.ActionLink("لیست اسلاید های من", "MySlides", "Slide")</li>
-
-                                                        <li>
-                                                            @Html.ActionLink("اضافه کردن اسلاید جدید", "Create", "ManageSlide", new { area = "User" })
-                                                        </li>
-
-
-                                                    </ul>
-                                                </li>
+                                                <li>@Html.ActionLink("لیست اسلاید های من", "MySlides", "Slide")</li>
                                                 <li>
                                                     @Html.ActionLink("پروفایل من", "Profile", "Account")
                                                 </li>
-
-
                                             </ul>
                                         </li>
                                     }
@@ -166,11 +152,8 @@
                                                 <li>
                                                     <a href="#">مدیریت دسته بندی</a>
                                                     <ul>
-
-                                                        @Html.ActionLink("لیست دسته بندی ها", "List", "ManageCategory", new { area = "Admin" })
+                                                        <li> @Html.ActionLink("لیست دسته بندی ها", "List", "ManageCategory", new { area = "Admin" })</li>
                                                         <li>@Html.ActionLink("دسته بندی جدید", "CreateCategory", "ManageCategory", new { area = "Admin" })</li>
-
-                                                
                                                     </ul>
                                                 </li>
                                                 <li>
@@ -179,7 +162,7 @@
                                                         <li>@Html.ActionLink("لیست نوع اسلاید", "List", "ManageDocumentType", new { area = "Admin" })</li>
                                                         <li>@Html.ActionLink("نوع اسلاید جدید", "CreateDocumentType", "ManageDocumentType", new { area = "Admin" })</li>
 
-                                                  
+
                                                     </ul>
                                                 </li>
                                                 <li>
@@ -187,31 +170,17 @@
                                                     <ul>
                                                         <li>@Html.ActionLink("لیست اسلاید", "Index", "ManageSlide", new { area = "Admin" })</li>
                                                         <li>@Html.ActionLink("اضافه کردن اسلاید جدید", "Create", "ManageSlide", new { area = "Admin" })</li>
-
-                                                        
                                                     </ul>
                                                 </li>
                                                 <li>
-
                                                 <li>@Html.ActionLink("لیست کاربران ویژه ادمین", "Index", "ManageSlide", new { area = "Admin" })</li>
 
+                                            </ul>
                                         </li>
-
-                                    </ul>
-                                    </li>
                                     }
-
-
-
-
-
-
-
-                                    
-
                                     <li class="nav-item">
                                         @Html.ActionLink("خروج", "LogOut", "Account", null, new { @class = "" })
-                                </li>
+                                    </li>
                                 }
                             </ul>
                         </nav><!-- /.main-header__nav -->
@@ -380,10 +349,10 @@
     <script src="~/assets/vendors/jquery-lettering/jquery.lettering.min.js"></script>
 
     <!-- Dropzone JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js"></script>
+    @* <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js"></script> *@
 
-    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+   @*  <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script> *@
     <!-- template js -->
     @await RenderSectionAsync("Scripts", required: false)
 
@@ -392,5 +361,4 @@
 </body>
 
 
-<!-- Mirrored from pixydrops.com/eduhive-html/index-dark.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jun 2024 10:42:02 GMT -->
 </html>
